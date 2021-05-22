@@ -1,5 +1,6 @@
-# ThietKePhanMem_QuanLyDaiLy
- Author: Pham Van That, Pham Minh Vuong
+# TKPM_QuanLyDaiLy_DesktopApp
+Authors: 18120655 - Phạm Minh Vương; 
+         18120568 - Phạm Văn Thật
 # Database
  SQL Server
 # Language
