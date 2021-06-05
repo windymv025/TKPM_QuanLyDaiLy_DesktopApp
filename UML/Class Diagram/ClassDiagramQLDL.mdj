@@ -1225,6 +1225,7 @@
 											"top": 266,
 											"width": 116.20654296875,
 											"height": 13,
+											"underline": true,
 											"text": "+ThemSanPham()",
 											"horizontalAlignment": 0
 										},
@@ -1242,6 +1243,7 @@
 											"top": 281,
 											"width": 116.20654296875,
 											"height": 13,
+											"underline": true,
 											"text": "+XoaSanPham()",
 											"horizontalAlignment": 0
 										},
@@ -1259,6 +1261,7 @@
 											"top": 296,
 											"width": 116.20654296875,
 											"height": 13,
+											"underline": true,
 											"text": "+SuaSanPham()",
 											"horizontalAlignment": 0
 										},
@@ -6561,7 +6564,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF52hw254vxWps="
 							},
-							"name": "ThemSanPham"
+							"name": "ThemSanPham",
+							"isStatic": true
 						},
 						{
 							"_type": "UMLOperation",
@@ -6569,7 +6573,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF52hw254vxWps="
 							},
-							"name": "XoaSanPham"
+							"name": "XoaSanPham",
+							"isStatic": true
 						},
 						{
 							"_type": "UMLOperation",
@@ -6577,7 +6582,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF52hw254vxWps="
 							},
-							"name": "SuaSanPham"
+							"name": "SuaSanPham",
+							"isStatic": true
 						},
 						{
 							"_type": "UMLOperation",
