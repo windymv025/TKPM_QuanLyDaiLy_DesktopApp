@@ -1,13 +1,19 @@
+﻿use master
+go
+create database DBQuanLyCacDaiLy
+go
+use DBQuanLyCacDaiLy
+go
 CREATE TABLE [DaiLy] (
 	ID integer NOT NULL,
-	Ten string NOT NULL,
-	DienThoai string NOT NULL,
-	DiaChi string NOT NULL,
+	Ten nvarchar(200) NOT NULL,
+	DienThoai varchar(15) NOT NULL,
+	DiaChi nvarchar(500) NOT NULL,
 	NgayTiepNhan date NOT NULL,
-	Quan string NOT NULL,
-	Email string NOT NULL,
+	Quan nvarchar(200) NOT NULL,
+	Email varchar(200) NOT NULL,
 	LoaiDaiLy integer NOT NULL,
-	IsRemove boolean NOT NULL,
+	IsRemove bit NOT NULL, -- 0 là chưa xóa, 1 là bị xóa
   CONSTRAINT [PK_DAILY] PRIMARY KEY CLUSTERED
   (
   [ID] ASC
@@ -27,10 +33,10 @@ CREATE TABLE [LoaiDaiLy] (
 GO
 CREATE TABLE [QuyDinh] (
 	MaQuyDinh integer NOT NULL,
-	TenQuyDinh string NOT NULL,
+	TenQuyDinh varchar(100) NOT NULL,
 	GiaTri integer NOT NULL,
-	KieuDuLieu string NOT NULL,
-	TrangThai boolean NOT NULL,
+	KieuDuLieu varchar(10) NOT NULL,
+	TrangThai bit NOT NULL, -- 0: chua xoa, 1: da xoa
   CONSTRAINT [PK_QUYDINH] PRIMARY KEY CLUSTERED
   (
   [MaQuyDinh] ASC
@@ -105,7 +111,7 @@ CREATE TABLE [PhieuThuTien] (
 GO
 CREATE TABLE [PhieuXuatHang] (
 	ID integer NOT NULL,
-	DonViTinh string NOT NULL,
+	DonViTinh varchar(10) NOT NULL,
 	TongTien decimal NOT NULL,
   CONSTRAINT [PK_PHIEUXUATHANG] PRIMARY KEY CLUSTERED
   (
@@ -116,7 +122,7 @@ CREATE TABLE [PhieuXuatHang] (
 GO
 CREATE TABLE [LoaiSanPham] (
 	ID integer NOT NULL,
-	Ten string NOT NULL,
+	Ten nvarchar(200) NOT NULL,
   CONSTRAINT [PK_LOAISANPHAM] PRIMARY KEY CLUSTERED
   (
   [ID] ASC
@@ -126,7 +132,7 @@ CREATE TABLE [LoaiSanPham] (
 GO
 CREATE TABLE [SanPham] (
 	ID integer NOT NULL,
-	Ten string NOT NULL,
+	Ten nvarchar(200) NOT NULL,
 	DonGia decimal NOT NULL,
 	SoLuong integer NOT NULL,
 	IDLoaiSanPham integer NOT NULL,
@@ -140,9 +146,9 @@ CREATE TABLE [SanPham] (
 GO
 CREATE TABLE [NguonNhap] (
 	ID integer NOT NULL,
-	Ten string NOT NULL,
-	DiaChi string NOT NULL,
-	SoDienThoai string NOT NULL,
+	Ten nvarchar(200) NOT NULL,
+	DiaChi nvarchar(500) NOT NULL,
+	SoDienThoai varchar(10) NOT NULL,
   CONSTRAINT [PK_NGUONNHAP] PRIMARY KEY CLUSTERED
   (
   [ID] ASC
