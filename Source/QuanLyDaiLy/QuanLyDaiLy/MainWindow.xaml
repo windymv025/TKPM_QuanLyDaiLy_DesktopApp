@@ -16,204 +16,307 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <!--//Toggle btn style-->
-        <ImageBrush ImageSource="/Assets/tgBtn_MouseOver.png" x:Key="tb_mouse_over" />
-        <!--//Text font style-->
-        <Style x:Key="font_style" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="20" />
-        </Style>
+	<Window.Resources>
+		<!--//Toggle btn style-->
+		<ImageBrush ImageSource="/Assets/tgBtn_MouseOver.png" x:Key="tb_mouse_over" />
+		<!--//Text font style-->
+		<Style x:Key="font_style" TargetType="TextBlock">
+			<Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="HorizontalAlignment" Value="Left" />
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="FontSize" Value="20" />
+		</Style>
 
-        <!--//Tooltip Style-->
-        <Style TargetType="ToolTip" x:Key="tt_style">
-            <Setter Property="Placement" Value="Right" />
-            <Setter Property="Height" Value="40" />
-            <Setter Property="Width" Value="100" />
-            <Setter Property="Margin" Value="20,0,0,0" />
-            <Setter Property="Background" Value="#4A5668" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="PlacementRectangle" Value="60,0,0,0" />
-            <Setter Property="HorizontalOffset" Value="15" />
-            <Setter Property="VerticalOffset" Value="6" />
-            <Setter Property="HasDropShadow" Value="True" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-        </Style>
+		<!--//Tooltip Style-->
+		<Style TargetType="ToolTip" x:Key="tt_style">
+			<Setter Property="Placement" Value="Right" />
+			<Setter Property="Height" Value="40" />
+			<Setter Property="Width" Value="100" />
+			<Setter Property="Margin" Value="20,0,0,0" />
+			<Setter Property="Background" Value="#4A5668" />
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto" />
+			<Setter Property="FontSize" Value="16" />
+			<Setter Property="PlacementRectangle" Value="60,0,0,0" />
+			<Setter Property="HorizontalOffset" Value="15" />
+			<Setter Property="VerticalOffset" Value="6" />
+			<Setter Property="HasDropShadow" Value="True" />
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+		</Style>
 
-        <!--//togglebutton style-->
-        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+		<!--//togglebutton style-->
+		<Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ToggleButton}">
+						<Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
 
-                        </Border>
+						</Border>
 
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource tb_mouse_over}">
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Background" TargetName="border" Value="{StaticResource tb_mouse_over}">
 
-                                </Setter>
+								</Setter>
 
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource tb_mouse_over}">
+								<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource tb_mouse_over}">
 
-                                </Setter>
-                            </Trigger>
+								</Setter>
+							</Trigger>
 
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource tb_mouse_over}" />
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource tb_mouse_over}" />
-                            </Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Background" TargetName="border" Value="{StaticResource tb_mouse_over}" />
+								<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource tb_mouse_over}" />
+							</Trigger>
 
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 
-        <!--//button next, prev style-->
-        <Style x:Key="next_prev_btn" TargetType="{x:Type Button}">
+		<!--//button next, prev style-->
+		<Style x:Key="next_prev_btn" TargetType="{x:Type Button}">
 
-            <Setter Property="Template">
+			<Setter Property="Template">
 
-                <Setter.Value>
+				<Setter.Value>
 
-                    <ControlTemplate TargetType="{x:Type Button}">
+					<ControlTemplate TargetType="{x:Type Button}">
 
-                        <Border x:Name="button"
+						<Border x:Name="button"
                                 BorderThickness="0"
                                 Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True">
 
-                        </Border>
+						</Border>
 
-                    </ControlTemplate>
+					</ControlTemplate>
 
-                </Setter.Value>
+				</Setter.Value>
 
-            </Setter>
+			</Setter>
 
-        </Style>
+		</Style>
 
-        <!--//dish-->
-        <Style x:Key="dish_btn" TargetType="{x:Type Button}">
+		<!--//dish-->
+		<Style x:Key="dish_btn" TargetType="{x:Type Button}">
 
-            <Setter Property="Template">
+			<Setter Property="Template">
 
-                <Setter.Value>
+				<Setter.Value>
 
-                    <ControlTemplate TargetType="{x:Type Button}">
+					<ControlTemplate TargetType="{x:Type Button}">
 
-                        <Border x:Name="button"
+						<Border x:Name="button"
                                 BorderThickness="0"
                                 Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True">
 
-                        </Border>
+						</Border>
 
-                    </ControlTemplate>
+					</ControlTemplate>
 
-                </Setter.Value>
+				</Setter.Value>
 
-            </Setter>
+			</Setter>
 
-        </Style>
-    </Window.Resources>
+		</Style>
+	</Window.Resources>
 
-    <Grid>
-        <!--//Background color-->
-        <Grid Background="Black">
+	<Grid>
+		<!--//Background color-->
+		<Grid Background="Black">
 
-            <!--//background image-->
-            <Grid x:Name="bg" PreviewMouseLeftButtonDown="bg_PreviewMouseLeftButtonDown" Margin="0,2,0,-2"
+			<!--//background image-->
+			<Grid x:Name="bg" PreviewMouseLeftButtonDown="bg_PreviewMouseLeftButtonDown" Margin="0,2,0,-2"
                   Visibility="Visible"
                   Background="White">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="70"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
 
-                <!--Background Home Screen-->
-                <Grid x:Name="bg_home" Grid.Column="1" Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="60"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="50" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="QUẢN LÝ ĐẠI LÝ" HorizontalAlignment="Left"
-                           VerticalAlignment="Center" FontSize="30" FontWeight="ExtraBold" Margin="30,0,0,0"
-                           Foreground="Blue"/>
-                        <Image Grid.Column="2" x:Name="icon_search" Source="/Assets/search.png" HorizontalAlignment="Center" Panel.ZIndex="5" 
-                           Width="40" Height="40" VerticalAlignment="Center"
-                           Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
-                        <Grid Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="1.3*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="textbox_search" Grid.Column="1" HorizontalAlignment="Right" Visibility="Visible" VerticalAlignment="Center"
+				<!--Background Home Screen-->
+				<Grid x:Name="bg_home" Grid.Column="1" Visibility="Visible">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="70"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Border Background="#2E333A" Margin="-10,0,-5,0" Padding="10, 0,5,0">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="120"/>
+								<ColumnDefinition Width="320" />
+							</Grid.ColumnDefinitions>
+							<Label Grid.Column="0" Content="QUẢN LÝ ĐẠI LÝ" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" FontSize="35" FontWeight="ExtraBold"
+                           Foreground="#FFFFDC00" BorderBrush="White" Background="{x:Null}"/>
+
+							<Grid Grid.Column="2" Margin="0,0,10,0" >
+								<Image Grid.Column="2" x:Name="icon_search" Source="/Assets/search.png" HorizontalAlignment="Right" Panel.ZIndex="5" Width="40" Height="40"  VerticalAlignment="Center"
+                           Margin="0,0,10,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+								<TextBox x:Name="textbox_search" Grid.Column="1" HorizontalAlignment="Right" Visibility="Visible" VerticalAlignment="Center" Background="White"
 								FontSize="18"
-								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
 								Width="300"
 								BorderThickness="0"
 								materialDesign:HintAssist.Hint="Enter the keyword..."
-								materialDesign:HintAssist.IsFloating="True"
-								materialDesign:TextFieldAssist.HasClearButton="True"
 								materialDesign:TextFieldAssist.HasOutlinedTextField="True"
 								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
+								materialDesign:TextFieldAssist.TextFieldCornerRadius="8"
 								TextChanged="textbox_search_TextChanged"/>
-                        </Grid>
+							</Grid>
 
-                    </Grid>
-                    <!--TODO SomeThing-->
-                    <ListView Grid.Row="1" Name="listViewProducts" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" >
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel HorizontalAlignment="Center">
-                                    <Border BorderThickness="1" CornerRadius="20" BorderBrush="#FF484848" Margin="5" Width="400" Height="300" >
-                                        <Border.Background>
-                                            <ImageBrush RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill" Opacity="0.9"
-                                        ImageSource="{Binding PathImage}">
-                                            </ImageBrush>
-                                        </Border.Background>
-                                    </Border>
-                                    <TextBlock Text="{Binding Name}" Foreground="Black" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"
-                                   VerticalAlignment="Top" FontSize="18" FontWeight="ExtraBold" Margin="10" TextAlignment="Center"/>
+							<Border CornerRadius="8"  Grid.Column="1">
+								<ComboBox Padding="5,15,0,15" Background="White" HorizontalAlignment="Right" Width="120" >
+									<ComboBoxItem IsSelected="True">
+										<TextBlock Text="Đại lý" FontWeight="Bold" />
+									</ComboBoxItem>
+									<ComboBoxItem>
+										<TextBlock Text="Sản phẩm" FontWeight="Bold" />
+									</ComboBoxItem>
+									<ComboBoxItem>
+										<TextBlock Text="Nhà cung cấp" FontWeight="Bold" />
+									</ComboBoxItem>
 
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Price}"
-                                   VerticalAlignment="Bottom" TextWrapping="WrapWithOverflow" FontSize="16" TextTrimming="CharacterEllipsis" FontWeight="Black" Foreground="Red"
-                                       TextAlignment="Right"  />
-                                        <TextBlock Text="VND" FontSize="16" FontWeight="Black" Margin="5,0,0,0" Foreground="Red" TextAlignment="Center"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <!--Footer-->
-                    <Grid Grid.Row="2">
+								</ComboBox>
+							</Border>
+						</Grid>
+					</Border>
+					<!--TODO SomeThing-->
+					<ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden">
+						<StackPanel>
+							<!--Sản phẩm bán chạy-->
+							<TextBlock Text="Sản phẩm bán chạy" FontSize="25" HorizontalAlignment="Center" Foreground="Blue" Margin="10,15" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
+
+
+							<Border Height="400" Margin="40,0" >
+								<Border.Background>
+									<ImageBrush Stretch="Fill" ImageSource="/Assets/podium_awards.png"/>
+								</Border.Background>
+
+								<Grid Margin="35,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<!--top 2-->
+									<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
+										<Border  Margin="0,85,0,0"  CornerRadius="50" Height="120" Width="200">
+											<Border.Background>
+												<ImageBrush x:Name="imgSanPhamTop2" ImageSource="Images/Product/1.png" Stretch="UniformToFill" />
+
+											</Border.Background>
+
+										</Border>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
+											<TextBlock x:Name="txtSoLuongBanTop2" Text="1.500" FontSize="14" FontWeight="Black" Foreground="Red"/>
+										</StackPanel>
+									</StackPanel>
+
+									<!--top 1-->
+									<StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+										<Border  Margin="0,0,0,0"  CornerRadius="50" Height="130" Width="200">
+											<Border.Background>
+												<ImageBrush x:Name="imgSanPhamTop1" ImageSource="Images/Product/1.png" Stretch="UniformToFill" />
+
+											</Border.Background>
+
+										</Border>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
+											<TextBlock x:Name="txtSoLuongBanTop1" Text="1.500" FontSize="14" FontWeight="Black" Foreground="Red"/>
+										</StackPanel>
+									</StackPanel>
+
+									<!--top 3-->
+									<StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+										<Border  Margin="0,105,0,0"  CornerRadius="50" Height="130" Width="200">
+											<Border.Background>
+												<ImageBrush x:Name="imgSanPhamTop3" ImageSource="Images/Product/1.png" Stretch="UniformToFill" />
+
+											</Border.Background>
+
+										</Border>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
+											<TextBlock x:Name="txtSoLuongBanTop3" Text="1.500" FontSize="14" FontWeight="Black" Foreground="Red"/>
+										</StackPanel>
+									</StackPanel>
+								</Grid>
+							</Border>
+
+							<!--Top Đại lý-->
+							<TextBlock Text="Đại lý top đầu" FontSize="25" HorizontalAlignment="Center" Foreground="Blue" Margin="10,20,10,10" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
+							<Border Height="400" Margin="40,0" >
+								<Border.Background>
+									<ImageBrush Stretch="Fill" ImageSource="/Assets/podium_awards.png"/>
+								</Border.Background>
+
+								<Grid Margin="35,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<!--top 2-->
+									<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
+										<Border  Margin="0,85,0,0"  CornerRadius="50" Height="120" Width="200">
+											<Border.Background>
+												<ImageBrush x:Name="imgDaiLyTop2" ImageSource="Images/Product/1.png" Stretch="UniformToFill" />
+
+											</Border.Background>
+
+										</Border>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock x:Name="txtDaiLyTop2" Text="105.550.500 VNĐ" FontSize="14" FontWeight="Black" Foreground="Red"/>
+										</StackPanel>
+									</StackPanel>
+
+									<!--top 1-->
+									<StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+										<Border  Margin="0,0,0,0"  CornerRadius="50" Height="130" Width="200">
+											<Border.Background>
+												<ImageBrush x:Name="imgDaiLyTop1" ImageSource="Images/Product/1.png" Stretch="UniformToFill" />
+
+											</Border.Background>
+
+										</Border>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock x:Name="txtDaiLyTop1" Text="105.550.500 VNĐ" FontSize="14" FontWeight="Black" Foreground="Red"/>
+										</StackPanel>
+									</StackPanel>
+
+									<!--top 3-->
+									<StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+										<Border  Margin="0,105,0,0"  CornerRadius="50" Height="130" Width="200">
+											<Border.Background>
+												<ImageBrush x:Name="imgDaiLyTop3" ImageSource="Images/Product/1.png" Stretch="UniformToFill" />
+
+											</Border.Background>
+
+										</Border>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock x:Name="txtDaiLyTop3" Text="105.550.500 VNĐ" FontSize="14" FontWeight="Black" Foreground="Red"/>
+										</StackPanel>
+									</StackPanel>
+								</Grid>
+
+							</Border>
+						</StackPanel>
+					</ScrollViewer>
+					<!--Footer-->
+					<!--<Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="160"/>
@@ -236,66 +339,66 @@
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                FontWeight="Bold" FontSize="18"/>
-                    </Grid>
-                </Grid>
+                    </Grid>-->
+				</Grid>
 
 
 
-                <!--Background contact-->
-                <Grid Grid.Column="1" x:Name="contact_screen" Visibility="Visible">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid x:Name="Vuong" Grid.Column="0" Margin="10">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="90" />
-                            </Grid.RowDefinitions>
+				<!--Background contact-->
+				<Grid Grid.Column="1" x:Name="contact_screen" Visibility="Collapsed">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<Grid x:Name="Vuong" Grid.Column="0" Margin="10">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="50" />
+								<RowDefinition Height="90" />
+							</Grid.RowDefinitions>
 
-                            <Border CornerRadius="100">
-                                <Border.Background>
-                                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets/Vuong.jpg" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                </Border.Background>
-                            </Border>
+							<Border CornerRadius="100">
+								<Border.Background>
+									<ImageBrush Stretch="UniformToFill" ImageSource="Assets/Vuong.jpg" RenderOptions.BitmapScalingMode="HighQuality"/>
+								</Border.Background>
+							</Border>
 
-                            <Label Content="Phạm Minh Vương"
+							<Label Content="Phạm Minh Vương"
                                Grid.Row="1" HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                FontWeight="Bold" FontSize="25"/>
-                            <Label Grid.Row="2"  Content="Email: 18120655@student.hcmus.edu.vn"
+							<Label Grid.Row="2"  Content="Email: 18120655@student.hcmus.edu.vn"
                                VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                                FontWeight="Bold" FontSize="14"/>
-                        </Grid>
-                    </Grid>
+						</Grid>
+					</Grid>
 
-                    <Grid x:Name="That" Grid.Column="1" Margin="10">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="90" />
-                            </Grid.RowDefinitions>
-                            
-                            <Border CornerRadius="100">
-                                <Border.Background>
-                                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets/That.jpg" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                </Border.Background>
-                            </Border>
+					<Grid x:Name="That" Grid.Column="1" Margin="10">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="50" />
+								<RowDefinition Height="90" />
+							</Grid.RowDefinitions>
 
-                            <Label Content="Phạm Văn Thật"
+							<Border CornerRadius="100">
+								<Border.Background>
+									<ImageBrush Stretch="UniformToFill" ImageSource="Assets/That.jpg" RenderOptions.BitmapScalingMode="HighQuality"/>
+								</Border.Background>
+							</Border>
+
+							<Label Content="Phạm Văn Thật"
                                Grid.Row="1" HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                FontWeight="Bold" FontSize="25"/>
-                            <Label Grid.Row="2"  Content="Email: 18120568@student.hcmus.edu.vn"
+							<Label Grid.Row="2"  Content="Email: 18120568@student.hcmus.edu.vn"
                                VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                                FontWeight="Bold" FontSize="14"/>
-                        </Grid>
-                    </Grid>
+						</Grid>
+					</Grid>
 
-                    <!--<Border Grid.Column="1" BorderBrush="#FF96B2E4"
+					<!--<Border Grid.Column="1" BorderBrush="#FF96B2E4"
                             BorderThickness="6"
                             CornerRadius="25">
                         <Grid>
@@ -314,140 +417,140 @@
                             </StackPanel>
                         </Grid>
                     </Border>-->
-                </Grid>
-            </Grid>
+				</Grid>
+			</Grid>
 
 
-            <!--//navigation panel // bảng điều hướng-->
-            <Grid x:Name="nav_pnl" HorizontalAlignment="Left" Width="65" Background="#2E333A">
-                <StackPanel x:Name="st_pnl">
-                    <!--//Grid chuyển đổi menu-->
-                    <Grid Height="90">
-                        <!--//text tiêu để menu-->
-                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="73,-20,0,0" Text="MENU" Foreground="White"
+			<!--//navigation panel // bảng điều hướng-->
+			<Grid x:Name="nav_pnl" HorizontalAlignment="Left" Width="65" Background="#2E333A">
+				<StackPanel x:Name="st_pnl">
+					<!--//Grid chuyển đổi menu-->
+					<Grid Height="90">
+						<!--//text tiêu để menu-->
+						<TextBlock Grid.Row="1" Grid.Column="0" Margin="73,-20,0,0" Text="MENU" Foreground="White"
                                    FontSize="22" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center"
                                    Style="{StaticResource font_style}">
                             
                             <!--//Shadow-->
-                            <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="-90" Color="White" />
-                            </TextBlock.Effect>
+							<TextBlock.Effect>
+								<DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="-90" Color="White" />
+							</TextBlock.Effect>
 
-                        </TextBlock>
+						</TextBlock>
 
 
-                        <!--//Toggle btn-->
-                        <ToggleButton x:Name="Tg_btn" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="18,-20,0,0" Height="30" Width="30" BorderThickness="0" Style="{StaticResource tb_style}" Unchecked="Tg_btn_Unchecked" Checked="Tg_btn_Checked">
-                            <ToggleButton.Background>
-                                <ImageBrush ImageSource="/Assets/tgBtn_default.png" Stretch="None"></ImageBrush>
-                            </ToggleButton.Background>
+						<!--//Toggle btn-->
+						<ToggleButton x:Name="Tg_btn" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="18,-20,0,0" Height="30" Width="30" BorderThickness="0" Style="{StaticResource tb_style}" Unchecked="Tg_btn_Unchecked" Checked="Tg_btn_Checked">
+							<ToggleButton.Background>
+								<ImageBrush ImageSource="/Assets/tgBtn_default.png" Stretch="None"></ImageBrush>
+							</ToggleButton.Background>
 
-                            <!--//Check, uncheck event-->
-                            <ToggleButton.Triggers>
-                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="HideStackPanel">
-                                            <DoubleAnimation Storyboard.TargetName="nav_pnl" Storyboard.TargetProperty="Width" BeginTime="0:0:0"
+							<!--//Check, uncheck event-->
+							<ToggleButton.Triggers>
+								<EventTrigger RoutedEvent="ToggleButton.Unchecked">
+									<BeginStoryboard>
+										<Storyboard x:Name="HideStackPanel">
+											<DoubleAnimation Storyboard.TargetName="nav_pnl" Storyboard.TargetProperty="Width" BeginTime="0:0:0"
                                                              From="230" To="65" Duration="0:0:0.2">
 
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
 
-                                <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="ShowStackPanel">
-                                            <DoubleAnimation Storyboard.TargetName="nav_pnl" Storyboard.TargetProperty="Width" BeginTime="0:0:0"
+								<EventTrigger RoutedEvent="ToggleButton.Checked">
+									<BeginStoryboard>
+										<Storyboard x:Name="ShowStackPanel">
+											<DoubleAnimation Storyboard.TargetName="nav_pnl" Storyboard.TargetProperty="Width" BeginTime="0:0:0"
                                                              From="65" To="230" Duration="0:0:0.3">
 
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
 
-                            </ToggleButton.Triggers>
-                        </ToggleButton>
-                    </Grid>
+							</ToggleButton.Triggers>
+						</ToggleButton>
+					</Grid>
 
-                    <!--//List items //ListView-->
-                    <ListView x:Name="LV" Background="Transparent" BorderBrush="Transparent"
+					<!--//List items //ListView-->
+					<ListView x:Name="LV" Background="Transparent" BorderBrush="Transparent"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <!--//HOME-->
-                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter" 
+						<!--//HOME-->
+						<ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter" 
                                       PreviewMouseLeftButtonDown="Image_PreviewMouseLeftButtonDown">
-                            <StackPanel Orientation="Horizontal" Width="230" PreviewMouseLeftButtonDown="Image_PreviewMouseLeftButtonDown">
-                                <Image Source="/Assets/img_home.png" Stretch="None" Margin="12,0,0,0" 
+							<StackPanel Orientation="Horizontal" Width="230" PreviewMouseLeftButtonDown="Image_PreviewMouseLeftButtonDown">
+								<Image Source="/Assets/img_home.png" Stretch="None" Margin="12,0,0,0" 
                                        PreviewMouseLeftButtonDown="Image_PreviewMouseLeftButtonDown"/>
-                                <TextBlock Text="Home" Margin="25,0,0,0" Style="{StaticResource font_style}" />
-                            </StackPanel>
+								<TextBlock Text="Home" Margin="25,0,0,0" Style="{StaticResource font_style}" />
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_home" Content="HOME" Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_home" Content="HOME" Style="{StaticResource tt_style}" />
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//ADD-->
-                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+						<!--//ADD-->
+						<ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
 									  PreviewMouseLeftButtonDown="img_add_PreviewMouseLeftButtonDown">
-                            <StackPanel  Orientation="Horizontal" Width="230" >
-                                <Image x:Name="img_addcake" Source="/Assets/plus.png" Stretch="None" Margin="12,0,0,0"/>
-                                <TextBlock Text="Add new cake" Margin="25,0,0,0" Style="{StaticResource font_style}" />
-                            </StackPanel>
+							<StackPanel  Orientation="Horizontal" Width="230" >
+								<Image x:Name="img_addcake" Source="/Assets/plus.png" Stretch="None" Margin="12,0,0,0"/>
+								<TextBlock Text="Add new cake" Margin="25,0,0,0" Style="{StaticResource font_style}" />
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_add" Content="ADD CAKE" Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_add" Content="ADD CAKE" Style="{StaticResource tt_style}" />
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//Contact-->
-                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+						<!--//Contact-->
+						<ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
                                       PreviewMouseLeftButtonDown="img_contact_PreviewMouseLeftButtonDown">
-                            <StackPanel Orientation="Horizontal" Width="230" PreviewMouseLeftButtonDown="img_contact_PreviewMouseLeftButtonDown">
-                                <Image x:Name="img_contact" Source="/Assets/img_contact.png" Stretch="None" Margin="12,0,0,0" Height="46" VerticalAlignment="Top" PreviewMouseLeftButtonDown="img_contact_PreviewMouseLeftButtonDown" />
-                                <TextBlock Text="Contact" Margin="25,0,0,0" Style="{StaticResource font_style}" />
-                            </StackPanel>
+							<StackPanel Orientation="Horizontal" Width="230" PreviewMouseLeftButtonDown="img_contact_PreviewMouseLeftButtonDown">
+								<Image x:Name="img_contact" Source="/Assets/img_contact.png" Stretch="None" Margin="12,0,0,0" Height="46" VerticalAlignment="Top" PreviewMouseLeftButtonDown="img_contact_PreviewMouseLeftButtonDown" />
+								<TextBlock Text="Contact" Margin="25,0,0,0" Style="{StaticResource font_style}" />
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_contact" Content="CONTACT" Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_contact" Content="CONTACT" Style="{StaticResource tt_style}" />
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//Style-->
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <Border x:Name="Bd" Height="50" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+						<!--//Style-->
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="{x:Type ListViewItem}">
+											<Border x:Name="Bd" Height="50" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                                     Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
-                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+												<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                                   VerticalAlignment="{TemplateBinding VerticalAlignment}" />
-                                            </Border>
+											</Border>
 
-                                            <ControlTemplate.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="IsMouseOver" Value="True" />
-                                                    </MultiTrigger.Conditions>
+											<ControlTemplate.Triggers>
+												<MultiTrigger>
+													<MultiTrigger.Conditions>
+														<Condition Property="IsMouseOver" Value="True" />
+													</MultiTrigger.Conditions>
 
-                                                    <Setter Property="Background" TargetName="Bd" Value="#404D5B" />
-                                                    <Setter Property="BorderBrush" TargetName="Bd" Value="#404D5B" />
+													<Setter Property="Background" TargetName="Bd" Value="#404D5B" />
+													<Setter Property="BorderBrush" TargetName="Bd" Value="#404D5B" />
 
-                                                </MultiTrigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+												</MultiTrigger>
+											</ControlTemplate.Triggers>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ListView.ItemContainerStyle>
 
-                    </ListView>
+					</ListView>
 
-                </StackPanel>
-            </Grid>
-        </Grid>
-    </Grid>
+				</StackPanel>
+			</Grid>
+		</Grid>
+	</Grid>
 
 </Window>

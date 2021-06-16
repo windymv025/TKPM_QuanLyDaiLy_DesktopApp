@@ -205,7 +205,6 @@
     <Resource Include="Assets\nextbutton.png" />
     <Resource Include="Assets\plus.png" />
     <Resource Include="Assets\previousbutton.png" />
-    <Resource Include="Assets\search.png" />
     <Resource Include="Assets\tgBtn_default.png" />
     <Resource Include="Assets\tgBtn_MouseOver.png" />
     <Resource Include="Assets\Vuong.jpg" />
@@ -214,6 +213,12 @@
     <Resource Include="Assets\That.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\podium_awards.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Model\QuanLyCacDaiLyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>QuanLyCacDaiLyModel.Context.cs</LastGenOutput>
@@ -287,9 +292,9 @@
     <None Include="Images\Product\1.6.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Images\Product\1.png">
+    <Resource Include="Images\Product\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
     <None Include="Images\Product\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
