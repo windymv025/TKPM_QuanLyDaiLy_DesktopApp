@@ -43,13 +43,13 @@ namespace QuanLyDaiLy
             if (Tg_btn.IsChecked == true)
             {
                 tt_home.Visibility = Visibility.Collapsed;
-                tt_add.Visibility = Visibility.Collapsed;
+                tt_daily.Visibility = Visibility.Collapsed;
                 tt_contact.Visibility = Visibility.Collapsed;
             }
             else
             {
                 tt_home.Visibility = Visibility.Visible;
-                tt_add.Visibility = Visibility.Visible;
+                tt_daily.Visibility = Visibility.Visible;
                 tt_contact.Visibility = Visibility.Visible;
             }
         }
@@ -57,18 +57,23 @@ namespace QuanLyDaiLy
         private void img_contact_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             bg_home.Visibility = Visibility.Collapsed;
+            bg_daily.Visibility = Visibility.Collapsed;
             contact_screen.Visibility = Visibility.Visible;
             Tg_btn.IsChecked = false;
         }
 
-        private void img_add_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void img_daily_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            bg_home.Visibility = Visibility.Collapsed;
+            bg_daily.Visibility = Visibility.Visible;
+            contact_screen.Visibility = Visibility.Collapsed;
+            Tg_btn.IsChecked = false;
         }
 
         private void Image_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             bg_home.Visibility = Visibility.Visible;
+            bg_daily.Visibility = Visibility.Collapsed;
             contact_screen.Visibility = Visibility.Collapsed;
             Tg_btn.IsChecked = false;
         }
@@ -82,5 +87,34 @@ namespace QuanLyDaiLy
         {
 
         }
+
+        private void DaiLy_button_Search_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void DaiLy_textbox_search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void DaiLy_lable_Them_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ScreenThemDaiLy screenThemDaiLy = new ScreenThemDaiLy();
+            screenThemDaiLy.ShowDialog();
+        }
+
+        private void DaiLy_button_Them_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ScreenThemDaiLy screenThemDaiLy = new ScreenThemDaiLy();
+            screenThemDaiLy.ShowDialog();
+        }
+
+        private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        
     }
 }

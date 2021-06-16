@@ -1,0 +1,154 @@
+﻿<Window x:Class="QuanLyDaiLy.ScreenThemDaiLy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyDaiLy"
+        mc:Ignorable="d"
+        Title="Tiếp nhận đại lý" Height="700" Width="1024"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <!--Row 1-->
+        <Label Content="Tiếp nhận đại lý" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="30" Foreground="Red" Margin="10,0,0,0"/>
+
+        <!--Row 2-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Tên đại lý-->
+            <Label Content="Tên đại lý: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="1" x:Name="DaiLy_textbox_name" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"
+								FontSize="18"
+								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+								Width="300"
+								BorderThickness="0"
+								materialDesign:HintAssist.Hint="Nhập tên đại lý..."
+								materialDesign:HintAssist.IsFloating="True"
+								materialDesign:TextFieldAssist.HasClearButton="True"
+								materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+            
+            <!--Số điện thoại-->
+            <Label Grid.Row="1" Grid.Column="0" Content="Số điện thoại: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="DaiLy_textbox_phone" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"
+								FontSize="18"
+								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+								Width="300"
+								BorderThickness="0"
+								materialDesign:HintAssist.Hint="Nhập số điện thoại..."
+								materialDesign:HintAssist.IsFloating="True"
+								materialDesign:TextFieldAssist.HasClearButton="True"
+								materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+            <!--Địa chỉ-->
+            <Label Grid.Row="2" Grid.Column="0" Content="Địa chỉ: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="DaiLy_textbox_address" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"
+								FontSize="18"
+								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+								Width="300"
+								BorderThickness="0"
+								materialDesign:HintAssist.Hint="Nhập địa chỉ..."
+								materialDesign:HintAssist.IsFloating="True"
+								materialDesign:TextFieldAssist.HasClearButton="True"
+								materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+            <!--Ngày tiếp nhận-->
+            <Label Grid.Row="3" Grid.Column="0" Content="Ngày tiếp nhận: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="DaiLy_textbox_Date" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"
+								FontSize="18"
+								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+								Width="300"
+								BorderThickness="0"
+								materialDesign:HintAssist.Hint="Nhập ngày tiếp nhận..."
+								materialDesign:HintAssist.IsFloating="True"
+								materialDesign:TextFieldAssist.HasClearButton="True"
+								materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+            <!--Quận-->
+            <Label Grid.Row="4" Grid.Column="0" Content="Quận: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <TextBox Grid.Row="4" Grid.Column="1" x:Name="DaiLy_textbox_district" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"
+								FontSize="18"
+								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+								Width="300"
+								BorderThickness="0"
+								materialDesign:HintAssist.Hint="Nhập tên quận..."
+								materialDesign:HintAssist.IsFloating="True"
+								materialDesign:TextFieldAssist.HasClearButton="True"
+								materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+            <!--Email-->
+            <Label Grid.Row="5" Grid.Column="0" Content="Email: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <TextBox Grid.Row="5" Grid.Column="1" x:Name="DaiLy_textbox_email" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"
+								FontSize="18"
+								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+								Width="300"
+								BorderThickness="0"
+								materialDesign:HintAssist.Hint="Nhập email..."
+								materialDesign:HintAssist.IsFloating="True"
+								materialDesign:TextFieldAssist.HasClearButton="True"
+								materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+            <!--Loại đại lý-->
+            <Label Grid.Row="6" Grid.Column="0" Content="Loại đại lý: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <ComboBox Grid.Row="6" Grid.Column="1" Margin="40,0,0,0" Panel.ZIndex="2" Width="150" HorizontalAlignment="Left" Name="cbb_loaidaily" SelectionChanged="cbb_loaidaily_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Padding="10,0,0,0" FontSize="18"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock x:Name="placeHolderCategory" Grid.Row="6" Grid.Column="1" Text="Loại đại lý" VerticalAlignment="Center" Margin="55,0,0,0" Foreground="Gray" FontSize="18"></TextBlock>
+
+            <!--Hình ảnh-->
+            <Label Grid.Row="7" Grid.Column="0" Content="Hình ảnh: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
+                <Button Name="btnOpenFile" Click="btnOpenFile_Click" Margin="40,0,0,0" Width="100" HorizontalAlignment="Left">Open file</Button>
+                <Image x:Name="avatar_DaiLy" Visibility="Collapsed" RenderOptions.BitmapScalingMode="HighQuality" Margin="20,0,0,0"/>
+            </StackPanel>
+        </Grid>
+     
+        <!--Row 3-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,150,0">
+            <Button x:Name="btn_OK" Content="Lưu" FontSize="20" Click="btn_OK_Click"/>
+            <Button x:Name="btn_Cancel" Content="Thoát" FontSize="20" Margin="50,0,0,0" Click="btn_Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
