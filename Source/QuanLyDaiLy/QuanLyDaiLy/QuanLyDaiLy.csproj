@@ -132,11 +132,11 @@
     <Compile Include="Model\SanPham.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
     <Compile Include="ScreenChiTietDaiLy.xaml.cs">
       <DependentUpon>ScreenChiTietDaiLy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenPopupThemLoaiDaiLy.xaml.cs">
+      <DependentUpon>ScreenPopupThemLoaiDaiLy.xaml</DependentUpon>
     </Compile>
     <Compile Include="ScreenSuaDaiLy.xaml.cs">
       <DependentUpon>ScreenSuaDaiLy.xaml</DependentUpon>
@@ -158,6 +158,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ScreenChiTietDaiLy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenPopupThemLoaiDaiLy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -430,6 +434,8 @@
     <Resource Include="Assets\iconPhieuThuTien.png" />
     <Resource Include="Assets\iconPhieuXuatHang.png" />
     <Resource Include="Assets\iconSanPham.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>

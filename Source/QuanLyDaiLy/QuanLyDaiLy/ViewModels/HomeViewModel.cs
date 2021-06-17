@@ -15,7 +15,8 @@ namespace AppQuanLyDaiLy.ViewModels
             List<DaiLy> result = new List<DaiLy>();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                result = db.DaiLies.ToList();
+                string sql = $"select* from DaiLy where IsRemove = 0";
+                result = db.DaiLies.SqlQuery(sql).ToList();
             }
 
             foreach ( var item in result) {
@@ -48,6 +49,15 @@ namespace AppQuanLyDaiLy.ViewModels
                     }
                 }
                 db.DaiLies.Add(daiLy);
+                db.SaveChanges();
+            }
+        }
+
+        public void AddLoaiDaiLy(LoaiDaiLy loaiDaiLy)
+        {
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                db.LoaiDaiLies.Add(loaiDaiLy);
                 db.SaveChanges();
             }
         }

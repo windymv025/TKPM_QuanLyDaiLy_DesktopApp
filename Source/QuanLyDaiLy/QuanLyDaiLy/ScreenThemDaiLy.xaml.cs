@@ -160,7 +160,9 @@ namespace QuanLyDaiLy
 
         private void btn_ThemLoaiDaiLy_Click(object sender, RoutedEventArgs e)
         {
-
+            ScreenPopupThemLoaiDaiLy screenPopupThemLoaiDaiLy = new ScreenPopupThemLoaiDaiLy();
+            screenPopupThemLoaiDaiLy.ShowDialog();
+            loadData();
         }
     }
 }
