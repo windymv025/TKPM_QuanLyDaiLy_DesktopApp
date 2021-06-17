@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using AppQuanLyDaiLy.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace QuanLyDaiLy
     /// </summary>
     public partial class ScreenThemDaiLy : Window
     {
-        string[] loai = { "1", "2" };
+        HomeViewModel viewModel = new HomeViewModel();
         public ScreenThemDaiLy()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace QuanLyDaiLy
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            cbb_loaidaily.ItemsSource = loai;
+            cbb_loaidaily.ItemsSource = viewModel.getAllLoaiDaiLy();
         }
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)

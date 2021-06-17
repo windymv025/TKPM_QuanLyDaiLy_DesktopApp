@@ -40,5 +40,6 @@ namespace QuanLyDaiLy.Model
         public virtual DbSet<PhieuXuatHang> PhieuXuatHangs { get; set; }
         public virtual DbSet<QuyDinh> QuyDinhs { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

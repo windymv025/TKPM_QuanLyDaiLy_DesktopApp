@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2ad42642af014a27b679a7426199660b" Name="Diagram1">
+      <Diagram DiagramId="338300b4152b4493abce647b82432cf3" Name="Diagram1">
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.BangBaoCaoThang" Width="1.5" PointX="7.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.BaoCaoCongNo" Width="1.5" PointX="10" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.BaoCaoDoanhSo" Width="1.5" PointX="10" PointY="6.5" IsExpanded="true" />
@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.PhieuXuatHang" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.QuyDinh" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.SanPham" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.sysdiagram" Width="1.5" PointX="7.75" PointY="12.125" IsExpanded="true" />
         <AssociationConnector Association="DBQuanLyCacDaiLyModel.BaoCaoCongNo_fk0" ManuallyRouted="false" />
         <AssociationConnector Association="DBQuanLyCacDaiLyModel.BaoCaoDoanhSo_fk0" ManuallyRouted="false" />
         <AssociationConnector Association="DBQuanLyCacDaiLyModel.ChiTietBaoCao_fk1" ManuallyRouted="false" />

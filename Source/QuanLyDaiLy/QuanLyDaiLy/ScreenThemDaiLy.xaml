@@ -23,7 +23,9 @@
         </Grid.RowDefinitions>
 
         <!--Row 1-->
-        <Label Content="Tiếp nhận đại lý" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="30" Foreground="Red" Margin="10,0,0,0"/>
+        <Grid Background="#2E333A">
+            <Label Content="Tiếp nhận đại lý" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="30" Foreground="#FFFFBD0B"  Margin="20,0,0,0"/>
+        </Grid>
 
         <!--Row 2-->
         <Grid Grid.Row="1">
@@ -131,7 +133,7 @@
             <ComboBox Grid.Row="6" Grid.Column="1" Margin="40,0,0,0" Panel.ZIndex="2" Width="150" HorizontalAlignment="Left" Name="cbb_loaidaily" SelectionChanged="cbb_loaidaily_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" Padding="10,0,0,0" FontSize="18"/>
+                        <TextBlock Text="{Binding MaLoai}" Padding="10,0,0,0" FontSize="18"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
