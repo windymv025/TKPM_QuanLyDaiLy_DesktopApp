@@ -14,8 +14,72 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
+        Title="{Binding Ten}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <!--Row 1-->
+        <Grid Background="#2E333A">
+            <Label x:Name="lb_Ten" Content="{Binding Ten}" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="30" Foreground="#FFFFBD0B"  Margin="20,0,0,0"/>
+        </Grid>
+
+        <!--Row 2-->
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            <Grid x:Name="bg_Content">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Số điện thoại-->
+                <Label Grid.Row="0" Grid.Column="0" Content="Số điện thoại: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding DienThoai}" FontWeight="ExtraBold" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+
+                <!--Địa chỉ-->
+                <Label Grid.Row="1" Grid.Column="0" Content="Địa chỉ: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding DiaChi}" FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+
+                <!--Ngày tiếp nhận-->
+                <Label Grid.Row="2" Grid.Column="0" Content="Ngày tiếp nhận: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding NgayTiepNhan}" FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+
+                <!--Quận-->
+                <Label Grid.Row="3" Grid.Column="0" Content="Quận: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Quan}" FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+
+                <!--Email-->
+                <Label Grid.Row="4" Grid.Column="0" Content="Email: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+                <Label Grid.Row="4" Grid.Column="1" Content="{Binding Email}" FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+
+                <!--Loại đại lý-->
+                <Label Grid.Row="5" Grid.Column="0" Content="Loại đại lý: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+                <Label Grid.Row="5" Grid.Column="1" Content="{Binding LoaiDaiLy}" FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+
+                <!--Hình ảnh-->
+                <Label Grid.Row="6" Grid.Column="0" Content="Hình ảnh: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
+                <Image Grid.Row="6" Grid.Column="1" x:Name="avatar_DaiLy" Source="{Binding HinhAnh}" RenderOptions.BitmapScalingMode="HighQuality" Margin="40,0,0,0" HorizontalAlignment="Left"/>
+            </Grid>
+        </ScrollViewer>
+
+        <!--Row 3-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,150,0">
+            <Button x:Name="btn_Xoa" Content="Xóa" FontSize="20" Click="btn_Xoa_Click"/>
+            <Button x:Name="btn_Sua" Content="Cập nhật" FontSize="20" Click="btn_Sua_Click" Margin="50,0,0,0"/>
+            <Button x:Name="btn_Cancel" Content="Thoát" FontSize="20" Margin="50,0,0,0" Click="btn_Cancel_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

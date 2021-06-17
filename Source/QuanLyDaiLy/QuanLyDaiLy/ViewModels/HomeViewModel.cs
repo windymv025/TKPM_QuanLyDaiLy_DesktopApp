@@ -1,6 +1,7 @@
 ﻿using QuanLyDaiLy.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace AppQuanLyDaiLy.ViewModels
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
                 result = db.DaiLies.ToList();
+            }
+
+            foreach ( var item in result) {
+                item.HinhAnh = Path.GetFullPath(item.HinhAnh);
             }
 
             return result;

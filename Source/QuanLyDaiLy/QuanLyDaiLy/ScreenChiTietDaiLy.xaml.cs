@@ -29,7 +29,23 @@ namespace QuanLyDaiLy
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = daiLy.Ten;
+            this.DataContext = daiLy;
+        }
+
+        private void btn_Xoa_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Sua_Click(object sender, RoutedEventArgs e)
+        {
+            ScreenSuaDaiLy screenSuaDaiLy = new ScreenSuaDaiLy(daiLy);
+            screenSuaDaiLy.ShowDialog();
+        }
+
+        private void btn_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
