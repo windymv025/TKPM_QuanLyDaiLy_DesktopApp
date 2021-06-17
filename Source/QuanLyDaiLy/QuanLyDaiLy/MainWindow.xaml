@@ -355,7 +355,7 @@
                     <!--Row 2-->
                     <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="25, 20, 25,20"
                     CornerRadius="10" BorderThickness="1" BorderBrush="#FF484848" >
-                        <ListView Name="listDaiLy" FontSize="16" SelectionChanged="listDaiLy_SelectionChanged" HorizontalContentAlignment="Center" >
+                        <ListView Name="listDaiLy" FontSize="16" SelectionChanged="listDaiLy_SelectionChanged" HorizontalContentAlignment="Center">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="auto">

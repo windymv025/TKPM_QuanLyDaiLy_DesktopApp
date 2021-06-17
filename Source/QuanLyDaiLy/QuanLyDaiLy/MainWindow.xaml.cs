@@ -1,4 +1,5 @@
 ﻿using AppQuanLyDaiLy.ViewModels;
+using QuanLyDaiLy.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -167,7 +168,10 @@ namespace QuanLyDaiLy
 
         private void listDaiLy_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var item = listDaiLy.SelectedItem as DaiLy;
 
+            ScreenChiTietDaiLy screenChiTietDaiLy = new ScreenChiTietDaiLy(item);
+            screenChiTietDaiLy.ShowDialog();
         }
 
         

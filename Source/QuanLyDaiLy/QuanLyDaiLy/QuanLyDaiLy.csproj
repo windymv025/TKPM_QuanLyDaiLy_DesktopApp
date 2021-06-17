@@ -135,6 +135,9 @@
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="ScreenChiTietDaiLy.xaml.cs">
+      <DependentUpon>ScreenChiTietDaiLy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScreenThemDaiLy.xaml.cs">
       <DependentUpon>ScreenThemDaiLy.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ScreenChiTietDaiLy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ScreenThemDaiLy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
