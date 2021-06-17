@@ -136,7 +136,7 @@
                   Background="White">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="65"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
@@ -150,7 +150,7 @@
                         <RowDefinition Height="70"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Border  Background="#2E333A" Margin="-10,0,0,0" Padding="10,0,0,0">
+                    <Border  Background="#2E333A" Padding="10,0,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -323,18 +323,19 @@
                 <!--Màn hình quản lý đại lý-->
                 <Grid Grid.Column="1" x:Name="bg_daily" Visibility="Visible">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="70"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <!--Row 1-->
-                    <Grid Background="#2E333A">
-                        <Label Content="Quản lý đại lý" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="30" Foreground="#FFFFBD0B" Margin="20,0,0,0"/>
-                    </Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Label Name="DaiLy_lable_Them" Content="Tiếp nhận đại lý" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="20" PreviewMouseLeftButtonDown="DaiLy_lable_Them_PreviewMouseLeftButtonDown"/>
-                        <Image x:Name="DaiLy_button_Them" Source="/Assets/add.png" RenderOptions.BitmapScalingMode="HighQuality" PreviewMouseLeftButtonDown="DaiLy_button_Them_PreviewMouseLeftButtonDown" Width="40" Height="40"/>
-                        <TextBox x:Name="DaiLy_textbox_search" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="40,0,0,0"
+                    <Border Background="#2E333A">
+                        <Grid>
+                            <Label Content="Quản lý đại lý" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="30" Foreground="#FFFFBD0B" Margin="20,0,0,0"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Label Name="DaiLy_lable_Them" Content="Tiếp nhận đại lý" VerticalContentAlignment="Center" FontWeight="ExtraBold" FontSize="20" PreviewMouseLeftButtonDown="DaiLy_lable_Them_PreviewMouseLeftButtonDown" Foreground="#FFFFBD0B"/>
+                                <Image x:Name="DaiLy_button_Them" Source="/Assets/add.png" RenderOptions.BitmapScalingMode="HighQuality" PreviewMouseLeftButtonDown="DaiLy_button_Them_PreviewMouseLeftButtonDown" Width="40" Height="40"/>
+                                <TextBox x:Name="DaiLy_textbox_search" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="40,0,0,0" Background="White"
 								FontSize="18"
 								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
 								Width="300"
@@ -346,8 +347,26 @@
 								materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
 								materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
 								TextChanged="DaiLy_textbox_search_TextChanged"/>
-                        <Image x:Name="DaiLy_button_Search" Source="/Assets/search.png" PreviewMouseLeftButtonDown="DaiLy_button_Search_PreviewMouseLeftButtonDown" RenderOptions.BitmapScalingMode="HighQuality" Width="40" Height="40"/>
-                    </StackPanel>
+                                <Image x:Name="DaiLy_button_Search" Source="/Assets/search.png" PreviewMouseLeftButtonDown="DaiLy_button_Search_PreviewMouseLeftButtonDown" RenderOptions.BitmapScalingMode="HighQuality" Width="40" Height="40"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    
+                </Grid>
+
+                <!--Màn hình sản phẩm-->
+                <Grid x:Name="bg_sanpham" Grid.Column="1" Visibility="Collapsed">
+                    <Label Content="San Pham"/>
+                </Grid>
+
+                <!--Màn hình phiếu thu tiền-->
+                <Grid x:Name="bg_phieuthutien" Grid.Column="1" Visibility="Collapsed">
+                    <Label Content="Phiếu thu tiền"/>
+                </Grid>
+
+                <!--Màn hình phiếu xuất hàng-->
+                <Grid x:Name="bg_phieuxuathang" Grid.Column="1" Visibility="Collapsed">
+                    <Label Content="Phiếu xuất hàng"/>
                 </Grid>
 
                 <!--Background contact-->
@@ -490,7 +509,46 @@
 							</ListViewItem.ToolTip>
 						</ListViewItem>
 
-						<!--//Contact-->
+                        <!--//Sản Phẩm-->
+                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+									  PreviewMouseLeftButtonDown="img_sanpham_PreviewMouseLeftButtonDown">
+                            <StackPanel  Orientation="Horizontal" Width="230" >
+                                <Image x:Name="img_sanpham" Source="/Assets/iconSanPham.png" Stretch="None" Margin="12,0,0,0" Width="30" Height="30"/>
+                                <TextBlock Text="Sản phẩm" Margin="25,0,0,0" Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_sanpham" Content="SẢN PHẨM" Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--//Phiếu thu tiền-->
+                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+									  PreviewMouseLeftButtonDown="img_phieuthutien_PreviewMouseLeftButtonDown">
+                            <StackPanel  Orientation="Horizontal" Width="230" >
+                                <Image x:Name="img_phieuthutien" Source="/Assets/iconPhieuThuTien.png" Stretch="None" Margin="12,0,0,0" Width="30" Height="30"/>
+                                <TextBlock Text="Phiếu thu tiền" Margin="25,0,0,0" Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_phieuthutien" Content="THU TIỀN" Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--//Phiếu xuất hàng-->
+                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+									  PreviewMouseLeftButtonDown="img_phieuxuathang_PreviewMouseLeftButtonDown">
+                            <StackPanel  Orientation="Horizontal" Width="230" >
+                                <Image x:Name="img_phieuxuathang" Source="/Assets/iconPhieuXuatHang.png" Stretch="None" Margin="12,0,0,0" Width="30" Height="30"/>
+                                <TextBlock Text="Phiếu xuất hàng" Margin="25,0,0,0" Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_phieuxuathang" Content="XUẤT HÀNG" Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--//Contact-->
 						<ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
                                       PreviewMouseLeftButtonDown="img_contact_PreviewMouseLeftButtonDown">
 							<StackPanel Orientation="Horizontal" Width="230" PreviewMouseLeftButtonDown="img_contact_PreviewMouseLeftButtonDown">

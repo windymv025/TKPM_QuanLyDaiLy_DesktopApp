@@ -44,21 +44,30 @@ namespace QuanLyDaiLy
             {
                 tt_home.Visibility = Visibility.Collapsed;
                 tt_daily.Visibility = Visibility.Collapsed;
+                tt_sanpham.Visibility = Visibility.Collapsed;
+                tt_phieuthutien.Visibility = Visibility.Collapsed;
+                tt_phieuxuathang.Visibility = Visibility.Collapsed;
                 tt_contact.Visibility = Visibility.Collapsed;
             }
             else
             {
                 tt_home.Visibility = Visibility.Visible;
                 tt_daily.Visibility = Visibility.Visible;
+                tt_sanpham.Visibility = Visibility.Visible;
+                tt_phieuthutien.Visibility = Visibility.Visible;
+                tt_phieuxuathang.Visibility = Visibility.Visible;
                 tt_contact.Visibility = Visibility.Visible;
             }
         }
 
-        private void img_contact_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Image_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            bg_home.Visibility = Visibility.Collapsed;
+            bg_home.Visibility = Visibility.Visible;
             bg_daily.Visibility = Visibility.Collapsed;
-            contact_screen.Visibility = Visibility.Visible;
+            bg_sanpham.Visibility = Visibility.Collapsed;
+            bg_phieuthutien.Visibility = Visibility.Collapsed;
+            bg_phieuxuathang.Visibility = Visibility.Collapsed;
+            contact_screen.Visibility = Visibility.Collapsed;
             Tg_btn.IsChecked = false;
         }
 
@@ -66,15 +75,54 @@ namespace QuanLyDaiLy
         {
             bg_home.Visibility = Visibility.Collapsed;
             bg_daily.Visibility = Visibility.Visible;
+            bg_sanpham.Visibility = Visibility.Collapsed;
+            bg_phieuthutien.Visibility = Visibility.Collapsed;
+            bg_phieuxuathang.Visibility = Visibility.Collapsed;
             contact_screen.Visibility = Visibility.Collapsed;
             Tg_btn.IsChecked = false;
         }
 
-        private void Image_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void img_sanpham_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            bg_home.Visibility = Visibility.Visible;
+            bg_home.Visibility = Visibility.Collapsed;
             bg_daily.Visibility = Visibility.Collapsed;
+            bg_sanpham.Visibility = Visibility.Visible;
+            bg_phieuthutien.Visibility = Visibility.Collapsed;
+            bg_phieuxuathang.Visibility = Visibility.Collapsed;
             contact_screen.Visibility = Visibility.Collapsed;
+            Tg_btn.IsChecked = false;
+        }
+
+        private void img_phieuthutien_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            bg_home.Visibility = Visibility.Collapsed;
+            bg_daily.Visibility = Visibility.Collapsed;
+            bg_sanpham.Visibility = Visibility.Collapsed;
+            bg_phieuthutien.Visibility = Visibility.Visible;
+            bg_phieuxuathang.Visibility = Visibility.Collapsed;
+            contact_screen.Visibility = Visibility.Collapsed;
+            Tg_btn.IsChecked = false;
+        }
+
+        private void img_phieuxuathang_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            bg_home.Visibility = Visibility.Collapsed;
+            bg_daily.Visibility = Visibility.Collapsed;
+            bg_sanpham.Visibility = Visibility.Collapsed;
+            bg_phieuthutien.Visibility = Visibility.Collapsed;
+            bg_phieuxuathang.Visibility = Visibility.Visible;
+            contact_screen.Visibility = Visibility.Collapsed;
+            Tg_btn.IsChecked = false;
+        }
+
+        private void img_contact_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            bg_home.Visibility = Visibility.Collapsed;
+            bg_daily.Visibility = Visibility.Collapsed;
+            bg_sanpham.Visibility = Visibility.Collapsed;
+            bg_phieuthutien.Visibility = Visibility.Collapsed;
+            bg_phieuxuathang.Visibility = Visibility.Collapsed;
+            contact_screen.Visibility = Visibility.Visible;
             Tg_btn.IsChecked = false;
         }
 
@@ -108,16 +156,6 @@ namespace QuanLyDaiLy
         {
             ScreenThemDaiLy screenThemDaiLy = new ScreenThemDaiLy();
             screenThemDaiLy.ShowDialog();
-        }
-
-        private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void img_add_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }
