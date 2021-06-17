@@ -57,7 +57,7 @@ namespace QuanLyDaiLy
         private void img_contact_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             bg_home.Visibility = Visibility.Collapsed;
-            //bg_daily.Visibility = Visibility.Collapsed;
+            bg_daily.Visibility = Visibility.Collapsed;
             contact_screen.Visibility = Visibility.Visible;
             Tg_btn.IsChecked = false;
         }
@@ -65,7 +65,7 @@ namespace QuanLyDaiLy
         private void img_daily_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             bg_home.Visibility = Visibility.Collapsed;
-           // bg_daily.Visibility = Visibility.Visible;
+            bg_daily.Visibility = Visibility.Visible;
             contact_screen.Visibility = Visibility.Collapsed;
             Tg_btn.IsChecked = false;
         }
@@ -73,7 +73,7 @@ namespace QuanLyDaiLy
         private void Image_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             bg_home.Visibility = Visibility.Visible;
-            //bg_daily.Visibility = Visibility.Collapsed;
+            bg_daily.Visibility = Visibility.Collapsed;
             contact_screen.Visibility = Visibility.Collapsed;
             Tg_btn.IsChecked = false;
         }
