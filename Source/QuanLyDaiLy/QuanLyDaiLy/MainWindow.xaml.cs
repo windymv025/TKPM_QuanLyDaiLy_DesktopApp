@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppQuanLyDaiLy.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,15 @@ namespace QuanLyDaiLy
     /// </summary>
     public partial class MainWindow : Window
     {
+        HomeViewModel viewModel = new HomeViewModel();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            listDaiLy.ItemsSource = viewModel.getAllDaiLy();
         }
 
         private void Tg_btn_Unchecked(object sender, RoutedEventArgs e)
@@ -157,5 +164,12 @@ namespace QuanLyDaiLy
             ScreenThemDaiLy screenThemDaiLy = new ScreenThemDaiLy();
             screenThemDaiLy.ShowDialog();
         }
+
+        private void listDaiLy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        
     }
 }
