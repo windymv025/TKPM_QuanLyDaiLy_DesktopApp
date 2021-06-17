@@ -60,7 +60,7 @@
             
             <!--Số điện thoại-->
             <Label Grid.Row="1" Grid.Column="0" Content="Số điện thoại: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="DaiLy_textbox_phone" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="DaiLy_textbox_phone" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" TextChanged="DaiLy_textbox_phone_TextChanged"
 								FontSize="18"
 								Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
 								Width="300"
@@ -130,14 +130,20 @@
 
             <!--Loại đại lý-->
             <Label Grid.Row="6" Grid.Column="0" Content="Loại đại lý: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>
-            <ComboBox Grid.Row="6" Grid.Column="1" Margin="40,0,0,0" Panel.ZIndex="2" Width="150" HorizontalAlignment="Left" Name="cbb_loaidaily" SelectionChanged="cbb_loaidaily_SelectionChanged">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding MaLoai}" Padding="10,0,0,0" FontSize="18"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBlock x:Name="placeHolderCategory" Grid.Row="6" Grid.Column="1" Text="Loại đại lý" VerticalAlignment="Center" Margin="55,0,0,0" Foreground="Gray" FontSize="18"></TextBlock>
+            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                <Grid>
+                    <ComboBox Margin="40,0,0,0" Panel.ZIndex="2" Width="150" HorizontalAlignment="Left" Name="cbb_loaidaily" SelectionChanged="cbb_loaidaily_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding MaLoai}" Padding="10,0,0,0" FontSize="18"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock x:Name="placeHolderCategory" Text="Loại đại lý" VerticalAlignment="Center" Margin="55,0,0,0" Foreground="Gray" FontSize="18"></TextBlock>
+                </Grid>
+                <Button x:Name="btn_ThemLoaiDaiLy" Content="Thêm loại" Margin="20,0,0,0" Click="btn_ThemLoaiDaiLy_Click"/>
+            </StackPanel>
+            
 
             <!--Hình ảnh-->
             <Label Grid.Row="7" Grid.Column="0" Content="Hình ảnh: " FontWeight="ExtraBold" VerticalContentAlignment="Center" FontSize="20" Margin="0,0,50,0" HorizontalAlignment="Right"/>

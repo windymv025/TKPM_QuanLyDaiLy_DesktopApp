@@ -33,6 +33,11 @@ namespace QuanLyDaiLy
             listDaiLy.ItemsSource = viewModel.getAllDaiLy();
         }
 
+        private void loadData()
+        {
+            listDaiLy.ItemsSource = viewModel.getAllDaiLy();
+        }
+
         private void Tg_btn_Unchecked(object sender, RoutedEventArgs e)
         {
             bg.Opacity = 1;
@@ -158,6 +163,7 @@ namespace QuanLyDaiLy
         {
             ScreenThemDaiLy screenThemDaiLy = new ScreenThemDaiLy();
             screenThemDaiLy.ShowDialog();
+            loadData();
         }
 
         private void DaiLy_button_Them_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

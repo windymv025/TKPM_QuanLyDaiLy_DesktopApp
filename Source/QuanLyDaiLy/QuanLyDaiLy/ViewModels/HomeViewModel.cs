@@ -35,5 +35,21 @@ namespace AppQuanLyDaiLy.ViewModels
 
             return result;
         }
+
+        public void AddDaiLy(DaiLy daiLy)
+        {
+            using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                foreach (var item in db.DaiLies)
+                {
+                    if (item.Ten.Equals(daiLy.Ten))
+                    {
+                        return;
+                    }
+                }
+                db.DaiLies.Add(daiLy);
+                db.SaveChanges();
+            }
+        }
     }
 }
