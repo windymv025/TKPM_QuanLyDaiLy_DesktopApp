@@ -198,7 +198,7 @@
                     <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible">
                         <StackPanel>
                             <!--Sản phẩm bán chạy-->
-                            <TextBlock Text="Sản phẩm bán chạy" FontSize="25" HorizontalAlignment="Center" Foreground="Blue" Margin="10,15" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
+                            <TextBlock Text="Sản phẩm bán chạy" FontSize="25" HorizontalAlignment="Center" Foreground="Red" Margin="10,15" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
 
                             <Border Height="255" Margin="40,0" >
                                 <Border.Background>
@@ -218,7 +218,9 @@
 												<ImageBrush ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 											</Border.Background>
 
-                                        </Border>
+											<TextBlock Text="{Binding Ten}" FontSize="13" FontWeight="DemiBold" Foreground="Yellow" Background="DarkBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="10,0,10,5" Padding="10,5" />
+
+										</Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
                                             <TextBlock Text="{Binding SoLuong}" FontSize="14" FontWeight="Black" Foreground="Red"/>
@@ -229,11 +231,10 @@
                                     <StackPanel x:Name="spSanPhamTop1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
                                         <Border  Margin="0,0,0,0" BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop1" ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
-
-                                            </Border.Background>
-
-                                        </Border>
+												<ImageBrush x:Name="imgSanPhamTop1" ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
+											</Border.Background>
+											<TextBlock Text="{Binding Ten}" FontSize="13" FontWeight="DemiBold" Foreground="Yellow" Background="DarkBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="10,0,10,5" Padding="10,5" />
+										</Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
                                             <TextBlock  Text="{Binding SoLuong}" FontSize="14" FontWeight="Black" Foreground="Red"/>
@@ -247,8 +248,8 @@
                                                 <ImageBrush ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 
                                             </Border.Background>
-
-                                        </Border>
+											<TextBlock Text="{Binding Ten}" FontSize="13" FontWeight="DemiBold" Foreground="Yellow" Background="DarkBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="10,0,10,5" Padding="10,5" />
+										</Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
                                             <TextBlock Text="{Binding SoLuong}" FontSize="14" FontWeight="Black" Foreground="Red"/>
@@ -258,7 +259,7 @@
                             </Border>
 
                             <!--Top Đại lý-->
-                            <TextBlock Text="Đại lý top đầu" FontSize="25" HorizontalAlignment="Center" Foreground="Blue" Margin="10,20,10,10" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
+                            <TextBlock Text="Đại lý top đầu" FontSize="25" HorizontalAlignment="Center" Foreground="Red" Margin="10,20,10,10" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
                             <Border Height="255" Margin="40,0" >
                                 <Border.Background>
 									<ImageBrush Stretch="Fill" ImageSource="Assets/podium_awards.png"/>
@@ -277,8 +278,8 @@
                                                 <ImageBrush x:Name="imgDaiLyTop2" ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 
                                             </Border.Background>
-
-                                        </Border>
+											<TextBlock Text="{Binding Ten}" FontSize="13" FontWeight="DemiBold" Foreground="Yellow" Background="DarkBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="10,0,10,5" Padding="10,5" />
+										</Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 											<TextBlock x:Name="txtDaiLyTop2" Text="{Binding TongTienXuat}" FontSize="14" FontWeight="Black" Foreground="Red"/>
                                         </StackPanel>
@@ -291,8 +292,8 @@
                                                 <ImageBrush ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 
                                             </Border.Background>
-
-                                        </Border>
+											<TextBlock Text="{Binding Ten}" FontSize="13" FontWeight="DemiBold" Foreground="Yellow" Background="DarkBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="10,0,10,5" Padding="10,5" />
+										</Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 											<TextBlock Text="{Binding TongTienXuat}" FontSize="14" FontWeight="Black" Foreground="Red"/>
                                         </StackPanel>
@@ -304,8 +305,8 @@
                                             <Border.Background>
                                                 <ImageBrush x:Name="imgDaiLyTop3" ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
                                             </Border.Background>
-
-                                        </Border>
+											<TextBlock Text="{Binding Ten}" FontSize="13" FontWeight="DemiBold" Foreground="Yellow" Background="DarkBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="10,0,10,5" Padding="10,5"/>
+										</Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 											<TextBlock Text="{Binding TongTienXuat}" FontSize="14" FontWeight="Black" Foreground="Red"/>
 										</StackPanel>

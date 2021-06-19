@@ -31,6 +31,10 @@ namespace QuanLyDaiLy
             spSanPhamTop1.DataContext = viewModel.SanPhamTop1;
             spSanPhamTop2.DataContext = viewModel.SanPhamTop2;
             spSanPhamTop3.DataContext = viewModel.SanPhamTop3;
+
+            spDaiLyTop1.DataContext = viewModel.DaiLyTop1;
+            spDaiLyTop2.DataContext = viewModel.DaiLyTop2;
+            spDaiLyTop3.DataContext = viewModel.DaiLyTop3;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

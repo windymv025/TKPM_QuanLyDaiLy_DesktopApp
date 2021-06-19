@@ -14,12 +14,16 @@ namespace AppQuanLyDaiLy.ViewModels
         public string SoLuong { get; set; }
         public int SoLuongNum { get; set; }
         public string HinhAnh { get; set; }
+        public string Ten { get; set; }
     }
 
     public class DaiLyTop
     {
         public int ID { get; set; }
-        public int TongTienXuat { get; set; }
+        public decimal TongTienXuatNum { get; set; }
+        public string TongTienXuat { get; set; }
+        public string HinhAnh { get; set; }
+        public string Ten { get; set; }
     }
 
     public class HomeViewModel
@@ -43,12 +47,88 @@ namespace AppQuanLyDaiLy.ViewModels
             DaiLyTop3 = new DaiLyTop();
 
             getTopSanPham();
+
+            getTopDaiLy();
         }
 
         public void getTopDaiLy()
         {
-           
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                var listDaiLy = (from pdl in db.PhieuDaiLies
+                                 join pxh in db.PhieuXuatHangs
+                                 on pdl.ID equals pxh.ID
+                                 join dl in db.DaiLies
+                                 on pdl.IDDaiLy equals dl.ID
+                                 select new
+                                 {
+                                     ID = pdl.IDDaiLy,
+                                     TongTien = pxh.TongTien
+                                 }).GroupBy(t => t.ID);
+
+                var listDaiLyTop = new List<DaiLyTop>();
+
+                foreach (var group in listDaiLy)
+                {
+                    var dlt = new DaiLyTop { ID = group.Key };
+                    dlt.TongTienXuatNum = 0;
+                    foreach (var i in group)
+                    {
+                        dlt.TongTienXuatNum += i.TongTien;
+                    }
+                    dlt.TongTienXuat = convertNumberDecimalToString(dlt.TongTienXuatNum);
+                    listDaiLyTop.Add(dlt);
+                }
+
+
+                for (int i = 0; i < listDaiLyTop.Count; i++)
+                {
+                    for (int j = i + 1; j < listDaiLyTop.Count; j++)
+                    {
+                        if (listDaiLyTop[i].TongTienXuatNum < listDaiLyTop[j].TongTienXuatNum)
+                        {
+                            var temp = listDaiLyTop[i];
+                            listDaiLyTop[i] = listDaiLyTop[j];
+                            listDaiLyTop[j] = temp;
+                        }
+                    }
+                }
+
+
+                foreach (var i in listDaiLyTop)
+                {
+                    foreach (var dl in db.DaiLies)
+                    {
+                        if (i.ID == dl.ID)
+                        {
+                            if (dl.HinhAnh != null)
+                                i.HinhAnh = Path.GetFullPath(dl.HinhAnh);
+                            else
+                                i.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
+                            i.Ten = dl.Ten;
+                        }
+                    }
+                }
+
+
+                if (listDaiLyTop.Count >= 0)
+                {
+                    DaiLyTop1 = listDaiLyTop[0];
+                }
+                if (listDaiLyTop.Count >= 1)
+                {
+                    DaiLyTop2 = listDaiLyTop[1];
+                }
+
+                if (listDaiLyTop.Count >= 2)
+                {
+                    DaiLyTop3 = listDaiLyTop[2];
+                }
+
+            }
         }
+
+        
 
         public void getTopSanPham()
         {
@@ -91,7 +171,12 @@ namespace AppQuanLyDaiLy.ViewModels
                     {
                         if(i.ID == sp.ID)
                         {
-                            i.HinhAnh = Path.GetFullPath(sp.HinhAnh);
+                            if (sp.HinhAnh != null)
+                                i.HinhAnh = Path.GetFullPath(sp.HinhAnh);
+                            else
+                                i.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
+
+                            i.Ten = sp.Ten;
                         }
                     }
                 }
@@ -136,5 +221,31 @@ namespace AppQuanLyDaiLy.ViewModels
 
                 return result;
         }
+
+        private string convertNumberDecimalToString(decimal num)
+        {
+            string temp = "";
+            string result = "";
+            string number = num.ToString().Split('.')[0];
+
+            for (int i = number.Length - 1; i >= 0; i--)
+            {
+                temp += number[i];
+                if (i > 0 && number.Length - i > 2 && (number.Length - i) % 3 == 0)
+                {
+                    temp += ".";
+                }
+            }
+
+            for (int i = temp.Length - 1; i >= 0; i--)
+            {
+                result += temp[i];
+            }
+
+            result += "," + num.ToString().Split('.')[1] + " VND";
+
+            return result;
+        }
+
     }
 }
