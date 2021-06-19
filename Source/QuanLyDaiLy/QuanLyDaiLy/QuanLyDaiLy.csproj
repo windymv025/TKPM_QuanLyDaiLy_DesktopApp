@@ -209,93 +209,93 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\043-picture-3.png">
+    <Content Include="Assets\043-picture-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\047-picture.png">
+    </Content>
+    <Content Include="Assets\047-picture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\add.png">
+    </Content>
+    <Content Include="Assets\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\back-button.png">
+    </Content>
+    <Content Include="Assets\back-button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\background.jpg">
+    </Content>
+    <Content Include="Assets\background.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\buttonprevious.png">
+    </Content>
+    <Content Include="Assets\buttonprevious.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\cancel.png">
+    </Content>
+    <Content Include="Assets\cancel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\cashpayment.png">
+    </Content>
+    <Content Include="Assets\cashpayment.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\diskette.png">
+    </Content>
+    <Content Include="Assets\diskette.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\heart.png">
+    </Content>
+    <Content Include="Assets\heart.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\heart2.png">
+    </Content>
+    <Content Include="Assets\heart2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\iconchart2.png">
+    </Content>
+    <Content Include="Assets\iconchart2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\iconcoming.png">
+    </Content>
+    <Content Include="Assets\iconcoming.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\iconDaiLy.png">
+    </Content>
+    <Content Include="Assets\iconDaiLy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\icondelete.png">
+    </Content>
+    <Content Include="Assets\icondelete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\iconfinish.png">
+    </Content>
+    <Content Include="Assets\iconfinish.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\iconorder.png">
+    </Content>
+    <Content Include="Assets\iconorder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\iconrevenue.png">
+    </Content>
+    <Content Include="Assets\iconrevenue.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\iconupdate.png">
+    </Content>
+    <Content Include="Assets\iconupdate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\img_contact.png">
+    </Content>
+    <Content Include="Assets\img_contact.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\img_home.png">
+    </Content>
+    <Content Include="Assets\img_home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\income.png">
+    </Content>
+    <Content Include="Assets\income.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\nextbutton.png">
+    </Content>
+    <Content Include="Assets\nextbutton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\plus.png">
+    </Content>
+    <Content Include="Assets\plus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\previousbutton.png">
+    </Content>
+    <Content Include="Assets\previousbutton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\tgBtn_default.png">
+    </Content>
+    <Content Include="Assets\tgBtn_default.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\tgBtn_MouseOver.png">
+    </Content>
+    <Content Include="Assets\tgBtn_MouseOver.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\That.jpg">
+    </Content>
+    <Content Include="Assets\That.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\Vuong.jpg">
+    </Content>
+    <Content Include="Assets\Vuong.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <None Include="Images\Category\apple.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -422,20 +422,23 @@
     <None Include="Images\Product\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Resource Include="Assets\search.png" />
+    <Content Include="Assets\search.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\iconPhieuThuTien.png" />
-    <Resource Include="Assets\iconPhieuXuatHang.png" />
-    <Resource Include="Assets\iconSanPham.png" />
+    <Content Include="Assets\iconPhieuThuTien.png" />
+    <Content Include="Assets\iconPhieuXuatHang.png" />
+    <Content Include="Assets\iconSanPham.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\podium_awards.png">
+    <Content Include="Assets\podium_awards.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </Content>
+    <Content Include="Assets\image_not_available.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>

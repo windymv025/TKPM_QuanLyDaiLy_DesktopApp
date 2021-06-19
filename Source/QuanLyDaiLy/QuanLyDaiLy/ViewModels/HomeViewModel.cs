@@ -19,8 +19,16 @@ namespace AppQuanLyDaiLy.ViewModels
                 result = db.DaiLies.SqlQuery(sql).ToList();
             }
 
-            foreach ( var item in result) {
-                item.HinhAnh = Path.GetFullPath(item.HinhAnh);
+            foreach (var item in result)
+            {
+                if (item.HinhAnh != null)
+                {
+                    item.HinhAnh = Path.GetFullPath(item.HinhAnh);
+                }
+                else
+                {
+                    item.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
+                }
             }
 
             return result;
