@@ -8,66 +8,133 @@ using System.Threading.Tasks;
 
 namespace AppQuanLyDaiLy.ViewModels
 {
+    public class SanPhamTop
+    {
+        public int ID { get; set; }
+        public string SoLuong { get; set; }
+        public int SoLuongNum { get; set; }
+        public string HinhAnh { get; set; }
+    }
+
+    public class DaiLyTop
+    {
+        public int ID { get; set; }
+        public int TongTienXuat { get; set; }
+    }
+
     public class HomeViewModel
     {
-        public List<DaiLy> getAllDaiLy()
+        public SanPhamTop SanPhamTop1 { get; set; }
+        public SanPhamTop SanPhamTop2 { get; set; }
+        public SanPhamTop SanPhamTop3 { get; set; }
+
+        public DaiLyTop DaiLyTop1 { get; set; }
+        public DaiLyTop DaiLyTop2 { get; set; }
+        public DaiLyTop DaiLyTop3 { get; set; }
+
+        public HomeViewModel()
         {
-            List<DaiLy> result = new List<DaiLy>();
-            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
-            {
-                string sql = $"select* from DaiLy where IsRemove = 0";
-                result = db.DaiLies.SqlQuery(sql).ToList();
-            }
+            SanPhamTop1 = new SanPhamTop();
+            SanPhamTop2 = new SanPhamTop();
+            SanPhamTop3 = new SanPhamTop();
 
-            foreach (var item in result)
-            {
-                if (item.HinhAnh != null)
-                {
-                    item.HinhAnh = Path.GetFullPath(item.HinhAnh);
-                }
-                else
-                {
-                    item.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
-                }
-            }
+            DaiLyTop1 = new DaiLyTop();
+            DaiLyTop2 = new DaiLyTop();
+            DaiLyTop3 = new DaiLyTop();
 
-            return result;
+            getTopSanPham();
         }
 
-        public List<LoaiDaiLy> getAllLoaiDaiLy()
+        public void getTopDaiLy()
         {
-            List<LoaiDaiLy> result = new List<LoaiDaiLy>();
-            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
-            {
-                result = db.LoaiDaiLies.ToList();
-            }
-
-            return result;
+           
         }
 
-        public void AddDaiLy(DaiLy daiLy)
+        public void getTopSanPham()
         {
             using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                foreach (var item in db.DaiLies)
+                var listPhieuXuat = db.ChiTietPhieuXuatHangs.GroupBy(t=>t.IDSanPham);
+
+                var listSanPhamTop = new List<SanPhamTop>();
+
+                foreach (var group in listPhieuXuat)
                 {
-                    if (item.Ten.Equals(daiLy.Ten))
+                    var spt = new SanPhamTop { ID = group.Key};
+                    spt.SoLuongNum = 0;
+                    foreach(var i in group)
                     {
-                        return;
+                        spt.SoLuongNum += i.SoLuong;
+                    }
+                    spt.SoLuong = convertNumberToString(spt.SoLuongNum);
+                    listSanPhamTop.Add(spt);
+                }
+
+                
+                for(int i = 0; i < listSanPhamTop.Count; i++)
+                {
+                    for (int j = i + 1; j < listSanPhamTop.Count; j++)
+                    {
+                        if(listSanPhamTop[i].SoLuongNum < listSanPhamTop[j].SoLuongNum)
+                        {
+                            var temp = listSanPhamTop[i];
+                            listSanPhamTop[i] = listSanPhamTop[j];
+                            listSanPhamTop[j] = temp;
+                        }
                     }
                 }
-                db.DaiLies.Add(daiLy);
-                db.SaveChanges();
+                    
+
+                foreach( var i in listSanPhamTop)
+                {
+                    foreach(var sp in db.SanPhams)
+                    {
+                        if(i.ID == sp.ID)
+                        {
+                            i.HinhAnh = Path.GetFullPath(sp.HinhAnh);
+                        }
+                    }
+                }
+                
+                
+                if(listSanPhamTop.Count >= 0)
+                {
+                    SanPhamTop1 = listSanPhamTop[0];
+                }
+                if (listSanPhamTop.Count >= 1)
+                {
+                    SanPhamTop2 = listSanPhamTop[1];
+                }
+
+                if (listSanPhamTop.Count >= 2)
+                {
+                    SanPhamTop3 = listSanPhamTop[2];
+                }
+
             }
         }
 
-        public void AddLoaiDaiLy(LoaiDaiLy loaiDaiLy)
+        private string convertNumberToString(int num)
         {
-            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            string temp = "";
+            string result = "";
+            string number = num.ToString();
+
+            for(int i = number.Length - 1; i >= 0; i--)
             {
-                db.LoaiDaiLies.Add(loaiDaiLy);
-                db.SaveChanges();
+                temp += number[i];
+                if ( i > 0 && number.Length - i > 2 && (number.Length - i) % 3 == 0) 
+                {
+                    temp += ".";
+                }
             }
+
+            for (int i = temp.Length - 1; i >= 0; i--)
+            {
+                result+= temp[i];
+            }
+
+                return result;
         }
     }
 }

@@ -212,47 +212,46 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
-                                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
+									<StackPanel x:Name="spSanPhamTop2" VerticalAlignment="Top" HorizontalAlignment="Right">
 										<Border  Margin="0,45,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="120" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop2" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
-
-                                            </Border.Background>
+												<ImageBrush ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
+											</Border.Background>
 
                                         </Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
-                                            <TextBlock x:Name="txtSoLuongBanTop2" Text="1.500" FontSize="14" FontWeight="Black" Foreground="Red"/>
+                                            <TextBlock Text="{Binding SoLuong}" FontSize="14" FontWeight="Black" Foreground="Red"/>
                                         </StackPanel>
                                     </StackPanel>
 
                                     <!--top 1-->
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <StackPanel x:Name="spSanPhamTop1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
                                         <Border  Margin="0,0,0,0" BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop1" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
+                                                <ImageBrush x:Name="imgSanPhamTop1" ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 
                                             </Border.Background>
 
                                         </Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
-                                            <TextBlock x:Name="txtSoLuongBanTop1" Text="1.500" FontSize="14" FontWeight="Black" Foreground="Red"/>
+                                            <TextBlock  Text="{Binding SoLuong}" FontSize="14" FontWeight="Black" Foreground="Red"/>
                                         </StackPanel>
                                     </StackPanel>
 
                                     <!--top 3-->
-                                    <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+									<StackPanel x:Name="spSanPhamTop3" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
 										<Border  Margin="0,50,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop3" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
+                                                <ImageBrush ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 
                                             </Border.Background>
 
                                         </Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: " FontSize="14"  FontWeight="Black" Foreground="Black"/>
-                                            <TextBlock x:Name="txtSoLuongBanTop3" Text="1.500" FontSize="14" FontWeight="Black" Foreground="Red"/>
+                                            <TextBlock Text="{Binding SoLuong}" FontSize="14" FontWeight="Black" Foreground="Red"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -272,44 +271,44 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
-                                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
+                                    <StackPanel x:Name="spDaiLyTop2" VerticalAlignment="Top" HorizontalAlignment="Right">
 										<Border Margin="0,45,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="120" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop2" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
+                                                <ImageBrush x:Name="imgDaiLyTop2" ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 
                                             </Border.Background>
 
                                         </Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="txtDaiLyTop2" Text="105.550.500 VNĐ" FontSize="14" FontWeight="Black" Foreground="Red"/>
+											<TextBlock x:Name="txtDaiLyTop2" Text="{Binding TongTienXuat}" FontSize="14" FontWeight="Black" Foreground="Red"/>
                                         </StackPanel>
                                     </StackPanel>
 
                                     <!--top 1-->
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <StackPanel x:Name="spDaiLyTop1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
 										<Border  Margin="0,0,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20"  Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop1" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
+                                                <ImageBrush ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
 
                                             </Border.Background>
 
                                         </Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="txtDaiLyTop1" Text="105.550.500 VNĐ" FontSize="14" FontWeight="Black" Foreground="Red"/>
+											<TextBlock Text="{Binding TongTienXuat}" FontSize="14" FontWeight="Black" Foreground="Red"/>
                                         </StackPanel>
                                     </StackPanel>
 
                                     <!--top 3-->
-                                    <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                    <StackPanel x:Name="spDaiLyTop3" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
 										<Border   Margin="0,50,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop3" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
+                                                <ImageBrush x:Name="imgDaiLyTop3" ImageSource="{Binding HinhAnh}" Stretch="Uniform" />
                                             </Border.Background>
 
                                         </Border>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock x:Name="txtDaiLyTop3" Text="105.550.500 VNĐ" FontSize="14" FontWeight="Black" Foreground="Red"/>
-                                        </StackPanel>
+											<TextBlock Text="{Binding TongTienXuat}" FontSize="14" FontWeight="Black" Foreground="Red"/>
+										</StackPanel>
                                     </StackPanel>
                                 </Grid>
 

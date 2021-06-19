@@ -1,5 +1,6 @@
 ﻿using AppQuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.Model;
+using QuanLyDaiLy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,10 +43,10 @@ namespace QuanLyDaiLy
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.DataContext = daiLy;
-            cbb_loaidaily.ItemsSource = viewModel.getAllLoaiDaiLy();
+            cbb_loaidaily.ItemsSource = DaiLyDAO.getAllLoaiDaiLy();
 
             int index = 0;
-            foreach (var item in viewModel.getAllLoaiDaiLy())
+            foreach (var item in DaiLyDAO.getAllLoaiDaiLy())
             {
                 if(item.MaLoai == daiLy.LoaiDaiLy)
                 {

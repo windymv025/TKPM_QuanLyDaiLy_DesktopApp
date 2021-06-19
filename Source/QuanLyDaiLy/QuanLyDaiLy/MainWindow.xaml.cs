@@ -1,5 +1,6 @@
 ﻿using AppQuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.Model;
+using QuanLyDaiLy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,20 +23,25 @@ namespace QuanLyDaiLy
     /// </summary>
     public partial class MainWindow : Window
     {
-        HomeViewModel viewModel = new HomeViewModel();
+        HomeViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new HomeViewModel();
+            spSanPhamTop1.DataContext = viewModel.SanPhamTop1;
+            spSanPhamTop2.DataContext = viewModel.SanPhamTop2;
+            spSanPhamTop3.DataContext = viewModel.SanPhamTop3;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            listDaiLy.ItemsSource = viewModel.getAllDaiLy();
+            listDaiLy.ItemsSource = DaiLyDAO.getAllDaiLy();
+            
         }
 
         private void loadData()
         {
-            listDaiLy.ItemsSource = viewModel.getAllDaiLy();
+            listDaiLy.ItemsSource = DaiLyDAO.getAllDaiLy();
         }
 
         private void Tg_btn_Unchecked(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using AppQuanLyDaiLy.ViewModels;
 using Microsoft.Win32;
 using QuanLyDaiLy.Model;
+using QuanLyDaiLy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -25,7 +26,7 @@ namespace QuanLyDaiLy
     /// </summary>
     public partial class ScreenThemDaiLy : Window
     {
-        HomeViewModel viewModel = new HomeViewModel();
+        DaiLyViewModel viewModel = new DaiLyViewModel();
         public ScreenThemDaiLy()
         {
             InitializeComponent();
@@ -38,12 +39,12 @@ namespace QuanLyDaiLy
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            cbb_loaidaily.ItemsSource = viewModel.getAllLoaiDaiLy();
+            cbb_loaidaily.ItemsSource = DaiLyDAO.getAllLoaiDaiLy();
         }
 
         private void loadData()
         {
-            cbb_loaidaily.ItemsSource = viewModel.getAllLoaiDaiLy();
+            cbb_loaidaily.ItemsSource = DaiLyDAO.getAllLoaiDaiLy();
         }
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)

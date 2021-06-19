@@ -144,6 +144,7 @@
     <Compile Include="ScreenThemDaiLy.xaml.cs">
       <DependentUpon>ScreenThemDaiLy.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DaiLyViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -374,9 +375,9 @@
     <None Include="Images\Product\1.6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Resource Include="Images\Product\1.png">
+    <None Include="Images\Product\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
     <None Include="Images\Product\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

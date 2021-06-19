@@ -1,5 +1,6 @@
 ﻿using AppQuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.Model;
+using QuanLyDaiLy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace QuanLyDaiLy
     /// </summary>
     public partial class ScreenPopupThemLoaiDaiLy : Window
     {
-        HomeViewModel viewModel = new HomeViewModel();
+        DaiLyViewModel viewModel = new DaiLyViewModel();
         public ScreenPopupThemLoaiDaiLy()
         {
             InitializeComponent();
@@ -41,8 +42,8 @@ namespace QuanLyDaiLy
 
             if (canSave)
             {
-                MessageBoxResult result = MessageBox.Show($"Bạn có muốn lưu loại đại lý {viewModel.getAllLoaiDaiLy().Count + 1}?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                loaiDaiLy.MaLoai = viewModel.getAllLoaiDaiLy().Count + 1;
+                MessageBoxResult result = MessageBox.Show($"Bạn có muốn lưu loại đại lý {DaiLyDAO.getAllLoaiDaiLy().Count + 1}?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                loaiDaiLy.MaLoai = DaiLyDAO.getAllLoaiDaiLy().Count + 1;
                 loaiDaiLy.SoTienNoToiDa = decimal.Parse(LoaiDaiLy_textbox_SoTienNoToiDa.Text.Trim());
 
                 viewModel.AddLoaiDaiLy(loaiDaiLy);
