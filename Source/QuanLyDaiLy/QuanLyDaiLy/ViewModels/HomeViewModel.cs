@@ -247,5 +247,16 @@ namespace AppQuanLyDaiLy.ViewModels
             return result;
         }
 
+        public DaiLy getDaiLyTheoTop(DaiLyTop daiLyTop)
+        {
+            DaiLy dl = new DaiLy();
+
+            using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                dl = db.DaiLies.Where(d => d.ID == daiLyTop.ID).FirstOrDefault();
+            }
+
+            return dl;
+        }
     }
 }

@@ -24,10 +24,18 @@ namespace QuanLyDaiLy
     public partial class MainWindow : Window
     {
         HomeViewModel viewModel;
+        SanPhamViewModel sanPhamViewModel;
         public MainWindow()
         {
             InitializeComponent();
             viewModel = new HomeViewModel();
+            sanPhamViewModel = new SanPhamViewModel();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            listDaiLy.ItemsSource = DaiLyDAO.getAllDaiLy();
+
             spSanPhamTop1.DataContext = viewModel.SanPhamTop1;
             spSanPhamTop2.DataContext = viewModel.SanPhamTop2;
             spSanPhamTop3.DataContext = viewModel.SanPhamTop3;
@@ -35,12 +43,8 @@ namespace QuanLyDaiLy
             spDaiLyTop1.DataContext = viewModel.DaiLyTop1;
             spDaiLyTop2.DataContext = viewModel.DaiLyTop2;
             spDaiLyTop3.DataContext = viewModel.DaiLyTop3;
-        }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            listDaiLy.ItemsSource = DaiLyDAO.getAllDaiLy();
-            
+            lvSanPham.ItemsSource = sanPhamViewModel.SanPhams;
         }
 
         private void loadData()
@@ -190,6 +194,60 @@ namespace QuanLyDaiLy
             screenChiTietDaiLy.ShowDialog();
         }
 
-        
+        private void spDaiLyTop2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var dl = viewModel.getDaiLyTheoTop(viewModel.DaiLyTop2);
+            ScreenChiTietDaiLy screenChiTietDaiLy = new ScreenChiTietDaiLy(dl);
+            screenChiTietDaiLy.ShowDialog();
+        }
+
+        private void spDaiLyTop1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var dl = viewModel.getDaiLyTheoTop(viewModel.DaiLyTop1);
+            ScreenChiTietDaiLy screenChiTietDaiLy = new ScreenChiTietDaiLy(dl);
+            screenChiTietDaiLy.ShowDialog();
+        }
+
+        private void spDaiLyTop3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var dl = viewModel.getDaiLyTheoTop(viewModel.DaiLyTop3);
+            ScreenChiTietDaiLy screenChiTietDaiLy = new ScreenChiTietDaiLy(dl);
+            screenChiTietDaiLy.ShowDialog();
+        }
+
+        private void spSanPhamTop2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void spSanPhamTop1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void spSanPhamTop3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SanPham_lable_Them_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SanPham_button_Them_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SanPham_textbox_search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void SanPham_btn_Search_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
