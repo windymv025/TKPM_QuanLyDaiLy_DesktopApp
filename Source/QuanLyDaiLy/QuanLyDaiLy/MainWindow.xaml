@@ -145,7 +145,7 @@
                 </Grid.RowDefinitions>
 
                 <!--Background Home Screen-->
-                <Grid x:Name="bg_home" Grid.Column="1" Visibility="Collapsed">
+                <Grid x:Name="bg_home" Grid.Column="1" Visibility="Visible">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70"/>
                         <RowDefinition Height="*"/>
@@ -195,12 +195,12 @@
                     </Border>
 
                     <!--TODO SomeThing-->
-                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden">
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible">
                         <StackPanel>
                             <!--Sản phẩm bán chạy-->
                             <TextBlock Text="Sản phẩm bán chạy" FontSize="25" HorizontalAlignment="Center" Foreground="Blue" Margin="10,15" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
 
-                            <Border Height="400" Margin="40,0" >
+                            <Border Height="255" Margin="40,0" >
                                 <Border.Background>
                                     <ImageBrush Stretch="Fill" ImageSource="Assets/podium_awards.png"/>
                                 </Border.Background>
@@ -208,14 +208,14 @@
                                 <Grid Margin="35,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1.2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
                                     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
-                                        <Border  Margin="0,85,0,0"  CornerRadius="50" Height="120" Width="200">
+										<Border  Margin="0,45,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="120" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop2" ImageSource="/Images/Product/1.png" Stretch="UniformToFill" />
+                                                <ImageBrush x:Name="imgSanPhamTop2" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
 
                                             </Border.Background>
 
@@ -228,9 +228,9 @@
 
                                     <!--top 1-->
                                     <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                        <Border  Margin="0,0,0,0"  CornerRadius="50" Height="130" Width="200">
+                                        <Border  Margin="0,0,0,0" BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop1" ImageSource="/Images/Product/1.png" Stretch="UniformToFill" />
+                                                <ImageBrush x:Name="imgSanPhamTop1" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
 
                                             </Border.Background>
 
@@ -243,9 +243,9 @@
 
                                     <!--top 3-->
                                     <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                        <Border  Margin="0,105,0,0"  CornerRadius="50" Height="130" Width="200">
+										<Border  Margin="0,50,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop3" ImageSource="/Images/Product/1.png" Stretch="UniformToFill" />
+                                                <ImageBrush x:Name="imgSanPhamTop3" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
 
                                             </Border.Background>
 
@@ -260,22 +260,22 @@
 
                             <!--Top Đại lý-->
                             <TextBlock Text="Đại lý top đầu" FontSize="25" HorizontalAlignment="Center" Foreground="Blue" Margin="10,20,10,10" FontWeight="UltraBlack" materialDesign:ThemeAssist.Theme="Dark" FontFamily="Cooper Black" />
-                            <Border Height="400" Margin="40,0" >
+                            <Border Height="255" Margin="40,0" >
                                 <Border.Background>
-                                    <ImageBrush Stretch="Fill" ImageSource="Assets/podium_awards.png"/>
+									<ImageBrush Stretch="Fill" ImageSource="Assets/podium_awards.png"/>
                                 </Border.Background>
 
                                 <Grid Margin="35,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1.2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
                                     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
-                                        <Border  Margin="0,85,0,0"  CornerRadius="50" Height="120" Width="200">
+										<Border Margin="0,45,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="120" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop2" ImageSource="/Images/Product/1.png" Stretch="UniformToFill" />
+                                                <ImageBrush x:Name="imgDaiLyTop2" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
 
                                             </Border.Background>
 
@@ -287,9 +287,9 @@
 
                                     <!--top 1-->
                                     <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                        <Border  Margin="0,0,0,0"  CornerRadius="50" Height="130" Width="200">
+										<Border  Margin="0,0,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20"  Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop1" ImageSource="/Images/Product/1.png" Stretch="UniformToFill" />
+                                                <ImageBrush x:Name="imgDaiLyTop1" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
 
                                             </Border.Background>
 
@@ -301,10 +301,9 @@
 
                                     <!--top 3-->
                                     <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                        <Border  Margin="0,105,0,0"  CornerRadius="50" Height="130" Width="200">
+										<Border   Margin="0,50,0,0"  BorderBrush="Blue" BorderThickness="2"  CornerRadius="20" Height="130" Width="200">
                                             <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop3" ImageSource="/Images/Product/1.png" Stretch="UniformToFill" />
-
+                                                <ImageBrush x:Name="imgDaiLyTop3" ImageSource="/Images/Product/1.png" Stretch="Uniform" />
                                             </Border.Background>
 
                                         </Border>
@@ -321,7 +320,7 @@
                 </Grid>
 
                 <!--Màn hình quản lý đại lý-->
-                <Grid Grid.Column="1" x:Name="bg_daily" Visibility="Visible">
+                <Grid Grid.Column="1" x:Name="bg_daily" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70"/>
                         <RowDefinition Height="*"/>

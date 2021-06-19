@@ -281,9 +281,6 @@
     <Resource Include="Assets\plus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\podium_awards.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Assets\previousbutton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -436,6 +433,9 @@
     <Resource Include="Assets\iconSanPham.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\podium_awards.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
