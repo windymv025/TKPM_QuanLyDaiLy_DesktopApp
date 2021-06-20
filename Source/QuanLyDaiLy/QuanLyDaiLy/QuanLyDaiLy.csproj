@@ -72,6 +72,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAO\ConvertNumber.cs" />
+    <Compile Include="DAO\LoaiSanPhamDAO.cs" />
+    <Compile Include="DAO\NguonNhapDAO.cs" />
+    <Compile Include="DAO\SanPhamDAO.cs" />
+    <Compile Include="DTO\DaiLyTop.cs" />
+    <Compile Include="DTO\PagingInfo.cs" />
+    <Compile Include="DTO\SanPhamHienThi.cs" />
+    <Compile Include="DTO\SanPhamTop.cs" />
     <Compile Include="Model\BangBaoCaoThang.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>

@@ -44,12 +44,18 @@ namespace QuanLyDaiLy
             spDaiLyTop2.DataContext = viewModel.DaiLyTop2;
             spDaiLyTop3.DataContext = viewModel.DaiLyTop3;
 
-            lvSanPham.ItemsSource = sanPhamViewModel.SanPhams;
+            
         }
 
-        private void loadData()
+        private void loadDataDaiLy()
         {
             listDaiLy.ItemsSource = DaiLyDAO.getAllDaiLy();
+        }
+
+        private void loadDataSanPham(int page)
+        {
+            lvSanPham.ItemsSource = sanPhamViewModel.loadPageHienThi(page);
+
         }
 
         private void Tg_btn_Unchecked(object sender, RoutedEventArgs e)
@@ -177,7 +183,7 @@ namespace QuanLyDaiLy
         {
             ScreenThemDaiLy screenThemDaiLy = new ScreenThemDaiLy();
             screenThemDaiLy.ShowDialog();
-            loadData();
+            loadDataDaiLy();
         }
 
         private void DaiLy_button_Them_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -246,6 +252,16 @@ namespace QuanLyDaiLy
         }
 
         private void SanPham_btn_Search_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SanPham_previous_button(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SanPham_next_button(object sender, MouseButtonEventArgs e)
         {
 
         }

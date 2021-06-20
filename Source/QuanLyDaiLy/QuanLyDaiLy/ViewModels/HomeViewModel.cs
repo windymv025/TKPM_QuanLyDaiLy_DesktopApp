@@ -1,4 +1,6 @@
-﻿using QuanLyDaiLy.Model;
+﻿using QuanLyDaiLy.DAO;
+using QuanLyDaiLy.DTO;
+using QuanLyDaiLy.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,24 +10,6 @@ using System.Threading.Tasks;
 
 namespace AppQuanLyDaiLy.ViewModels
 {
-    public class SanPhamTop
-    {
-        public int ID { get; set; }
-        public string SoLuong { get; set; }
-        public int SoLuongNum { get; set; }
-        public string HinhAnh { get; set; }
-        public string Ten { get; set; }
-    }
-
-    public class DaiLyTop
-    {
-        public int ID { get; set; }
-        public decimal TongTienXuatNum { get; set; }
-        public string TongTienXuat { get; set; }
-        public string HinhAnh { get; set; }
-        public string Ten { get; set; }
-    }
-
     public class HomeViewModel
     {
         public SanPhamTop SanPhamTop1 { get; set; }
@@ -76,7 +60,7 @@ namespace AppQuanLyDaiLy.ViewModels
                     {
                         dlt.TongTienXuatNum += i.TongTien;
                     }
-                    dlt.TongTienXuat = convertNumberDecimalToString(dlt.TongTienXuatNum);
+                    dlt.TongTienXuat = ConvertNumber.convertNumberDecimalToString(dlt.TongTienXuatNum);
                     listDaiLyTop.Add(dlt);
                 }
 
@@ -146,7 +130,7 @@ namespace AppQuanLyDaiLy.ViewModels
                     {
                         spt.SoLuongNum += i.SoLuong;
                     }
-                    spt.SoLuong = convertNumberToString(spt.SoLuongNum);
+                    spt.SoLuong = ConvertNumber.convertNumberToString(spt.SoLuongNum);
                     listSanPhamTop.Add(spt);
                 }
 
@@ -197,54 +181,6 @@ namespace AppQuanLyDaiLy.ViewModels
                 }
 
             }
-        }
-
-        private string convertNumberToString(int num)
-        {
-            string temp = "";
-            string result = "";
-            string number = num.ToString();
-
-            for(int i = number.Length - 1; i >= 0; i--)
-            {
-                temp += number[i];
-                if ( i > 0 && number.Length - i > 2 && (number.Length - i) % 3 == 0) 
-                {
-                    temp += ".";
-                }
-            }
-
-            for (int i = temp.Length - 1; i >= 0; i--)
-            {
-                result+= temp[i];
-            }
-
-                return result;
-        }
-
-        private string convertNumberDecimalToString(decimal num)
-        {
-            string temp = "";
-            string result = "";
-            string number = num.ToString().Split('.')[0];
-
-            for (int i = number.Length - 1; i >= 0; i--)
-            {
-                temp += number[i];
-                if (i > 0 && number.Length - i > 2 && (number.Length - i) % 3 == 0)
-                {
-                    temp += ".";
-                }
-            }
-
-            for (int i = temp.Length - 1; i >= 0; i--)
-            {
-                result += temp[i];
-            }
-
-            result += "," + num.ToString().Split('.')[1] + " VND";
-
-            return result;
         }
 
         public DaiLy getDaiLyTheoTop(DaiLyTop daiLyTop)
