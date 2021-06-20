@@ -26,7 +26,7 @@ namespace QuanLyDaiLy
     /// </summary>
     public partial class ScreenThemDaiLy : Window
     {
-        DaiLyViewModel viewModel = new DaiLyViewModel();
+        DaiLyDAO viewModel = new DaiLyDAO();
         public ScreenThemDaiLy()
         {
             InitializeComponent();
@@ -92,7 +92,7 @@ namespace QuanLyDaiLy
                 canSave = false;
                 noti.Append("Quận, ");
             }
-            if (DaiLy_textbox_email.Text.Trim().ToString().Equals(""))
+            if (DaiLy_textbox_email.Text.Trim().ToString().Equals("") || !Regex.IsMatch(DaiLy_textbox_email.Text.Trim().ToString(), "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
             {
                 canSave = false;
                 noti.Append("Email, ");

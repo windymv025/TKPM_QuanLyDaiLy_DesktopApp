@@ -23,7 +23,7 @@ namespace QuanLyDaiLy
     /// </summary>
     public partial class ScreenPopupThemLoaiDaiLy : Window
     {
-        DaiLyViewModel viewModel = new DaiLyViewModel();
+        DaiLyDAO viewModel = new DaiLyDAO();
         public ScreenPopupThemLoaiDaiLy()
         {
             InitializeComponent();

@@ -45,10 +45,6 @@ namespace QuanLyDaiLy.ViewModels
             return result;
         }
 
-        
-    }
-    public class DaiLyViewModel
-    {
         public void AddDaiLy(DaiLy daiLy)
         {
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
