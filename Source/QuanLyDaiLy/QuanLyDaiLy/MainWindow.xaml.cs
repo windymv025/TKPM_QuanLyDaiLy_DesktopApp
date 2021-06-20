@@ -55,7 +55,8 @@ namespace QuanLyDaiLy
         private void loadDataSanPham(int page)
         {
             lvSanPham.ItemsSource = sanPhamViewModel.loadPageHienThi(page);
-
+            currentPageTxt.Text = sanPhamViewModel.PagingInfo.CurrentPage.ToString();
+            totalPageTxt.Text = sanPhamViewModel.PagingInfo.TotalPage.ToString();
         }
 
         private void Tg_btn_Unchecked(object sender, RoutedEventArgs e)
@@ -124,6 +125,8 @@ namespace QuanLyDaiLy
             bg_phieuxuathang.Visibility = Visibility.Collapsed;
             contact_screen.Visibility = Visibility.Collapsed;
             Tg_btn.IsChecked = false;
+            sanPhamViewModel.getSanPhams();
+            loadDataSanPham(1);
         }
 
         private void img_phieuthutien_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -258,12 +261,12 @@ namespace QuanLyDaiLy
 
         private void SanPham_previous_button(object sender, MouseButtonEventArgs e)
         {
-
+            loadDataSanPham(sanPhamViewModel.PagingInfo.CurrentPage - 1);
         }
 
         private void SanPham_next_button(object sender, MouseButtonEventArgs e)
         {
-
+            loadDataSanPham(sanPhamViewModel.PagingInfo.CurrentPage + 1);
         }
     }
 }

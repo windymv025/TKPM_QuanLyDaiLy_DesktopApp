@@ -22,9 +22,10 @@ namespace QuanLyDaiLy.ViewModels
 
         public SanPhamViewModel()
         {
-            getSanPhams();
             getLoaiSanPhams();
             getNguonNhaps();
+            getSanPhams();
+
             PagingInfo = new PagingInfo(3, SanPhams.Count);
         }
 
@@ -40,34 +41,74 @@ namespace QuanLyDaiLy.ViewModels
             LoaiSanPhams = LoaiSanPhamDAO.GetAllLoaiSanPham();
         }
 
-        private void getSanPhams()
+        public void getSanPhams()
         {
             SanPhams = new List<SanPham>();
             SanPhams = SanPhamDAO.GetAllSanPham();
 
-            var result = from sp in SanPhams
-                         join lsp in LoaiSanPhams
-                         on sp.IDLoaiSanPham equals lsp.ID
-                         join nn in NguonNhaps
-                         on sp.IDNguonNhap equals nn.ID
-                         select new SanPhamHienThi
-                         {
-                             ID = sp.ID,
-                             Ten = sp.Ten,
-                             DonGiaNum = sp.DonGia,
-                             HinhAnh = Path.GetFullPath(sp.HinhAnh),
-                             MoTa = sp.MoTa,
-                             SoLuongNum = sp.SoLuong,
-                             HinhAnhLoai = Path.GetFullPath(lsp.HinhAnh),
-                             HinhAnhNguon = Path.GetFullPath(nn.HinhAnh)
-                         };
-
-            SanPhamHienThis = new List<SanPhamHienThi>();
-            foreach (var i in result)
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                i.DonGia = ConvertNumber.convertNumberDecimalToString(i.DonGiaNum);
-                i.SoLuong = ConvertNumber.convertNumberToString(i.SoLuongNum);
-                SanPhamHienThis.Add(i);
+                var result = (from sp in db.SanPhams
+                              select new SanPhamHienThi
+                              {
+                                  ID = sp.ID,
+                                  Ten = sp.Ten,
+                                  DonGiaNum = sp.DonGia,
+                                  HinhAnh = sp.HinhAnh,
+                                  MoTa = sp.MoTa,
+                                  SoLuongNum = sp.SoLuong,
+                                  HinhAnhLoai = sp.LoaiSanPham.HinhAnh,
+                                  HinhAnhNguon = sp.NguonNhap.HinhAnh,
+                                  DonGia = "",
+                                  SoLuong = ""
+                              }).ToList();
+
+
+                SanPhamHienThis = new List<SanPhamHienThi>();
+                foreach (var sp in result)
+                {
+                    if (sp.HinhAnh == null)
+                    {
+                        sp.HinhAnh = Path.GetFullPath("Assets/image_not_available.png");
+                    }
+                    else
+                    {
+                        sp.HinhAnh = Path.GetFullPath(sp.HinhAnh);
+                    }
+
+                    if(sp.HinhAnhLoai == null)
+                    {
+                        sp.HinhAnhLoai = Path.GetFullPath("Assets/image_not_available.png");
+
+                    }
+                    else
+                    {
+                        sp.HinhAnhLoai = Path.GetFullPath(sp.HinhAnhLoai);
+                    }
+
+                    if (sp.HinhAnhNguon == null)
+                    {
+                        sp.HinhAnhNguon = Path.GetFullPath("Assets/image_not_available.png");
+
+                    }
+                    else
+                    {
+                        sp.HinhAnhNguon = Path.GetFullPath(sp.HinhAnhNguon);
+                    }
+                    SanPhamHienThis.Add(new SanPhamHienThi
+                    {
+                        ID = sp.ID,
+                        Ten = sp.Ten,
+                        DonGiaNum = sp.DonGiaNum,
+                        HinhAnh = sp.HinhAnh,
+                        MoTa = sp.MoTa,
+                        SoLuongNum = sp.SoLuongNum,
+                        HinhAnhLoai = sp.HinhAnhLoai,
+                        HinhAnhNguon = sp.HinhAnhNguon,
+                        DonGia = ConvertNumber.convertNumberDecimalToString(sp.DonGiaNum),
+                        SoLuong = ConvertNumber.convertNumberToString(sp.SoLuongNum)
+                    });
+                }
             }
         }
 

@@ -454,9 +454,9 @@
     <Content Include="Assets\podium_awards.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\image_not_available.png">
+    <None Include="Assets\image_not_available.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>

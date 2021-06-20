@@ -51,7 +51,7 @@ namespace QuanLyDaiLy.DAO
                 result += temp[i];
             }
 
-            result += "," + num.ToString().Split('.')[1] + " VND";
+            result += "," + num.ToString().Split('.')[1];
 
             return result;
         }
