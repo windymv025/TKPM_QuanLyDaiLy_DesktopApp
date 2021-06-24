@@ -92,7 +92,8 @@ GO
 CREATE TABLE [SanPham] (
 	Id int identity(1,1) NOT NULL,
 	Ten nvarchar(max) NOT NULL,
-	DonGia decimal NOT NULL,
+	GiaNhap decimal NOT NULL,
+	GiaBan decimal not null,
 	SoLuong int NOT NULL,
 	IdLoaiSanPham int NOT NULL,
 	IdNguonNhap int NOT NULL,
@@ -115,7 +116,6 @@ CREATE TABLE [ChiTietPhieuXuatHang] (
 	IdSanPham int NOT NULL,
 	IdPhieuXuatHang int NOT NULL,
 	SoLuong int NOT NULL,
-	GiaBan decimal NOT NULL,
 	primary key(IdSanPham, IDPhieuXuatHang)
 )
 GO
@@ -132,7 +132,26 @@ CREATE TABLE [HinhAnhSanPham] (
 	primary key(Id)
 )
 GO
+CREATE TABLE [NhanVien] (
+	Id int identity(1,1) not null,
+	Ten nvarchar(max) not null,
+	DienThoai varchar(20) not null,
+	DiaChi nvarchar(max) not null,
+	Email varchar(100),
+	VaiTro int,			/*1 - admin, 2 - staff*/
+	primary key(Id)
+)
+GO
+CREATE TABLE [TaiKhoan] (
+	Id int not null,
+	TenDangNhap varchar(100) not null,
+	MatKhau nvarchar(128),
+	primary key(Id)
+)
+GO
 
+ALTER TABLE [TaiKhoan] ADD CONSTRAINT [TaiKhoan_fk0] FOREIGN KEY ([Id]) REFERENCES [NhanVien]([Id])
+GO
 ALTER TABLE [DaiLy] ADD CONSTRAINT [DaiLy_fk0] FOREIGN KEY ([IdLoaiDaiLy]) REFERENCES [LoaiDaiLy]([Id])
 GO
 
@@ -179,6 +198,20 @@ GO
 
 
 /* Thêm data */
+INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [VaiTro]) VALUES (N'Phạm Văn Thật', '0352358161', N'Tiền Giang', '18120568@student.hcmus.edu.vn', 1)
+GO
+INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [VaiTro]) VALUES (N'Phạm Minh Vương', '0988788146', N'Bình Định', '18120655@student.hcmus.edu.vn', 1)
+GO
+INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [VaiTro]) VALUES (N'Nguyễn Bá Vương Thần Vũ', '0909909009', N'Thành phố Hồ Chí Minh', 'nbvtvu@gmail.com', 2)
+GO
+
+INSERT [dbo].[TaiKhoan] ([Id], [TenDangNhap], [MatKhau]) VALUES ('1', 'that','db69fc039dcbd2962cb4d28f5891aae1')		/*admin*/
+GO
+INSERT [dbo].[TaiKhoan] ([Id], [TenDangNhap], [MatKhau]) VALUES ('2', 'vuong','db69fc039dcbd2962cb4d28f5891aae1')
+GO
+INSERT [dbo].[TaiKhoan] ([Id], [TenDangNhap], [MatKhau]) VALUES ('3', 'vu','978aae9bb6bee8fb75de3e4830a1be46')			/*staff*/
+GO
+
 INSERT [dbo].[LoaiDaiLy] ([Ten], [SoTienNoToiDa]) VALUES ('1', CAST(300000000 AS Decimal(18, 0)))
 GO
 INSERT [dbo].[LoaiDaiLy] ([Ten], [SoTienNoToiDa]) VALUES ('2', CAST(500000000 AS Decimal(18, 0)))
@@ -223,48 +256,65 @@ GO
 INSERT [dbo].[ChiTietBaoCao] ([IDDaiLy], [IdBangBaoCao], [NgayTao]) VALUES (1, 2, CAST(N'2021-01-31' AS Datetime))
 GO
 
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-01' AS Datetime), 1)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-31' AS Datetime), 8)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-04-10' AS Datetime), 2)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-05-14' AS Datetime), 3)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-13' AS Datetime), 1)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-13' AS Datetime), 8)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 1)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 2)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 1)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-16' AS Datetime), 4)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-17' AS Datetime), 8)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-17' AS Datetime), 3)
-GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-18' AS Datetime), 1)
-GO
-
 INSERT [dbo].[BaoCaoDoanhSo] ([IdBangBaoCao], [SoPhieuXuat], [TongTriGia], [TyLe]) VALUES (1, 5, CAST(100000000 AS Decimal(18, 0)), 1)
 GO
 INSERT [dbo].[BaoCaoCongNo] ([IdBangBaoCao], [NoDau], [PhatSinh]) VALUES (2, CAST(54590000 AS Decimal(18, 0)), CAST(1000000 AS Decimal(18, 0)))
 GO
 
-INSERT [dbo].[PhieuThuTien] ([IdPhieuDaiLy], [SoTienThu]) VALUES (1, CAST(100000000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-01' AS Datetime), 1)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-01' AS Datetime), 1)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-31' AS Datetime), 2)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-04-10' AS Datetime), 3)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-05-14' AS Datetime), 4)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-13' AS Datetime), 5)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-13' AS Datetime), 6)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 7)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 8)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 9)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-16' AS Datetime), 10)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-17' AS Datetime), 11)
+GO
+INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-17' AS Datetime), 12)
 GO
 
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (2, CAST(54590000 AS Decimal(18, 0)))
+
+INSERT [dbo].[PhieuThuTien] ([IdPhieuDaiLy], [SoTienThu]) VALUES (2, CAST(29000000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (4, CAST(64280000 AS Decimal(18, 0)))
+
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (1, CAST(29000000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (5, CAST(539850000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (3, CAST(230940000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (6, CAST(713850000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (4, CAST(15990000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (5, CAST(154900000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (6, CAST(115918000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (7, CAST(22900000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (8, CAST(11400000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (9, CAST(22490000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (10, CAST(25590000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (11, CAST(65490000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (12, CAST(43690000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (13, CAST(20590000 AS Decimal(18, 0)))
 GO
 
 INSERT [dbo].[LoaiSanPham] ([Ten], [HinhAnh]) VALUES (N'Dell', N'Images/Category/dell.png')
@@ -287,8 +337,10 @@ GO
 
 INSERT [dbo].[DonViTinh] ([Ten]) VALUES (N'Cái')
 GO
+INSERT [dbo].[DonViTinh] ([Ten]) VALUES (N'Con')
+GO
 
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh] , [HinhAnh], [MoTa]) VALUES (N'Alienware M17-I7 9750H RTX 2060 RAM 16GB SSD 256GB+HDD 1T 17.3"" FHD Windows 10 LIKE NEW 99%', CAST(29000000 AS Decimal(18, 0)), 20, 1, 1, 1, N'Images/Product/1.png', N'Thương Hiệu	DELL
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh] , [HinhAnh], [MoTa]) VALUES (N'Alienware M17-I7 9750H RTX 2060 RAM 16GB SSD 256GB+HDD 1T 17.3"" FHD Windows 10 LIKE NEW 99%', CAST(29000000 AS Decimal(18, 0)), CAST(29000000 AS Decimal(18, 0)), 20, 1, 1, 1, N'Images/Product/1.png', N'Thương Hiệu	DELL
 Model Alienware M17
 CPU Intel® Core™ i7-9750H (6-Core 12 Threads 12MB Cache up to 4.50GHz)
 RAM 16GB DDR4
@@ -303,7 +355,7 @@ Trọng lượng 2.6kg
 Pin 99 Whr, 4-cell Battery (Integrated)
 Hệ điều hành Windows 10 Home')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Dell G5 5500 (70225484) i7-10750H RTX 2070 RAM 16GB 1TB SSD 15.6'''' FHD', CAST(38490000 AS Decimal(18, 0)), 15, 1, 2, 1, N'Images/Product/2.png', N'Thương Hiệu	DELL
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Dell G5 5500 (70225484) i7-10750H RTX 2070 RAM 16GB 1TB SSD 15.6'''' FHD', CAST(38490000 AS Decimal(18, 0)), CAST(38490000 AS Decimal(18, 0)), 15, 1, 2, 1, N'Images/Product/2.png', N'Thương Hiệu	DELL
 Model G5 5500
 CPU Intel® Core™ i7-10750H (6-Core 12 Threads 12MB Cache up to 5.0GHz)
 RAM 16GB DDR4-2933MHz
@@ -318,7 +370,7 @@ Trọng lượng 2.34kg
 Pin 68 Whr, 4-cell Battery (Integrated)
 Hệ điều hành Windows 10 Home')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Dell Inspiron (N3I3016W)-SILVER i3-1115G4 8GB SSD 256GB 13.3 FHD', CAST(15990000 AS Decimal(18, 0)), 30, 1, 3, 1, N'Images/Product/3.png', N'Thương Hiệu DELL
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Dell Inspiron (N3I3016W)-SILVER i3-1115G4 8GB SSD 256GB 13.3 FHD', CAST(15990000 AS Decimal(18, 0)), CAST(15990000 AS Decimal(18, 0)), 30, 1, 3, 1, N'Images/Product/3.png', N'Thương Hiệu DELL
 Model Inspiron 5301
 CPU Intel® Core™ i3-1115G4 (2-Core 4 Threads 8MB Cache up to 4.1Hz)
 RAM 8GB Onboard LPDDR4X Buss 4267MHz
@@ -333,7 +385,7 @@ Trọng lượng 1.06kg
 Pin 40 Whr, 3-cell Battery (Integrated)
 Hệ điều hành Windows 10 Home')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS A512FL - EJ765T I5-10210U MX250 8GB 512GB SSD 15.6" FHD', CAST(15490000 AS Decimal(18, 0)), 30, 2, 1, 1, N'Images/Product/4.png', N'Thương Hiệu ASUS
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS A512FL - EJ765T I5-10210U MX250 8GB 512GB SSD 15.6" FHD', CAST(15490000 AS Decimal(18, 0)), CAST(15490000 AS Decimal(18, 0)), 30, 2, 1, 1, N'Images/Product/4.png', N'Thương Hiệu ASUS
 Model VIVOBOOK
 CPU Intel® Core™ i5-10210U (4-Core 8 Threads 6MB Cache up to 3.9Hz)
 RAM 8GB DDR4-2666MHz
@@ -348,7 +400,7 @@ Trọng lượng 1.66 Kg
 Pin 37 Whr, 2-cell Battery (Integrated)
 Hệ điều hành WINDOWS 10 Home')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS ProArt StudioBook Pro 15 ( W500G5T XS77 ) I7 9750H Quadro RTX 5000 RAM 48GB 2TB SSD', CAST(115918000 AS Decimal(18, 0)), 10, 2, 2, 1, N'Images/Product/5.png', N'Thương Hiệu ASUS
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS ProArt StudioBook Pro 15 ( W500G5T XS77 ) I7 9750H Quadro RTX 5000 RAM 48GB 2TB SSD', CAST(115918000 AS Decimal(18, 0)), CAST(115918000 AS Decimal(18, 0)), 10, 2, 2, 1, N'Images/Product/5.png', N'Thương Hiệu ASUS
 Model Pro Art
 CPU Intel® Core™ i7-9750H (6-Core 12 Threads 12MB Cache up to 4.5GHz)
 RAM 48GB DDR4-2400MHz
@@ -363,10 +415,10 @@ Trọng lượng 1.9 Kg
 Pin 76 Whr, 4-cell Battery (Integrated)
 Hệ điều hành WINDOWS 10 Pro')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS ROG Strix G15 G512-IAL013T i5-10300H 1650Ti 4GB 8GB 512GB 15.6" FHD 144Hz', CAST(22990000 AS Decimal(18, 0)), 20, 2, 3, 1, N'Images/Product/6.png', N'Thương Hiệu ASUS
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS ROG Strix G15 G512-IAL013T i5-10300H 1650Ti 4GB 8GB 512GB 15.6" FHD 144Hz', CAST(22990000 AS Decimal(18, 0)), CAST(22990000 AS Decimal(18, 0)), 20, 2, 3, 1, N'Images/Product/6.png', N'Thương Hiệu ASUS
 Model ROG STRIX G15
 CPU Intel Core i5-10300H 2.5GHz up to 4.5GHz 8MB
-RAM 8GB DDR4 3200MHz 
+RAM 8GB DDR4 3200MHz
 Ổ cứng 512GB SSD
 CD/DVD None
 Card VGA NVIDIA GeForce GTX 1650Ti 4GB GDDR6 + Intel UHD Graphics
@@ -378,7 +430,7 @@ Trọng lượng 2.4 Kg
 Pin 48 Whr, 3-cell Battery (Integrated)
 Hệ điều hành WINDOWS 10 Home')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'HP 14 348 G7 ( 9PG86PA ) I3-10110U 4GB 256GB SSD 14" FHD', CAST(11400000 AS Decimal(18, 0)), 30, 3, 1, 1, N'Images/Product/7.png', N'Thương Hiệu HP
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'HP 14 348 G7 ( 9PG86PA ) I3-10110U 4GB 256GB SSD 14" FHD', CAST(11400000 AS Decimal(18, 0)), CAST(11400000 AS Decimal(18, 0)), 30, 3, 1, 1, N'Images/Product/7.png', N'Thương Hiệu HP
 Model 348 G7
 CPU Intel® Core™ i3-10110U(2-Core 4 Threads 4MB Cache up to 4.1Hz)
 RAM 4GB DDR4-2666MHz 
@@ -392,7 +444,7 @@ Trọng lượng 1.50 kg
 Pin 41 Whr
 Hệ điều hành Windows 10')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'HP Envy 13-ba1028TU ( 2K0B2PA ) i5-1135G7 8GB 512GB SSD 13.3" FHD', CAST(22490000 AS Decimal(18, 0)), 20, 3, 2, 1, N'Images/Product/8.png', N'Thương Hiệu HP
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'HP Envy 13-ba1028TU ( 2K0B2PA ) i5-1135G7 8GB 512GB SSD 13.3" FHD', CAST(22490000 AS Decimal(18, 0)), CAST(22490000 AS Decimal(18, 0)), 20, 3, 2, 1, N'Images/Product/8.png', N'Thương Hiệu HP
 Model Envy 13
 CPU Intel Core i5-1135G7(4-Core 8 Threads 8MB Cache up to 4.2Hz)
 RAM 8GB DDR4 3200MHz (Onboard)
@@ -407,7 +459,7 @@ Trọng lượng 1.31 kg
 Pin 53 Whr, 3-cell
 Hệ điều hành Windows 10')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IdDonViTinh], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Macbook Air 13" 2020 Gold MGND3 - Apple M1 256GB SSD', CAST(25590000 AS Decimal(18, 0)), 20, 4, 3, 1, 1, N'Images/Product/9.png', N'Thương Hiệu APPLE
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Macbook Air 13" 2020 Gold MGND3 - Apple M1 256GB SSD', CAST(25590000 AS Decimal(18, 0)), CAST(25590000 AS Decimal(18, 0)), 20, 4, 3, 1, N'Images/Product/9.png', N'Thương Hiệu APPLE
 Model Macbook Air 13
 CPU Apple M1 chip with 8-core CPU
 RAM 8GB PDDR4X-4266MHz SDRAM
@@ -422,7 +474,7 @@ Trọng lượng 1.4 Kg
 Pin 58.2 Whr
 Hệ điều hành MacOS')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'MacBook Pro 16" 2019 Gray 1TB MVVK2', CAST(65490000 AS Decimal(18, 0)), 15, 4, 1, 1, N'Images/Product/10.png', N'Thương Hiệu APPLE
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'MacBook Pro 16" 2019 Gray 1TB MVVK2', CAST(65490000 AS Decimal(18, 0)), CAST(65490000 AS Decimal(18, 0)), 15, 4, 1, 1, N'Images/Product/10.png', N'Thương Hiệu APPLE
 Model Macbook Pro 16
 CPU 2.3GHz 8-core 9th-generation Intel Core i9 processor
 Turbo Boost up to 4.8GHz
@@ -438,7 +490,7 @@ Trọng lượng 2.0 Kg
 Pin Built‑in 100‑watt‑hour lithium‑polymer battery
 Hệ điều hành MacOS')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Lenovo Legion 5 Pro 16ACH6H (82JQ001VVN) R7-5800H 16GB 512GB VGA RTX 3060 6GB 16'' WQXGA 165Hz', CAST(43690000 AS Decimal(18, 0)), 20, 5, 2, 1, N'Images/Product/11.png', N'Thương Hiệu Lenovo
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Lenovo Legion 5 Pro 16ACH6H (82JQ001VVN) R7-5800H 16GB 512GB VGA RTX 3060 6GB 16'' WQXGA 165Hz', CAST(43690000 AS Decimal(18, 0)), CAST(43690000 AS Decimal(18, 0)), 20, 5, 2, 1, N'Images/Product/11.png', N'Thương Hiệu Lenovo
 Model LEGION 5
 CPU AMD Ryzen 7 5800H 3.2GHz up to 4.4GHz 16MB
 RAM 16GB (8GBx2) DDR4 3200MHz (2x SO-DIMM socket, up to 32GB SDRAM)
@@ -453,7 +505,7 @@ Trọng lượng 2.45 kg
 Pin 4 Cell 80 WHr
 Hệ điều hành Windows 10')
 GO
-INSERT [dbo].[SanPham] ([Ten], [DonGia], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Laptop Lenovo ThinkPad E14 Gen 2 20TA002MVA (i7-1165G7 RAM 8GB 512GB SSD Intel Iris 14"FHD', CAST(20590000 AS Decimal(18, 0)), 20, 5, 3, 1, N'Images/Product/12.png', N'Thương Hiệu Lenovo
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Laptop Lenovo ThinkPad E14 Gen 2 20TA002MVA (i7-1165G7 RAM 8GB 512GB SSD Intel Iris 14"FHD', CAST(20590000 AS Decimal(18, 0)), CAST(20590000 AS Decimal(18, 0)), 20, 5, 3, 1, N'Images/Product/12.png', N'Thương Hiệu Lenovo
 Model THINKPAD E14 Gen 2
 CPU Intel® Core™ i7-1165G7 (tối đa 4.70 GHz, 12MB)
 RAM 8GB DDR4 3200Mhz 
@@ -468,23 +520,29 @@ Trọng lượng 1.59kg
 Pin 3 Cells 45 Whrs
 Hệ điều hành Free Dos')
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (1, 2, 1, CAST(29000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (1, 1, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (1, 6, 6, CAST(29000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (2, 3, 6)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (11, 4, 1, CAST(43690000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (3, 4, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (11, 5, 10, CAST(43690000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (4, 5, 10)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (11, 6, 10, CAST(43690000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (5, 6, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (12, 2, 1, CAST(25590000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (6, 7, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (12, 4, 1, CAST(20590000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (7, 8, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (12, 5, 5, CAST(20590000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (8, 9, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong], [GiaBan]) VALUES (12, 6, 5, CAST(20590000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (9, 10, 1)
+GO
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (10, 11, 1)
+GO
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (11, 12, 1)
+GO
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (12, 13, 1)
 GO
 
 INSERT [dbo].[HinhAnhSanPham] ([IDSanPham], [HinhAnh]) VALUES (1, N'Images/Product/1.png')
@@ -515,3 +573,12 @@ GO
 INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'SO_LUONG_LOAI_DAI_LY', 2, N'integer', 1)
 INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN', 4, N'integer', 1)
 GO
+
+
+/* Báo cáo doanh số
+
+select DaiLy.Id, DaiLy.Ten, Sum(PhieuXuatHang.TongTien) as 'Sum'
+from DaiLy, PhieuDaiLy, PhieuXuatHang
+where DaiLy.Id = PhieuDaiLy.IdDaiLy and PhieuDaiLy.Id = PhieuXuatHang.IdPhieuDaiLy
+group by DaiLy.Id, DaiLy.Ten
+*/
