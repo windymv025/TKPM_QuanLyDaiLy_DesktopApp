@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A11E3D1-1DF3-4153-8649-CF5369DE476D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>QuanLyDaiLyMVVM</RootNamespace>
+    <AssemblyName>QuanLyDaiLyMVVM</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=2.0.1.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.0.1\lib\net452\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.1.0.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.1.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BaoCaoWindow.xaml.cs">
+      <DependentUpon>BaoCaoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DaiLyWindow.xaml.cs">
+      <DependentUpon>DaiLyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LienHeWindow.xaml.cs">
+      <DependentUpon>LienHeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BangBaoCao.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BaoCaoCongNo.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BaoCaoDoanhSo.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChiTietBaoCao.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChiTietPhieuXuatHang.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DaiLy.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DBQuanLyCacDaiLy.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBQuanLyCacDaiLy.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DBQuanLyCacDaiLy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DBQuanLyCacDaiLy.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DonViTinh.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\HinhAnhSanPham.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LoaiDaiLy.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LoaiSanPham.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NguonNhap.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NhanVien.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PhieuDaiLy.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PhieuThuTien.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PhieuXuatHang.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QuyDinh.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SanPham.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TaiKhoan.cs">
+      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienWindow.xaml.cs">
+      <DependentUpon>NhanVienWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PhieuThuTienWindow.xaml.cs">
+      <DependentUpon>PhieuThuTienWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PhieuXuatHangWindow.xaml.cs">
+      <DependentUpon>PhieuXuatHangWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SanPhamWindow.xaml.cs">
+      <DependentUpon>SanPhamWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\BaoCaoViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\DaiLyViewModel.cs" />
+    <Compile Include="ViewModel\LienHeViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NhanVienViewModel.cs" />
+    <Compile Include="ViewModel\PhieuThuTienViewModel.cs" />
+    <Compile Include="ViewModel\PhieuXuatHangViewModel.cs" />
+    <Compile Include="ViewModel\SanPhamViewModel.cs" />
+    <Page Include="BaoCaoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DaiLyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LienHeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="NhanVienWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PhieuThuTienWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PhieuXuatHangWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SanPhamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="Model\DBQuanLyCacDaiLy.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBQuanLyCacDaiLy.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\DBQuanLyCacDaiLy.edmx.diagram">
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\043-picture-3.png" />
+    <Resource Include="Assets\047-picture.png" />
+    <Resource Include="Assets\add.png" />
+    <Resource Include="Assets\back-button.png" />
+    <Resource Include="Assets\background.jpg" />
+    <Resource Include="Assets\buttonprevious.png" />
+    <Resource Include="Assets\cancel.png" />
+    <Resource Include="Assets\cashpayment.png" />
+    <Resource Include="Assets\diskette.png" />
+    <Resource Include="Assets\heart.png" />
+    <Resource Include="Assets\heart2.png" />
+    <Resource Include="Assets\iconchart2.png" />
+    <Resource Include="Assets\iconcoming.png" />
+    <Resource Include="Assets\iconDaiLy.png" />
+    <Resource Include="Assets\icondelete.png" />
+    <Resource Include="Assets\iconfinish.png" />
+    <Resource Include="Assets\iconorder.png" />
+    <Resource Include="Assets\iconPhieuThuTien.png" />
+    <Resource Include="Assets\iconPhieuXuatHang.png" />
+    <Resource Include="Assets\iconrevenue.png" />
+    <Resource Include="Assets\iconSanPham.png" />
+    <Resource Include="Assets\iconupdate.png" />
+    <Resource Include="Assets\image_not_available.png" />
+    <Resource Include="Assets\img_contact.png" />
+    <Resource Include="Assets\img_home.png" />
+    <Resource Include="Assets\income.png" />
+    <Resource Include="Assets\nextbutton.png" />
+    <Resource Include="Assets\plus.png" />
+    <Resource Include="Assets\podium_awards.png" />
+    <Resource Include="Assets\previousbutton.png" />
+    <Resource Include="Assets\search.png" />
+    <Resource Include="Assets\tgBtn_default.png" />
+    <Resource Include="Assets\tgBtn_MouseOver.png" />
+    <Resource Include="Assets\That.jpg" />
+    <Resource Include="Assets\Vuong.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DBQuanLyCacDaiLy.Context.cs</LastGenOutput>
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\DBQuanLyCacDaiLy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+      <LastGenOutput>DBQuanLyCacDaiLy.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>
