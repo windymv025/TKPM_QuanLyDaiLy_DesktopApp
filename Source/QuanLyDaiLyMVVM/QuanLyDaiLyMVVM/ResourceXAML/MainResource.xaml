@@ -3,4 +3,11 @@
                     xmlns:viewmodel="clr-namespace:QuanLyDaiLyMVVM.ViewModel"
                     xmlns:local="clr-namespace:QuanLyDaiLyMVVM.ResourceXAML">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:BaoCaoViewModel x:Key="BaoCaoVM"></viewmodel:BaoCaoViewModel>
+    <viewmodel:DaiLyViewModel x:Key="DaiLyVM"></viewmodel:DaiLyViewModel>
+    <viewmodel:LienHeViewModel x:Key="LienHeVM"></viewmodel:LienHeViewModel>
+    <viewmodel:NhanVienViewModel x:Key="NhanVienVM"></viewmodel:NhanVienViewModel>
+    <viewmodel:PhieuThuTienViewModel x:Key="PhieuThuTienVM"></viewmodel:PhieuThuTienViewModel>
+    <viewmodel:PhieuXuatHangViewModel x:Key="PhieuXuatHangVM"></viewmodel:PhieuXuatHangViewModel>
+    <viewmodel:SanPhamViewModel x:Key="SanPhamVM"></viewmodel:SanPhamViewModel>
 </ResourceDictionary>
