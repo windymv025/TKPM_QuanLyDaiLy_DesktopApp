@@ -20,7 +20,7 @@ CREATE TABLE [DaiLy] (
 GO
 CREATE TABLE [LoaiDaiLy] (
 	Id int identity(1,1) not null,
-	Ten varchar(5) NOT NULL,
+	Ten nvarchar(30) NOT NULL,
 	SoTienNoToiDa decimal NOT NULL,
 	primary key(Id)
 )
