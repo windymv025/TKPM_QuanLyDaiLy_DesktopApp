@@ -46,12 +46,12 @@
                 <Grid Grid.Row="0">
                     <TextBox materialDesign:HintAssist.Hint="Tên đăng nhập"
                              Text="{Binding UserName}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <PasswordBox x:Name="FloatingPasswordBox"
                                  materialDesign:HintAssist.Hint="Mật khẩu"
-                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PasswordChanged">
                                 <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
@@ -73,13 +73,13 @@
                             Command="{Binding LoginCommand}"
                             CommandParameter="{Binding ElementName=loginWindow}"
                             ToolTip="Resource name: MaterialDesignRaisedButton"
-                            Content="Đăng nhập"></Button>
+                            Content="Đăng nhập" Background="Blue"></Button>
                     <Button Grid.Column="1"
                             Style="{StaticResource MaterialDesignRaisedButton}"
                             Width="110"
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=loginWindow}"
-                            Background="OrangeRed"
+                            Background="Red"
                             ToolTip="Resource name: MaterialDesignRaisedButton"
                             Content="Thoát"></Button>
                 </Grid>
