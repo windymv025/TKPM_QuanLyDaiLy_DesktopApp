@@ -108,7 +108,6 @@
     <Compile Include="Model\DaiLy.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\DBQuanLyCacDaiLy.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

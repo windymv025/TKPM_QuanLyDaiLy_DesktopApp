@@ -5,9 +5,224 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="DaiLyWindow" Height="450" Width="800"
-        DataContext="{StaticResource DaiLyVM}">
-    <Grid>
-        
+        Title="DaiLyWindow"
+        Height="700"
+        Width="1024"
+        DataContext="{StaticResource DaiLyVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+    <!--Màn hình quản lý đại lý-->
+    <Grid x:Name="bg_daily">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Row 1-->
+        <Border Background="#2E333A">
+            <Grid>
+                <Label Content="Quản lý đại lý"
+                       VerticalContentAlignment="Center"
+                       FontWeight="ExtraBold"
+                       FontSize="30"
+                       Foreground="#FFFFBD0B"
+                       Margin="20,0,0,0" />
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Label Name="DaiLy_lable_Them"
+                           Content="Tiếp nhận đại lý"
+                           VerticalContentAlignment="Center"
+                           FontWeight="ExtraBold"
+                           FontSize="20"
+                           Foreground="#FFFFBD0B">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding AddCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Label>
+                    <materialDesign:PackIcon Kind="AccountPlus"
+                                             Width="40"
+                                             Height="40"
+                                             VerticalAlignment="Center"
+                                             Foreground="PaleGreen"
+                                             Margin="10,0,0,0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding AddCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </materialDesign:PackIcon>
+
+                    <Grid Grid.Column="2"
+                          Margin="10,0">
+                        <TextBox x:Name="DaiLy_textbox_search"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Center"
+                                 Margin="40,0,0,0"
+                                 Background="White"
+                                 FontSize="18"
+                                 Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="300"
+                                 BorderThickness="0"
+                                 materialDesign:HintAssist.Hint="Nhập tên đại lý..."
+                                 materialDesign:HintAssist.IsFloating="True"
+                                 materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                                 materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+                        <materialDesign:PackIcon Grid.Column="2"
+                                                 Kind="Magnify"
+                                                 Width="40"
+                                                 Height="40"
+                                                 Margin="0,0,10,0"
+                                                 Panel.ZIndex="5"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </materialDesign:PackIcon>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--Row 2-->
+        <materialDesign:Card Grid.Row="1" Margin="20" UniformCornerRadius="10">
+            <Border Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="25, 20, 25,20"
+                    CornerRadius="10"
+                    BorderThickness="1"
+                    BorderBrush="#FF484848">
+                <ListView Name="listDaiLy"
+                          FontSize="16"
+                          HorizontalContentAlignment="Center">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ListSelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="auto">
+                                <GridViewColumn.Header>Tên đại lý</GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Ten}"
+                                                   FontSize="15"
+                                                   TextAlignment="Center"
+                                                   Width="auto"
+                                                   TextWrapping="WrapWithOverflow"
+                                                   VerticalAlignment="Center"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="auto">
+                                <GridViewColumn.Header>Số điện thoại</GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DienThoai}"
+                                                   FontSize="15"
+                                                   TextAlignment="Center"
+                                                   Width="auto"
+                                                   TextWrapping="WrapWithOverflow"
+                                                   VerticalAlignment="Center"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="auto">
+                                <GridViewColumn.Header>Địa chỉ</GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DiaChi}"
+                                                   FontSize="15"
+                                                   TextAlignment="Justify"
+                                                   Width="auto"
+                                                   Margin="15,0,0,0"
+                                                   TextWrapping="WrapWithOverflow"
+                                                   VerticalAlignment="Center"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="auto">
+                                <GridViewColumn.Header>Ngày tiếp nhận</GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding NgayTiepNhan}"
+                                                       FontSize="15"
+                                                       TextAlignment="Right"
+                                                       Width="auto"
+                                                       VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="auto">
+                                <GridViewColumn.Header>Quận</GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Quan}"
+                                                       FontSize="15"
+                                                       TextAlignment="Right"
+                                                       Width="auto"
+                                                       VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="auto">
+                                <GridViewColumn.Header>Email</GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Email}"
+                                                       FontSize="15"
+                                                       TextAlignment="Right"
+                                                       Width="auto"
+                                                       VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="auto">
+                                <GridViewColumn.Header>Loại đại lý</GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding LoaiDaiLy}"
+                                                       FontSize="15"
+                                                       TextAlignment="Right"
+                                                       Width="auto"
+                                                       VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+        </materialDesign:Card>
     </Grid>
 </Window>

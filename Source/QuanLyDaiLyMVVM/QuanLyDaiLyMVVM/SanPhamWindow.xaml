@@ -5,9 +5,224 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="SanPhamWindow" Height="450" Width="800"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="Sản phẩm"
+        Height="700"
+        Width="1024"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource SanPhamVM}">
-    <Grid>
-        
+    <!--Màn hình sản phẩm-->
+    <Grid x:Name="bg_sanpham">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <!--Row 1-->
+        <Border Background="#2E333A">
+            <Grid>
+                <Label Content="Quản lý đại lý"
+                       VerticalContentAlignment="Center"
+                       FontWeight="ExtraBold"
+                       FontSize="30"
+                       Foreground="#FFFFBD0B"
+                       Margin="20,0,0,0" />
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Label Name="SanPham_lable_Them"
+                           Content="Thêm Sản Phẩm"
+                           VerticalContentAlignment="Center"
+                           FontWeight="ExtraBold"
+                           FontSize="20"
+                           Foreground="#FFFFBD0B">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding ThemCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Label>
+                    <materialDesign:PackIcon Kind="PlusCircle" Width="40" Height="40" VerticalAlignment="Center" Foreground="LightGreen">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding ThemCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </materialDesign:PackIcon>
+
+                    <Grid Grid.Column="2"
+                          Margin="10,0">
+                        <TextBox x:Name="SanPham_textbox_search"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Center"
+                                 Margin="40,0,0,0"
+                                 Background="White"
+                                 FontSize="18"
+                                 Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="300"
+                                 BorderThickness="0"
+                                 materialDesign:HintAssist.Hint="Nhập tên sản phẩm..."
+                                 materialDesign:HintAssist.IsFloating="True"
+                                 materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                                 materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+                        <materialDesign:PackIcon Grid.Column="2"
+                                                 Kind="Magnify"
+                                                 Width="40"
+                                                 Height="40"
+                                                 Margin="0,0,10,0"
+                                                 Panel.ZIndex="5"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </materialDesign:PackIcon>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+
+
+        <!--Row 2-->
+        <materialDesign:Card Grid.Row="1"
+                             Margin="20"
+                             UniformCornerRadius="10">
+            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Name="lvSanPham"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      HorizontalAlignment="Center"
+                      Padding="5"
+                      Margin="15">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition MaxWidth="850" />
+                            </Grid.ColumnDefinitions>
+                            <Border Height="150"
+                                    BorderThickness="2"
+                                    BorderBrush="#18a0fb"
+                                    CornerRadius="25"
+                                    VerticalAlignment="Top"
+                                    Margin="5">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding HinhAnh}"
+                                                Stretch="Uniform"
+                                                RenderOptions.BitmapScalingMode="HighQuality" />
+                                </Border.Background>
+                                <StackPanel Width="45"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Margin="3">
+                                    <Image Source="{Binding HinhAnhLoai}"
+                                           Margin="0,0,0,2"
+                                           RenderOptions.BitmapScalingMode="HighQuality" />
+                                    <Image Source="{Binding HinhAnhNguon}"
+                                           RenderOptions.BitmapScalingMode="HighQuality" />
+                                </StackPanel>
+                            </Border>
+
+                            <StackPanel Grid.Column="1"
+                                        VerticalAlignment="Top"
+                                        Margin="5, 15, 5, 15">
+                                <TextBlock Text="{Binding Ten}"
+                                           FontSize="17"
+                                           FontWeight="Bold"
+                                           Foreground="Blue"
+                                           TextWrapping="WrapWithOverflow"
+                                           MaxHeight="50"
+                                           Margin="10,0"
+                                           TextTrimming="CharacterEllipsis"
+                                           materialDesign:ShadowAssist.Darken="True" />
+                                <WrapPanel Margin="10,0">
+                                    <TextBlock Text="Giá bán:"
+                                               Margin="0,0,25,0"
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               materialDesign:ShadowAssist.Darken="True" />
+                                    <TextBlock Text="{Binding DonGia}"
+                                               Foreground="Red"
+                                               FontSize="15"
+                                               FontWeight="Bold"
+                                               materialDesign:ShadowAssist.Darken="True" />
+                                    <TextBlock Text=" VNĐ"
+                                               FontSize="15"
+                                               Foreground="Red"
+                                               FontWeight="Bold"
+                                               materialDesign:ShadowAssist.Darken="True" />
+
+                                </WrapPanel>
+
+                                <WrapPanel Margin="10,0">
+                                    <TextBlock Text="Số lượng:"
+                                               FontSize="15"
+                                               FontWeight="Bold"
+                                               Margin="0,0,20,0"
+                                               materialDesign:ShadowAssist.Darken="True" />
+                                    <TextBlock Text="{Binding SoLuong}"
+                                               Foreground="Red"
+                                               FontSize="15"
+                                               FontWeight="Bold"
+                                               materialDesign:ShadowAssist.Darken="True" />
+
+                                </WrapPanel>
+                                <TextBlock Text="{Binding MoTa}"
+                                           TextWrapping="WrapWithOverflow"
+                                           MaxHeight="50"
+                                           TextTrimming="CharacterEllipsis"
+                                           Margin="10,5" />
+
+
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </materialDesign:Card>
+            
+
+        <!--Row 3-->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2"
+                    Margin="0,5,0,10"
+                    HorizontalAlignment="Center"
+                    Name="sp_PhanTrang_SanPham">
+            
+            <materialDesign:PackIcon Kind="ArrowLeftBold" Width="50" Height="50" Foreground="Blue" VerticalAlignment="Center"/>
+
+            <TextBlock x:Name="currentPageTxt"
+                       Text=""
+                       FontSize="25"
+                       FontWeight="Bold"
+                       Foreground="Red"
+                       VerticalAlignment="Center"
+                       Margin="30,0,5,0" />
+            <TextBlock Text="/"
+                       FontSize="25"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center" />
+            <TextBlock Name="totalPageTxt"
+                       Text=""
+                       FontSize="25"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Margin="5,0,30,0" />
+
+            <materialDesign:PackIcon Kind="ArrowRightBold" Width="50" Height="50" VerticalAlignment="Center" Foreground="Blue"/>
+        </StackPanel>
     </Grid>
 </Window>

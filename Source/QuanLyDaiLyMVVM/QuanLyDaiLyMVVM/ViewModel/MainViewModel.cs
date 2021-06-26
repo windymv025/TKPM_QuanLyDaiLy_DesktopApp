@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace QuanLyDaiLyMVVM.ViewModel
@@ -47,37 +48,44 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             });
 
-            DaiLyShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            DaiLyShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
                 DaiLyWindow wd = new DaiLyWindow();
                 wd.ShowDialog();
             });
 
-            SanPhamShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            SanPhamShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
                 SanPhamWindow wd = new SanPhamWindow();
                 wd.ShowDialog();
             });
 
-            PhieuThuTienShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            PhieuThuTienShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
                 PhieuThuTienWindow wd = new PhieuThuTienWindow();
                 wd.ShowDialog();
             });
 
-            PhieuXuatHangShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            PhieuXuatHangShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
                 PhieuXuatHangWindow wd = new PhieuXuatHangWindow();
                 wd.ShowDialog();
             });
 
-            RevenueShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            RevenueShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
                 BaoCaoWindow wd = new BaoCaoWindow();
                 wd.ShowDialog();
             });
 
-            AccountShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            AccountShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
                 NhanVienWindow wd = new NhanVienWindow();
                 wd.ShowDialog();
             });
 
-            ContactShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            ContactShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
                 LienHeWindow wd = new LienHeWindow();
                 wd.ShowDialog();
             });

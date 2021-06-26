@@ -5,9 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="LienHeWindow" Height="450" Width="800"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="Liên hệ"
+        Height="700"
+        Width="1024"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource LienHeVM}">
+    <!--Background contact-->
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <materialDesign:Card Margin="20" UniformCornerRadius="10">
+            <Grid x:Name="Vuong" Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="90" />
+                    </Grid.RowDefinitions>
+
+                    <Border CornerRadius="20">
+                        <Border.Background>
+                            <ImageBrush Stretch="UniformToFill"
+                                        ImageSource="/Assets/Vuong.jpg"
+                                        RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Border.Background>
+                    </Border>
+
+                    <Label Content="Phạm Minh Vương"
+                           Grid.Row="1"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="25" />
+                    <Label Grid.Row="2"
+                           Content="Email: 18120655@student.hcmus.edu.vn"
+                           VerticalContentAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="14" />
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="1" Margin="20" UniformCornerRadius="10">
+            <Grid x:Name="That"
+                  Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="90" />
+                    </Grid.RowDefinitions>
+
+                    <Border CornerRadius="20">
+                        <Border.Background>
+                            <ImageBrush Stretch="UniformToFill"
+                                        ImageSource="/Assets/That.jpg"
+                                        RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Border.Background>
+                    </Border>
+
+                    <Label Content="Phạm Văn Thật"
+                           Grid.Row="1"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="25" />
+                    <Label Grid.Row="2"
+                           Content="Email: 18120568@student.hcmus.edu.vn"
+                           VerticalContentAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="14" />
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Window>

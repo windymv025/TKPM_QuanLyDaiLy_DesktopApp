@@ -39,18 +39,21 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 return;
 
             string passEncode = MD5Hash(Base64Encode(Password));
-            var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenDangNhap == UserName && x.MatKhau == passEncode).Count();
 
-            if (accCount > 0)
+            using(var db = new DBQuanLyCacDaiLyEntities())
             {
-                IsLogin = true;
+                var accCount = db.TaiKhoans.Where(x => x.TenDangNhap == UserName && x.MatKhau == passEncode).Count();
+                if (accCount > 0)
+                {
+                    IsLogin = true;
 
-                p.Close();
-            }
-            else
-            {
-                IsLogin = false;
-                MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!");
+                    p.Close();
+                }
+                else
+                {
+                    IsLogin = false;
+                    MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!");
+                }
             }
         }
 
