@@ -11,7 +11,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        //public ICommand LoadedWindowCommand { get; set; }
+        public bool Isloaded = false;
+        public ICommand LoadedWindowCommand { get; set; }
         public ICommand DaiLyShowCommand { get; set; }
         public ICommand SanPhamShowCommand { get; set; }
         public ICommand PhieuThuTienShowCommand { get; set; }
@@ -22,6 +23,30 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         public MainViewModel()
         {
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                Isloaded = true;
+                if (p == null)
+                    return;
+                p.Hide();
+
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog();
+
+                if (loginWindow.DataContext == null)
+                    return;
+                var loginVM = loginWindow.DataContext as LoginViewModel;
+
+                if (loginVM.IsLogin)
+                {
+                    p.Show();
+                    //LoadallData();
+                }
+                else
+                {
+                    p.Close();
+                }
+            });
+
             DaiLyShowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 DaiLyWindow wd = new DaiLyWindow();
                 wd.ShowDialog();

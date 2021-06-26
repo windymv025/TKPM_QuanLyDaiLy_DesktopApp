@@ -21,11 +21,11 @@
         WindowStartupLocation="CenterScreen"
         
         DataContext="{StaticResource MainVM}"
-        >
+        Name="mainWindow">
     
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="SelectionChanged">
-            <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" />
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 

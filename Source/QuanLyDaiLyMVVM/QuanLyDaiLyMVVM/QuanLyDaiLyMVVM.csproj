@@ -87,6 +87,9 @@
     <Compile Include="LienHeWindow.xaml.cs">
       <DependentUpon>LienHeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BangBaoCao.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
@@ -105,6 +108,7 @@
     <Compile Include="Model\DaiLy.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\DBQuanLyCacDaiLy.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +176,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DaiLyViewModel.cs" />
     <Compile Include="ViewModel\LienHeViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NhanVienViewModel.cs" />
     <Compile Include="ViewModel\PhieuThuTienViewModel.cs" />
@@ -186,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LienHeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
