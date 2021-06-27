@@ -33,7 +33,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     NgayTiepNhan = SelectedItem.NgayTiepNhan;
                     Quan = SelectedItem.Quan;
                     Email = SelectedItem.Email;
-                    HinhAnh = SelectedItem.HinhAnh;
+
+                    var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                    string uriImage = currentFolder.ToString();
+                    var info = new FileInfo(uriImage).ToString();
+                    
+
+                    HinhAnh = $"{info}{SelectedItem.HinhAnh}";
                     SelectedLoaiDaiLy = SelectedItem.LoaiDaiLy;
                 }
             } 
@@ -71,8 +77,12 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand ExitThemLoaiDaiLyCommand { get; set; }
         
         public ICommand ChooseImageCommand { get; set; }
+        public ICommand ChooseImageUpdateCommand { get; set; }
         public ICommand ListSelectionChangedCommand { get; set; }
-        
+
+        public ICommand ExitUpdateCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
+
 
 
         public DaiLyViewModel()
@@ -105,6 +115,19 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     var img = open.FileNames;
                     p.avatar_DaiLy.Source = new BitmapImage(new Uri(img[0].ToString()));
                     //HinhAnh = img[0].ToString();
+                }
+            });
+
+            ChooseImageUpdateCommand = new RelayCommand<ThemDaiLyWindow>((p) => { return true; }, (p) =>
+            {
+                OpenFileDialog open = new OpenFileDialog();
+                open.Multiselect = false;
+                open.Filter = "Image Files(*.jpg; *.png; *.jpeg; *.gif; *.bmp)|*.jpg; *.png; *.jpeg; *.gif; *.bmp";
+                bool? result = open.ShowDialog();
+                if (result == true)
+                {
+                    var img = open.FileNames;
+                    HinhAnh = img[0].ToString();
                 }
             });
 
@@ -164,6 +187,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                     List.Add(daiLy);
 
+                    //OnPropertyChanged("List");
+
                     p.Close();
                 }
             });
@@ -215,8 +240,69 @@ namespace QuanLyDaiLyMVVM.ViewModel
             #endregion
 
 
+            #region CẬP NHẬT ĐẠI LÝ
+            UpdateCommand = new RelayCommand<CapNhatDaiLyWindow>((p) => {
+                if (p == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(p.DaiLy_textbox_name.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_phone.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_address.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_district.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_email.Text.Trim()) || !Regex.IsMatch(p.DaiLy_textbox_email.Text.Trim().ToString(), "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") || p.cbb_loaidaily.SelectedIndex == -1 || p.cbb_loaidaily.Text.Trim() == "" || p.avatar_DaiLy.Source == null)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+            }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var dl = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                    dl.Ten = Ten;
+                    dl.DienThoai = DienThoai;
+                    dl.DiaChi = DiaChi;
+                    dl.NgayTiepNhan = NgayTiepNhan;
+                    dl.Quan = Quan;
+                    dl.Email = Email;
 
-            
+                    var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                    string uriImage = currentFolder.ToString();
+                    //string file = p.avatar_DaiLy.Source.ToString().Substring(8);
+                    string file = HinhAnh;
+                    var info = new FileInfo(file);
+                    var newName = $"{Guid.NewGuid()}{info.Extension}";
+                    File.Copy(file, $"{uriImage}Images\\DaiLy\\{newName}");
+                    HinhAnh = $"Images/DaiLy/{newName}";
+                    dl.HinhAnh = HinhAnh;
+
+                    dl.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
+
+                    db.SaveChanges();
+
+                    SelectedItem.Ten = Ten;
+                    SelectedItem.DienThoai = DienThoai;
+                    SelectedItem.DiaChi = DiaChi;
+                    SelectedItem.NgayTiepNhan = NgayTiepNhan;
+                    SelectedItem.Quan = Quan;
+                    SelectedItem.Email = Email;
+
+                    var info1 = new FileInfo(uriImage).ToString();
+
+
+                    SelectedItem.HinhAnh = $"{info1}{HinhAnh}";
+
+                    SelectedItem.HinhAnh = HinhAnh;
+                    SelectedItem.LoaiDaiLy = SelectedLoaiDaiLy;
+                }
+                p.Close();
+            });
+            ExitUpdateCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Close();
+            });
+            #endregion
+
 
             ListSelectionChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

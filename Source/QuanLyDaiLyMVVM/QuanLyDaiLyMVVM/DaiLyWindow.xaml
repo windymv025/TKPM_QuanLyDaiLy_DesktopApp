@@ -110,7 +110,7 @@
                 <ScrollViewer>
                     <ListView Name="listDaiLy"
                               ItemsSource="{Binding List}"
-                              SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
+                              SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               FontSize="16"
                               HorizontalContentAlignment="Center">
                         <i:Interaction.Triggers>
@@ -208,7 +208,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <GridViewColumn Width="auto">
+                                <!--<GridViewColumn Width="auto">
                                     <GridViewColumn.Header>Loại đại lý</GridViewColumn.Header>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -221,7 +221,9 @@
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                </GridViewColumn>-->
+                                <GridViewColumn Header="Loại đại lý"
+                                                DisplayMemberBinding="{Binding LoaiDaiLy.Ten, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
