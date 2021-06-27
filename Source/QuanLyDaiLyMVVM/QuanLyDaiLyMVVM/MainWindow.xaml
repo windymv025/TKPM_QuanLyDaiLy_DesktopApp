@@ -498,7 +498,6 @@
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
                                     <StackPanel DataContext="{Binding DaiLyTop2}"
-                                                MouseDown="spDaiLyTop2_MouseDown"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Right">
 
@@ -555,7 +554,6 @@
 
                                     <!--top 1-->
                                     <StackPanel DataContext="{Binding DaiLyTop1}"
-                                                MouseDown="spDaiLyTop1_MouseDown"
                                                 Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
@@ -612,7 +610,6 @@
 
                                     <!--top 3-->
                                     <StackPanel DataContext="{Binding DaiLyTop3}"
-                                                MouseDown="spDaiLyTop3_MouseDown"
                                                 Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">

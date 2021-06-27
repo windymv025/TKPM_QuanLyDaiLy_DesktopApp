@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyDaiLyMVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace QuanLyDaiLyMVVM.Model
 {
-    public class PagingInfo
+    public class PagingInfo: BaseViewModel
     {
-        public int CurrentPage { get; set; }
-        public int TotalPage { get; set; }
-        public int ItemInPerPage { get; set; }
+        public int _CurrentPage;
+        public int CurrentPage { get => _CurrentPage; set { _CurrentPage = value; OnPropertyChanged(); } }
+
+        public int _TotalPage;
+        public int TotalPage { get => _TotalPage; set { _TotalPage = value; OnPropertyChanged(); } }
+
+        public int _ItemInPerPage;
+        public int ItemInPerPage { get => _ItemInPerPage; set { _ItemInPerPage = value; OnPropertyChanged(); } }
 
         public PagingInfo(int numberOfItemInPerPage, int total)
         {

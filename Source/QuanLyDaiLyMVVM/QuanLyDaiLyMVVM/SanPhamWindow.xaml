@@ -18,8 +18,9 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        DataContext="{StaticResource SanPhamVM}">
-    <!--Màn hình sản phẩm-->
+        DataContext="{StaticResource SanPhamVM}"
+		Name="sanPhamWindow">
+	<!--Màn hình sản phẩm-->
     <Grid x:Name="bg_sanpham">
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
@@ -101,9 +102,9 @@
                              Margin="20"
                              UniformCornerRadius="10">
             <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      Name="lvSanPham"
+                      ItemsSource="{Binding ListSanPhamHienThiTheotrang}"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      HorizontalAlignment="Center"
+                      HorizontalAlignment="Center" Name="lv_SanPham"
                       Padding="5"
                       Margin="15">
                 <ListView.ItemTemplate>
@@ -120,7 +121,7 @@
                                     VerticalAlignment="Top"
                                     Margin="5">
                                 <Border.Background>
-                                    <ImageBrush ImageSource="{Binding HinhAnh}"
+                                    <ImageBrush ImageSource="{Binding SanPham.HinhAnh}"
                                                 Stretch="Uniform"
                                                 RenderOptions.BitmapScalingMode="HighQuality" />
                                 </Border.Background>
@@ -128,10 +129,10 @@
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Top"
                                             Margin="3">
-                                    <Image Source="{Binding HinhAnhLoai}"
+                                    <Image Source="{Binding LoaiSanPham.HinhAnh}"
                                            Margin="0,0,0,2"
                                            RenderOptions.BitmapScalingMode="HighQuality" />
-                                    <Image Source="{Binding HinhAnhNguon}"
+                                    <Image Source="{Binding NguonNhap.HinhAnh}"
                                            RenderOptions.BitmapScalingMode="HighQuality" />
                                 </StackPanel>
                             </Border>
@@ -139,7 +140,7 @@
                             <StackPanel Grid.Column="1"
                                         VerticalAlignment="Top"
                                         Margin="5, 15, 5, 15">
-                                <TextBlock Text="{Binding Ten}"
+                                <TextBlock Text="{Binding SanPham.Ten}"
                                            FontSize="17"
                                            FontWeight="Bold"
                                            Foreground="Blue"
@@ -154,7 +155,7 @@
                                                FontSize="16"
                                                FontWeight="Bold"
                                                materialDesign:ShadowAssist.Darken="True" />
-                                    <TextBlock Text="{Binding DonGia}"
+                                    <TextBlock Text="{Binding GiaBan}"
                                                Foreground="Red"
                                                FontSize="15"
                                                FontWeight="Bold"
@@ -164,8 +165,23 @@
                                                Foreground="Red"
                                                FontWeight="Bold"
                                                materialDesign:ShadowAssist.Darken="True" />
+									<TextBlock Text="Giá Nhập:"
+                                               Margin="40,0,25,0"
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               materialDesign:ShadowAssist.Darken="True" />
+									<TextBlock Text="{Binding GiaNhap}"
+                                               Foreground="Red"
+                                               FontSize="15"
+                                               FontWeight="Bold"
+                                               materialDesign:ShadowAssist.Darken="True" />
+									<TextBlock Text=" VNĐ"
+                                               FontSize="15"
+                                               Foreground="Red"
+                                               FontWeight="Bold"
+                                               materialDesign:ShadowAssist.Darken="True" />
 
-                                </WrapPanel>
+								</WrapPanel>
 
                                 <WrapPanel Margin="10,0">
                                     <TextBlock Text="Số lượng:"
@@ -180,7 +196,7 @@
                                                materialDesign:ShadowAssist.Darken="True" />
 
                                 </WrapPanel>
-                                <TextBlock Text="{Binding MoTa}"
+                                <TextBlock Text="{Binding SanPham.MoTa}"
                                            TextWrapping="WrapWithOverflow"
                                            MaxHeight="50"
                                            TextTrimming="CharacterEllipsis"
@@ -201,11 +217,21 @@
                     Margin="0,5,0,10"
                     HorizontalAlignment="Center"
                     Name="sp_PhanTrang_SanPham">
-            
-            <materialDesign:PackIcon Kind="ArrowLeftBold" Width="50" Height="50" Foreground="Blue" VerticalAlignment="Center"/>
 
-            <TextBlock x:Name="currentPageTxt"
-                       Text=""
+			<materialDesign:PackIcon Kind="ArrowLeftBold" 
+									 Width="50" Height="50" 
+									 Foreground="Blue" 
+									 VerticalAlignment="Center"
+									 >
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+						<i:InvokeCommandAction Command="{Binding PrevBtnCommand}" />
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+				
+			</materialDesign:PackIcon>
+
+			<TextBlock Text="{Binding PagingInfo.CurrentPage}"
                        FontSize="25"
                        FontWeight="Bold"
                        Foreground="Red"
@@ -215,14 +241,22 @@
                        FontSize="25"
                        FontWeight="Bold"
                        VerticalAlignment="Center" />
-            <TextBlock Name="totalPageTxt"
-                       Text=""
+            <TextBlock Text="{Binding PagingInfo.TotalPage}"
                        FontSize="25"
                        FontWeight="Bold"
                        VerticalAlignment="Center"
                        Margin="5,0,30,0" />
 
-            <materialDesign:PackIcon Kind="ArrowRightBold" Width="50" Height="50" VerticalAlignment="Center" Foreground="Blue"/>
-        </StackPanel>
+			<materialDesign:PackIcon Kind="ArrowRightBold" 
+									 Width="50" Height="50" 
+									 VerticalAlignment="Center" 
+									 Foreground="Blue">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+						<i:InvokeCommandAction Command="{Binding NextBtnCommand}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</materialDesign:PackIcon>
+		</StackPanel>
     </Grid>
 </Window>

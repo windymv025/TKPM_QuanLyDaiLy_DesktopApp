@@ -162,6 +162,7 @@
     <Compile Include="Model\SanPham.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SanPhamHienThi.cs" />
     <Compile Include="Model\SanPhamTop.cs" />
     <Compile Include="Model\TaiKhoan.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>

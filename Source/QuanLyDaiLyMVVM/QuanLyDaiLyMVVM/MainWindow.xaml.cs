@@ -60,35 +60,7 @@ namespace QuanLyDaiLyMVVM
             }
         }
 
-        private void spDaiLyTop1_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void spDaiLyTop3_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void spDaiLyTop2_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void spSanPhamTop1_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void spSanPhamTop2_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void spSanPhamTop3_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+       
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
         {
