@@ -17,7 +17,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="capnhatwindow">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
@@ -227,6 +228,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>-->
                     <ComboBox Margin="40,0,0,0"
+                              Name="cbb_loaidaily"
                               Padding="10,0,0,0"
                               FontSize="18"
                               DisplayMemberPath="Ten"
@@ -261,7 +263,7 @@
                         Width="100"
                         HorizontalAlignment="Left"
                         Content="Open File"
-                        Command="{Binding ChooseImageCommand}"></Button>
+                        Command="{Binding ChooseImageUpdateCommand}"></Button>
                 <Image x:Name="avatar_DaiLy"
                        Source="{Binding HinhAnh}"
                        RenderOptions.BitmapScalingMode="HighQuality"
@@ -276,11 +278,13 @@
                     Margin="0,0,150,0">
             <Button x:Name="btn_OK"
                     Content="Lưu"
-                    FontSize="20" />
+                    FontSize="20"
+                    Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding ElementName=capnhatwindow}" />
             <Button x:Name="btn_Cancel"
                     Content="Thoát"
                     FontSize="20"
-                    Margin="50,0,0,0" />
+                    Margin="50,0,0,0" Command="{Binding ExitUpdateCommand}" CommandParameter="{Binding ElementName=capnhatwindow}"/>
         </StackPanel>
     </Grid>
 </Window>
