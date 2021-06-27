@@ -278,21 +278,27 @@
                                   VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
                             <!--Sản phẩm bán chạy-->
-                            <TextBlock Text="Sản phẩm bán chạy"
+							<materialDesign:Card Margin="10,15"
+												 Background="#03a9f4"
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+								  Padding="8">
+								<TextBlock Text="Sản phẩm bán chạy"
                                        FontSize="25"
                                        HorizontalAlignment="Center"
-                                       Foreground="Red"
-                                       Margin="10,15"
+                                       Foreground="White"
+                                       
                                        FontWeight="UltraBlack"
                                        materialDesign:ThemeAssist.Theme="Dark"
                                        FontFamily="Cooper Black" />
+							</materialDesign:Card>
 
-                            <Border Height="255"
+
+							<materialDesign:Card Height="255"
                                     Margin="40,0">
-                                <Border.Background>
+								<materialDesign:Card.Background>
                                     <ImageBrush Stretch="Fill"
                                                 ImageSource="Assets/podium_awards.png" />
-                                </Border.Background>
+                                </materialDesign:Card.Background>
 
                                 <Grid Margin="35,0">
                                     <Grid.ColumnDefinitions>
@@ -301,12 +307,18 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
-                                    <StackPanel x:Name="spSanPhamTop2"
-                                                MouseDown="spSanPhamTop2_MouseDown"
-                                                VerticalAlignment="Top"
-                                                HorizontalAlignment="Right">
-                                        <Border  Margin="0,45,0,0"
-                                                 BorderBrush="Blue"
+                                    <StackPanel VerticalAlignment="Top"
+												DataContext="{Binding SanPhamTop2}"
+												HorizontalAlignment="Right">
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop2_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										<Border  Margin="0,45,0,0"
+                                                 BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="120"
@@ -316,18 +328,23 @@
                                                             Stretch="Uniform" />
                                             </Border.Background>
 
-                                            <TextBlock Text="{Binding Ten}"
+											<materialDesign:Card
+												Background="Yellow"
+												Foreground="Blue"
+												VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center"
+												 Margin="10,0,10,5"
+                                                 Padding="5,5" >
+
+												<TextBlock Text="{Binding Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
-                                                       Foreground="Yellow"
-                                                       Background="DarkBlue"
                                                        VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Center"
                                                        TextTrimming="CharacterEllipsis"
-                                                       Margin="10,0,10,5"
-                                                       Padding="10,5" />
-
-                                        </Border>
+                                                      />
+											</materialDesign:Card>
+										</Border>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: "
@@ -342,32 +359,45 @@
                                     </StackPanel>
 
                                     <!--top 1-->
-                                    <StackPanel x:Name="spSanPhamTop1"
-                                                MouseDown="spSanPhamTop1_MouseDown"
-                                                Grid.Column="1"
+                                    <StackPanel  Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop1_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										
                                         <Border  Margin="0,0,0,0"
-                                                 BorderBrush="Blue"
+                                                 BorderBrush="Red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="130"
                                                  Width="200">
                                             <Border.Background>
                                                 <ImageBrush x:Name="imgSanPhamTop1"
-                                                            ImageSource="{Binding HinhAnh}"
+                                                            ImageSource="{Binding SanPhamTop1.HinhAnh}"
                                                             Stretch="Uniform" />
                                             </Border.Background>
-                                            <TextBlock Text="{Binding Ten}"
+											<materialDesign:Card
+												Foreground="Blue"
+												Background="Yellow"
+												VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center"
+												 Margin="10,0,10,5"
+                                                 Padding="5,5" >
+
+												<TextBlock Text="{Binding SanPhamTop1.Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
-                                                       Foreground="Yellow"
-                                                       Background="DarkBlue"
                                                        VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Center"
                                                        TextTrimming="CharacterEllipsis"
-                                                       Margin="10,0,10,5"
-                                                       Padding="10,5" />
+                                                      />
+											</materialDesign:Card>
+											
                                         </Border>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
@@ -375,7 +405,7 @@
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Black" />
-                                            <TextBlock  Text="{Binding SoLuong}"
+											<TextBlock  Text="{Binding SanPhamTop1.SoLuong}"
                                                         FontSize="14"
                                                         FontWeight="Black"
                                                         Foreground="Red" />
@@ -383,13 +413,21 @@
                                     </StackPanel>
 
                                     <!--top 3-->
-                                    <StackPanel x:Name="spSanPhamTop3"
-                                                MouseDown="spSanPhamTop3_MouseDown"
+                                    <StackPanel DataContext="{Binding SanPhamTop3}"
                                                 Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
-                                        <Border  Margin="0,50,0,0"
-                                                 BorderBrush="Blue"
+
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop3_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+
+										<Border  Margin="0,50,0,0"
+                                                 BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="130"
@@ -399,17 +437,24 @@
                                                             Stretch="Uniform" />
 
                                             </Border.Background>
-                                            <TextBlock Text="{Binding Ten}"
+											<materialDesign:Card
+												Background="Yellow"
+												Foreground="Blue"
+												VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center"
+												 Margin="10,0,10,5"
+                                                 Padding="5,5" >
+
+												<TextBlock Text="{Binding Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
-                                                       Foreground="Yellow"
-                                                       Background="DarkBlue"
                                                        VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Center"
                                                        TextTrimming="CharacterEllipsis"
-                                                       Margin="10,0,10,5"
-                                                       Padding="10,5" />
-                                        </Border>
+                                                      />
+											</materialDesign:Card>
+
+										</Border>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <TextBlock Text="Đã bán: "
@@ -423,23 +468,27 @@
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
-                            </Border>
+                            </materialDesign:Card>
 
                             <!--Top Đại lý-->
-                            <TextBlock Text="Đại lý top đầu"
+							<materialDesign:Card Margin="10,20,10,15" Background="#03a9f4"
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+								  Padding="8">
+								<TextBlock Text="Đại lý top đầu"
                                        FontSize="25"
                                        HorizontalAlignment="Center"
-                                       Foreground="Red"
-                                       Margin="10,20,10,10"
+                                       Foreground="White"
                                        FontWeight="UltraBlack"
                                        materialDesign:ThemeAssist.Theme="Dark"
                                        FontFamily="Cooper Black" />
-                            <Border Height="255"
-                                    Margin="40,0">
-                                <Border.Background>
+							</materialDesign:Card>
+
+							<materialDesign:Card Height="255"
+                                    Margin="40,0, 40, 20">
+								<materialDesign:Card.Background>
                                     <ImageBrush Stretch="Fill"
                                                 ImageSource="Assets/podium_awards.png" />
-                                </Border.Background>
+                                </materialDesign:Card.Background>
 
                                 <Grid Margin="35,0">
                                     <Grid.ColumnDefinitions>
@@ -448,12 +497,21 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
-                                    <StackPanel x:Name="spDaiLyTop2"
+                                    <StackPanel DataContext="{Binding DaiLyTop2}"
                                                 MouseDown="spDaiLyTop2_MouseDown"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Right">
-                                        <Border Margin="0,45,0,0"
-                                                BorderBrush="Blue"
+
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding DaiLyTop2_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										
+										<Border Margin="0,45,0,0"
+                                                BorderBrush="Red"
                                                 BorderThickness="2"
                                                 CornerRadius="20"
                                                 Height="120"
@@ -464,17 +522,23 @@
                                                             Stretch="Uniform" />
 
                                             </Border.Background>
-                                            <TextBlock Text="{Binding Ten}"
+											<materialDesign:Card
+												Background="Yellow"
+												Foreground="Blue"
+												VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center"
+												 Margin="10,0,10,5"
+                                                 Padding="5,5" >
+
+												<TextBlock Text="{Binding Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
-                                                       Foreground="Yellow"
-                                                       Background="DarkBlue"
                                                        VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Center"
                                                        TextTrimming="CharacterEllipsis"
-                                                       Margin="10,0,10,5"
-                                                       Padding="10,5" />
-                                        </Border>
+                                                      />
+											</materialDesign:Card>
+										</Border>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <TextBlock x:Name="txtDaiLyTop2"
@@ -490,13 +554,22 @@
                                     </StackPanel>
 
                                     <!--top 1-->
-                                    <StackPanel x:Name="spDaiLyTop1"
+                                    <StackPanel DataContext="{Binding DaiLyTop1}"
                                                 MouseDown="spDaiLyTop1_MouseDown"
                                                 Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
+										
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding DaiLyTop1_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										
                                         <Border  Margin="0,0,0,0"
-                                                 BorderBrush="Blue"
+                                                 BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="130"
@@ -506,17 +579,23 @@
                                                             Stretch="Uniform" />
 
                                             </Border.Background>
-                                            <TextBlock Text="{Binding Ten}"
+											<materialDesign:Card
+												Background="Yellow"
+												Foreground="Blue"
+												VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center"
+												 Margin="10,0,10,5"
+                                                 Padding="5,5" >
+
+												<TextBlock Text="{Binding Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
-                                                       Foreground="Yellow"
-                                                       Background="DarkBlue"
                                                        VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Center"
                                                        TextTrimming="CharacterEllipsis"
-                                                       Margin="10,0,10,5"
-                                                       Padding="10,5" />
-                                        </Border>
+                                                      />
+											</materialDesign:Card>
+										</Border>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <TextBlock Text="{Binding TongTienXuat}"
@@ -532,13 +611,22 @@
                                     </StackPanel>
 
                                     <!--top 3-->
-                                    <StackPanel x:Name="spDaiLyTop3"
+                                    <StackPanel DataContext="{Binding DaiLyTop3}"
                                                 MouseDown="spDaiLyTop3_MouseDown"
                                                 Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
-                                        <Border   Margin="0,50,0,0"
-                                                  BorderBrush="Blue"
+
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding DaiLyTop3_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+
+										<Border   Margin="0,50,0,0"
+                                                  BorderBrush="Red"
                                                   BorderThickness="2"
                                                   CornerRadius="20"
                                                   Height="130"
@@ -548,17 +636,23 @@
                                                             ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
                                             </Border.Background>
-                                            <TextBlock Text="{Binding Ten}"
+											<materialDesign:Card
+												Background="Yellow"
+												Foreground="Blue"
+												VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center"
+												 Margin="10,0,10,5"
+                                                 Padding="5,5" >
+
+												<TextBlock Text="{Binding Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
-                                                       Foreground="Yellow"
-                                                       Background="DarkBlue"
                                                        VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Center"
                                                        TextTrimming="CharacterEllipsis"
-                                                       Margin="10,0,10,5"
-                                                       Padding="10,5" />
-                                        </Border>
+                                                      />
+											</materialDesign:Card>
+										</Border>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <TextBlock Text="{Binding TongTienXuat}"
@@ -573,7 +667,7 @@
                                     </StackPanel>
                                 </Grid>
 
-                            </Border>
+                            </materialDesign:Card>
                         </StackPanel>
                     </ScrollViewer>
 

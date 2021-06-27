@@ -81,9 +81,6 @@
     <Compile Include="BaoCaoWindow.xaml.cs">
       <DependentUpon>BaoCaoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CapNhatDaiLyWindow.xaml.cs">
-      <DependentUpon>CapNhatDaiLyWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DaiLyWindow.xaml.cs">
       <DependentUpon>DaiLyWindow.xaml</DependentUpon>
     </Compile>
@@ -108,9 +105,11 @@
     <Compile Include="Model\ChiTietPhieuXuatHang.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ConvertNumber.cs" />
     <Compile Include="Model\DaiLy.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\DaiLyTop.cs" />
     <Compile Include="Model\DBQuanLyCacDaiLy.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,6 +143,7 @@
     <Compile Include="Model\NhanVien.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PagingInfo.cs" />
     <Compile Include="Model\PhieuDaiLy.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
@@ -159,6 +159,7 @@
     <Compile Include="Model\SanPham.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SanPhamTop.cs" />
     <Compile Include="Model\TaiKhoan.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
@@ -191,10 +192,6 @@
     <Compile Include="ViewModel\PhieuXuatHangViewModel.cs" />
     <Compile Include="ViewModel\SanPhamViewModel.cs" />
     <Page Include="BaoCaoWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CapNhatDaiLyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -324,132 +321,132 @@
     <Resource Include="Assets\Vuong.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Category\apple.png">
+    <None Include="Images\Category\apple.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Category\asus.png">
+    </None>
+    <None Include="Images\Category\asus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Category\dell.png">
+    </None>
+    <None Include="Images\Category\dell.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Category\hp.png">
+    </None>
+    <None Include="Images\Category\hp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Category\lenovo.png">
+    </None>
+    <None Include="Images\Category\lenovo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\1.png">
+    </None>
+    <None Include="Images\DaiLy\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\10.png">
+    </None>
+    <None Include="Images\DaiLy\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\11.png">
+    </None>
+    <None Include="Images\DaiLy\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\12.png">
+    </None>
+    <None Include="Images\DaiLy\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\13.png">
+    </None>
+    <None Include="Images\DaiLy\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\14.png">
+    </None>
+    <None Include="Images\DaiLy\14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\2.png">
+    </None>
+    <None Include="Images\DaiLy\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\3.png">
+    </None>
+    <None Include="Images\DaiLy\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\4.png">
+    </None>
+    <None Include="Images\DaiLy\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\5.png">
+    </None>
+    <None Include="Images\DaiLy\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\6.png">
+    </None>
+    <None Include="Images\DaiLy\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\7.png">
+    </None>
+    <None Include="Images\DaiLy\7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\8.png">
+    </None>
+    <None Include="Images\DaiLy\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\DaiLy\9.png">
+    </None>
+    <None Include="Images\DaiLy\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\ImportSource\itlap.png">
+    </None>
+    <None Include="Images\ImportSource\itlap.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\1.1.png">
+    </None>
+    <None Include="Images\Product\1.1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\1.2.png">
+    </None>
+    <None Include="Images\Product\1.2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\1.3.png">
+    </None>
+    <None Include="Images\Product\1.3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\1.4.png">
+    </None>
+    <None Include="Images\Product\1.4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\1.5.png">
+    </None>
+    <None Include="Images\Product\1.5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\1.6.png">
+    </None>
+    <None Include="Images\Product\1.6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\1.png">
+    </None>
+    <None Include="Images\Product\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\10.png">
+    </None>
+    <None Include="Images\Product\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\11.png">
+    </None>
+    <None Include="Images\Product\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\12.png">
+    </None>
+    <None Include="Images\Product\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\2.1.png">
+    </None>
+    <None Include="Images\Product\2.1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\2.2.png">
+    </None>
+    <None Include="Images\Product\2.2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\2.3.png">
+    </None>
+    <None Include="Images\Product\2.3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\2.4.png">
+    </None>
+    <None Include="Images\Product\2.4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\2.png">
+    </None>
+    <None Include="Images\Product\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\3.png">
+    </None>
+    <None Include="Images\Product\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\4.png">
+    </None>
+    <None Include="Images\Product\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\5.png">
+    </None>
+    <None Include="Images\Product\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\6.png">
+    </None>
+    <None Include="Images\Product\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\7.png">
+    </None>
+    <None Include="Images\Product\7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\8.png">
+    </None>
+    <None Include="Images\Product\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Product\9.png">
+    </None>
+    <None Include="Images\Product\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBQuanLyCacDaiLy.Context.cs</LastGenOutput>
