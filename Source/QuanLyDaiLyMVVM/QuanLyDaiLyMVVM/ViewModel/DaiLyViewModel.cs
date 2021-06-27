@@ -34,12 +34,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     Quan = SelectedItem.Quan;
                     Email = SelectedItem.Email;
 
-                    var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
-                    string uriImage = currentFolder.ToString();
-                    var info = new FileInfo(uriImage).ToString();
-                    
+                    //var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                    //string uriImage = currentFolder.ToString();
+                    //var info = new FileInfo(uriImage).ToString();
 
-                    HinhAnh = $"{info}{SelectedItem.HinhAnh}";
+
+                    //HinhAnh = $"{info}{SelectedItem.HinhAnh}";
+
+                    HinhAnh = Path.GetFullPath(SelectedItem.HinhAnh);
                     SelectedLoaiDaiLy = SelectedItem.LoaiDaiLy;
                 }
             } 
@@ -290,7 +292,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     var info1 = new FileInfo(uriImage).ToString();
 
 
-                    SelectedItem.HinhAnh = $"{info1}{HinhAnh}";
+                    //SelectedItem.HinhAnh = $"{info1}{HinhAnh}";
+                    SelectedItem.HinhAnh = Path.GetFullPath(HinhAnh);
 
                     SelectedItem.HinhAnh = HinhAnh;
                     SelectedItem.LoaiDaiLy = SelectedLoaiDaiLy;

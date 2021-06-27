@@ -219,7 +219,6 @@
                               FontSize="18"
                               DisplayMemberPath="Ten"
                               ItemsSource="{Binding LoaiDaiLy}"
-                              SelectedItem="{Binding SelectedLoaiDaiLy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               materialDesign:HintAssist.Hint="Loại đại lý" VerticalAlignment="Center"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
                 </Grid>
