@@ -307,11 +307,17 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <!--top 2-->
-                                    <StackPanel MouseDown="spSanPhamTop2_MouseDown"
-												VerticalAlignment="Top"
+                                    <StackPanel VerticalAlignment="Top"
 												DataContext="{Binding SanPhamTop2}"
 												HorizontalAlignment="Right">
-                                        <Border  Margin="0,45,0,0"
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop2_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										<Border  Margin="0,45,0,0"
                                                  BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
@@ -353,11 +359,17 @@
                                     </StackPanel>
 
                                     <!--top 1-->
-                                    <StackPanel 
-                                                MouseDown="spSanPhamTop1_MouseDown"
-                                                Grid.Column="1"
+                                    <StackPanel  Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop1_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										
                                         <Border  Margin="0,0,0,0"
                                                  BorderBrush="Red"
                                                  BorderThickness="2"
@@ -402,11 +414,19 @@
 
                                     <!--top 3-->
                                     <StackPanel DataContext="{Binding SanPhamTop3}"
-                                                MouseDown="spSanPhamTop3_MouseDown"
                                                 Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
-                                        <Border  Margin="0,50,0,0"
+
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop3_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+
+										<Border  Margin="0,50,0,0"
                                                  BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
@@ -481,7 +501,16 @@
                                                 MouseDown="spDaiLyTop2_MouseDown"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Right">
-                                        <Border Margin="0,45,0,0"
+
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding DaiLyTop2_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										
+										<Border Margin="0,45,0,0"
                                                 BorderBrush="Red"
                                                 BorderThickness="2"
                                                 CornerRadius="20"
@@ -530,6 +559,15 @@
                                                 Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
+										
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding DaiLyTop1_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										
                                         <Border  Margin="0,0,0,0"
                                                  BorderBrush="red"
                                                  BorderThickness="2"
@@ -578,7 +616,16 @@
                                                 Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
-                                        <Border   Margin="0,50,0,0"
+
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="MouseDown">
+												<i:InvokeCommandAction 
+													Command="{Binding DaiLyTop3_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+
+										<Border   Margin="0,50,0,0"
                                                   BorderBrush="Red"
                                                   BorderThickness="2"
                                                   CornerRadius="20"

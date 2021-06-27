@@ -42,6 +42,15 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand AccountShowCommand { get; set; }
         public ICommand ContactShowCommand { get; set; }
 
+
+        public ICommand SanPhamTop1_MouseDownCommand { get; set; }
+        public ICommand SanPhamTop2_MouseDownCommand { get; set; }
+        public ICommand SanPhamTop3_MouseDownCommand { get; set; }
+
+        public ICommand DaiLyTop1_MouseDownCommand { get; set; }
+        public ICommand DaiLyTop2_MouseDownCommand { get; set; }
+        public ICommand DaiLyTop3_MouseDownCommand { get; set; }
+
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
@@ -111,6 +120,23 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 LienHeWindow wd = new LienHeWindow();
                 wd.ShowDialog();
             });
+
+            SanPhamTop1_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { SanPhamTop1_MouseDown(p); });
+
+            SanPhamTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { SanPhamTop2_MouseDown(p); });
+
+            SanPhamTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { SanPhamTop3_MouseDown(p); });
+
+        }
+
+        private void SanPhamTop1_MouseDown(Window p)
+        {
+        }
+        private void SanPhamTop2_MouseDown(Window p)
+        {
+        }
+        private void SanPhamTop3_MouseDown(Window p)
+        {
         }
 
         private void khoiTaoThuocTinh()
