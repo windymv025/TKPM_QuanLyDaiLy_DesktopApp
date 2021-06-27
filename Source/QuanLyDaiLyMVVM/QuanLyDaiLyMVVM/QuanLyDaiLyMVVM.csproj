@@ -81,6 +81,9 @@
     <Compile Include="BaoCaoWindow.xaml.cs">
       <DependentUpon>BaoCaoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CapNhatDaiLyWindow.xaml.cs">
+      <DependentUpon>CapNhatDaiLyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DaiLyWindow.xaml.cs">
       <DependentUpon>DaiLyWindow.xaml</DependentUpon>
     </Compile>
@@ -159,6 +162,7 @@
     <Compile Include="Model\SanPham.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SanPhamHienThi.cs" />
     <Compile Include="Model\SanPhamTop.cs" />
     <Compile Include="Model\TaiKhoan.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
@@ -194,6 +198,10 @@
     <Page Include="BaoCaoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CapNhatDaiLyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DaiLyWindow.xaml">
       <SubType>Designer</SubType>
