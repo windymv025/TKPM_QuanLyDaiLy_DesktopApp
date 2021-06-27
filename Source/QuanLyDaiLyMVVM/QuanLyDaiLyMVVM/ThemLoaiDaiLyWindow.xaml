@@ -67,7 +67,7 @@
                     Content="Thoát"
                     FontSize="20"
                     Margin="20,0,20,0"
-                    Command="{Binding ExitThemDaiLyCommand}" CommandParameter="{Binding ElementName=themloaidailywindow}"/>
+                    Command="{Binding ExitThemLoaiDaiLyCommand}" CommandParameter="{Binding ElementName=themloaidailywindow}"/>
         </StackPanel>
     </Grid>
 </Window>

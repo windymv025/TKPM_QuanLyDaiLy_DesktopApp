@@ -3,6 +3,7 @@ using QuanLyDaiLyMVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -61,11 +62,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         public ICommand ShowAddCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand TextChangedSDTCommand { get; set; }
+        public ICommand ExitThemDaiLyCommand { get; set; }
 
         public ICommand ShowAddLoaiDaiLyCommand { get; set; }
         public ICommand AddLoaiDaiLyCommand { get; set; }
         public ICommand TextChangedMaxMoneyCommand { get; set; }
-        public ICommand ExitThemDaiLyCommand { get; set; }
+        public ICommand ExitThemLoaiDaiLyCommand { get; set; }
         
         public ICommand ChooseImageCommand { get; set; }
         public ICommand ListSelectionChangedCommand { get; set; }
@@ -74,17 +77,102 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         public DaiLyViewModel()
         {
+            //load data
             using (var db = new DBQuanLyCacDaiLyEntities())
             {
                 List = new ObservableCollection<DaiLy>(db.DaiLies);
                 LoaiDaiLy = new ObservableCollection<LoaiDaiLy>(db.LoaiDaiLies);
             }
 
+            /*========================================================================================================*/
+            #region THÊM ĐẠI LÝ
+            //Show window
             ShowAddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 ThemDaiLyWindow wd = new ThemDaiLyWindow();
                 wd.ShowDialog();
             });
+
+            //Duyệt ảnh
+            ChooseImageCommand = new RelayCommand<ThemDaiLyWindow>((p) => { return true; }, (p) =>
+            {
+                OpenFileDialog open = new OpenFileDialog();
+                open.Multiselect = false;
+                open.Filter = "Image Files(*.jpg; *.png; *.jpeg; *.gif; *.bmp)|*.jpg; *.png; *.jpeg; *.gif; *.bmp";
+                bool? result = open.ShowDialog();
+                if (result == true)
+                {
+                    var img = open.FileNames;
+                    p.avatar_DaiLy.Source = new BitmapImage(new Uri(img[0].ToString()));
+                    //HinhAnh = img[0].ToString();
+                }
+            });
+
+            //text nhập toàn số
+            TextChangedSDTCommand = new RelayCommand<ThemDaiLyWindow>((p) => { return true; }, (p) =>
+            {
+                p.DaiLy_textbox_phone.Text = Regex.Replace(p.DaiLy_textbox_phone.Text, "[^0-9]+", "");
+            });
+
+            //Thêm đại lý
+            AddCommand = new RelayCommand<ThemDaiLyWindow>((p) => 
+            {
+                if (p == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(p.DaiLy_textbox_name.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_phone.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_address.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_district.Text.Trim()) || string.IsNullOrEmpty(p.DaiLy_textbox_email.Text.Trim()) || !Regex.IsMatch(p.DaiLy_textbox_email.Text.Trim().ToString(), "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") || p.cbb_loaidaily.SelectedIndex == -1 || p.cbb_loaidaily.Text.Trim() == "" || p.avatar_DaiLy.Source == null)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+            }, (p) =>
+            {
+                MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                    string uriImage = currentFolder.ToString();
+                    string file = p.avatar_DaiLy.Source.ToString().Substring(8);
+
+
+                    //Lấy file ảnh copy vào Images của project
+                    var info = new FileInfo(file);
+                    var newName = $"{Guid.NewGuid()}{info.Extension}";
+                    File.Copy(file, $"{uriImage}Images\\DaiLy\\{newName}");
+
+                    var daiLy = new DaiLy();
+                    daiLy.HinhAnh = $"Images/Daily/{newName}";
+
+                    daiLy.Ten = p.DaiLy_textbox_name.Text.Trim();
+                    daiLy.DienThoai = p.DaiLy_textbox_phone.Text.Trim();
+                    daiLy.DiaChi = p.DaiLy_textbox_address.Text.Trim();
+                    daiLy.NgayTiepNhan = p.DaiLy_Date.SelectedDate ?? DateTime.Now;
+                    daiLy.Quan = p.DaiLy_textbox_district.Text.Trim();
+                    daiLy.Email = p.DaiLy_textbox_email.Text.Trim();
+                    daiLy.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
+
+
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        db.DaiLies.Add(daiLy);
+                        db.SaveChanges();
+                    }
+
+                    List.Add(daiLy);
+
+                    p.Close();
+                }
+            });
+
+            ExitThemDaiLyCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Close();
+            });
+            #endregion
 
             /*========================================================================================================*/
             #region LOẠI ĐẠI LÝ
@@ -120,7 +208,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
 
             //Thoát
-            ExitThemDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { return true; }, (p) =>
+            ExitThemLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { return true; }, (p) =>
             {
                 p.Close();
             });
@@ -128,25 +216,11 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
 
 
-            ChooseImageCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                OpenFileDialog open = new OpenFileDialog();
-                open.Multiselect = false;
-                open.Filter = "Image Files(*.jpg; *.png; *.jpeg; *.gif; *.bmp)|*.jpg; *.png; *.jpeg; *.gif; *.bmp";
-                bool? result = open.ShowDialog();
-                if (result == true)
-                {
-                    var img = open.FileNames;
-                    //ImageSource imageSource = new BitmapImage(new Uri(img[0].ToString()));
-                    //avatar_DaiLy.Source = imageSource;
-                    //avatar_DaiLy.Visibility = Visibility.Visible;
-                    HinhAnh = img[0].ToString();
-                }
-            });
+            
 
             ListSelectionChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                ThemDaiLyWindow wd = new ThemDaiLyWindow();
+                CapNhatDaiLyWindow wd = new CapNhatDaiLyWindow();
                 wd.DataContext = this;
                 wd.ShowDialog();
             });
