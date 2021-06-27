@@ -17,7 +17,9 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="themdailywindow"
+        DataContext="{StaticResource DaiLyVM}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
@@ -65,7 +67,6 @@
                      VerticalAlignment="Center"
                      Margin="40,0,0,0"
                      FontSize="18"
-                     Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"
                      Width="400"
                      BorderThickness="1"
                      materialDesign:HintAssist.Hint="Nhập tên đại lý..."
@@ -91,7 +92,6 @@
                      VerticalAlignment="Center"
                      Margin="40,0,0,0"
                      FontSize="18"
-                     Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged}"
                      Width="400"
                      BorderThickness="1"
                      materialDesign:HintAssist.Hint="Nhập số điện thoại..."
@@ -99,7 +99,13 @@
                      materialDesign:TextFieldAssist.HasClearButton="True"
                      materialDesign:TextFieldAssist.HasOutlinedTextField="True"
                      materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                     materialDesign:TextFieldAssist.TextFieldCornerRadius="4" />
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="4">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding TextChangedSDTCommand}" CommandParameter="{Binding ElementName=themdailywindow}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
 
             <!--Địa chỉ-->
             <Label Grid.Row="2"
@@ -117,7 +123,6 @@
                      VerticalAlignment="Center"
                      Margin="40,0,0,0"
                      FontSize="18"
-                     Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
                      Width="400"
                      BorderThickness="1"
                      materialDesign:HintAssist.Hint="Nhập địa chỉ..."
@@ -136,22 +141,15 @@
                    FontSize="20"
                    Margin="0,0,50,0"
                    HorizontalAlignment="Right" />
-            <TextBox Grid.Row="3"
-                     Grid.Column="1"
-                     x:Name="DaiLy_textbox_Date"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     Margin="40,0,0,0"
-                     FontSize="18"
-                     Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
-                     Width="400"
-                     BorderThickness="1"
-                     materialDesign:HintAssist.Hint="Nhập ngày tiếp nhận..."
-                     materialDesign:HintAssist.IsFloating="True"
-                     materialDesign:TextFieldAssist.HasClearButton="True"
-                     materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-                     materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                     materialDesign:TextFieldAssist.TextFieldCornerRadius="4" />
+            <DatePicker Grid.Row="3"
+                        Grid.Column="1" Focusable="False"
+                        x:Name="DaiLy_Date"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Width="200" FontSize="20"
+                        Margin="40,0,0,0" BorderThickness="1"
+                        materialDesign:HintAssist.Hint="Ngày tiếp nhận..."
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
 
             <!--Quận-->
             <Label Grid.Row="4"
@@ -169,7 +167,6 @@
                      VerticalAlignment="Center"
                      Margin="40,0,0,0"
                      FontSize="18"
-                     Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
                      Width="400"
                      BorderThickness="1"
                      materialDesign:HintAssist.Hint="Nhập tên quận..."
@@ -195,7 +192,6 @@
                      VerticalAlignment="Center"
                      Margin="40,0,0,0"
                      FontSize="18"
-                     Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
                      Width="400"
                      BorderThickness="1"
                      materialDesign:HintAssist.Hint="Nhập email..."
@@ -218,22 +214,7 @@
                         Grid.Column="1"
                         Orientation="Horizontal">
                 <Grid>
-                    <!--<ComboBox Margin="40,0,0,0"
-                              Panel.ZIndex="2"
-                              Width="150"
-                              HorizontalAlignment="Left"
-                              Name="cbb_loaidaily"
-                              ItemsSource="{Binding LoaiDaiLy}"
-                              SelectedItem="{Binding SelectedLoaiDaiLy, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding LoaiDaiLy.Ten}"
-                                           Padding="10,0,0,0"
-                                           FontSize="18" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>-->
-                    <ComboBox Margin="40,0,0,0"
+                    <ComboBox Name="cbb_loaidaily" Margin="40,0,0,0"
                               Padding="10,0,0,0"
                               FontSize="18"
                               DisplayMemberPath="Ten"
@@ -244,7 +225,8 @@
                 </Grid>
                 <Button x:Name="btn_ThemLoaiDaiLy"
                         Content="Thêm loại"
-                        Margin="20,0,0,0" Command="{Binding ShowAddLoaiDaiLyCommand}"/>
+                        Margin="20,0,0,0"
+                        Command="{Binding ShowAddLoaiDaiLyCommand}"/>
             </StackPanel>
 
 
@@ -266,8 +248,8 @@
                         Width="100"
                         HorizontalAlignment="Left"
                         Content="Open File"
-                        Command="{Binding ChooseImageCommand}"></Button>
-                <Image x:Name="avatar_DaiLy" Source="{Binding HinhAnh}"
+                        Command="{Binding ChooseImageCommand}" CommandParameter="{Binding ElementName=themdailywindow}"></Button>
+                <Image x:Name="avatar_DaiLy"
                        RenderOptions.BitmapScalingMode="HighQuality"
                        Margin="20,0,0,0" />
             </StackPanel>
@@ -280,11 +262,12 @@
                     Margin="0,0,150,0">
             <Button x:Name="btn_OK"
                     Content="Lưu"
-                    FontSize="20" />
+                    FontSize="20"
+                    Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=themdailywindow}"/>
             <Button x:Name="btn_Cancel"
                     Content="Thoát"
                     FontSize="20"
-                    Margin="50,0,0,0" />
+                    Margin="50,0,0,0" Command="{Binding ExitThemDaiLyCommand}" CommandParameter="{Binding ElementName=themdailywindow}"/>
         </StackPanel>
     </Grid>
 </Window>
