@@ -46,6 +46,7 @@ namespace QuanLyDaiLyMVVM
                 tt_phieuthutien.Visibility = Visibility.Collapsed;
                 tt_phieuxuathang.Visibility = Visibility.Collapsed;
                 tt_contact.Visibility = Visibility.Collapsed;
+                tt_quydinh.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -55,6 +56,7 @@ namespace QuanLyDaiLyMVVM
                 tt_phieuthutien.Visibility = Visibility.Visible;
                 tt_phieuxuathang.Visibility = Visibility.Visible;
                 tt_contact.Visibility = Visibility.Visible;
+                tt_quydinh.Visibility = Visibility.Visible;
             }
         }
 

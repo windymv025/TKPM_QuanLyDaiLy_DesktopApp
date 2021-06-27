@@ -81,6 +81,9 @@
     <Compile Include="BaoCaoWindow.xaml.cs">
       <DependentUpon>BaoCaoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CapNhatDaiLyWindow.xaml.cs">
+      <DependentUpon>CapNhatDaiLyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DaiLyWindow.xaml.cs">
       <DependentUpon>DaiLyWindow.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,9 @@
     <Compile Include="PhieuXuatHangWindow.xaml.cs">
       <DependentUpon>PhieuXuatHangWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuyDinhWindow.xaml.cs">
+      <DependentUpon>QuyDinhWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SanPhamWindow.xaml.cs">
       <DependentUpon>SanPhamWindow.xaml</DependentUpon>
     </Compile>
@@ -190,10 +196,15 @@
     <Compile Include="ViewModel\NhanVienViewModel.cs" />
     <Compile Include="ViewModel\PhieuThuTienViewModel.cs" />
     <Compile Include="ViewModel\PhieuXuatHangViewModel.cs" />
+    <Compile Include="ViewModel\QuyDinhViewModel.cs" />
     <Compile Include="ViewModel\SanPhamViewModel.cs" />
     <Page Include="BaoCaoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CapNhatDaiLyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DaiLyWindow.xaml">
       <SubType>Designer</SubType>
@@ -228,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PhieuXuatHangWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuyDinhWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,90 @@
+﻿<Window x:Class="QuanLyDaiLyMVVM.QuyDinhWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
+        mc:Ignorable="d"
+        Title="DaiLyWindow"
+        Height="700"
+        Width="1024"
+        DataContext="{StaticResource QuyDinhVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--các element binding từ selected item-->
+            <materialDesign:Card Grid.Row="0"
+                                 Margin="5">
+                <WrapPanel Margin="0 0 0 10">
+                    <TextBox Text="{Binding TenQuyDinh, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="5 5 15 5"
+                             materialDesign:HintAssist.Hint="Tên quy định"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding GiaTri, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="5 5 15 5"
+                             materialDesign:HintAssist.Hint="Giá trị"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding KieuDuLieu, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="5 5 15 5"
+                             materialDesign:HintAssist.Hint="Kiểu dữ liệu"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="1"
+                                 Margin="5">
+                <WrapPanel>
+                    <Button Command="{Binding AddCommand}"
+                            Content="Thêm"
+                            Margin="5"
+                            Width="100"></Button>
+                    <Button Command="{Binding EditCommand}"
+                            Content="Sửa"
+                            Margin="5"
+                            Width="100"></Button>
+                    <Button Command="{Binding DeleteCommand}"
+                            Content="Xóa"
+                            Margin="5"
+                            Width="100"></Button>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2"
+                                 Margin="5"
+                                 VerticalAlignment="Stretch">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding List}"
+                              SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên quy định"
+                                                DisplayMemberBinding="{Binding TenQuyDinh}"></GridViewColumn>
+                                <GridViewColumn Header="Giá trị"
+                                                DisplayMemberBinding="{Binding GiaTri}"></GridViewColumn>
+                                <GridViewColumn Header="Kiểu dữ liệu"
+                                                DisplayMemberBinding="{Binding KieuDuLieu}"></GridViewColumn>
+                                
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>
+

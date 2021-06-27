@@ -40,7 +40,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand PhieuXuatHangShowCommand { get; set; }
         public ICommand RevenueShowCommand { get; set; }
         public ICommand AccountShowCommand { get; set; }
+        public ICommand QuyDinhShowCommand { get; set; }
         public ICommand ContactShowCommand { get; set; }
+        
 
 
         public ICommand SanPhamTop1_MouseDownCommand { get; set; }
@@ -112,6 +114,12 @@ namespace QuanLyDaiLyMVVM.ViewModel
             AccountShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 NhanVienWindow wd = new NhanVienWindow();
+                wd.ShowDialog();
+            });
+
+            QuyDinhShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
+                QuyDinhWindow wd = new QuyDinhWindow();
                 wd.ShowDialog();
             });
 

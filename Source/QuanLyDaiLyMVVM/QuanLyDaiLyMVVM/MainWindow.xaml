@@ -982,6 +982,37 @@
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding QuyDinhShowCommand}"
+                                                           CommandParameter="{Binding ElementName=Tg_btn}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <materialDesign:PackIcon Kind="CommentQuestion"
+                                                         Foreground="Red"
+                                                         Width="30"
+                                                         Height="30"
+                                                         VerticalAlignment="Center"
+                                                         HorizontalAlignment="Center"
+                                                         Margin="12,0,0,0" />
+                                <TextBlock Text="Quy định"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_quydinh"
+                                         Content="REGULATION"
+                                         Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--//Contact-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                                     <i:InvokeCommandAction Command="{Binding ContactShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
                                 </i:EventTrigger>
