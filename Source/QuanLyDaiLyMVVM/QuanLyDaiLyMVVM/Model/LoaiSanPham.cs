@@ -9,21 +9,28 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
+    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class LoaiSanPham
+    public partial class LoaiSanPham: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LoaiSanPham()
         {
             this.SanPhams = new HashSet<SanPham>();
         }
-    
-        public int Id { get; set; }
-        public string Ten { get; set; }
-        public string HinhAnh { get; set; }
-    
+
+        private int _Id;
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+
+        private string _Ten;
+        public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
+
+        private string _HinhAnh;
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
     }

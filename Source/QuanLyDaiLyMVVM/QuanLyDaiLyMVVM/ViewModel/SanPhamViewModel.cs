@@ -30,8 +30,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
         private ObservableCollection<NguonNhap> _NguonNhaps;
         public ObservableCollection<NguonNhap> NguonNhaps { get => _NguonNhaps; set { _NguonNhaps = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<DonViTinh> _DonViTinhs;
+        public ObservableCollection<DonViTinh> DonViTinhs { get => _DonViTinhs; set { _DonViTinhs = value; OnPropertyChanged(); } }
+
         public ICommand PrevBtnCommand { get; set; }
         public ICommand NextBtnCommand { get; set; }
+        public ICommand SelectionChangedCommand { get; set; }
+        public ICommand ThemCommand { get; set; }
 
         private PagingInfo _PagingInfo;
         public PagingInfo PagingInfo { get => _PagingInfo; set { _PagingInfo = value; OnPropertyChanged(); } }
@@ -44,6 +49,22 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
             PrevBtnCommand = new RelayCommand<ListView>((p) => { return true; }, (p) => { loadPrevPage(p); });
             NextBtnCommand = new RelayCommand<ListView>((p) => { return true; }, (p) => { loadNextPage(p); });
+
+            SelectionChangedCommand = new RelayCommand<ListView>((p) => { return true; }, (p) => { selectionChanged(p); });
+            ThemCommand = new RelayCommand<Window>((p) => { return true; }, 
+                (p) => {
+                    new ThemSanPhamWindow().ShowDialog();
+
+                });
+
+        }
+
+        private void selectionChanged(ListView p)
+        {
+            if(p.SelectedIndex > -1)
+            {
+                new CapNhatSanPhamWindow(ListSanPhamHienThiTheotrang[p.SelectedIndex]).ShowDialog();
+            }
         }
 
         private void loadNextPage(ListView p)
@@ -82,11 +103,12 @@ namespace QuanLyDaiLyMVVM.ViewModel
         {
             using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                _SanPhams = new ObservableCollection<SanPham>(db.SanPhams);
-                _LoaiSanPhams = new ObservableCollection<LoaiSanPham>(db.LoaiSanPhams);
-                _NguonNhaps = new ObservableCollection<NguonNhap>(db.NguonNhaps);
+                SanPhams = new ObservableCollection<SanPham>(db.SanPhams);
+                LoaiSanPhams = new ObservableCollection<LoaiSanPham>(db.LoaiSanPhams);
+                NguonNhaps = new ObservableCollection<NguonNhap>(db.NguonNhaps);
+                DonViTinhs = new ObservableCollection<DonViTinh>(db.DonViTinhs);
 
-                foreach(var sp in _SanPhams)
+                foreach(var sp in SanPhams)
                 {
                     if (sp.HinhAnh == null)
                     {
@@ -99,7 +121,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                 }
 
-                foreach (var l in _LoaiSanPhams)
+                foreach (var l in LoaiSanPhams)
                 {
                     if (l.HinhAnh == null)
                     {
@@ -112,7 +134,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                 }
 
-                foreach (var l in _NguonNhaps)
+                foreach (var l in NguonNhaps)
                 {
                     if (l.HinhAnh == null)
                     {
@@ -126,12 +148,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }
 
-            _ListSanPham = new ObservableCollection<SanPhamHienThi>(
-                from sp in _SanPhams
-                join lsp in _LoaiSanPhams
+            ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                from sp in SanPhams
+                join lsp in LoaiSanPhams
                 on sp.IdLoaiSanPham equals lsp.Id
-                join nn in _NguonNhaps
+                join nn in NguonNhaps
                 on sp.IdNguonNhap equals nn.Id
+                join dv in DonViTinhs
+                on sp.IdDonViTinh equals dv.Id
                 select new SanPhamHienThi
                 {
                     SanPham = sp,
@@ -139,7 +163,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     NguonNhap = nn,
                     GiaBan = ConvertNumber.convertNumberDecimalToString(sp.GiaBan),
                     GiaNhap = ConvertNumber.convertNumberDecimalToString(sp.GiaNhap),
-                    SoLuong = ConvertNumber.convertNumberToString(sp.SoLuong)
+                    SoLuong = ConvertNumber.convertNumberToString(sp.SoLuong),
+                    DonViTinh = dv
                 });
 
         }

@@ -9,42 +9,31 @@ using System.Threading.Tasks;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
-    public class CapNhatSanPhamViewModel: BaseViewModel
+    public class ThemSanPhamViewModel: BaseViewModel
     {
-        private string _HinhAnhHienThi;
-        public string HinhAnhHienThi { get => _HinhAnhHienThi; set { _HinhAnhHienThi = value; OnPropertyChanged(); } }
-
         private SanPham _SanPham;
         public SanPham SanPham { get => _SanPham; set { _SanPham = value; OnPropertyChanged(); } }
-
-        private NguonNhap _NguonNhap;
-        public NguonNhap NguonNhap { get => _NguonNhap; set { _NguonNhap = value; OnPropertyChanged(); } }
-
-        private LoaiSanPham _LoaiSanPham;
-        public LoaiSanPham LoaiSanPham { get => _LoaiSanPham; set { _LoaiSanPham = value; OnPropertyChanged(); } }
-
-        private DonViTinh _DonViTinh;
-        public DonViTinh DonViTinh { get => _DonViTinh; set { _DonViTinh = value; OnPropertyChanged(); } }
-
-        private SanPhamHienThi _SanPhamHienThi;
-        public SanPhamHienThi SanPhamHienThi { get => _SanPhamHienThi; set { _SanPhamHienThi = value; OnPropertyChanged(); } }
 
         private ObservableCollection<HinhAnhSanPham> _HinhAnhSanPhams;
         public ObservableCollection<HinhAnhSanPham> HinhAnhSanPhams { get => _HinhAnhSanPhams; set { _HinhAnhSanPhams = value; OnPropertyChanged(); } }
 
         private ObservableCollection<LoaiSanPham> loaiSanPhams;
         public ObservableCollection<LoaiSanPham> LoaiSanPhams { get => loaiSanPhams; set { loaiSanPhams = value; OnPropertyChanged(); } }
-        
+
         private ObservableCollection<NguonNhap> nguonNhaps;
-        public ObservableCollection<NguonNhap> NguonNhaps  { get => nguonNhaps; set { nguonNhaps = value; OnPropertyChanged(); } }
+        public ObservableCollection<NguonNhap> NguonNhaps { get => nguonNhaps; set { nguonNhaps = value; OnPropertyChanged(); } }
 
         private ObservableCollection<DonViTinh> _DonViTinhs;
         public ObservableCollection<DonViTinh> DonViTinhs { get => _DonViTinhs; set { _DonViTinhs = value; OnPropertyChanged(); } }
 
-        public CapNhatSanPhamViewModel()
+        public ThemSanPhamViewModel()
         {
+            SanPham = new SanPham { 
+                HinhAnh = "Assets/image_not_available.png"
+            };
             loadDataList();
         }
+
         private void loadDataList()
         {
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
@@ -78,37 +67,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }
 
-            
-        }
-        public void loadDataBinding(SanPhamHienThi sanPhamHienThi)
-        {
-            SanPhamHienThi = sanPhamHienThi;
-            SanPham = SanPhamHienThi.SanPham;
-            NguonNhap = SanPhamHienThi.NguonNhap;
-            LoaiSanPham = SanPhamHienThi.LoaiSanPham;
-            DonViTinh = SanPhamHienThi.DonViTinh;
 
-            HinhAnhHienThi = SanPham.HinhAnh;
-
-            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
-            {
-                HinhAnhSanPhams = new ObservableCollection<HinhAnhSanPham>(
-                    from ha in db.HinhAnhSanPhams
-                    where ha.IdSanPham == SanPham.Id
-                    select ha
-                    );
-            }
-            foreach (var i in HinhAnhSanPhams)
-            {
-                if (i.HinhAnh != null)
-                {
-                    i.HinhAnh = Path.GetFullPath(i.HinhAnh);
-                }
-                else
-                {
-                    i.HinhAnh = Path.GetFullPath("Assets/image_not_available.png");
-                }
-            }
         }
     }
 }
