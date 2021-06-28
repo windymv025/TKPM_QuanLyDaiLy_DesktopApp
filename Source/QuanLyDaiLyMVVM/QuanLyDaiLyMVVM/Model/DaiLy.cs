@@ -9,10 +9,11 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
+    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class DaiLy
+    public partial class DaiLy: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DaiLy()
@@ -20,21 +21,34 @@ namespace QuanLyDaiLyMVVM.Model
             this.ChiTietBaoCaos = new HashSet<ChiTietBaoCao>();
             this.PhieuDaiLies = new HashSet<PhieuDaiLy>();
         }
-    
-        public int Id { get; set; }
-        public string Ten { get; set; }
-        public string DienThoai { get; set; }
-        public string DiaChi { get; set; }
-        public System.DateTime NgayTiepNhan { get; set; }
-        public string Quan { get; set; }
-        public string Email { get; set; }
-        public int IdLoaiDaiLy { get; set; }
-        public bool IsRemove { get; set; }
-        public string HinhAnh { get; set; }
+
+        private int _Id;
+        public int Id { get=>_Id; set { _Id = value; OnPropertyChanged(); } }
+        private string _Ten;
+        public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
+        private string _DienThoai;
+        public string DienThoai { get => _DienThoai; set { _DienThoai = value; OnPropertyChanged(); } }
+
+        private string _DiaChi;
+        public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
+        private System.DateTime _NgayTiepNhan;
+        public System.DateTime NgayTiepNhan { get => _NgayTiepNhan; set { _NgayTiepNhan = value; OnPropertyChanged(); } }
+        private string _Quan;
+        public string Quan { get => _Quan; set { _Quan = value; OnPropertyChanged(); } }
+        private string _Email;
+        public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
+        private int _IdLoaiDaiLy;
+        public int IdLoaiDaiLy { get => _IdLoaiDaiLy; set { _IdLoaiDaiLy = value; OnPropertyChanged(); } }
+        private bool _IsRemove;
+        public bool IsRemove { get => _IsRemove; set { _IsRemove = value; OnPropertyChanged(); } }
+        private string _HinhAnh;
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
+
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietBaoCao> ChiTietBaoCaos { get; set; }
-        public virtual LoaiDaiLy LoaiDaiLy { get; set; }
+        private LoaiDaiLy _LoaiDaiLy;
+        public virtual LoaiDaiLy LoaiDaiLy { get=>_LoaiDaiLy; set { _LoaiDaiLy = value; OnPropertyChanged(); } }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuDaiLy> PhieuDaiLies { get; set; }
     }
