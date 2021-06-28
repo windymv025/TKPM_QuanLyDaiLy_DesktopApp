@@ -49,7 +49,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }
 
             AddCommand = new RelayCommand<QuyDinhWindow>((p) => { 
-                if(!string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && !string.IsNullOrEmpty(p.Value.Text.Trim()))
+                if(p != null && !string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && !string.IsNullOrEmpty(p.Value.Text.Trim()))
                 {
                     return true;
                 }
@@ -67,7 +67,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             });
             EditCommand = new RelayCommand<QuyDinhWindow>((p) => {
-                if (!string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && !string.IsNullOrEmpty(p.Value.Text.Trim()) && SelectedItem != null)
+                if (p != null && !string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && !string.IsNullOrEmpty(p.Value.Text.Trim()) && SelectedItem != null)
                 {
                     return true;
                 }

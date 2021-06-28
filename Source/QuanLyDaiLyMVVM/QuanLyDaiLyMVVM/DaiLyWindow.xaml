@@ -71,14 +71,20 @@
                                  Margin="40,0,0,0"
                                  Background="White"
                                  FontSize="18"
-                                 Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
                                  Width="300"
+                                 Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  materialDesign:HintAssist.Hint="Nhập tên đại lý..."
                                  materialDesign:HintAssist.IsFloating="True"
                                  materialDesign:TextFieldAssist.HasOutlinedTextField="True"
                                  materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4" />
+                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchTextChangedCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
 
                         <materialDesign:PackIcon Grid.Column="2"
                                                  Kind="Magnify"
@@ -88,11 +94,11 @@
                                                  Panel.ZIndex="5"
                                                  HorizontalAlignment="Right"
                                                  VerticalAlignment="Center">
-                            <i:Interaction.Triggers>
+                            <!--<i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                                     <i:InvokeCommandAction Command="{Binding SearchCommand}" />
                                 </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                            </i:Interaction.Triggers>-->
                         </materialDesign:PackIcon>
                     </Grid>
                 </StackPanel>

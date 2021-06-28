@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Data.Entity;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
@@ -33,14 +34,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     NgayTiepNhan = SelectedItem.NgayTiepNhan;
                     Quan = SelectedItem.Quan;
                     Email = SelectedItem.Email;
-
-                    //var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
-                    //string uriImage = currentFolder.ToString();
-                    //var info = new FileInfo(uriImage).ToString();
-
-
-                    //HinhAnh = $"{info}{SelectedItem.HinhAnh}";
-
                     HinhAnh = Path.GetFullPath(SelectedItem.HinhAnh);
                     SelectedLoaiDaiLy = SelectedItem.LoaiDaiLy;
                 }
@@ -66,11 +59,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         private Model.LoaiDaiLy _SelectedLoaiDaiLy;
         public Model.LoaiDaiLy SelectedLoaiDaiLy { get => _SelectedLoaiDaiLy; set { _SelectedLoaiDaiLy = value; OnPropertyChanged(); } }
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
 
 
         public ICommand ShowAddCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand TextChangedSDTCommand { get; set; }
+        public ICommand SearchTextChangedCommand { get; set; }
         public ICommand ExitThemDaiLyCommand { get; set; }
 
         public ICommand ShowAddLoaiDaiLyCommand { get; set; }
@@ -84,6 +80,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         public ICommand ExitUpdateCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
 
 
@@ -134,7 +131,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
 
             //text nhập toàn số
-            TextChangedSDTCommand = new RelayCommand<ThemDaiLyWindow>((p) => { return true; }, (p) =>
+            TextChangedSDTCommand = new RelayCommand<ThemDaiLyWindow>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
                 p.DaiLy_textbox_phone.Text = Regex.Replace(p.DaiLy_textbox_phone.Text, "[^0-9]+", "");
             });
@@ -178,21 +175,23 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     daiLy.NgayTiepNhan = p.DaiLy_Date.SelectedDate ?? DateTime.Now;
                     daiLy.Quan = p.DaiLy_textbox_district.Text.Trim();
                     daiLy.Email = p.DaiLy_textbox_email.Text.Trim();
-                    daiLy.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
+                    daiLy.IdLoaiDaiLy = (p.cbb_loaidaily.SelectedItem as Model.LoaiDaiLy).Id;
+                    //daiLy.LoaiDaiLy = LoaiDaiLy.Where(x => x.Id == (p.cbb_loaidaily.SelectedItem as Model.LoaiDaiLy).Id).SingleOrDefault();
 
 
                     using (var db = new DBQuanLyCacDaiLyEntities())
                     {
+                        daiLy.LoaiDaiLy = db.LoaiDaiLies.Where(x => x.Id == daiLy.IdLoaiDaiLy).SingleOrDefault();
                         db.DaiLies.Add(daiLy);
                         db.SaveChanges();
-                        List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                        List.Add(daiLy);
                     }
 
                     p.Close();
                 }
             });
 
-            ExitThemDaiLyCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            ExitThemDaiLyCommand = new RelayCommand<Window>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
                 p.Close();
             });
@@ -208,13 +207,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
 
             //text nhập toàn số
-            TextChangedMaxMoneyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { return true; }, (p) =>
+            TextChangedMaxMoneyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
                 p.LoaiDaiLy_textbox_SoTienNoToiDa.Text = Regex.Replace(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text, "[^0-9]+", "");
             });
 
             //thêm
-            AddLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { return true; }, (p) =>
+            AddLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
                 var category = new LoaiDaiLy() { Ten = p.TenLoaiDaiLyMoi.Text.Trim(), SoTienNoToiDa = Decimal.Parse(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Trim()) };
                 using (var db = new DBQuanLyCacDaiLyEntities())
@@ -232,7 +231,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
 
             //Thoát
-            ExitThemLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { return true; }, (p) =>
+            ExitThemLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
                 p.Close();
             });
@@ -277,6 +276,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                     dl.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
 
+                    dl.LoaiDaiLy = db.LoaiDaiLies.Where(x => x.Id == dl.IdLoaiDaiLy).SingleOrDefault();
+
                     db.SaveChanges();
 
                     SelectedItem.Ten = Ten;
@@ -297,7 +298,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
                 p.Close();
             });
-            ExitUpdateCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            ExitUpdateCommand = new RelayCommand<Window>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
                 p.Close();
             });
@@ -309,6 +310,43 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 CapNhatDaiLyWindow wd = new CapNhatDaiLyWindow();
                 wd.DataContext = this;
                 wd.ShowDialog();
+            });
+
+            DeleteCommand = new RelayCommand<Window>((p) => {
+                if (SelectedItem == null || p == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
+            {
+                using(var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var item = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                    item.IsRemove = true;
+                    db.SaveChanges();
+                    p.Close();
+                    //List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false).ToList());
+                }
+            });
+
+            SearchTextChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    if (string.IsNullOrEmpty(TextSearch))
+                    {
+                        List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false).ToList());
+                    }
+                    else
+                    {
+                        string sql = $"select* from DaiLy where freetext(Ten, N'{TextSearch}')";
+                        List = new ObservableCollection<DaiLy>(db.DaiLies.SqlQuery(sql).ToList());
+                    }
+                }
             });
         }
     }

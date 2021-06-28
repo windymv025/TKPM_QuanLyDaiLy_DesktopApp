@@ -281,10 +281,16 @@
                     FontSize="20"
                     Command="{Binding UpdateCommand}"
                     CommandParameter="{Binding ElementName=capnhatwindow}" />
+            <Button x:Name="btn_Delete"
+                    Content="Xóa"
+                    FontSize="20"
+                    Command="{Binding DeleteCommand}"
+                    Margin="40,0,0,0"
+                    CommandParameter="{Binding ElementName=capnhatwindow}" />
             <Button x:Name="btn_Cancel"
                     Content="Thoát"
                     FontSize="20"
-                    Margin="50,0,0,0" Command="{Binding ExitUpdateCommand}" CommandParameter="{Binding ElementName=capnhatwindow}"/>
+                    Margin="40,0,0,0" Command="{Binding ExitUpdateCommand}" CommandParameter="{Binding ElementName=capnhatwindow}"/>
         </StackPanel>
     </Grid>
 </Window>
