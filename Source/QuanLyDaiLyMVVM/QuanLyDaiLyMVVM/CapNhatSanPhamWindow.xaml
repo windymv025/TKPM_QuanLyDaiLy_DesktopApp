@@ -228,6 +228,7 @@
 							</ComboBox>
 
 							<Button Width="auto"
+									Command="{Binding ThemDonViCommand}"
 								Grid.Column="2" Height="auto" Margin="5"
 								ToolTip="Thêm đơn vị tính"
 								Style="{StaticResource MaterialDesignOutlinedButton}"
@@ -271,7 +272,8 @@
 								</ComboBox.ItemTemplate>
 							</ComboBox>
 
-							<Button Width="auto"
+							<Button Width="auto" 
+									Command="{Binding ThemLoaiSanPhamCommand}"
 								Grid.Column="2" Height="auto" Margin="5"
 								ToolTip="Thêm loại sản phẩm"
 								Style="{StaticResource MaterialDesignOutlinedButton}"
@@ -328,7 +330,8 @@
 								</ComboBox.ItemTemplate>
 							</ComboBox>
 
-							<Button Width="auto"
+							<Button Width="auto" 
+									Command="{Binding ThemNguonNhapCommand}"
 								Grid.Column="2" Height="auto" Margin="5"
 								ToolTip="Thêm loại sản phẩm"
 								Style="{StaticResource MaterialDesignOutlinedButton}"

@@ -191,8 +191,17 @@
     <Compile Include="ThemDaiLyWindow.xaml.cs">
       <DependentUpon>ThemDaiLyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ThemDonViTinhWindow.xaml.cs">
+      <DependentUpon>ThemDonViTinhWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ThemLoaiDaiLyWindow.xaml.cs">
       <DependentUpon>ThemLoaiDaiLyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemLoaiSanPhamWindow.xaml.cs">
+      <DependentUpon>ThemLoaiSanPhamWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemNguonNhapWindow.xaml.cs">
+      <DependentUpon>ThemNguonNhapWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ThemSanPhamWindow.xaml.cs">
       <DependentUpon>ThemSanPhamWindow.xaml</DependentUpon>
@@ -210,6 +219,9 @@
     <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\QuyDinhViewModel.cs" />
     <Compile Include="ViewModel\SanPhamViewModel.cs" />
+    <Compile Include="ViewModel\ThemDonViTinhViewModel.cs" />
+    <Compile Include="ViewModel\ThemLoaiSanPhamViewModel.cs" />
+    <Compile Include="ViewModel\ThemNguonNhapViewModel.cs" />
     <Compile Include="ViewModel\ThemSanPhamViewModel.cs" />
     <Page Include="BaoCaoWindow.xaml">
       <SubType>Designer</SubType>
@@ -279,7 +291,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ThemDonViTinhWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ThemLoaiDaiLyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemLoaiSanPhamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemNguonNhapWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
@@ -26,12 +28,20 @@ namespace QuanLyDaiLyMVVM.ViewModel
         private ObservableCollection<DonViTinh> _DonViTinhs;
         public ObservableCollection<DonViTinh> DonViTinhs { get => _DonViTinhs; set { _DonViTinhs = value; OnPropertyChanged(); } }
 
+        public ICommand ThemDonViCommand { get; set; }
+        public ICommand ThemNguonNhapCommand { get; set; }
+        public ICommand ThemLoaiSanPhamCommand { get; set; }
+
         public ThemSanPhamViewModel()
         {
             SanPham = new SanPham { 
                 HinhAnh = "Assets/image_not_available.png"
             };
             loadDataList();
+
+            ThemDonViCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemDonViTinhWindow().ShowDialog(); });
+            ThemNguonNhapCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemNguonNhapWindow().ShowDialog(); });
+            ThemLoaiSanPhamCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemLoaiSanPhamWindow().ShowDialog(); });
         }
 
         private void loadDataList()
