@@ -66,36 +66,43 @@
                         <materialDesign:Card Grid.Row="1"
                                              VerticalContentAlignment="Center"
                                              Height="auto"
-                                             Margin="20" Padding="10">
+                                             Margin="20" Padding="10" UniformCornerRadius="20">
                             <StackPanel Orientation="Vertical"
                                         VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Phone"
-                                                             Width="50"
-                                                             Height="50"
-                                                             Foreground="Gray" />
-                                    <TextBlock Text="{Binding NhanVien.DienThoai}" VerticalAlignment="Center" FontSize="18" Foreground="DarkBlue" FontWeight="ExtraBold" Margin="20"/>
+                                                             Width="40"
+                                                             Height="40"
+                                                             Foreground="Gray" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding NhanVien.DienThoai}"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               Foreground="DarkBlue"
+                                               FontWeight="ExtraBold"
+                                               Margin="20"
+                                               TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="MapMarker"
-                                                             Width="50"
-                                                             Height="50"
-                                                             Foreground="Gray" />
+                                                             Width="40"
+                                                             Height="40"
+                                                             Foreground="Gray" VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding NhanVien.DiaChi}"
                                                VerticalAlignment="Center"
-                                               FontSize="18"
+                                               FontSize="16"
                                                Foreground="DarkBlue"
                                                FontWeight="ExtraBold"
-                                               Margin="20" />
+                                               Margin="20" 
+                                               TextWrapping="WrapWithOverflow"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Email"
-                                                             Width="50"
-                                                             Height="50"
-                                                             Foreground="Gray" />
+                                                             Width="40"
+                                                             Height="40"
+                                                             Foreground="Gray" VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding NhanVien.Email}"
                                                VerticalAlignment="Center"
-                                               FontSize="18"
+                                               FontSize="16"
                                                Foreground="DarkBlue"
                                                FontWeight="ExtraBold"
                                                Margin="20" />
