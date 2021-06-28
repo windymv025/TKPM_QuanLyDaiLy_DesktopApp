@@ -138,6 +138,7 @@ CREATE TABLE [NhanVien] (
 	DienThoai varchar(20) not null,
 	DiaChi nvarchar(max) not null,
 	Email varchar(100),
+	HinhAnh nvarchar(max),
 	VaiTro int,			/*1 - admin, 2 - staff*/
 	primary key(Id)
 )
@@ -198,11 +199,11 @@ GO
 
 
 /* Thêm data */
-INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [VaiTro]) VALUES (N'Phạm Văn Thật', '0352358161', N'Tiền Giang', '18120568@student.hcmus.edu.vn', 1)
+INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [HinhAnh], [VaiTro]) VALUES (N'Phạm Văn Thật', '0352358161', N'Tiền Giang', '18120568@student.hcmus.edu.vn', N'Images/Staff/That.jpg', 1)
 GO
-INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [VaiTro]) VALUES (N'Phạm Minh Vương', '0988788146', N'Bình Định', '18120655@student.hcmus.edu.vn', 1)
+INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [HinhAnh], [VaiTro]) VALUES (N'Phạm Minh Vương', '0988788146', N'Bình Định', '18120655@student.hcmus.edu.vn',  N'Images/Staff/Vuong.jpg', 1)
 GO
-INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [VaiTro]) VALUES (N'Nguyễn Bá Vương Thần Vũ', '0909909009', N'Thành phố Hồ Chí Minh', 'nbvtvu@gmail.com', 2)
+INSERT [dbo].[NhanVien] ([Ten], [DienThoai], [DiaChi], [Email], [HinhAnh], [VaiTro]) VALUES (N'Nguyễn Bá Vương Thần Vũ', '0909909009', N'Thành phố Hồ Chí Minh', 'nbvtvu@gmail.com',  N'Images/Staff/Vu.jpg', 2)
 GO
 
 INSERT [dbo].[TaiKhoan] ([Id], [TenDangNhap], [MatKhau]) VALUES ('1', 'that','db69fc039dcbd2962cb4d28f5891aae1')		/*admin*/

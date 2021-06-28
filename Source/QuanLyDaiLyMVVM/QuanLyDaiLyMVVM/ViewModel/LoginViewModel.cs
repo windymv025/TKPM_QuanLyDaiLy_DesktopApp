@@ -14,6 +14,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         public bool IsLogin { get; set; }
+
+        public static int IdUser;
+
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
         private string _Password;
@@ -42,11 +45,11 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
             using(var db = new DBQuanLyCacDaiLyEntities())
             {
-                var accCount = db.TaiKhoans.Where(x => x.TenDangNhap == UserName && x.MatKhau == passEncode).Count();
-                if (accCount > 0)
+                var accCount = db.TaiKhoans.Where(x => x.TenDangNhap == UserName && x.MatKhau == passEncode);
+                if (accCount.Count() > 0)
                 {
                     IsLogin = true;
-
+                    IdUser = accCount.SingleOrDefault().Id;
                     p.Close();
                 }
                 else

@@ -20,6 +20,7 @@ namespace QuanLyDaiLyMVVM.Model
         public string DiaChi { get; set; }
         public string Email { get; set; }
         public Nullable<int> VaiTro { get; set; }
+        public string HinhAnh { get; set; }
     
         public virtual TaiKhoan TaiKhoan { get; set; }
     }

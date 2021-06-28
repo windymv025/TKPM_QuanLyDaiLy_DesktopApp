@@ -1,0 +1,105 @@
+﻿<Window x:Class="QuanLyDaiLyMVVM.DoiMatKhauWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
+        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="Đổi mật khẩu"
+        Height="300"
+        Width="400"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        DataContext="{StaticResource ProfileVM}"
+        Name="doimkWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Đổi mật khẩu"
+                   Margin="10"
+                   FontSize="20"
+                   VerticalAlignment="Center"
+                   FontWeight="ExtraBold"></TextBlock>
+        <materialDesign:Card Grid.Row="1"
+                             Width="330"
+                             Height="150"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin"
+                                Value="15 0 15 0"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <PasswordBox x:Name="FloatingPasswordBox"
+                                 materialDesign:HintAssist.Hint="Mật khẩu cũ"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
+                                                       CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <PasswordBox x:Name="FloatingPasswordBoxNew"
+                                 materialDesign:HintAssist.Hint="Mật khẩu mới"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommandNew}"
+                                                       CommandParameter="{Binding ElementName=FloatingPasswordBoxNew}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            IsDefault="True"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="110"
+                            Command="{Binding DoiMatKhauCommand}"
+                            CommandParameter="{Binding ElementName=doimkWindow}"
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Content="Xác nhận"
+                            Background="Blue"></Button>
+                    <Button Grid.Column="1"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="110"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding ElementName=doimkWindow}"
+                            Background="Red"
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Content="Thoát"></Button>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>
+

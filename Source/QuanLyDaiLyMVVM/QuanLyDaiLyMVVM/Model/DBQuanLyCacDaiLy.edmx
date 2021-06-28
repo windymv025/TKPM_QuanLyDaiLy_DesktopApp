@@ -113,6 +113,7 @@
           <Property Name="DienThoai" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="HinhAnh" Type="nvarchar(max)" />
           <Property Name="VaiTro" Type="int" />
         </EntityType>
         <EntityType Name="PhieuDaiLy">
@@ -561,6 +562,7 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VaiTro" Type="Int32" />
           <NavigationProperty Name="TaiKhoan" Relationship="Self.TaiKhoan_fk0" FromRole="NhanVien" ToRole="TaiKhoan" />
+          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PhieuDaiLy">
           <Key>
@@ -1006,6 +1008,7 @@
           <EntitySetMapping Name="NhanViens">
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
