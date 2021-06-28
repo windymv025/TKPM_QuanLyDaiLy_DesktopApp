@@ -1,6 +1,4 @@
-﻿using QuanLyDaiLyMVVM.Model;
-using QuanLyDaiLyMVVM.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,16 +15,13 @@ using System.Windows.Shapes;
 namespace QuanLyDaiLyMVVM
 {
     /// <summary>
-    /// Interaction logic for CapNhatSanPhamWindow.xaml
+    /// Interaction logic for ThemSanPhamWindow.xaml
     /// </summary>
-    public partial class CapNhatSanPhamWindow : Window
+    public partial class ThemSanPhamWindow : Window
     {
-        CapNhatSanPhamViewModel viewModel;
-        public CapNhatSanPhamWindow(SanPhamHienThi sanPhamHienThi)
+        public ThemSanPhamWindow()
         {
             InitializeComponent();
-            viewModel = this.DataContext as CapNhatSanPhamViewModel;
-            viewModel.loadDataBinding(sanPhamHienThi);
         }
     }
 }

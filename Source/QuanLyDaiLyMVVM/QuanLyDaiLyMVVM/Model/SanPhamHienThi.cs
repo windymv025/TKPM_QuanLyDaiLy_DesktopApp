@@ -17,6 +17,9 @@ namespace QuanLyDaiLyMVVM.Model
 
         private NguonNhap _NguonNhap;
         public NguonNhap NguonNhap { get => _NguonNhap; set { _NguonNhap = value; OnPropertyChanged(); } }
+
+        private DonViTinh _DonViTinh;
+        public DonViTinh DonViTinh { get => _DonViTinh; set { _DonViTinh = value; OnPropertyChanged(); } }
         
         private string _GiaNhap;
         public string GiaNhap { get => _GiaNhap; set { _GiaNhap = value; OnPropertyChanged(); } }

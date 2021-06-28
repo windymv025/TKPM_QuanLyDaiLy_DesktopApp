@@ -89,7 +89,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
             SanPhamShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
-                new CapNhatSanPhamWindow().ShowDialog();
+                //new CapNhatSanPhamWindow().ShowDialog();
                 SanPhamWindow wd = new SanPhamWindow();
                 wd.ShowDialog();
             });

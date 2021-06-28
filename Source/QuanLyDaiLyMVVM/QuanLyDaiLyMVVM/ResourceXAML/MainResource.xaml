@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:QuanLyDaiLyMVVM.ViewModel"
-                    xmlns:local="clr-namespace:QuanLyDaiLyMVVM.ResourceXAML">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+					xmlns:viewmodel="clr-namespace:QuanLyDaiLyMVVM.ViewModel">
+	
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:BaoCaoViewModel x:Key="BaoCaoVM"></viewmodel:BaoCaoViewModel>
     <viewmodel:DaiLyViewModel x:Key="DaiLyVM"></viewmodel:DaiLyViewModel>
@@ -12,4 +12,6 @@
     <viewmodel:SanPhamViewModel x:Key="SanPhamVM"></viewmodel:SanPhamViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:CapNhatSanPhamViewModel x:Key="CapNhatSanPhamVM"></viewmodel:CapNhatSanPhamViewModel>
+    <viewmodel:ThemSanPhamViewModel x:Key="ThemSanPhamVM"></viewmodel:ThemSanPhamViewModel>
+	
 </ResourceDictionary>
