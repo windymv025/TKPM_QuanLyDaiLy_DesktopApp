@@ -5,9 +5,121 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="NhanVienWindow" Height="450" Width="800"
-        DataContext="{StaticResource NhanVienVM}">
+        Height="700"
+        Width="1024"
+        DataContext="{StaticResource ProfileVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="nhanvienwindow">
     <Grid>
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.0"
+                                          Color="#2596BE" />
+                            <GradientStop Offset="1.0"
+                                          Color="WhiteSmoke" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+        </Grid>
+        <Grid>
+            <materialDesign:Card Margin="100"
+                                 UniformCornerRadius="20"
+                                 Background="WhiteSmoke">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Width="300"
+                             Height="300"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center" StrokeThickness="1" Stroke="Black">
+                        <Ellipse.Fill>
+                            <ImageBrush Stretch="UniformToFill"
+                                        ImageSource="{Binding NhanVien.HinhAnh}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding NhanVien.Ten}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Foreground="Red"/>
+                        <materialDesign:Card Grid.Row="1"
+                                             VerticalContentAlignment="Center"
+                                             Height="auto"
+                                             Margin="20" Padding="10" UniformCornerRadius="20">
+                            <StackPanel Orientation="Vertical"
+                                        VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Phone"
+                                                             Width="40"
+                                                             Height="40"
+                                                             Foreground="Gray" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding NhanVien.DienThoai}"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               Foreground="DarkBlue"
+                                               FontWeight="ExtraBold"
+                                               Margin="20"
+                                               TextWrapping="WrapWithOverflow" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="MapMarker"
+                                                             Width="40"
+                                                             Height="40"
+                                                             Foreground="Gray" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding NhanVien.DiaChi}"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               Foreground="DarkBlue"
+                                               FontWeight="ExtraBold"
+                                               Margin="20" 
+                                               TextWrapping="WrapWithOverflow"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Email"
+                                                             Width="40"
+                                                             Height="40"
+                                                             Foreground="Gray" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding NhanVien.Email}"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               Foreground="DarkBlue"
+                                               FontWeight="ExtraBold"
+                                               Margin="20" />
+                                </StackPanel>
+                            </StackPanel>
+                        </materialDesign:Card>
+
+                        <StackPanel Grid.Row="2">
+                            <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Width="150"
+                                    ToolTip="Resource name: MaterialDesignRaisedButton" Command="{Binding ShowDoiMatKhauCommand}">
+                                Đổi mật khẩu
+                            </Button>
+                        </StackPanel>
+                        </Grid>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
     </Grid>
 </Window>

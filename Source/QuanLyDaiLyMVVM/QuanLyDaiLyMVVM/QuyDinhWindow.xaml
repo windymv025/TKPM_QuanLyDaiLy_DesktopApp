@@ -18,7 +18,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="quydinhwindow">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -36,7 +37,7 @@
                              materialDesign:HintAssist.Hint="Tên quy định"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding GiaTri, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
+                             Margin="5 5 15 5" x:Name="Value"
                              materialDesign:HintAssist.Hint="Giá trị"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding KieuDuLieu, UpdateSourceTrigger=PropertyChanged}"
@@ -52,15 +53,18 @@
                     <Button Command="{Binding AddCommand}"
                             Content="Thêm"
                             Margin="5"
-                            Width="100"></Button>
+                            Width="100"
+                            CommandParameter="{Binding ElementName=quydinhwindow}"></Button>
                     <Button Command="{Binding EditCommand}"
                             Content="Sửa"
                             Margin="5"
-                            Width="100"></Button>
+                            Width="100"
+                            CommandParameter="{Binding ElementName=quydinhwindow}"></Button>
                     <Button Command="{Binding DeleteCommand}"
                             Content="Xóa"
                             Margin="5"
-                            Width="100"></Button>
+                            Width="100"
+                            CommandParameter="{Binding ElementName=quydinhwindow}"></Button>
                 </WrapPanel>
             </materialDesign:Card>
 

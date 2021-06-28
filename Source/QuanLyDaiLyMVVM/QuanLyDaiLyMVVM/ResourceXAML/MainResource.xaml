@@ -11,6 +11,8 @@
     <viewmodel:PhieuXuatHangViewModel x:Key="PhieuXuatHangVM"></viewmodel:PhieuXuatHangViewModel>
     <viewmodel:SanPhamViewModel x:Key="SanPhamVM"></viewmodel:SanPhamViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+    <viewmodel:QuyDinhViewModel x:Key="QuyDinhVM"></viewmodel:QuyDinhViewModel>
+    <viewmodel:ProfileViewModel x:Key="ProfileVM"></viewmodel:ProfileViewModel>
     <viewmodel:CapNhatSanPhamViewModel x:Key="CapNhatSanPhamVM"></viewmodel:CapNhatSanPhamViewModel>
     <viewmodel:ThemSanPhamViewModel x:Key="ThemSanPhamVM"></viewmodel:ThemSanPhamViewModel>
 	

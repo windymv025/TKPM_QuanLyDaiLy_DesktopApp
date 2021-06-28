@@ -90,6 +90,9 @@
     <Compile Include="DaiLyWindow.xaml.cs">
       <DependentUpon>DaiLyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DoiMatKhauWindow.xaml.cs">
+      <DependentUpon>DoiMatKhauWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LienHeWindow.xaml.cs">
       <DependentUpon>LienHeWindow.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,7 @@
     <Compile Include="ViewModel\NhanVienViewModel.cs" />
     <Compile Include="ViewModel\PhieuThuTienViewModel.cs" />
     <Compile Include="ViewModel\PhieuXuatHangViewModel.cs" />
+    <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\QuyDinhViewModel.cs" />
     <Compile Include="ViewModel\SanPhamViewModel.cs" />
     <Compile Include="ViewModel\ThemSanPhamViewModel.cs" />
@@ -220,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DaiLyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DoiMatKhauWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -479,6 +487,13 @@
     <None Include="Images\Product\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Resource Include="Images\Staff\ThanVu.jpg" />
+    <Content Include="Images\Staff\That.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Staff\Vuong.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBQuanLyCacDaiLy.Context.cs</LastGenOutput>

@@ -92,7 +92,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             //load data
             using (var db = new DBQuanLyCacDaiLyEntities())
             {
-                List = new ObservableCollection<DaiLy>(db.DaiLies);
+                List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
                 LoaiDaiLy = new ObservableCollection<LoaiDaiLy>(db.LoaiDaiLies);
             }
 
@@ -185,11 +185,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     {
                         db.DaiLies.Add(daiLy);
                         db.SaveChanges();
+                        List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
                     }
-
-                    List.Add(daiLy);
-
-                    //OnPropertyChanged("List");
 
                     p.Close();
                 }
