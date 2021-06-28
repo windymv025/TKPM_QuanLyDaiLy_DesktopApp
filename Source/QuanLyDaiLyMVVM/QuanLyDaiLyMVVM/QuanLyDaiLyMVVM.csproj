@@ -84,6 +84,9 @@
     <Compile Include="CapNhatDaiLyWindow.xaml.cs">
       <DependentUpon>CapNhatDaiLyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CapNhatSanPhamWindow.xaml.cs">
+      <DependentUpon>CapNhatSanPhamWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DaiLyWindow.xaml.cs">
       <DependentUpon>DaiLyWindow.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,7 @@
     </Compile>
     <Compile Include="ViewModel\BaoCaoViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CapNhatSanPhamViewModel.cs" />
     <Compile Include="ViewModel\DaiLyViewModel.cs" />
     <Compile Include="ViewModel\LienHeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -210,6 +214,10 @@
     <Page Include="CapNhatDaiLyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CapNhatSanPhamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DaiLyWindow.xaml">
       <SubType>Designer</SubType>

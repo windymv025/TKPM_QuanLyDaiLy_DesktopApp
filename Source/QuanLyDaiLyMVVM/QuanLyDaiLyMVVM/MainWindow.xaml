@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
+        Title="MainWindow"
         
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        Title="MainWindow"
         Height="700"
         Width="1024"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"

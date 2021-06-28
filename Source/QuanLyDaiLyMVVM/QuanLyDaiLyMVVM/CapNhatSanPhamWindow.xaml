@@ -1,0 +1,361 @@
+﻿<Window x:Class="QuanLyDaiLyMVVM.CapNhatSanPhamWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
+        mc:Ignorable="d"
+        Title="CapNhatSanPhamWindow" 
+		
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Height="700"
+        Width="1024"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+		
+		DataContext="{StaticResource CapNhatSanPhamVM}"
+		Name="capNhatSPWindow">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		
+		<!--Header-->
+		<Border  Background="#2E333A"
+                             Padding="10,0,0,0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="150" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="0"
+						   Text="{Binding Ten}"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   FontSize="35"
+						   TextWrapping="WrapWithOverflow"
+						   TextTrimming="CharacterEllipsis"
+						   FontWeight="ExtraBold"
+						   Foreground="#FFFFBD0B"
+						   Background="{x:Null}" />
+
+				<Button x:Name="btnLuu"
+					Grid.Column="1" Height="auto" Margin="10" IsEnabled="False"
+						FontSize="20" FontWeight="Bold"
+						Background="#18a0fb"
+						Style="{StaticResource MaterialDesignRaisedDarkButton}"
+						ToolTip="Lưu những thay đổi"
+						Content="Lưu" />
+
+				<Button x:Name="btnThoat"
+					Grid.Column="2" Height="auto" Margin="10"
+						FontSize="20" FontWeight="Bold"
+						Background="Red"
+						Style="{StaticResource MaterialDesignRaisedDarkButton}"
+						ToolTip="Trở về giao diện trước đó"
+						Content="Thoát" />
+
+			</Grid>
+		</Border>
+
+		<!--Content-->
+		<ScrollViewer Grid.Row="1">
+			<StackPanel>
+				<Grid Height="500">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="1.3*"/>
+					</Grid.ColumnDefinitions>
+
+					<!--Hinh anh-->
+					<materialDesign:Card Margin="10">
+						<Grid >
+							<Grid.RowDefinitions>
+								<RowDefinition Height="2*"/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+							<!--Anh chinh-->
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="50"/>
+									<ColumnDefinition/>
+									<ColumnDefinition Width="50"/>
+								</Grid.ColumnDefinitions>
+
+								<Button  Style="{StaticResource MaterialDesignIconButton}"
+								 ToolTip="Hình trước đó">
+									<materialDesign:PackIcon Kind="ChevronLeft" 
+												 Width="50" Height="50"
+											     Foreground="Black"
+												 VerticalAlignment="Center" 
+												 HorizontalAlignment="Center" />
+								</Button>
+
+								<materialDesign:Card Grid.Column="1" UniformCornerRadius="10" Margin="5">
+									<materialDesign:Card.Background>
+										<ImageBrush  ImageSource="pack://siteoforigin:,,,/Images/Product/1.2.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform"></ImageBrush>
+									</materialDesign:Card.Background>
+								</materialDesign:Card>
+
+								<Button Grid.Column="2"  Style="{StaticResource MaterialDesignIconButton}"
+								 ToolTip="Hình kế tiếp">
+									<materialDesign:PackIcon Kind="ChevronRight" 
+												 Width="50" Height="50"
+												Foreground="Black"
+												 VerticalAlignment="Center" 
+												 HorizontalAlignment="Center" />
+								</Button>
+
+							</Grid>
+
+							<!--Anh phu-->
+							<ListView Grid.Row="1">
+								<ListView.ItemsPanel>
+									<ItemsPanelTemplate>
+										<WrapPanel/>
+									</ItemsPanelTemplate>
+								</ListView.ItemsPanel>
+								<ListView.ItemTemplate>
+									<DataTemplate>
+										<materialDesign:Card Width="170">
+											<Grid>
+												<Grid.RowDefinitions>
+													<RowDefinition Height="*"/>
+													<RowDefinition Height="55"/>
+												</Grid.RowDefinitions>
+												<Image Source="{Binding HinhAnh}" 
+									   RenderOptions.BitmapScalingMode="HighQuality"
+									   HorizontalAlignment="Center" VerticalAlignment="Center"
+									   Stretch="UniformToFill"/>
+
+												<Button Grid.Row="1"  Style="{StaticResource MaterialDesignIconButton}"
+								 ToolTip="MaterialDesignIconButton" Margin="5">
+													<materialDesign:PackIcon Kind="Delete"
+															 Foreground="Red"
+												 Width="auto" Height="auto"
+												 VerticalAlignment="Center" 
+												 HorizontalAlignment="Center" />
+												</Button>
+
+											</Grid>
+
+										</materialDesign:Card>
+									</DataTemplate>
+								</ListView.ItemTemplate>
+							</ListView>
+
+						</Grid>
+					</materialDesign:Card>
+
+					<!--Du lieu-->
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="80"/>
+							<RowDefinition Height="80"/>
+							<RowDefinition Height="80"/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBox Margin="5,10"  materialDesign:HintAssist.Hint="Tên sản phẩm"
+							  materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+							  materialDesign:HintAssist.FloatingScale="0.50"
+							  Text="{Binding Ten}"
+							  FontWeight="ExtraBold"
+								  Foreground="Blue"
+							  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							  FontSize="24" />
+
+						<TextBox Margin="5,10"  Grid.Row="1"
+								  materialDesign:HintAssist.Hint="Giá bán"
+							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							Text="100000" FontSize="20" Foreground="Red"
+						    FontWeight="Bold"	  Padding="5"
+							VerticalAlignment="Center"
+							materialDesign:TextFieldAssist.PrefixText=" đ "
+							materialDesign:TextFieldAssist.SuffixText="VNĐ">
+						</TextBox>
+
+						<TextBox Margin="5,10"  Grid.Row="2"
+								  materialDesign:HintAssist.Hint="Giá nhập"
+							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							Text="100000" FontSize="20" Foreground="Red"
+						    FontWeight="Bold"	  Padding="5"
+							VerticalAlignment="Center"
+							materialDesign:TextFieldAssist.PrefixText=" đ "
+							materialDesign:TextFieldAssist.SuffixText="VNĐ">
+						</TextBox>
+
+						<!--Số lượng, đơn vị tính-->
+						<Grid Grid.Row="3" Margin="5,10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="2.5*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="125"/>
+							</Grid.ColumnDefinitions>
+
+							<TextBox Margin="5,10" materialDesign:HintAssist.Hint="Số lượng"
+									  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+									  VerticalAlignment="Center" FontWeight="Bold"
+									 Text="100000" FontSize="20"/>
+
+							<ComboBox Grid.Column="1" materialDesign:HintAssist.Hint="Đơn vị tính"
+									  HorizontalAlignment="Center" Padding="5,15">
+								<ComboBox.ItemsPanel>
+									<ItemsPanelTemplate>
+										<VirtualizingStackPanel />
+									</ItemsPanelTemplate>
+								</ComboBox.ItemsPanel>
+							</ComboBox>
+
+							<Button Width="auto"
+								Grid.Column="2" Height="auto" Margin="5"
+								ToolTip="Thêm đơn vị tính"
+								Style="{StaticResource MaterialDesignOutlinedButton}"
+								>
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition />
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+
+									<materialDesign:PackIcon Kind="PlusCircle" Width="100" Height="25" HorizontalAlignment="Center"/>
+									<TextBlock Text="Thêm đơn vị" HorizontalAlignment="Center" Grid.Row="1"/>
+								</Grid>
+							</Button>
+						</Grid>
+
+						<!--Loại sản phẩm-->
+						<Grid Grid.Row="4" Margin="5,10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition Width="125"/>
+							</Grid.ColumnDefinitions>
+							<ComboBox  materialDesign:HintAssist.Hint="Loại sản phẩm" Margin="5,0" >
+								<ComboBox.ItemsPanel>
+									<ItemsPanelTemplate>
+										<VirtualizingStackPanel />
+									</ItemsPanelTemplate>
+								</ComboBox.ItemsPanel>
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="80"/>
+												<ColumnDefinition/>
+											</Grid.ColumnDefinitions>
+											<Image Source="{Binding HinhAnh}" RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform"/>
+											<TextBlock Text="{Binding Ten}" VerticalAlignment="Center"/>
+										</Grid>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+
+							<Button Width="auto"
+								Grid.Column="2" Height="auto" Margin="5"
+								ToolTip="Thêm loại sản phẩm"
+								Style="{StaticResource MaterialDesignOutlinedButton}"
+								>
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition />
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+
+									<materialDesign:PackIcon Kind="PlusCircle" Width="100" Height="25" HorizontalAlignment="Center"/>
+									<TextBlock Text="Thêm loại" HorizontalAlignment="Center" Grid.Row="1"/>
+								</Grid>
+							</Button>
+						</Grid>
+
+						<!--Nguồn nhập-->
+						<Grid Grid.Row="5" Margin="5,10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition Width="125"/>
+							</Grid.ColumnDefinitions>
+							<ComboBox  materialDesign:HintAssist.Hint="Nguồn nhập" Margin="5,0" >
+								<ComboBox.ItemsPanel>
+									<ItemsPanelTemplate>
+										<VirtualizingStackPanel />
+									</ItemsPanelTemplate>
+								</ComboBox.ItemsPanel>
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="100"/>
+												<ColumnDefinition/>
+											</Grid.ColumnDefinitions>
+											<Image Source="{Binding HinhAnh}" RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform"/>
+
+											<Grid>
+												<Grid.RowDefinitions>
+													<RowDefinition/>
+													<RowDefinition/>
+													<RowDefinition/>
+												</Grid.RowDefinitions>
+												<TextBlock Text="{Binding Ten}" FontWeight="Bold" VerticalAlignment="Center"/>
+												<TextBlock Grid.Row="1" Text="{Binding SoDienThoai}" VerticalAlignment="Center"/>
+												<TextBlock Grid.Row="2" Text="{Binding DiaChi}" 
+														   TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" VerticalAlignment="Center"
+														   ToolTip="{Binding DiaChi}"/>
+											</Grid>
+										</Grid>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+
+							<Button Width="auto"
+								Grid.Column="2" Height="auto" Margin="5"
+								ToolTip="Thêm loại sản phẩm"
+								Style="{StaticResource MaterialDesignOutlinedButton}"
+								>
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition />
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+
+									<materialDesign:PackIcon Kind="PlusCircle" Width="100" Height="25" HorizontalAlignment="Center"/>
+									<TextBlock Text="Thêm nguồn" HorizontalAlignment="Center" Grid.Row="1"/>
+								</Grid>
+							</Button>
+						</Grid>
+					</Grid>
+
+					
+				</Grid>
+
+				<!--Mô tả sp-->
+				<materialDesign:Card Margin="10, 5, 10, 20">
+					<StackPanel>
+						<TextBlock Text="Mô tả sản phẩm" 
+								   HorizontalAlignment="Center" Margin="10"
+								   FontSize="24" FontWeight="Black"
+								   Foreground="Blue"/>
+						<TextBox  Margin="10" TextWrapping="Wrap"  
+							  VerticalAlignment="Stretch"
+						  MinWidth="280"  AcceptsReturn="True"
+						  VerticalScrollBarVisibility="Auto"
+						  SpellCheck.IsEnabled="True"
+							  FontSize="16"
+						  materialDesign:HintAssist.Hint="Mô tả sản phẩm"
+						  Height="auto" MinHeight="70"
+						  Text="{Binding MoTa}" />
+					</StackPanel>
+				</materialDesign:Card>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Window>
