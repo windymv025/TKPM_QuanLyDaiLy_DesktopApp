@@ -15,5 +15,8 @@
     <viewmodel:ProfileViewModel x:Key="ProfileVM"></viewmodel:ProfileViewModel>
     <viewmodel:CapNhatSanPhamViewModel x:Key="CapNhatSanPhamVM"></viewmodel:CapNhatSanPhamViewModel>
     <viewmodel:ThemSanPhamViewModel x:Key="ThemSanPhamVM"></viewmodel:ThemSanPhamViewModel>
+    <viewmodel:ThemLoaiSanPhamViewModel x:Key="ThemLoaiSanPhamVM"></viewmodel:ThemLoaiSanPhamViewModel>
+    <viewmodel:ThemNguonNhapViewModel x:Key="ThemNguonNhapVM"></viewmodel:ThemNguonNhapViewModel>
+	<viewmodel:ThemDonViTinhViewModel x:Key="ThemDonViTinhVM"></viewmodel:ThemDonViTinhViewModel>
 	
 </ResourceDictionary>

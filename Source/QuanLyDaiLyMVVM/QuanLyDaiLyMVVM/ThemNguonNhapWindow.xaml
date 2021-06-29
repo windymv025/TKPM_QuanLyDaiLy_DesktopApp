@@ -1,0 +1,133 @@
+﻿<Window x:Class="QuanLyDaiLyMVVM.ThemNguonNhapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
+        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Height="450"
+        Width="700"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+		
+		DataContext="{StaticResource ThemNguonNhapVM}"
+		
+        Title="ThemNguon  NhapWindow">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+
+		<!--Header-->
+		<Border  Background="#2E333A"
+                             Padding="10,0,0,0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="150" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="0"
+						   Text="Thêm Nguồn Nhập"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   FontSize="35"
+						   TextWrapping="WrapWithOverflow"
+						   TextTrimming="CharacterEllipsis"
+						   FontWeight="ExtraBold"
+						   Foreground="#FFFFBD0B"
+						   Background="{x:Null}" />
+
+				<Button
+					Grid.Column="1" Height="auto" Margin="10" 
+						FontSize="20" FontWeight="Bold"
+						Background="#18a0fb"
+						Style="{StaticResource MaterialDesignRaisedDarkButton}"
+						ToolTip="Lưu"
+						Content="Lưu" />
+
+				<Button
+					Grid.Column="2" Height="auto" Margin="10"
+						FontSize="20" FontWeight="Bold"
+						Background="Red"
+						Style="{StaticResource MaterialDesignRaisedDarkButton}"
+						ToolTip="Trở về giao diện trước đó"
+						Content="Hủy" />
+
+			</Grid>
+		</Border>
+
+		<materialDesign:Card Padding="20" Grid.Row="1">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="1.5*"/>
+				</Grid.ColumnDefinitions>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition Height="70"/>
+					</Grid.RowDefinitions>
+
+					<materialDesign:Card UniformCornerRadius="10" Margin="5" >
+						<materialDesign:Card.Background>
+							<ImageBrush  ImageSource="{Binding NguonNhap.HinhAnh}" 
+								RenderOptions.BitmapScalingMode="HighQuality" 
+								 Stretch="Uniform"></ImageBrush>
+						</materialDesign:Card.Background>
+					</materialDesign:Card>
+
+					<Button x:Name="btnChooseImage" Grid.Row="1" Width="150"
+										Grid.Column="1" Height="auto" Margin="10"
+										FontSize="20" FontWeight="Bold"
+										Style="{StaticResource MaterialDesignRaisedDarkButton}"
+										ToolTip="Lưu những thay đổi"
+										Content="Duyệt File" />
+
+				</Grid>
+
+				<StackPanel VerticalAlignment="Center" Grid.Column="1">
+					<TextBox  Margin="10, 15"  materialDesign:HintAssist.Hint="Tên Nguồn Nhập"
+					 VerticalAlignment="Center"
+							  materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+							  materialDesign:HintAssist.FloatingScale="0.50"
+							  Text="{Binding NguonNhap.Ten}"
+							  ToolTip="{Binding NguonNhap.Ten}"
+							  FontWeight="Black"
+								  Foreground="Blue"
+							  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							  FontSize="20" />
+					
+					<TextBox  Margin="10"  materialDesign:HintAssist.Hint="Số điện thoại"
+					 VerticalAlignment="Center"
+							  materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+							  materialDesign:HintAssist.FloatingScale="0.50"
+							  Text="{Binding NguonNhap.SoDienThoai}"
+							  FontWeight="Bold"
+							  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							  FontSize="18" />
+					
+					<TextBox  Margin="10, 15"  materialDesign:HintAssist.Hint="Địa chỉ"
+					 VerticalAlignment="Center"
+							  materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+							  materialDesign:HintAssist.FloatingScale="0.50"
+							  Text="{Binding NguonNhap.DiaChi}"
+							  ToolTip="{Binding NguonNhap.DiaChi}"
+							  FontWeight="Bold"
+							  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							  FontSize="18" />
+				</StackPanel>
+			</Grid>
+		</materialDesign:Card>
+	</Grid>
+</Window>
