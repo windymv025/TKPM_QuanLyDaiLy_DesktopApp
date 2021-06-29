@@ -35,7 +35,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     Quan = SelectedItem.Quan;
                     Email = SelectedItem.Email;
                     HinhAnh = Path.GetFullPath(SelectedItem.HinhAnh);
-                    SelectedLoaiDaiLy = SelectedItem.LoaiDaiLy;
+                    SelectedLoaiDaiLy = LoaiDaiLy.Where(x => x.Id == (SelectedItem.IdLoaiDaiLy)).SingleOrDefault();
                 }
             } 
         }
@@ -240,7 +240,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
             #region CẬP NHẬT ĐẠI LÝ
             UpdateCommand = new RelayCommand<CapNhatDaiLyWindow>((p) => {
-                if (p == null)
+                if (p == null || SelectedItem == null)
                 {
                     return false;
                 }
@@ -305,8 +305,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
             #endregion
 
 
-            ListSelectionChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ListSelectionChangedCommand = new RelayCommand<object>((p) => { 
+                if(SelectedItem == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
             {
+                SelectedLoaiDaiLy = LoaiDaiLy.Where(x => x.Id == (SelectedItem.IdLoaiDaiLy)).SingleOrDefault();
                 CapNhatDaiLyWindow wd = new CapNhatDaiLyWindow();
                 wd.DataContext = this;
                 wd.ShowDialog();
@@ -328,8 +338,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     var item = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
                     item.IsRemove = true;
                     db.SaveChanges();
+                    List.Remove(SelectedItem);
                     p.Close();
-                    //List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false).ToList());
                 }
             });
 
@@ -339,7 +349,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 {
                     if (string.IsNullOrEmpty(TextSearch))
                     {
-                        List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false).ToList());
+                        var List1 = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false).ToList());
+                        List = List1;
                     }
                     else
                     {
