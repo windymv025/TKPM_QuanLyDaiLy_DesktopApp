@@ -53,8 +53,15 @@ namespace QuanLyDaiLyMVVM.ViewModel
             SelectionChangedCommand = new RelayCommand<ListView>((p) => { return true; }, (p) => { selectionChanged(p); });
             ThemCommand = new RelayCommand<Window>((p) => { return true; }, 
                 (p) => {
-                    new ThemSanPhamWindow().ShowDialog();
-
+                    var wd = new ThemSanPhamWindow();
+                    var vm = wd.DataContext as ThemSanPhamViewModel;
+                    wd.ShowDialog();
+                    if (vm.IsSave)
+                    {
+                        loadData();
+                        PagingInfo = new PagingInfo(5, ListSanPham.Count);
+                        ListSanPhamHienThiTheotrang = loadPageHienThi(1);
+                    }
                 });
 
         }
@@ -67,6 +74,22 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 var vm = new CapNhatSanPhamViewModel(ListSanPhamHienThiTheotrang[p.SelectedIndex]);
                 wd.DataContext = vm;
                 wd.ShowDialog();
+                if (ListSanPham.Where(sp => sp.SanPham.TrangThai == false).Count() > 0)
+                {
+                    int currentPage = PagingInfo.CurrentPage;
+                    ListSanPham.Remove(ListSanPham.Where(sp => sp.SanPham.TrangThai == false).First());
+                    PagingInfo = new PagingInfo(5, ListSanPham.Count);
+                    if (PagingInfo.TotalPage >= currentPage)
+                    {
+                        PagingInfo.CurrentPage = currentPage;
+                    }
+                    else
+                    {
+                        PagingInfo.CurrentPage = currentPage - 1;
+                    }
+                    ListSanPhamHienThiTheotrang = loadPageHienThi(PagingInfo.CurrentPage);
+
+                }
             }
         }
 
@@ -106,7 +129,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         {
             using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                SanPhams = new ObservableCollection<SanPham>(db.SanPhams);
+                SanPhams = new ObservableCollection<SanPham>(db.SanPhams.Where(sp=> sp.TrangThai == true));
                 LoaiSanPhams = new ObservableCollection<LoaiSanPham>(db.LoaiSanPhams);
                 NguonNhaps = new ObservableCollection<NguonNhap>(db.NguonNhaps);
                 DonViTinhs = new ObservableCollection<DonViTinh>(db.DonViTinhs);

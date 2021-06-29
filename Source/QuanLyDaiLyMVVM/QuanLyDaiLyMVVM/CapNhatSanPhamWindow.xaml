@@ -36,6 +36,7 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="150" />
 					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="150" />
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0"
 						   Text="{Binding Ten}"
@@ -48,9 +49,18 @@
 						   FontWeight="ExtraBold"
 						   Foreground="#FFFFBD0B"
 						   Background="{x:Null}" />
+				<Button 
+					Grid.Column="1" Height="auto" Margin="10"
+						FontSize="20" FontWeight="Bold"
+						Background="Red"
+						Command="{Binding XoaCommand}"
+					CommandParameter="{Binding ElementName=capNhatSPWindow}"
+						Style="{StaticResource MaterialDesignRaisedDarkButton}"
+						ToolTip="Xóa sản phẩm vĩnh viễn"
+						Content="Xóa" />
 
 				<Button x:Name="btnLuu"
-					Grid.Column="1" Height="auto" Margin="10" IsEnabled="False"
+					Grid.Column="2" Height="auto" Margin="10" IsEnabled="False"
 						FontSize="20" FontWeight="Bold"
 						Background="#18a0fb"
 						Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -60,9 +70,8 @@
 						Content="Lưu" />
 
 				<Button 
-					Grid.Column="2" Height="auto" Margin="10"
+					Grid.Column="3" Height="auto" Margin="10"
 						FontSize="20" FontWeight="Bold"
-						Background="Red"
 						Command="{Binding ThoatCommand}"
 					CommandParameter="{Binding ElementName=capNhatSPWindow}"
 						Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -362,10 +371,11 @@
 					
 				</Grid>
 
-				<materialDesign:Card Margin="10" Height="450">
+				<!--Hình ảnh sản phẩm-->
+				<materialDesign:Card Margin="10" Height="480">
 					<Grid >
 						<Grid.RowDefinitions>
-							<RowDefinition Height="2*"/>
+							<RowDefinition Height="1.8*"/>
 							<RowDefinition/>
 						</Grid.RowDefinitions>
 						<!--Anh chinh-->

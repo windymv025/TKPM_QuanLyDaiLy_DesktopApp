@@ -134,18 +134,76 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
             SanPhamTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { SanPhamTop2_MouseDown(p); });
 
-            SanPhamTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { SanPhamTop3_MouseDown(p); });
+            SanPhamTop3_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { SanPhamTop3_MouseDown(p); });
 
         }
 
         private void SanPhamTop1_MouseDown(Window p)
         {
+            CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
+            SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
+            using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop1.ID).FirstOrDefault();
+                SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+
+                sanPhamHienThi.SanPham = SanPham;
+
+                sanPhamHienThi.NguonNhap = SanPham.NguonNhap;
+                sanPhamHienThi.LoaiSanPham = SanPham.LoaiSanPham;
+                sanPhamHienThi.DonViTinh = SanPham.DonViTinh;
+
+                sanPhamHienThi.GiaBan = ConvertNumber.convertNumberDecimalToString(SanPham.GiaBan);
+                sanPhamHienThi.GiaNhap = ConvertNumber.convertNumberDecimalToString(SanPham.GiaNhap);
+                sanPhamHienThi.SoLuong = ConvertNumber.convertNumberDecimalToString(SanPham.SoLuong);
+            }
+            var vm = new CapNhatSanPhamViewModel(sanPhamHienThi);
+            wd.DataContext = vm;
+            wd.ShowDialog();
         }
         private void SanPhamTop2_MouseDown(Window p)
         {
+            CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
+            SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop2.ID).FirstOrDefault();
+                SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+                sanPhamHienThi.SanPham = SanPham;
+
+                sanPhamHienThi.NguonNhap = SanPham.NguonNhap;
+                sanPhamHienThi.LoaiSanPham = SanPham.LoaiSanPham;
+                sanPhamHienThi.DonViTinh = SanPham.DonViTinh;
+
+                sanPhamHienThi.GiaBan = ConvertNumber.convertNumberDecimalToString(SanPham.GiaBan);
+                sanPhamHienThi.GiaNhap = ConvertNumber.convertNumberDecimalToString(SanPham.GiaNhap);
+                sanPhamHienThi.SoLuong = ConvertNumber.convertNumberDecimalToString(SanPham.SoLuong);
+            }
+            var vm = wd.DataContext as CapNhatSanPhamViewModel;
+            vm = new CapNhatSanPhamViewModel(sanPhamHienThi);
+            wd.ShowDialog();
         }
         private void SanPhamTop3_MouseDown(Window p)
         {
+            CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
+            SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop3.ID).FirstOrDefault();
+                sanPhamHienThi.SanPham = SanPham;
+                SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+
+                sanPhamHienThi.NguonNhap = SanPham.NguonNhap;
+                sanPhamHienThi.LoaiSanPham = SanPham.LoaiSanPham;
+                sanPhamHienThi.DonViTinh = SanPham.DonViTinh;
+
+                sanPhamHienThi.GiaBan = ConvertNumber.convertNumberDecimalToString(SanPham.GiaBan);
+                sanPhamHienThi.GiaNhap = ConvertNumber.convertNumberDecimalToString(SanPham.GiaNhap);
+                sanPhamHienThi.SoLuong = ConvertNumber.convertNumberDecimalToString(SanPham.SoLuong);
+            }
+            var vm = wd.DataContext as CapNhatSanPhamViewModel;
+            vm = new CapNhatSanPhamViewModel(sanPhamHienThi);
+            wd.ShowDialog();
         }
 
         private void khoiTaoThuocTinh()

@@ -16,7 +16,7 @@ namespace QuanLyDaiLyMVVM.Model
     public partial class QuyDinh: BaseViewModel
     {
         private int _Id;
-        public int Id { get=>_Id; set { _Id = value; OnPropertyChanged(); } }
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
         private string _TenQuyDinh;
         public string TenQuyDinh { get => _TenQuyDinh; set { _TenQuyDinh = value; OnPropertyChanged(); } }
         private int _GiaTri;

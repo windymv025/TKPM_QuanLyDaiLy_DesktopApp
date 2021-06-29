@@ -12,8 +12,8 @@ namespace QuanLyDaiLyMVVM.Model
     using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class LoaiDaiLy: BaseViewModel
+
+    public partial class LoaiDaiLy : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LoaiDaiLy()
@@ -22,7 +22,7 @@ namespace QuanLyDaiLyMVVM.Model
         }
 
         private int _Id;
-        public int Id { get=>_Id; set { _Id = value; OnPropertyChanged(); } }
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
         private string _Ten;
         public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
         private decimal _SoTienNoToiDa;
@@ -30,6 +30,6 @@ namespace QuanLyDaiLyMVVM.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         private ICollection<DaiLy> _DaiLies;
-        public virtual ICollection<DaiLy> DaiLies { get=>_DaiLies; set { _DaiLies = value; OnPropertyChanged(); } }
+        public virtual ICollection<DaiLy> DaiLies { get => _DaiLies; set { _DaiLies = value; OnPropertyChanged(); } }
     }
 }

@@ -13,7 +13,7 @@ namespace QuanLyDaiLyMVVM.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class SanPham : BaseViewModel
+    public partial class SanPham: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
@@ -23,10 +23,10 @@ namespace QuanLyDaiLyMVVM.Model
         }
 
         private int _Id;
-        public int Id { get=>_Id; set { _Id = value;  OnPropertyChanged(); } }
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
 
         private string _Ten;
-        public string Ten { get=>_Ten; set { _Ten = value; OnPropertyChanged(); } }
+        public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
 
 
         private decimal _GiaNhap;
@@ -53,6 +53,9 @@ namespace QuanLyDaiLyMVVM.Model
         private string _MoTa;
         public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
 
+        private bool _TrangThai;
+        public bool TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get; set; }
         public virtual DonViTinh DonViTinh { get; set; }

@@ -79,6 +79,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand NextImageCommand { get; set; }
         public ICommand ThemAnhSPCommand { get; set; }
         public ICommand XoaHinhAnhSanPhamCommand { get; set; }
+        public ICommand XoaCommand { get; set; }
 
         public CapNhatSanPhamViewModel()
         {
@@ -269,6 +270,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             });
             #endregion
+
+            XoaCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                SanPham.TrangThai = false;
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    db.SanPhams.Where(sp => sp.Id == SanPham.Id).FirstOrDefault().TrangThai = false;
+                    db.SaveChanges();
+                }
+                SanPhamHienThi.SanPham = SanPham;
+                p.Close(); 
+            });
 
             ThoatCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
         }

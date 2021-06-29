@@ -52,6 +52,8 @@
 					Grid.Column="1" Height="auto" Margin="10" 
 						FontSize="20" FontWeight="Bold"
 						Background="#18a0fb"
+					Command="{Binding LuuCommand}"
+						CommandParameter="{Binding ElementName=themSanPhamWindow}"
 						Style="{StaticResource MaterialDesignRaisedDarkButton}"
 						ToolTip="Lưu những thay đổi"
 						Content="Lưu" />
@@ -60,9 +62,11 @@
 					Grid.Column="2" Height="auto" Margin="10"
 						FontSize="20" FontWeight="Bold"
 						Background="Red"
+					Command="{Binding ThoatCommand}"
+					CommandParameter="{Binding ElementName=themSanPhamWindow}"
 						Style="{StaticResource MaterialDesignRaisedDarkButton}"
 						ToolTip="Trở về giao diện trước đó"
-						Content="Thoát" />
+						Content="Hủy" />
 
 			</Grid>
 		</Border>
@@ -80,7 +84,7 @@
 					<materialDesign:Card Margin="10">
 						<Grid >
 							<Grid.RowDefinitions>
-								<RowDefinition Height="1.5*"/>
+								<RowDefinition Height="1.8*"/>
 								<RowDefinition/>
 							</Grid.RowDefinitions>
 							<!--Anh chinh-->
@@ -102,6 +106,7 @@
 									<Button x:Name="btnChooseImage" Grid.Row="1" Width="150"
 										Grid.Column="1" Height="auto" Margin="10"
 										FontSize="20" FontWeight="Bold"
+											Command="{Binding DuyetFileCommand}"
 										Style="{StaticResource MaterialDesignRaisedDarkButton}"
 										ToolTip="Lưu những thay đổi"
 										Content="Duyệt File" />
@@ -114,60 +119,81 @@
 									<ColumnDefinition/>
 									<ColumnDefinition Width="110"/>
 								</Grid.ColumnDefinitions>
-								
-								<ListView Grid.Column="0" ItemsSource="{Binding HinhAnhSanPhams}">
-									<ListView.ItemsPanel>
-										<ItemsPanelTemplate>
-											<StackPanel Orientation="Horizontal" Margin="5"/>
-										</ItemsPanelTemplate>
-									</ListView.ItemsPanel>
-									<ListView.ItemTemplate>
-										<DataTemplate>
-											<materialDesign:Card>
-												<Grid Width="100">
-													<Grid.RowDefinitions>
-														<RowDefinition Height="80"/>
-														<RowDefinition Height="55"/>
-													</Grid.RowDefinitions>
+
+								<Border BorderBrush="White" BorderThickness="0" CornerRadius="4" Margin="5">
+									<ListView x:Name="lv_HinhAnhSP" Grid.Column="0" ItemsSource="{Binding HinhAnhSanPhams}" 
+										  HorizontalAlignment="Center">
+										<ListView.ItemsPanel>
+											<ItemsPanelTemplate>
+												<StackPanel Orientation="Horizontal" Margin="5"/>
+											</ItemsPanelTemplate>
+										</ListView.ItemsPanel>
+										<ListView.ItemTemplate>
+											<DataTemplate>
+												<materialDesign:Card Width="100" Height="100">
 													<Image Source="{Binding HinhAnh}" 
 									   RenderOptions.BitmapScalingMode="HighQuality"
 									   HorizontalAlignment="Center" VerticalAlignment="Center"
 									   Stretch="UniformToFill"/>
 
-													<Button Grid.Row="1"  
-														Style="{StaticResource MaterialDesignIconButton}"
-														ToolTip="MaterialDesignIconButton" Margin="5">
-														<materialDesign:PackIcon 
-														Kind="Delete"
-														Foreground="Red"
-														VerticalAlignment="Center" 
-														HorizontalAlignment="Center" />
-													</Button>
+												</materialDesign:Card>
+											</DataTemplate>
+										</ListView.ItemTemplate>
+									</ListView>
+								</Border>
 
-												</Grid>
-
-											</materialDesign:Card>
-										</DataTemplate>
-									</ListView.ItemTemplate>
-								</ListView>
-
-								<Button Width="auto"
+								<StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+									<Button Width="auto" Command="{Binding ThemAnhSPCommand}"
 								Grid.Column="2" Height="60" Margin="5"
 								ToolTip="Thêm hình ảnh sản phẩm"
 								Style="{StaticResource MaterialDesignOutlinedButton}"
 								>
-									<Grid>
-										<Grid.RowDefinitions>
-											<RowDefinition />
-											<RowDefinition/>
-										</Grid.RowDefinitions>
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="Click">
+												<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
+														   CommandParameter="{Binding ElementName=btnLuu}"/>
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										<Grid>
+											<Grid.RowDefinitions>
+												<RowDefinition />
+												<RowDefinition/>
+											</Grid.RowDefinitions>
 
-										<materialDesign:PackIcon Kind="PlusCircle" Width="100" Height="25" HorizontalAlignment="Center"/>
-										<TextBlock Text="Thêm ảnh" HorizontalAlignment="Center" Grid.Row="1"/>
-									</Grid>
-								</Button>
+											<materialDesign:PackIcon Kind="PlusCircle" Width="100" Height="25" HorizontalAlignment="Center"/>
+											<TextBlock Text="Thêm ảnh" HorizontalAlignment="Center" Grid.Row="1"/>
+										</Grid>
+									</Button>
+
+									<Button Width="auto" Command="{Binding XoaHinhAnhSanPhamCommand}"
+										CommandParameter="{Binding ElementName=lv_HinhAnhSP}"
+										Foreground="Red"
+								Grid.Column="2" Height="60" Margin="5"
+								ToolTip="Xóa hình ảnh sản phẩm đã chọn"
+								Style="{StaticResource MaterialDesignOutlinedButton}"
+								>
+										<i:Interaction.Triggers>
+											<i:EventTrigger EventName="Click">
+												<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
+														   CommandParameter="{Binding ElementName=btnLuu}"/>
+											</i:EventTrigger>
+										</i:Interaction.Triggers>
+										<Grid>
+											<Grid.RowDefinitions>
+												<RowDefinition />
+												<RowDefinition/>
+											</Grid.RowDefinitions>
+
+											<materialDesign:PackIcon 
+														Kind="Delete"
+														Foreground="Red"
+														VerticalAlignment="Center" 
+														HorizontalAlignment="Center" />
+											<TextBlock Text="Xóa ảnh" HorizontalAlignment="Center" Grid.Row="1"/>
+										</Grid>
+									</Button>
+								</StackPanel>
 							</Grid>
-
 						</Grid>
 					</materialDesign:Card>
 
@@ -192,24 +218,36 @@
 							  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 							  FontSize="22" />
 
-						<TextBox Margin="5,10"  Grid.Row="1"
+						<TextBox Margin="5,10"  Grid.Row="1" Name="GiaBanTxt"
 								  materialDesign:HintAssist.Hint="Giá bán"
 							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-							Text="{Binding SanPham.GiaBan}" FontSize="20" Foreground="Red"
+							Text="{Binding GiaBan}" FontSize="20" Foreground="Red"
 						    FontWeight="Bold"	  Padding="5"
 							VerticalAlignment="Center"
 							materialDesign:TextFieldAssist.PrefixText=" đ "
 							materialDesign:TextFieldAssist.SuffixText="VNĐ">
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="TextChanged">
+									<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuSoCommand}"
+														   CommandParameter="{Binding ElementName=GiaBanTxt}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
 						</TextBox>
 
-						<TextBox Margin="5,10"  Grid.Row="2"
+						<TextBox Margin="5,10"  Grid.Row="2" Name="giaNhapTxt"
 								  materialDesign:HintAssist.Hint="Giá nhập"
 							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-							Text="{Binding SanPham.GiaNhap}" FontSize="20" Foreground="Red"
+							Text="{Binding GiaNhap}" FontSize="20" Foreground="Red"
 						    FontWeight="Bold"	  Padding="5"
 							VerticalAlignment="Center"
 							materialDesign:TextFieldAssist.PrefixText=" đ "
 							materialDesign:TextFieldAssist.SuffixText="VNĐ">
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="TextChanged">
+									<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuSoCommand}"
+														   CommandParameter="{Binding ElementName=giaNhapTxt}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
 						</TextBox>
 
 						<!--Số lượng, đơn vị tính-->
@@ -220,14 +258,21 @@
 								<ColumnDefinition Width="125"/>
 							</Grid.ColumnDefinitions>
 
-							<TextBox Margin="5,10" materialDesign:HintAssist.Hint="Số lượng"
+							<TextBox x:Name="soLuongTxt" Margin="5,10" materialDesign:HintAssist.Hint="Số lượng"
 									  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 									  VerticalAlignment="Center" FontWeight="Bold"
-									 Text="{Binding SanPham.SoLuong}" FontSize="20"/>
+									 Text="{Binding  SoLuong}" FontSize="20">
+								<i:Interaction.Triggers>
+									<i:EventTrigger EventName="TextChanged">
+										<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuSoCommand}"
+														   CommandParameter="{Binding ElementName=soLuongTxt}"/>
+									</i:EventTrigger>
+								</i:Interaction.Triggers>
+							</TextBox>
 
 							<ComboBox Grid.Column="1" materialDesign:HintAssist.Hint="Đơn vị tính"
-									  ItemsSource="{Binding DonViTinhs}" SelectedItem="{Binding DonViTinh}"
-									  HorizontalAlignment="Center" Padding="5,15">
+									  ItemsSource="{Binding DonViTinhs}"  SelectedItem="{Binding DonViTinh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									  HorizontalAlignment="Center" Padding="5,15" >
 								<ComboBox.ItemsPanel>
 									<ItemsPanelTemplate>
 										<VirtualizingStackPanel />
@@ -240,7 +285,8 @@
 								</ComboBox.ItemTemplate>
 							</ComboBox>
 
-							<Button Width="auto" Command="{Binding ThemDonViCommand}"
+							<Button Width="auto"
+									Command="{Binding ThemDonViCommand}"
 								Grid.Column="2" Height="auto" Margin="5"
 								ToolTip="Thêm đơn vị tính"
 								Style="{StaticResource MaterialDesignOutlinedButton}"
@@ -264,7 +310,7 @@
 								<ColumnDefinition Width="125"/>
 							</Grid.ColumnDefinitions>
 							<ComboBox  materialDesign:HintAssist.Hint="Loại sản phẩm" 
-									   ItemsSource="{Binding LoaiSanPhams}" SelectedItem="{Binding LoaiSanPham}" Margin="5,0" >
+									   ItemsSource="{Binding LoaiSanPhams}"  SelectedItem="{Binding LoaiSanPham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0" >
 								<ComboBox.ItemsPanel>
 									<ItemsPanelTemplate>
 										<VirtualizingStackPanel />
@@ -278,13 +324,14 @@
 												<ColumnDefinition/>
 											</Grid.ColumnDefinitions>
 											<Image Source="{Binding HinhAnh}" RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform"/>
-											<TextBlock Grid.Column="1" Text="{Binding Ten}" FontWeight="Bold" Margin="10" VerticalAlignment="Center"/>
+											<TextBlock Grid.Column="1" Text="{Binding Ten}" Margin="10" FontWeight="Bold" VerticalAlignment="Center"/>
 										</Grid>
 									</DataTemplate>
 								</ComboBox.ItemTemplate>
 							</ComboBox>
 
-							<Button Width="auto" Command="{Binding ThemLoaiSanPhamCommand}"
+							<Button Width="auto" 
+									Command="{Binding ThemLoaiSanPhamCommand}"
 								Grid.Column="2" Height="auto" Margin="5"
 								ToolTip="Thêm loại sản phẩm"
 								Style="{StaticResource MaterialDesignOutlinedButton}"
@@ -308,7 +355,7 @@
 								<ColumnDefinition Width="125"/>
 							</Grid.ColumnDefinitions>
 							<ComboBox  materialDesign:HintAssist.Hint="Nguồn nhập" 
-									   ItemsSource="{Binding NguonNhaps}" SelectedItem="{Binding NguonNhap}"
+									   ItemsSource="{Binding NguonNhaps}"  SelectedItem="{Binding NguonNhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 									   Margin="5,0" >
 								<ComboBox.ItemsPanel>
 									<ItemsPanelTemplate>
@@ -332,16 +379,17 @@
 												</Grid.RowDefinitions>
 												<TextBlock Text="{Binding Ten}" FontWeight="Bold" VerticalAlignment="Center"/>
 												<TextBlock Grid.Row="1" Text="{Binding SoDienThoai}" VerticalAlignment="Center"/>
-												<TextBlock Grid.Row="2" Text="{Binding DiaChi}" 
+												<TextBlock Grid.Row="2" Text="{Binding DiaChi}" ToolTip="{Binding DiaChi}"
 														   TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" VerticalAlignment="Center"
-														   ToolTip="{Binding DiaChi}"/>
+														   />
 											</Grid>
 										</Grid>
 									</DataTemplate>
 								</ComboBox.ItemTemplate>
 							</ComboBox>
 
-							<Button Width="auto" Command="{Binding ThemNguonNhapCommand}"
+							<Button Width="auto" 
+									Command="{Binding ThemNguonNhapCommand}"
 								Grid.Column="2" Height="auto" Margin="5"
 								ToolTip="Thêm loại sản phẩm"
 								Style="{StaticResource MaterialDesignOutlinedButton}"

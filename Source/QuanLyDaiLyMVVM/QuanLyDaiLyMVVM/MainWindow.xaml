@@ -310,20 +310,21 @@
                                     <StackPanel VerticalAlignment="Top"
 												DataContext="{Binding SanPhamTop2}"
 												HorizontalAlignment="Right">
-										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
-												<i:InvokeCommandAction 
-													Command="{Binding SanPhamTop2_MouseDownCommand}" 
-													CommandParameter="{Binding ElementName=mainWindow}" />
-											</i:EventTrigger>
-										</i:Interaction.Triggers>
+										
 										<Border  Margin="0,45,0,0"
                                                  BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="120"
                                                  Width="200">
-                                            <Border.Background>
+											<i:Interaction.Triggers>
+												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+													<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop2_MouseDownCommand}" 
+													CommandParameter="{Binding ElementName=mainWindow}" />
+												</i:EventTrigger>
+											</i:Interaction.Triggers>
+											<Border.Background>
                                                 <ImageBrush ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
                                             </Border.Background>
@@ -362,21 +363,20 @@
                                     <StackPanel  Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
-										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
-												<i:InvokeCommandAction 
-													Command="{Binding SanPhamTop1_MouseDownCommand}" 
-													CommandParameter="{Binding ElementName=mainWindow}" />
-											</i:EventTrigger>
-										</i:Interaction.Triggers>
-										
                                         <Border  Margin="0,0,0,0"
                                                  BorderBrush="Red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="130"
                                                  Width="200">
-                                            <Border.Background>
+											<i:Interaction.Triggers>
+												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+													<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop1_MouseDownCommand}"  
+													CommandParameter="{Binding ElementName=mainWindow}" />
+												</i:EventTrigger>
+											</i:Interaction.Triggers>
+											<Border.Background>
                                                 <ImageBrush x:Name="imgSanPhamTop1"
                                                             ImageSource="{Binding SanPhamTop1.HinhAnh}"
                                                             Stretch="Uniform" />
@@ -418,20 +418,19 @@
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
 
-										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
-												<i:InvokeCommandAction 
-													Command="{Binding SanPhamTop3_MouseDownCommand}" 
-													CommandParameter="{Binding ElementName=mainWindow}" />
-											</i:EventTrigger>
-										</i:Interaction.Triggers>
-
-										<Border  Margin="0,50,0,0"
+											<Border  Margin="0,50,0,0"
                                                  BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="130"
                                                  Width="200">
+											<i:Interaction.Triggers>
+												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+													<i:InvokeCommandAction 
+													Command="{Binding SanPhamTop3_MouseDownCommand}"  
+													CommandParameter="{Binding ElementName=mainWindow}" />
+												</i:EventTrigger>
+											</i:Interaction.Triggers>
                                             <Border.Background>
                                                 <ImageBrush ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
