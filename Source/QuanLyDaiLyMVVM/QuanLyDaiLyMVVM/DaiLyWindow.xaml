@@ -18,7 +18,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="dailywindow">
     <!--Màn hình quản lý đại lý-->
     <Grid x:Name="bg_daily">
         <Grid.RowDefinitions>
@@ -121,7 +122,7 @@
                               HorizontalContentAlignment="Center">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding ListSelectionChangedCommand}" />
+                                <i:InvokeCommandAction Command="{Binding ListSelectionChangedCommand}" CommandParameter="{Binding ElementName=dailywindow}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <ListView.View>
