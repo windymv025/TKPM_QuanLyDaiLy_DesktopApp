@@ -55,5 +55,31 @@ namespace QuanLyDaiLyMVVM.Model
 
             return result;
         }
+
+        public static decimal convertStringtoDecimal(string numberString)
+        {
+            string newNumStr = "";
+            for (int i = 0; i < numberString.Length; i++)
+            {
+                if (numberString[i] != '.')
+                {
+                    newNumStr += numberString[i];
+                }
+            }
+            return decimal.Parse(newNumStr);
+        }
+
+        public static int convertStringtoInt(string numberString)
+        {
+            string newNumStr = "";
+            for (int i = 0; i < numberString.Length; i++)
+            {
+                if (numberString[i] != '.')
+                {
+                    newNumStr += numberString[i];
+                }
+            }
+            return int.Parse(newNumStr);
+        }
     }
 }

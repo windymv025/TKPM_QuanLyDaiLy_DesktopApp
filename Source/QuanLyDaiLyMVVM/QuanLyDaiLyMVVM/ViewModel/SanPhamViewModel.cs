@@ -63,7 +63,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
         {
             if(p.SelectedIndex > -1)
             {
-                new CapNhatSanPhamWindow(ListSanPhamHienThiTheotrang[p.SelectedIndex]).ShowDialog();
+                var wd = new CapNhatSanPhamWindow();
+                var vm = new CapNhatSanPhamViewModel(ListSanPhamHienThiTheotrang[p.SelectedIndex]);
+                wd.DataContext = vm;
+                wd.ShowDialog();
             }
         }
 

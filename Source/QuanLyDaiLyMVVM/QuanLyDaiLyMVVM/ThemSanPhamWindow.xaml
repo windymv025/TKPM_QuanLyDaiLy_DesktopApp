@@ -278,7 +278,7 @@
 												<ColumnDefinition/>
 											</Grid.ColumnDefinitions>
 											<Image Source="{Binding HinhAnh}" RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform"/>
-											<TextBlock Text="{Binding Ten}" VerticalAlignment="Center"/>
+											<TextBlock Grid.Column="1" Text="{Binding Ten}" FontWeight="Bold" Margin="10" VerticalAlignment="Center"/>
 										</Grid>
 									</DataTemplate>
 								</ComboBox.ItemTemplate>
@@ -324,7 +324,7 @@
 											</Grid.ColumnDefinitions>
 											<Image Source="{Binding HinhAnh}" RenderOptions.BitmapScalingMode="HighQuality" Stretch="Uniform"/>
 
-											<Grid>
+											<Grid Grid.Column="1" Margin="5">
 												<Grid.RowDefinitions>
 													<RowDefinition/>
 													<RowDefinition/>
