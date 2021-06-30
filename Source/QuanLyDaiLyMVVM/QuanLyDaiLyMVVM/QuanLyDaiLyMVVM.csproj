@@ -105,18 +105,6 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\BangBaoCao.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BaoCaoCongNo.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BaoCaoDoanhSo.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ChiTietBaoCao.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\ChiTietPhieuXuatHang.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
@@ -462,6 +450,16 @@
     <Content Include="Assets\Vuong.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+      <LastGenOutput>DBQuanLyCacDaiLy.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\DBQuanLyCacDaiLy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+      <LastGenOutput>DBQuanLyCacDaiLy.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\Category\apple.png">
@@ -598,16 +596,6 @@
     </Content>
     <Content Include="Images\Staff\Vuong.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBQuanLyCacDaiLy.Context.cs</LastGenOutput>
-      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model\DBQuanLyCacDaiLy.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
-      <LastGenOutput>DBQuanLyCacDaiLy.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

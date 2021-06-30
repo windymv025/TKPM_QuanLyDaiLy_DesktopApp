@@ -57,7 +57,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock Text="Báo cáo doanh số" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="ExtraBold" Margin="10"/>
                             <Grid Grid.Row="1"
-                                  Margin="10" MaxHeight="200">
+                                  Margin="10" MaxHeight="1000">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
@@ -129,6 +129,58 @@
                                          Background="White"
                                          Height="700"
                                          UniformCornerRadius="10">
+                        <Grid Grid.Row="1"
+                              Margin="10"
+                              MaxHeight="1000">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="30,30,50,30"
+                                        Height="auto"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <lvc:CartesianChart HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    LegendLocation="Right"
+                                                    FontSize="12"
+                                                    Width="300"
+                                                    Height="250"
+                                                    Series="{Binding SeriesCollection_CongNoCot}">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Tên đại lý" />
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="VNĐ" />
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                                <TextBlock Text="Công nợ của các đại lý"
+                                           FontSize="15"
+                                           Margin="10"
+                                           FontWeight="DemiBold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Bottom" />
+                            </StackPanel>
+                            <ListView Grid.Column="1"
+                                      Margin="20"
+                                      ItemsSource="{Binding DoanhSoHienThi}"
+                                      FontSize="16"
+                                      HorizontalContentAlignment="Center">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Tên đại lý"
+                                                        DisplayMemberBinding="{Binding TenDaiLy, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></GridViewColumn>
+                                        <GridViewColumn Header="Doanh số"
+                                                        DisplayMemberBinding="{Binding TongTien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></GridViewColumn>
+                                        <GridViewColumn Header="Tỷ lệ"
+                                                        DisplayMemberBinding="{Binding Tyle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='0.00%'}"></GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </materialDesign:Card>
+
+                    <materialDesign:Card x:Name="TienDaThu" Margin="30" Background="White" Height="700" UniformCornerRadius="10">
                         
                     </materialDesign:Card>
                 </StackPanel>

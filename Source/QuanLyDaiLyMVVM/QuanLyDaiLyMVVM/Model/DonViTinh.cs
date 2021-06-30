@@ -9,24 +9,20 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
-    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class DonViTinh: BaseViewModel
+    public partial class DonViTinh
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DonViTinh()
         {
             this.SanPhams = new HashSet<SanPham>();
         }
-
-        private int _Id;
-        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
-
-        private string _Ten;
-        public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
-
+    
+        public int Id { get; set; }
+        public string Ten { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
     }

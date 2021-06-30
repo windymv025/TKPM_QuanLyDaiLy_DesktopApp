@@ -4,41 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DBQuanLyCacDaiLyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BangBaoCao">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Thang" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="Nam" Type="varchar" MaxLength="4" Nullable="false" />
-        </EntityType>
-        <EntityType Name="BaoCaoCongNo">
-          <Key>
-            <PropertyRef Name="IdBangBaoCao" />
-          </Key>
-          <Property Name="IdBangBaoCao" Type="int" Nullable="false" />
-          <Property Name="NoDau" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="PhatSinh" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="BaoCaoDoanhSo">
-          <Key>
-            <PropertyRef Name="IdBangBaoCao" />
-          </Key>
-          <Property Name="IdBangBaoCao" Type="int" Nullable="false" />
-          <Property Name="SoPhieuXuat" Type="int" Nullable="false" />
-          <Property Name="TongTriGia" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="TyLe" Type="float" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ChiTietBaoCao">
-          <Key>
-            <PropertyRef Name="IdDaiLy" />
-            <PropertyRef Name="IdBangBaoCao" />
-          </Key>
-          <Property Name="IdDaiLy" Type="int" Nullable="false" />
-          <Property Name="IdBangBaoCao" Type="int" Nullable="false" />
-          <Property Name="NgayTao" Type="datetime" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="DBQuanLyCacDaiLyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietPhieuXuatHang">
           <Key>
             <PropertyRef Name="IdSanPham" />
@@ -144,7 +110,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenQuyDinh" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="GiaTri" Type="int" Nullable="false" />
+          <Property Name="GiaTri" Type="float" Nullable="false" />
           <Property Name="KieuDuLieu" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TrangThai" Type="bit" Nullable="false" />
         </EntityType>
@@ -172,54 +138,6 @@
           <Property Name="TenDangNhap" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MatKhau" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <Association Name="BaoCaoCongNo_fk0">
-          <End Role="BangBaoCao" Type="Self.BangBaoCao" Multiplicity="1" />
-          <End Role="BaoCaoCongNo" Type="Self.BaoCaoCongNo" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="BangBaoCao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BaoCaoCongNo">
-              <PropertyRef Name="IdBangBaoCao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BaoCaoDoanhSo_fk0">
-          <End Role="BangBaoCao" Type="Self.BangBaoCao" Multiplicity="1" />
-          <End Role="BaoCaoDoanhSo" Type="Self.BaoCaoDoanhSo" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="BangBaoCao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BaoCaoDoanhSo">
-              <PropertyRef Name="IdBangBaoCao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ChiTietBaoCao_fk0">
-          <End Role="DaiLy" Type="Self.DaiLy" Multiplicity="1" />
-          <End Role="ChiTietBaoCao" Type="Self.ChiTietBaoCao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DaiLy">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChiTietBaoCao">
-              <PropertyRef Name="IdDaiLy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ChiTietBaoCao_fk1">
-          <End Role="BangBaoCao" Type="Self.BangBaoCao" Multiplicity="1" />
-          <End Role="ChiTietBaoCao" Type="Self.ChiTietBaoCao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BangBaoCao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChiTietBaoCao">
-              <PropertyRef Name="IdBangBaoCao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ChiTietPhieuXuatHang_fk0">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="ChiTietPhieuXuatHang" Type="Self.ChiTietPhieuXuatHang" Multiplicity="*" />
@@ -353,10 +271,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBQuanLyCacDaiLyModelStoreContainer">
-          <EntitySet Name="BangBaoCao" EntityType="Self.BangBaoCao" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BaoCaoCongNo" EntityType="Self.BaoCaoCongNo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BaoCaoDoanhSo" EntityType="Self.BaoCaoDoanhSo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChiTietBaoCao" EntityType="Self.ChiTietBaoCao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietPhieuXuatHang" EntityType="Self.ChiTietPhieuXuatHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DaiLy" EntityType="Self.DaiLy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonViTinh" EntityType="Self.DonViTinh" Schema="dbo" store:Type="Tables" />
@@ -371,22 +285,6 @@
           <EntitySet Name="QuyDinh" EntityType="Self.QuyDinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="BaoCaoCongNo_fk0" Association="Self.BaoCaoCongNo_fk0">
-            <End Role="BangBaoCao" EntitySet="BangBaoCao" />
-            <End Role="BaoCaoCongNo" EntitySet="BaoCaoCongNo" />
-          </AssociationSet>
-          <AssociationSet Name="BaoCaoDoanhSo_fk0" Association="Self.BaoCaoDoanhSo_fk0">
-            <End Role="BangBaoCao" EntitySet="BangBaoCao" />
-            <End Role="BaoCaoDoanhSo" EntitySet="BaoCaoDoanhSo" />
-          </AssociationSet>
-          <AssociationSet Name="ChiTietBaoCao_fk0" Association="Self.ChiTietBaoCao_fk0">
-            <End Role="DaiLy" EntitySet="DaiLy" />
-            <End Role="ChiTietBaoCao" EntitySet="ChiTietBaoCao" />
-          </AssociationSet>
-          <AssociationSet Name="ChiTietBaoCao_fk1" Association="Self.ChiTietBaoCao_fk1">
-            <End Role="BangBaoCao" EntitySet="BangBaoCao" />
-            <End Role="ChiTietBaoCao" EntitySet="ChiTietBaoCao" />
-          </AssociationSet>
           <AssociationSet Name="ChiTietPhieuXuatHang_fk0" Association="Self.ChiTietPhieuXuatHang_fk0">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="ChiTietPhieuXuatHang" EntitySet="ChiTietPhieuXuatHang" />
@@ -432,51 +330,11 @@
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBQuanLyCacDaiLyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="BangBaoCao">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Thang" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Nam" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="BaoCaoCongNo" Relationship="Self.BaoCaoCongNo_fk0" FromRole="BangBaoCao" ToRole="BaoCaoCongNo" />
-          <NavigationProperty Name="BaoCaoDoanhSo" Relationship="Self.BaoCaoDoanhSo_fk0" FromRole="BangBaoCao" ToRole="BaoCaoDoanhSo" />
-          <NavigationProperty Name="ChiTietBaoCaos" Relationship="Self.ChiTietBaoCao_fk1" FromRole="BangBaoCao" ToRole="ChiTietBaoCao" />
-        </EntityType>
-        <EntityType Name="BaoCaoCongNo">
-          <Key>
-            <PropertyRef Name="IdBangBaoCao" />
-          </Key>
-          <Property Name="IdBangBaoCao" Type="Int32" Nullable="false" />
-          <Property Name="NoDau" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="PhatSinh" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="BangBaoCao" Relationship="Self.BaoCaoCongNo_fk0" FromRole="BaoCaoCongNo" ToRole="BangBaoCao" />
-        </EntityType>
-        <EntityType Name="BaoCaoDoanhSo">
-          <Key>
-            <PropertyRef Name="IdBangBaoCao" />
-          </Key>
-          <Property Name="IdBangBaoCao" Type="Int32" Nullable="false" />
-          <Property Name="SoPhieuXuat" Type="Int32" Nullable="false" />
-          <Property Name="TongTriGia" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="TyLe" Type="Double" Nullable="false" />
-          <NavigationProperty Name="BangBaoCao" Relationship="Self.BaoCaoDoanhSo_fk0" FromRole="BaoCaoDoanhSo" ToRole="BangBaoCao" />
-        </EntityType>
-        <EntityType Name="ChiTietBaoCao">
-          <Key>
-            <PropertyRef Name="IdDaiLy" />
-            <PropertyRef Name="IdBangBaoCao" />
-          </Key>
-          <Property Name="IdDaiLy" Type="Int32" Nullable="false" />
-          <Property Name="IdBangBaoCao" Type="Int32" Nullable="false" />
-          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="BangBaoCao" Relationship="Self.ChiTietBaoCao_fk1" FromRole="ChiTietBaoCao" ToRole="BangBaoCao" />
-          <NavigationProperty Name="DaiLy" Relationship="Self.ChiTietBaoCao_fk0" FromRole="ChiTietBaoCao" ToRole="DaiLy" />
-        </EntityType>
         <EntityType Name="ChiTietPhieuXuatHang">
           <Key>
             <PropertyRef Name="IdSanPham" />
@@ -502,7 +360,6 @@
           <Property Name="IdLoaiDaiLy" Type="Int32" Nullable="false" />
           <Property Name="IsRemove" Type="Boolean" Nullable="false" />
           <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ChiTietBaoCaos" Relationship="Self.ChiTietBaoCao_fk0" FromRole="DaiLy" ToRole="ChiTietBaoCao" />
           <NavigationProperty Name="LoaiDaiLy" Relationship="Self.DaiLy_fk0" FromRole="DaiLy" ToRole="LoaiDaiLy" />
           <NavigationProperty Name="PhieuDaiLies" Relationship="Self.PhieuDaiLy_fk0" FromRole="DaiLy" ToRole="PhieuDaiLy" />
         </EntityType>
@@ -561,9 +418,9 @@
           <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="VaiTro" Type="Int32" />
           <NavigationProperty Name="TaiKhoan" Relationship="Self.TaiKhoan_fk0" FromRole="NhanVien" ToRole="TaiKhoan" />
-          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PhieuDaiLy">
           <Key>
@@ -599,7 +456,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenQuyDinh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GiaTri" Type="Int32" Nullable="false" />
+          <Property Name="GiaTri" Type="Double" Nullable="false" />
           <Property Name="KieuDuLieu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TrangThai" Type="Boolean" Nullable="false" />
         </EntityType>
@@ -617,12 +474,12 @@
           <Property Name="IdDonViTinh" Type="Int32" Nullable="false" />
           <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ChiTietPhieuXuatHangs" Relationship="Self.ChiTietPhieuXuatHang_fk0" FromRole="SanPham" ToRole="ChiTietPhieuXuatHang" />
           <NavigationProperty Name="DonViTinh" Relationship="Self.SanPham_fk2" FromRole="SanPham" ToRole="DonViTinh" />
           <NavigationProperty Name="HinhAnhSanPhams" Relationship="Self.HinhAnhSanPham_fk0" FromRole="SanPham" ToRole="HinhAnhSanPham" />
           <NavigationProperty Name="LoaiSanPham" Relationship="Self.SanPham_fk0" FromRole="SanPham" ToRole="LoaiSanPham" />
           <NavigationProperty Name="NguonNhap" Relationship="Self.SanPham_fk1" FromRole="SanPham" ToRole="NguonNhap" />
-          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TaiKhoan">
           <Key>
@@ -633,54 +490,6 @@
           <Property Name="MatKhau" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NhanVien" Relationship="Self.TaiKhoan_fk0" FromRole="TaiKhoan" ToRole="NhanVien" />
         </EntityType>
-        <Association Name="BaoCaoCongNo_fk0">
-          <End Role="BangBaoCao" Type="Self.BangBaoCao" Multiplicity="1" />
-          <End Role="BaoCaoCongNo" Type="Self.BaoCaoCongNo" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="BangBaoCao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BaoCaoCongNo">
-              <PropertyRef Name="IdBangBaoCao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BaoCaoDoanhSo_fk0">
-          <End Role="BangBaoCao" Type="Self.BangBaoCao" Multiplicity="1" />
-          <End Role="BaoCaoDoanhSo" Type="Self.BaoCaoDoanhSo" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="BangBaoCao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BaoCaoDoanhSo">
-              <PropertyRef Name="IdBangBaoCao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ChiTietBaoCao_fk1">
-          <End Role="BangBaoCao" Type="Self.BangBaoCao" Multiplicity="1" />
-          <End Role="ChiTietBaoCao" Type="Self.ChiTietBaoCao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BangBaoCao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChiTietBaoCao">
-              <PropertyRef Name="IdBangBaoCao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ChiTietBaoCao_fk0">
-          <End Role="DaiLy" Type="Self.DaiLy" Multiplicity="1" />
-          <End Role="ChiTietBaoCao" Type="Self.ChiTietBaoCao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DaiLy">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChiTietBaoCao">
-              <PropertyRef Name="IdDaiLy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ChiTietPhieuXuatHang_fk0">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="ChiTietPhieuXuatHang" Type="Self.ChiTietPhieuXuatHang" Multiplicity="*" />
@@ -814,10 +623,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBQuanLyCacDaiLyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BangBaoCaos" EntityType="Self.BangBaoCao" />
-          <EntitySet Name="BaoCaoCongNoes" EntityType="Self.BaoCaoCongNo" />
-          <EntitySet Name="BaoCaoDoanhSoes" EntityType="Self.BaoCaoDoanhSo" />
-          <EntitySet Name="ChiTietBaoCaos" EntityType="Self.ChiTietBaoCao" />
           <EntitySet Name="ChiTietPhieuXuatHangs" EntityType="Self.ChiTietPhieuXuatHang" />
           <EntitySet Name="DaiLies" EntityType="Self.DaiLy" />
           <EntitySet Name="DonViTinhs" EntityType="Self.DonViTinh" />
@@ -832,22 +637,6 @@
           <EntitySet Name="QuyDinhs" EntityType="Self.QuyDinh" />
           <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
           <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
-          <AssociationSet Name="BaoCaoCongNo_fk0" Association="Self.BaoCaoCongNo_fk0">
-            <End Role="BangBaoCao" EntitySet="BangBaoCaos" />
-            <End Role="BaoCaoCongNo" EntitySet="BaoCaoCongNoes" />
-          </AssociationSet>
-          <AssociationSet Name="BaoCaoDoanhSo_fk0" Association="Self.BaoCaoDoanhSo_fk0">
-            <End Role="BangBaoCao" EntitySet="BangBaoCaos" />
-            <End Role="BaoCaoDoanhSo" EntitySet="BaoCaoDoanhSoes" />
-          </AssociationSet>
-          <AssociationSet Name="ChiTietBaoCao_fk1" Association="Self.ChiTietBaoCao_fk1">
-            <End Role="BangBaoCao" EntitySet="BangBaoCaos" />
-            <End Role="ChiTietBaoCao" EntitySet="ChiTietBaoCaos" />
-          </AssociationSet>
-          <AssociationSet Name="ChiTietBaoCao_fk0" Association="Self.ChiTietBaoCao_fk0">
-            <End Role="DaiLy" EntitySet="DaiLies" />
-            <End Role="ChiTietBaoCao" EntitySet="ChiTietBaoCaos" />
-          </AssociationSet>
           <AssociationSet Name="ChiTietPhieuXuatHang_fk0" Association="Self.ChiTietPhieuXuatHang_fk0">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="ChiTietPhieuXuatHang" EntitySet="ChiTietPhieuXuatHangs" />
@@ -899,43 +688,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBQuanLyCacDaiLyModelStoreContainer" CdmEntityContainer="DBQuanLyCacDaiLyEntities">
-          <EntitySetMapping Name="BangBaoCaos">
-            <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.BangBaoCao">
-              <MappingFragment StoreEntitySet="BangBaoCao">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Thang" ColumnName="Thang" />
-                <ScalarProperty Name="Nam" ColumnName="Nam" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BaoCaoCongNoes">
-            <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.BaoCaoCongNo">
-              <MappingFragment StoreEntitySet="BaoCaoCongNo">
-                <ScalarProperty Name="IdBangBaoCao" ColumnName="IdBangBaoCao" />
-                <ScalarProperty Name="NoDau" ColumnName="NoDau" />
-                <ScalarProperty Name="PhatSinh" ColumnName="PhatSinh" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BaoCaoDoanhSoes">
-            <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.BaoCaoDoanhSo">
-              <MappingFragment StoreEntitySet="BaoCaoDoanhSo">
-                <ScalarProperty Name="IdBangBaoCao" ColumnName="IdBangBaoCao" />
-                <ScalarProperty Name="SoPhieuXuat" ColumnName="SoPhieuXuat" />
-                <ScalarProperty Name="TongTriGia" ColumnName="TongTriGia" />
-                <ScalarProperty Name="TyLe" ColumnName="TyLe" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChiTietBaoCaos">
-            <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.ChiTietBaoCao">
-              <MappingFragment StoreEntitySet="ChiTietBaoCao">
-                <ScalarProperty Name="IdDaiLy" ColumnName="IdDaiLy" />
-                <ScalarProperty Name="IdBangBaoCao" ColumnName="IdBangBaoCao" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ChiTietPhieuXuatHangs">
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.ChiTietPhieuXuatHang">
               <MappingFragment StoreEntitySet="ChiTietPhieuXuatHang">
@@ -1010,12 +762,12 @@
           <EntitySetMapping Name="NhanViens">
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
-                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="VaiTro" ColumnName="VaiTro" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1059,7 +811,6 @@
           <EntitySetMapping Name="SanPhams">
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.SanPham">
               <MappingFragment StoreEntitySet="SanPham">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
@@ -1070,6 +821,7 @@
                 <ScalarProperty Name="IdDonViTinh" ColumnName="IdDonViTinh" />
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

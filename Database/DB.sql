@@ -28,39 +28,10 @@ GO
 CREATE TABLE [QuyDinh] (
 	Id int identity(1,1) NOT NULL,
 	TenQuyDinh nvarchar(max) NOT NULL,
-	GiaTri int NOT NULL,
+	GiaTri float NOT NULL,
 	KieuDuLieu nvarchar(20) NOT NULL,
 	TrangThai bit NOT NULL,
 	primary key(Id)
-)
-GO
-CREATE TABLE [BangBaoCao] (
-	Id int identity(1,1) NOT NULL,
-	Thang varchar(2) NOT NULL,
-	Nam varchar(4) not null,
-	primary key(Id)
-)
-GO
-CREATE TABLE [BaoCaoDoanhSo] (
-	IdBangBaoCao int NOT NULL,
-	SoPhieuXuat int NOT NULL,
-	TongTriGia decimal NOT NULL,
-	TyLe float NOT NULL,
-	primary key(IdBangBaoCao)
-)
-GO
-CREATE TABLE [BaoCaoCongNo] (
-	IdBangBaoCao int NOT NULL,
-	NoDau decimal NOT NULL,
-	PhatSinh decimal NOT NULL,
-	primary key(IdBangBaoCao)
-)
-GO
-CREATE TABLE [ChiTietBaoCao] (
-	IdDaiLy int NOT NULL,
-	IdBangBaoCao int NOT NULL,
-	NgayTao Datetime NOT NULL,
-	primary key(IdDaiLy, IdBangBaoCao)
 )
 GO
 CREATE TABLE [PhieuDaiLy] (
@@ -157,18 +128,6 @@ GO
 ALTER TABLE [DaiLy] ADD CONSTRAINT [DaiLy_fk0] FOREIGN KEY ([IdLoaiDaiLy]) REFERENCES [LoaiDaiLy]([Id])
 GO
 
-ALTER TABLE [BaoCaoDoanhSo] ADD CONSTRAINT [BaoCaoDoanhSo_fk0] FOREIGN KEY ([IdBangBaoCao]) REFERENCES [BangBaoCao]([Id])
-GO
-
-ALTER TABLE [BaoCaoCongNo] ADD CONSTRAINT [BaoCaoCongNo_fk0] FOREIGN KEY ([IdBangBaoCao]) REFERENCES [BangBaoCao]([Id])
-GO
-
-ALTER TABLE [ChiTietBaoCao] ADD CONSTRAINT [ChiTietBaoCao_fk0] FOREIGN KEY ([IdDaiLy]) REFERENCES [DaiLy]([Id])
-GO
-
-ALTER TABLE [ChiTietBaoCao] ADD CONSTRAINT [ChiTietBaoCao_fk1] FOREIGN KEY ([IdBangBaoCao]) REFERENCES [BangBaoCao]([Id])
-GO
-
 ALTER TABLE [PhieuDaiLy] ADD CONSTRAINT [PhieuDaiLy_fk0] FOREIGN KEY ([IdDaiLy]) REFERENCES [DaiLy]([Id])
 GO
 
@@ -246,21 +205,6 @@ GO
 INSERT [dbo].[DaiLy] ([Ten], [DienThoai], [DiaChi], [NgayTiepNhan], [Quan], [Email], [IdLoaiDaiLy], [IsRemove], [HinhAnh]) VALUES (N'Đại lý điện máy gia dụng Vương Trùng Dương', N'0999999999', N'208 Nguyễn Hữu Cảnh, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh', CAST(N'2020-12-01' AS Datetime), N'Bình Thạnh', N'trungthanthong@gmail.com', 1, 0, N'Images/DaiLy/13.png')
 GO
 INSERT [dbo].[DaiLy] ([Ten], [DienThoai], [DiaChi], [NgayTiepNhan], [Quan], [Email], [IdLoaiDaiLy], [IsRemove], [HinhAnh]) VALUES (N'Chu Bá Thông', N'0888888888', N'161 Xa lộ Hà Nội, Thảo Điền, Quận 2, Thành phố Hồ Chí Minh', CAST(N'2021-02-27' AS Datetime), N'2', N'chubathong@gmail.com', 2, 0, N'Images/DaiLy/14.png')
-GO
-
-INSERT [dbo].[BangBaoCao] ([Thang], [Nam]) VALUES ('12', '2020')
-GO
-INSERT [dbo].[BangBaoCao] ([Thang], [Nam]) VALUES ('01', '2021')
-GO
-
-INSERT [dbo].[ChiTietBaoCao] ([IDDaiLy], [IdBangBaoCao], [NgayTao]) VALUES (1, 1, CAST(N'2020-12-31' AS Datetime))
-GO
-INSERT [dbo].[ChiTietBaoCao] ([IDDaiLy], [IdBangBaoCao], [NgayTao]) VALUES (1, 2, CAST(N'2021-01-31' AS Datetime))
-GO
-
-INSERT [dbo].[BaoCaoDoanhSo] ([IdBangBaoCao], [SoPhieuXuat], [TongTriGia], [TyLe]) VALUES (1, 5, CAST(100000000 AS Decimal(18, 0)), 1)
-GO
-INSERT [dbo].[BaoCaoCongNo] ([IdBangBaoCao], [NoDau], [PhatSinh]) VALUES (2, CAST(54590000 AS Decimal(18, 0)), CAST(1000000 AS Decimal(18, 0)))
 GO
 
 INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-01' AS Datetime), 1)
@@ -586,6 +530,7 @@ GO
 
 INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'SO_LUONG_LOAI_DAI_LY', 2, N'integer', 1)
 INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN', 4, N'integer', 1)
+INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'LAI_XUAT', 0.23, N'float', 1)
 GO
 
 
