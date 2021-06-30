@@ -120,6 +120,7 @@
     <Compile Include="Model\ChiTietPhieuXuatHang.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CongNo.cs" />
     <Compile Include="Model\ConvertNumber.cs" />
     <Compile Include="Model\DaiLy.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
