@@ -209,14 +209,8 @@
     <Compile Include="ThemDaiLyWindow.xaml.cs">
       <DependentUpon>ThemDaiLyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThemDonViTinhWindow.xaml.cs">
-      <DependentUpon>ThemDonViTinhWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ThemLoaiDaiLyWindow.xaml.cs">
       <DependentUpon>ThemLoaiDaiLyWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ThemLoaiSanPhamWindow.xaml.cs">
-      <DependentUpon>ThemLoaiSanPhamWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ThemSanPhamWindow.xaml.cs">
       <DependentUpon>ThemSanPhamWindow.xaml</DependentUpon>
@@ -318,15 +312,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ThemDonViTinhWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ThemLoaiDaiLyWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ThemLoaiSanPhamWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

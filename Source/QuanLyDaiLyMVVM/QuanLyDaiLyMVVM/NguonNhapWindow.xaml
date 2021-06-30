@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="NguonNhapWindow" Height="700"
+        Title="NguonNhapWindow" 
+		
+		Height="700"
         Width="1024"
         DataContext="{StaticResource NguonNhapVM}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -44,7 +46,7 @@
 
 						<materialDesign:Card UniformCornerRadius="10" Margin="5" MaxHeight="250">
 							<materialDesign:Card.Background>
-								<ImageBrush  ImageSource="{Binding NguonNhap.HinhAnh}" 
+								<ImageBrush  ImageSource="{Binding HinhAnh}" 
 								RenderOptions.BitmapScalingMode="HighQuality" 
 								 Stretch="Uniform"></ImageBrush>
 							</materialDesign:Card.Background>
@@ -61,11 +63,11 @@
 					</Grid>
 
 					<WrapPanel Grid.Column="1" Margin="0 0 0 10">
-						<TextBox Text="{Binding NguonNhap.Ten, UpdateSourceTrigger=PropertyChanged}"
+						<TextBox Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"
                              Margin="5 5 15 5"
                              materialDesign:HintAssist.Hint="Tên nguồn nhập"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-						<TextBox Name="soDienThoaiTxt" Text="{Binding NguonNhap.SoDienThoai, UpdateSourceTrigger=PropertyChanged}"
+						<TextBox Name="soDienThoaiTxt" Text="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged}"
                              Margin="5 5 15 5" 
                              materialDesign:HintAssist.Hint="Số điện thoại"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
@@ -76,7 +78,7 @@
 								</i:EventTrigger>
 							</i:Interaction.Triggers>
 						</TextBox>
-						<TextBox Text="{Binding NguonNhap.DiaChi, UpdateSourceTrigger=PropertyChanged}"
+						<TextBox Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"
                              Margin="5 5 15 5"
                              materialDesign:HintAssist.Hint="Địa chỉ"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -97,6 +99,7 @@
                             Margin="5"
                             Width="100"></Button>
 					<Button Command="{Binding EditCommand}"
+							CommandParameter="{Binding ElementName=lv_DanhSachNguonNhap}"
                             Content="Sửa"
 							Background="Blue"
                             Margin="5"
@@ -114,7 +117,7 @@
                                  VerticalAlignment="Stretch">
 				<ScrollViewer VerticalScrollBarVisibility="Auto">
 					<ListView x:Name="lv_DanhSachNguonNhap" ItemsSource="{Binding NguonNhaps}" 
-                              SelectedItem="{Binding SelectNguonNhap, Mode=OneWayToSource}">
+                              SelectedItem="{Binding SelectNguonNhap, Mode=TwoWay}">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
 								<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
@@ -134,11 +137,11 @@
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
-								<GridViewColumn Header="Tên"
+								<GridViewColumn Header="Tên" Width="auto"
                                                 DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
-								<GridViewColumn Header="Số điện thoại"
+								<GridViewColumn Header="Số điện thoại" Width="auto"
                                                 DisplayMemberBinding="{Binding SoDienThoai}"></GridViewColumn>
-								<GridViewColumn Header="Địa chỉ"
+								<GridViewColumn Header="Địa chỉ" Width="auto"
                                                 DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
 
 							</GridView>

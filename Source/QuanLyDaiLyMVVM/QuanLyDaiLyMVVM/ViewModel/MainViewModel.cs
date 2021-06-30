@@ -475,16 +475,16 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                 if (listDaiLyTop.Count >= 0)
                 {
-                    _DaiLyTop1 = listDaiLyTop[0];
+                    DaiLyTop1 = listDaiLyTop[0];
                 }
                 if (listDaiLyTop.Count >= 1)
                 {
-                    _DaiLyTop2 = listDaiLyTop[1];
+                    DaiLyTop2 = listDaiLyTop[1];
                 }
 
                 if (listDaiLyTop.Count >= 2)
                 {
-                    _DaiLyTop3 = listDaiLyTop[2];
+                    DaiLyTop3 = listDaiLyTop[2];
                 }
 
             }

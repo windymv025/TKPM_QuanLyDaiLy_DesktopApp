@@ -70,9 +70,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
             };
             loadDataList();
 
-            ThemDonViCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new DonViTinhWindow().ShowDialog(); });
-            ThemNguonNhapCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new NguonNhapWindow().ShowDialog(); });
-            ThemLoaiSanPhamCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new LoaiSanPhamWindow().ShowDialog(); });
+            ThemDonViCommand = new RelayCommand<Button>((p) => { return true; }, (p) => {
+                new DonViTinhWindow().ShowDialog();
+                loadDataList();
+            });
+            ThemNguonNhapCommand = new RelayCommand<Button>((p) => { return true; }, (p) => {
+                new NguonNhapWindow().ShowDialog();
+                loadDataList();
+            });
+            ThemLoaiSanPhamCommand = new RelayCommand<Button>((p) => { return true; }, (p) => {
+                new LoaiSanPhamWindow().ShowDialog();
+                loadDataList();
+            });
 
             ThayDoiDuLieuSoCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => {
                 int caretIndex = p.CaretIndex;

@@ -16,8 +16,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
 {
     public class NguonNhapViewModel : BaseViewModel
     {
-        private NguonNhap _NguonNhap;
-        public NguonNhap NguonNhap { get => _NguonNhap; set { _NguonNhap = value; OnPropertyChanged(); } }
+        private string _Ten;
+        public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
+
+        private string _DiaChi;
+        public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
+
+        private string _SoDienThoai;
+        public string SoDienThoai { get => _SoDienThoai; set { _SoDienThoai = value; OnPropertyChanged(); } }
+
+        private string _HinhAnh;
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
 
         private NguonNhap _SelectNguonNhap;
         public NguonNhap SelectNguonNhap { get => _SelectNguonNhap; set { _SelectNguonNhap = value; OnPropertyChanged(); } }
@@ -30,6 +39,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand DuyetFileCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand EditCommand { get; set; }
 
         public NguonNhapViewModel()
         {
@@ -37,7 +48,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
             SelectionChangedCommand = new RelayCommand<ListView>((p) => {
                 return true;
             }, (p) => {
-                NguonNhap = SelectNguonNhap;
+                if (SelectNguonNhap == null)
+                    return;
+
+                Ten = SelectNguonNhap.Ten;
+                SoDienThoai = SelectNguonNhap.SoDienThoai;
+                DiaChi = SelectNguonNhap.DiaChi;
+                HinhAnh = SelectNguonNhap.HinhAnh;
             });
 
             ThayDoiDuLieuSoCommand = new RelayCommand<TextBox>((p) => {
@@ -57,7 +74,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 if (result == true)
                 {
                     var img = open.FileNames;
-                    NguonNhap.HinhAnh = img[0].ToString();
+                    HinhAnh = img[0].ToString();
                 }
             });
 
@@ -65,14 +82,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    if (string.IsNullOrEmpty(NguonNhap.HinhAnh))
+                    if (string.IsNullOrEmpty(HinhAnh))
                     {
-                        NguonNhap.HinhAnh = Path.GetFullPath("Assets/image_not_available.png");
+                        HinhAnh = Path.GetFullPath("Assets/image_not_available.png");
                     }
-                    if (string.IsNullOrEmpty(NguonNhap.Ten)
-                        || string.IsNullOrEmpty(NguonNhap.DiaChi)
-                        || string.IsNullOrEmpty(NguonNhap.SoDienThoai)
-                        || NguonNhap.SoDienThoai.Length < 10)
+                    if (string.IsNullOrEmpty(Ten)
+                        || string.IsNullOrEmpty(DiaChi)
+                        || string.IsNullOrEmpty(SoDienThoai)
+                        || SoDienThoai.Length < 10)
                     {
                         MessageBox.Show("Bạn nhập thiếu thông tin nguồn nhập.", "Error Systerm", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -81,10 +98,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                     var nguonNhap = new NguonNhap
                     {
-                        HinhAnh = ImageDatabase.savingImageToDatabase(NguonNhap.HinhAnh, ImageDatabase.PATH_PRODUCT),
-                        Ten = NguonNhap.Ten,
-                        SoDienThoai = NguonNhap.SoDienThoai,
-                        DiaChi = NguonNhap.DiaChi
+                        HinhAnh = ImageDatabase.savingImageToDatabase(HinhAnh, ImageDatabase.PATH_PRODUCT),
+                        Ten = Ten,
+                        SoDienThoai = SoDienThoai,
+                        DiaChi = DiaChi
                     };
 
 
@@ -95,18 +112,89 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     }
                     nguonNhap.HinhAnh = Path.GetFullPath(nguonNhap.HinhAnh);
                     NguonNhaps.Add(nguonNhap);
-                    MessageBox.Show(nguonNhap.Id + ""); 
-
+                    //MessageBox.Show(nguonNhap.Id + ""); 
+                    HinhAnh = "Assets/image_not_available.png";
+                    Ten = "";
+                    SoDienThoai = "";
+                    DiaChi = "";
                 }
             });
 
             RefreshCommand = new RelayCommand<Button>((p) => { return true; }, (p) => {
-                NguonNhap = new NguonNhap
-                {
-                    HinhAnh = "Assets/image_not_available.png"
-                };
+                HinhAnh = "Assets/image_not_available.png";
+                Ten = "";
+                SoDienThoai = "";
+                DiaChi = "";
+                
             });
 
+            DeleteCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var nguonNhap = db.NguonNhaps.Where(nn => nn.Id == SelectNguonNhap.Id).FirstOrDefault();
+                    if (nguonNhap.SanPhams.Count() == 0)
+                    {
+                        db.NguonNhaps.Remove(nguonNhap);
+                        db.SaveChanges();
+                        NguonNhaps.Remove(SelectNguonNhap);
+
+                        HinhAnh = "Assets/image_not_available.png";
+                        Ten = "";
+                        SoDienThoai = "";
+                        DiaChi = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không thể xóa nguồn nhập này do ràng buộc khóa ngoại.", "Error Systerm", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                
+                
+            });
+
+            EditCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                if (SelectNguonNhap == null)
+                    return;
+                MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (string.IsNullOrEmpty(HinhAnh))
+                    {
+                        HinhAnh = Path.GetFullPath("Assets/image_not_available.png");
+                    }
+                    if (string.IsNullOrEmpty(Ten)
+                        || string.IsNullOrEmpty(DiaChi)
+                        || string.IsNullOrEmpty(SoDienThoai)
+                        || SoDienThoai.Length < 10)
+                    {
+                        MessageBox.Show("Bạn nhập thiếu thông tin nguồn nhập.", "Error Systerm", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        var nguonNhap = db.NguonNhaps.Where(nn => nn.Id == SelectNguonNhap.Id).FirstOrDefault();
+                        if (nguonNhap.HinhAnh == null || HinhAnh != Path.GetFullPath(nguonNhap.HinhAnh))
+                        {
+                            nguonNhap.HinhAnh = ImageDatabase.savingImageToDatabase(HinhAnh, ImageDatabase.PATH_PRODUCT);
+                        }
+                            nguonNhap.Ten = Ten;
+                        nguonNhap.SoDienThoai = SoDienThoai;
+                        nguonNhap.DiaChi = DiaChi;
+
+                        db.SaveChanges();
+                    }
+                    
+                    SelectNguonNhap.HinhAnh = HinhAnh;
+                    SelectNguonNhap.Ten = Ten;
+                    SelectNguonNhap.SoDienThoai = SoDienThoai;
+                    SelectNguonNhap.DiaChi = DiaChi;
+                    
+                }
+            });
 
         }
         public void loadData()
@@ -124,10 +212,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         i.HinhAnh = Path.GetFullPath(i.HinhAnh);
                 }
             }
-            NguonNhap = new NguonNhap
-            {
-                HinhAnh = "Assets/image_not_available.png"
-            };
+            HinhAnh = "Assets/image_not_available.png";
         }
     }
 }
