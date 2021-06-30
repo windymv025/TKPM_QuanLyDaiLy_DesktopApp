@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace QuanLyDaiLyMVVM
 {
     /// <summary>
-    /// Interaction logic for ThemDonViTinhWindow.xaml
+    /// Interaction logic for DonViTinhWindow.xaml
     /// </summary>
-    public partial class ThemDonViTinhWindow : Window
+    public partial class DonViTinhWindow : Window
     {
-        public ThemDonViTinhWindow()
+        public DonViTinhWindow()
         {
             InitializeComponent();
         }

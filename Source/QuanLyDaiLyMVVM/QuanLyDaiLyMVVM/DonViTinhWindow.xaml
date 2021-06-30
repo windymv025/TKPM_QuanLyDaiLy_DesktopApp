@@ -1,0 +1,96 @@
+﻿<Window x:Class="QuanLyDaiLyMVVM.DonViTinhWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
+        mc:Ignorable="d"
+        Title="DonViTinhWindow" 
+		
+		Height="500"
+        Width="400"
+        DataContext="{StaticResource DonViTinhVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="donViTinhWindow">
+	<Grid>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<!--các element binding từ selected item-->
+			<materialDesign:Card Grid.Row="0"
+                                 Margin="5" >
+
+				<WrapPanel Grid.Column="1" Margin="0 0 0 10">
+					<TextBox Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="5 5 15 5"
+                             materialDesign:HintAssist.Hint="Tên đơn vị tính"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+					
+					<Button Command="{Binding RefreshCommand}"
+                            Content="Refresh"
+                            Margin="5"
+                            Width="100"></Button>
+				</WrapPanel>
+			</materialDesign:Card>
+
+			<materialDesign:Card Grid.Row="1"
+                                 Margin="5">
+				<WrapPanel>
+					<Button Command="{Binding AddCommand}"
+                            Content="Thêm"
+							Background="Blue"
+                            Margin="5"
+                            Width="100"></Button>
+					<Button Command="{Binding EditCommand}"
+							CommandParameter="{Binding ElementName=lv_DanhSachNguonNhap}"
+                            Content="Sửa"
+							Background="Blue"
+                            Margin="5"
+                            Width="100"></Button>
+					<Button Command="{Binding DeleteCommand}"
+                            Content="Xóa"
+							Background="Red"
+                            Margin="5"
+                            Width="100"></Button>
+				</WrapPanel>
+			</materialDesign:Card>
+
+			<materialDesign:Card Grid.Row="2"
+                                 Margin="5"
+                                 VerticalAlignment="Stretch">
+				<ScrollViewer VerticalScrollBarVisibility="Auto">
+					<ListView x:Name="lv_DanhSach" ItemsSource="{Binding DonViTinhs}" 
+                              SelectedItem="{Binding DonViTinh, Mode=TwoWay}">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
+													   CommandParameter="{Binding ElementName=lv_DanhSach}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="ID" Width="auto"
+                                                DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+								<GridViewColumn Header="Tên đơn vị tính" Width="auto"
+                                                DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</ScrollViewer>
+			</materialDesign:Card>
+		</Grid>
+	</Grid>
+</Window>

@@ -83,7 +83,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         public CapNhatSanPhamViewModel()
         {
-
         }
 
         public CapNhatSanPhamViewModel(SanPhamHienThi sanPhamHienThi)
@@ -91,9 +90,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
             loadDataBinding(sanPhamHienThi);
             loadDataList();
 
-            ThemDonViCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemDonViTinhWindow().ShowDialog(); });
-            ThemNguonNhapCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemNguonNhapWindow().ShowDialog(); });
-            ThemLoaiSanPhamCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemLoaiSanPhamWindow().ShowDialog(); });
+            ThemDonViCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { 
+                new DonViTinhWindow().ShowDialog();
+                loadDataList();
+            });
+            ThemNguonNhapCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { 
+                new NguonNhapWindow().ShowDialog();
+                loadDataList();
+            });
+            ThemLoaiSanPhamCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { 
+                new LoaiSanPhamWindow().ShowDialog();
+                loadDataList();
+            });
 
             ThayDoiDuLieuCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { p.IsEnabled = true; });
             ThayDoiDuLieuSoCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => {
@@ -293,9 +301,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 NguonNhaps = new ObservableCollection<NguonNhap>(db.NguonNhaps);
                 DonViTinhs = new ObservableCollection<DonViTinh>(db.DonViTinhs);
 
-                DonViTinh = DonViTinhs.Where(dv => dv.Id == DonViTinh.Id).FirstOrDefault();
-                NguonNhap = NguonNhaps.Where(i => i.Id == NguonNhap.Id).FirstOrDefault();
-                LoaiSanPham = LoaiSanPhams.Where(i => i.Id == LoaiSanPham.Id).FirstOrDefault();
+                DonViTinh = DonViTinhs.Where(dv => dv.Id == SanPhamHienThi.DonViTinh.Id).FirstOrDefault();
+                NguonNhap = NguonNhaps.Where(i => i.Id == SanPhamHienThi.NguonNhap.Id).FirstOrDefault();
+                LoaiSanPham = LoaiSanPhams.Where(i => i.Id == SanPhamHienThi.LoaiSanPham.Id).FirstOrDefault();
             }
 
             foreach (var i in LoaiSanPhams)
