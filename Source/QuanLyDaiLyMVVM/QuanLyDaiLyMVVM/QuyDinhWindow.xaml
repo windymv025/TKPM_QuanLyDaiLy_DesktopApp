@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="DaiLyWindow"
+        Title="QuyDinhWindow"
         Height="700"
         Width="1024"
         DataContext="{StaticResource QuyDinhVM}"

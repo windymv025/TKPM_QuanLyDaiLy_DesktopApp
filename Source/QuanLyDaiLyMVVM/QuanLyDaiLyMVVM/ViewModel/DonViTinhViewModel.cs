@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
-    public class ThemDonViTinhViewModel: BaseViewModel
+    public class DonViTinhViewModel: BaseViewModel
     {
         private DonViTinh _DonViTinh;
         public DonViTinh DonViTinh { get => _DonViTinh; set { _DonViTinh = value; OnPropertyChanged(); } }
 
-        public ThemDonViTinhViewModel()
+        public DonViTinhViewModel()
         {
             DonViTinh = new DonViTinh();
         }

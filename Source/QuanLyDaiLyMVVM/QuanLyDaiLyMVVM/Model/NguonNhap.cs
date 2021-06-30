@@ -30,7 +30,7 @@ namespace QuanLyDaiLyMVVM.Model
         private string _DiaChi;
         public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
 
-        public string _SoDienThoai;
+        private string _SoDienThoai;
         public string SoDienThoai { get => _SoDienThoai; set { _SoDienThoai = value; OnPropertyChanged(); } }
 
         private string _HinhAnh;

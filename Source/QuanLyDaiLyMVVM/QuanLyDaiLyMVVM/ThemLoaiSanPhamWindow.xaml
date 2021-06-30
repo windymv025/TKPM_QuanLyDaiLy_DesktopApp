@@ -18,7 +18,6 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
 		
-		DataContext="{StaticResource ThemLoaiSanPhamVM}"
 		
         mc:Ignorable="d"
         Title="ThemLoaiSanPhamWindow">

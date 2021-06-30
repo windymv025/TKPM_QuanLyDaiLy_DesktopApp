@@ -91,9 +91,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
             loadDataBinding(sanPhamHienThi);
             loadDataList();
 
-            ThemDonViCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemDonViTinhWindow().ShowDialog(); });
-            ThemNguonNhapCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemNguonNhapWindow().ShowDialog(); });
-            ThemLoaiSanPhamCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new ThemLoaiSanPhamWindow().ShowDialog(); });
+            ThemDonViCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new DonViTinhWindow().ShowDialog(); });
+            ThemNguonNhapCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new NguonNhapWindow().ShowDialog(); });
+            ThemLoaiSanPhamCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { new LoaiSanPhamWindow().ShowDialog(); });
 
             ThayDoiDuLieuCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { p.IsEnabled = true; });
             ThayDoiDuLieuSoCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => {

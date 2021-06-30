@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
-    public class ThemNguonNhapViewModel : BaseViewModel
+    public class LoaiSanPhamViewModel: BaseViewModel
     {
-        private NguonNhap _NguonNhap;
-        public NguonNhap NguonNhap { get => _NguonNhap; set { _NguonNhap = value; OnPropertyChanged(); } }
+        private LoaiSanPham _LoaiSanPham;
+        public LoaiSanPham LoaiSanPham { get => _LoaiSanPham; set { _LoaiSanPham = value; OnPropertyChanged(); } }
 
-        public ThemNguonNhapViewModel()
+        public LoaiSanPhamViewModel()
         {
-            NguonNhap = new NguonNhap
-            {
+            LoaiSanPham = new LoaiSanPham { 
                 HinhAnh = "Assets/image_not_available.png"
             };
+
         }
     }
 }
