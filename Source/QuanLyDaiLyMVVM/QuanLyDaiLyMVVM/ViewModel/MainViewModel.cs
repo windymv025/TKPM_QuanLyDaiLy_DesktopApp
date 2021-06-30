@@ -148,7 +148,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             DaiLyViewModel vm = new DaiLyViewModel();
             using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                DaiLy dl = db.DaiLies.Where(d => d.Id == DaiLyTop1.ID).FirstOrDefault();
+                DaiLy dl = db.DaiLies.Where(d => d.Id == DaiLyTop1.ID && d.IsRemove == false).FirstOrDefault();
                 vm.Ten = dl.Ten;
                 vm.Quan = dl.Quan;
                 vm.DiaChi = dl.DiaChi;
@@ -158,6 +158,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 vm.NgayTiepNhan = dl.NgayTiepNhan;
 
                 vm.SelectedLoaiDaiLy = vm.LoaiDaiLy.Where(x => x.Id == (dl.IdLoaiDaiLy)).SingleOrDefault();
+                vm.SelectedItem = new DaiLy()
+                {
+                    Id = dl.Id,
+                    Ten = dl.Ten,
+                    DienThoai = dl.DienThoai,
+                    DiaChi = dl.DiaChi,
+                    NgayTiepNhan = dl.NgayTiepNhan,
+                    Quan = dl.Quan,
+                    Email = dl.Email,
+                    HinhAnh = Path.GetFullPath(dl.HinhAnh),
+                    IdLoaiDaiLy = dl.IdLoaiDaiLy
+                };
             }
             wd.DataContext = vm;
 
@@ -171,7 +183,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             DaiLyViewModel vm = new DaiLyViewModel();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                DaiLy dl = db.DaiLies.Where(d => d.Id == DaiLyTop2.ID).FirstOrDefault();
+                DaiLy dl = db.DaiLies.Where(d => d.Id == DaiLyTop2.ID && d.IsRemove == false).FirstOrDefault();
                 vm.Ten = dl.Ten;
                 vm.Quan = dl.Quan;
                 vm.DiaChi = dl.DiaChi;
@@ -181,6 +193,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 vm.NgayTiepNhan = dl.NgayTiepNhan;
 
                 vm.SelectedLoaiDaiLy = vm.LoaiDaiLy.Where(x => x.Id == (dl.IdLoaiDaiLy)).SingleOrDefault();
+                vm.SelectedItem = new DaiLy()
+                {
+                    Id = dl.Id,
+                    Ten = dl.Ten,
+                    DienThoai = dl.DienThoai,
+                    DiaChi = dl.DiaChi,
+                    NgayTiepNhan = dl.NgayTiepNhan,
+                    Quan = dl.Quan,
+                    Email = dl.Email,
+                    HinhAnh = Path.GetFullPath(dl.HinhAnh),
+                    IdLoaiDaiLy = dl.IdLoaiDaiLy
+                };
             }
             wd.DataContext = vm;
 
@@ -194,7 +218,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             DaiLyViewModel vm = new DaiLyViewModel();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                DaiLy dl = db.DaiLies.Where(d => d.Id == DaiLyTop3.ID).FirstOrDefault();
+                DaiLy dl = db.DaiLies.Where(d => d.Id == DaiLyTop3.ID && d.IsRemove == false).FirstOrDefault();
                 vm.Ten = dl.Ten;
                 vm.Quan = dl.Quan;
                 vm.DiaChi = dl.DiaChi;
@@ -204,6 +228,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 vm.NgayTiepNhan = dl.NgayTiepNhan;
                 
                 vm.SelectedLoaiDaiLy = vm.LoaiDaiLy.Where(x => x.Id == (dl.IdLoaiDaiLy)).SingleOrDefault();
+                vm.SelectedItem = new DaiLy()
+                {
+                    Id = dl.Id,
+                    Ten = dl.Ten,
+                    DienThoai = dl.DienThoai,
+                    DiaChi = dl.DiaChi,
+                    NgayTiepNhan = dl.NgayTiepNhan,
+                    Quan = dl.Quan,
+                    Email = dl.Email,
+                    HinhAnh = Path.GetFullPath(dl.HinhAnh),
+                    IdLoaiDaiLy = dl.IdLoaiDaiLy
+                };
             }
             wd.DataContext = vm;
 

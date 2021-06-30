@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="DaiLyWindow"
+        Title="Báo cáo"
         Height="700"
         Width="1024"
         DataContext="{StaticResource BaoCaoVM}"
@@ -21,6 +22,117 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Name="baocaowindow">
     <Grid>
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ComboBox materialDesign:HintAssist.Hint="Năm"
+                      ItemsSource="{Binding ListYear}" Width="200" SelectedItem="{Binding Year, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding CBBChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer.Background>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.0"
+                                          Color="#2596BE" />
+                            <GradientStop Offset="1.0"
+                                          Color="WhiteSmoke" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </ScrollViewer.Background>
+                <StackPanel>
+                    <materialDesign:Card x:Name="BaoCaoDoanhSo" Margin="30" Background="White" Height="auto" UniformCornerRadius="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Báo cáo doanh số" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="ExtraBold" Margin="10"/>
+                            <Grid Grid.Row="1"
+                                  Margin="10" MaxHeight="200">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="30,30,50,30" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <lvc:PieChart Width="250"
+                                                  Height="250"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  LegendLocation="None"
+                                                  FontSize="12"
+                                                  Series="{Binding SeriesCollection_DoanhSo}">
+                                    </lvc:PieChart>
+                                    <TextBlock Text="Phần trăm doanh số bán hàng từ các đại lý"
+                                               FontSize="15"
+                                               Margin="10"
+                                               FontWeight="DemiBold"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Bottom" />
+                                </StackPanel>
+                                <ListView Name="listDaiLy" Grid.Column="1" Margin="20"
+                                          ItemsSource="{Binding DoanhSoHienThi}"
+                                          FontSize="16"
+                                          HorizontalContentAlignment="Center">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Tên đại lý"
+                                                            DisplayMemberBinding="{Binding TenDaiLy, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></GridViewColumn>
+                                            <GridViewColumn Header="Doanh số"
+                                                            DisplayMemberBinding="{Binding TongTien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></GridViewColumn>
+                                            <GridViewColumn Header="Tỷ lệ"
+                                                            DisplayMemberBinding="{Binding Tyle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='0.00%'}"></GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                            <Separator Grid.Row="2" Foreground="Gray"/>
+                            <Grid Grid.Row="3" Height="500">
+                                <StackPanel Margin="0" Height="auto"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <lvc:CartesianChart HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  LegendLocation="Right"
+                                                        FontSize="12"
+                                                        Width="800"
+                                                        Height="400"
+                                                        Series="{Binding SeriesCollection_DoanhSoCot}">
+                                        <lvc:CartesianChart.AxisX>
+                                            <lvc:Axis Title="Tên đại lý"/>
+                                        </lvc:CartesianChart.AxisX>
+                                        <lvc:CartesianChart.AxisY>
+                                            <lvc:Axis Title="VNĐ" />
+                                        </lvc:CartesianChart.AxisY>
+                                    </lvc:CartesianChart>
+                                    <TextBlock Text="Doanh số bán hàng từ các đại lý"
+                                               FontSize="15"
+                                               Margin="10"
+                                               FontWeight="DemiBold"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Bottom" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
+                    
+                    <materialDesign:Card x:Name="BaoCaoCongNo"
+                                         Margin="30"
+                                         Background="White"
+                                         Height="700"
+                                         UniformCornerRadius="10">
+                        
+                    </materialDesign:Card>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>
