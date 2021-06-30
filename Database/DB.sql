@@ -100,6 +100,7 @@ CREATE TABLE [SanPham] (
 	IdDonViTinh int NOT NULL,
 	HinhAnh nvarchar(max),
 	MoTa nvarchar(max),
+	TrangThai bit NOT NULL, --0 là đã xóa, --1 là chưa xóa
 	primary key(Id)
 )
 GO
@@ -341,7 +342,7 @@ GO
 INSERT [dbo].[DonViTinh] ([Ten]) VALUES (N'Con')
 GO
 
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh] , [HinhAnh], [MoTa]) VALUES (N'Alienware M17-I7 9750H RTX 2060 RAM 16GB SSD 256GB+HDD 1T 17.3"" FHD Windows 10 LIKE NEW 99%', CAST(29000000 AS Decimal(18, 0)), CAST(29000000 AS Decimal(18, 0)), 20, 1, 1, 1, N'Images/Product/1.png', N'Thương Hiệu	DELL
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh] , [HinhAnh], [MoTa], [TrangThai]) VALUES (N'Alienware M17-I7 9750H RTX 2060 RAM 16GB SSD 256GB+HDD 1T 17.3"" FHD Windows 10 LIKE NEW 99%', CAST(29000000 AS Decimal(18, 0)), CAST(29000000 AS Decimal(18, 0)), 20, 1, 1, 1, N'Images/Product/1.png', N'Thương Hiệu	DELL
 Model Alienware M17
 CPU Intel® Core™ i7-9750H (6-Core 12 Threads 12MB Cache up to 4.50GHz)
 RAM 16GB DDR4
@@ -354,9 +355,10 @@ Tích hợp USB 3.1 Gen 1 port with PowerShare,USB 3.1 Gen 1 port, Thunderbolt 3
 Bàn phím Backlit Keyboard 
 Trọng lượng 2.6kg
 Pin 99 Whr, 4-cell Battery (Integrated)
-Hệ điều hành Windows 10 Home')
+Hệ điều hành Windows 10 Home',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Dell G5 5500 (70225484) i7-10750H RTX 2070 RAM 16GB 1TB SSD 15.6'''' FHD', CAST(38490000 AS Decimal(18, 0)), CAST(38490000 AS Decimal(18, 0)), 15, 1, 2, 1, N'Images/Product/2.png', N'Thương Hiệu	DELL
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'Dell G5 5500 (70225484) i7-10750H RTX 2070 RAM 16GB 1TB SSD 15.6'''' FHD', CAST(38490000 AS Decimal(18, 0)), CAST(38490000 AS Decimal(18, 0)), 15, 1, 2, 1, N'Images/Product/2.png', N'Thương Hiệu	DELL
 Model G5 5500
 CPU Intel® Core™ i7-10750H (6-Core 12 Threads 12MB Cache up to 5.0GHz)
 RAM 16GB DDR4-2933MHz
@@ -369,9 +371,10 @@ Tích hợp 1x USB 3.1 Gen 2 Type-C Thunderbolt™ 3, 1x USB 3.2 Gen 1, 2x USB 2
 Bàn phím US Backlit Keyboard
 Trọng lượng 2.34kg
 Pin 68 Whr, 4-cell Battery (Integrated)
-Hệ điều hành Windows 10 Home')
+Hệ điều hành Windows 10 Home',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Dell Inspiron (N3I3016W)-SILVER i3-1115G4 8GB SSD 256GB 13.3 FHD', CAST(15990000 AS Decimal(18, 0)), CAST(15990000 AS Decimal(18, 0)), 30, 1, 3, 1, N'Images/Product/3.png', N'Thương Hiệu DELL
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'Dell Inspiron (N3I3016W)-SILVER i3-1115G4 8GB SSD 256GB 13.3 FHD', CAST(15990000 AS Decimal(18, 0)), CAST(15990000 AS Decimal(18, 0)), 30, 1, 3, 1, N'Images/Product/3.png', N'Thương Hiệu DELL
 Model Inspiron 5301
 CPU Intel® Core™ i3-1115G4 (2-Core 4 Threads 8MB Cache up to 4.1Hz)
 RAM 8GB Onboard LPDDR4X Buss 4267MHz
@@ -384,9 +387,10 @@ Tích hợp 1 x USB 3.2 Gen 2 Type-C port with DisplayPort/PowerDelivery, 2 x US
 Bàn phím backlit keyboard
 Trọng lượng 1.06kg
 Pin 40 Whr, 3-cell Battery (Integrated)
-Hệ điều hành Windows 10 Home')
+Hệ điều hành Windows 10 Home',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS A512FL - EJ765T I5-10210U MX250 8GB 512GB SSD 15.6" FHD', CAST(15490000 AS Decimal(18, 0)), CAST(15490000 AS Decimal(18, 0)), 30, 2, 1, 1, N'Images/Product/4.png', N'Thương Hiệu ASUS
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'ASUS A512FL - EJ765T I5-10210U MX250 8GB 512GB SSD 15.6" FHD', CAST(15490000 AS Decimal(18, 0)), CAST(15490000 AS Decimal(18, 0)), 30, 2, 1, 1, N'Images/Product/4.png', N'Thương Hiệu ASUS
 Model VIVOBOOK
 CPU Intel® Core™ i5-10210U (4-Core 8 Threads 6MB Cache up to 3.9Hz)
 RAM 8GB DDR4-2666MHz
@@ -399,9 +403,10 @@ Tích hợp Microphone-in/Headphone-out jack, Type C USB3.0 (USB3.1 GEN1), USB 3
 Bàn phím Full-sized  keyboard
 Trọng lượng 1.66 Kg
 Pin 37 Whr, 2-cell Battery (Integrated)
-Hệ điều hành WINDOWS 10 Home')
+Hệ điều hành WINDOWS 10 Home',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS ProArt StudioBook Pro 15 ( W500G5T XS77 ) I7 9750H Quadro RTX 5000 RAM 48GB 2TB SSD', CAST(115918000 AS Decimal(18, 0)), CAST(115918000 AS Decimal(18, 0)), 10, 2, 2, 1, N'Images/Product/5.png', N'Thương Hiệu ASUS
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'ASUS ProArt StudioBook Pro 15 ( W500G5T XS77 ) I7 9750H Quadro RTX 5000 RAM 48GB 2TB SSD', CAST(115918000 AS Decimal(18, 0)), CAST(115918000 AS Decimal(18, 0)), 10, 2, 2, 1, N'Images/Product/5.png', N'Thương Hiệu ASUS
 Model Pro Art
 CPU Intel® Core™ i7-9750H (6-Core 12 Threads 12MB Cache up to 4.5GHz)
 RAM 48GB DDR4-2400MHz
@@ -414,9 +419,10 @@ Tích hợp 1 x Microphone-in jack, 1 x Microphone-in/Headphone-out jack, 2 x Ty
 Bàn phím Illuminated chiclet keyboard with new Hot Keys for greater convenience
 Trọng lượng 1.9 Kg
 Pin 76 Whr, 4-cell Battery (Integrated)
-Hệ điều hành WINDOWS 10 Pro')
+Hệ điều hành WINDOWS 10 Pro',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'ASUS ROG Strix G15 G512-IAL013T i5-10300H 1650Ti 4GB 8GB 512GB 15.6" FHD 144Hz', CAST(22990000 AS Decimal(18, 0)), CAST(22990000 AS Decimal(18, 0)), 20, 2, 3, 1, N'Images/Product/6.png', N'Thương Hiệu ASUS
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'ASUS ROG Strix G15 G512-IAL013T i5-10300H 1650Ti 4GB 8GB 512GB 15.6" FHD 144Hz', CAST(22990000 AS Decimal(18, 0)), CAST(22990000 AS Decimal(18, 0)), 20, 2, 3, 1, N'Images/Product/6.png', N'Thương Hiệu ASUS
 Model ROG STRIX G15
 CPU Intel Core i5-10300H 2.5GHz up to 4.5GHz 8MB
 RAM 8GB DDR4 3200MHz
@@ -429,9 +435,10 @@ Tích hợp 1x USB3.2 Gen2 Type-C support DisplayPort™ 3x USB3.2 Gen 1 Type-A 
 Bàn phím RGB KB
 Trọng lượng 2.4 Kg
 Pin 48 Whr, 3-cell Battery (Integrated)
-Hệ điều hành WINDOWS 10 Home')
+Hệ điều hành WINDOWS 10 Home',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'HP 14 348 G7 ( 9PG86PA ) I3-10110U 4GB 256GB SSD 14" FHD', CAST(11400000 AS Decimal(18, 0)), CAST(11400000 AS Decimal(18, 0)), 30, 3, 1, 1, N'Images/Product/7.png', N'Thương Hiệu HP
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'HP 14 348 G7 ( 9PG86PA ) I3-10110U 4GB 256GB SSD 14" FHD', CAST(11400000 AS Decimal(18, 0)), CAST(11400000 AS Decimal(18, 0)), 30, 3, 1, 1, N'Images/Product/7.png', N'Thương Hiệu HP
 Model 348 G7
 CPU Intel® Core™ i3-10110U(2-Core 4 Threads 4MB Cache up to 4.1Hz)
 RAM 4GB DDR4-2666MHz 
@@ -443,9 +450,10 @@ Kết nối Wifi 802.11 AC + Bluetooth® 5.0
 Tích hợp 3 x USB 3.1 Gen 1, 1 x USB 3.1 Type-C™, 1x HDMI 1.4
 Trọng lượng 1.50 kg
 Pin 41 Whr
-Hệ điều hành Windows 10')
+Hệ điều hành Windows 10',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'HP Envy 13-ba1028TU ( 2K0B2PA ) i5-1135G7 8GB 512GB SSD 13.3" FHD', CAST(22490000 AS Decimal(18, 0)), CAST(22490000 AS Decimal(18, 0)), 20, 3, 2, 1, N'Images/Product/8.png', N'Thương Hiệu HP
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'HP Envy 13-ba1028TU ( 2K0B2PA ) i5-1135G7 8GB 512GB SSD 13.3" FHD', CAST(22490000 AS Decimal(18, 0)), CAST(22490000 AS Decimal(18, 0)), 20, 3, 2, 1, N'Images/Product/8.png', N'Thương Hiệu HP
 Model Envy 13
 CPU Intel Core i5-1135G7(4-Core 8 Threads 8MB Cache up to 4.2Hz)
 RAM 8GB DDR4 3200MHz (Onboard)
@@ -458,9 +466,10 @@ Tích hợp 1 x Thunderbolt 4 with USB 4 Type-C, 1x SuperSpeed USB Type-A (HP Sl
 Bàn phím Backlit keyboard
 Trọng lượng 1.31 kg
 Pin 53 Whr, 3-cell
-Hệ điều hành Windows 10')
+Hệ điều hành Windows 10',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Macbook Air 13" 2020 Gold MGND3 - Apple M1 256GB SSD', CAST(25590000 AS Decimal(18, 0)), CAST(25590000 AS Decimal(18, 0)), 20, 4, 3, 1, N'Images/Product/9.png', N'Thương Hiệu APPLE
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'Macbook Air 13" 2020 Gold MGND3 - Apple M1 256GB SSD', CAST(25590000 AS Decimal(18, 0)), CAST(25590000 AS Decimal(18, 0)), 20, 4, 3, 1, N'Images/Product/9.png', N'Thương Hiệu APPLE
 Model Macbook Air 13
 CPU Apple M1 chip with 8-core CPU
 RAM 8GB PDDR4X-4266MHz SDRAM
@@ -473,9 +482,10 @@ Tích hợp Two Thunderbolt / USB 4 ports
 Bàn phím Keyboard LED
 Trọng lượng 1.4 Kg
 Pin 58.2 Whr
-Hệ điều hành MacOS')
+Hệ điều hành MacOS',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'MacBook Pro 16" 2019 Gray 1TB MVVK2', CAST(65490000 AS Decimal(18, 0)), CAST(65490000 AS Decimal(18, 0)), 15, 4, 1, 1, N'Images/Product/10.png', N'Thương Hiệu APPLE
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'MacBook Pro 16" 2019 Gray 1TB MVVK2', CAST(65490000 AS Decimal(18, 0)), CAST(65490000 AS Decimal(18, 0)), 15, 4, 1, 1, N'Images/Product/10.png', N'Thương Hiệu APPLE
 Model Macbook Pro 16
 CPU 2.3GHz 8-core 9th-generation Intel Core i9 processor
 Turbo Boost up to 4.8GHz
@@ -489,9 +499,10 @@ Tích hợp USB-C (4 cổng) Thunderbolt 3
 Bàn phím keyboard LED
 Trọng lượng 2.0 Kg
 Pin Built‑in 100‑watt‑hour lithium‑polymer battery
-Hệ điều hành MacOS')
+Hệ điều hành MacOS',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Lenovo Legion 5 Pro 16ACH6H (82JQ001VVN) R7-5800H 16GB 512GB VGA RTX 3060 6GB 16'' WQXGA 165Hz', CAST(43690000 AS Decimal(18, 0)), CAST(43690000 AS Decimal(18, 0)), 20, 5, 2, 1, N'Images/Product/11.png', N'Thương Hiệu Lenovo
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'Lenovo Legion 5 Pro 16ACH6H (82JQ001VVN) R7-5800H 16GB 512GB VGA RTX 3060 6GB 16'' WQXGA 165Hz', CAST(43690000 AS Decimal(18, 0)), CAST(43690000 AS Decimal(18, 0)), 20, 5, 2, 1, N'Images/Product/11.png', N'Thương Hiệu Lenovo
 Model LEGION 5
 CPU AMD Ryzen 7 5800H 3.2GHz up to 4.4GHz 16MB
 RAM 16GB (8GBx2) DDR4 3200MHz (2x SO-DIMM socket, up to 32GB SDRAM)
@@ -504,9 +515,10 @@ Tích hợp 41x USB-C 3.2 Gen 2 (support data transfer, Power Delivery and Displ
 Bàn phím Backlit Keyboard 
 Trọng lượng 2.45 kg
 Pin 4 Cell 80 WHr
-Hệ điều hành Windows 10')
+Hệ điều hành Windows 10',
+1)
 GO
-INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa]) VALUES (N'Laptop Lenovo ThinkPad E14 Gen 2 20TA002MVA (i7-1165G7 RAM 8GB 512GB SSD Intel Iris 14"FHD', CAST(20590000 AS Decimal(18, 0)), CAST(20590000 AS Decimal(18, 0)), 20, 5, 3, 1, N'Images/Product/12.png', N'Thương Hiệu Lenovo
+INSERT [dbo].[SanPham] ([Ten], [GiaNhap], [GiaBan], [SoLuong], [IDLoaiSanPham], [IDNguonNhap], [IdDonViTinh], [HinhAnh], [MoTa], [TrangThai]) VALUES (N'Laptop Lenovo ThinkPad E14 Gen 2 20TA002MVA (i7-1165G7 RAM 8GB 512GB SSD Intel Iris 14"FHD', CAST(20590000 AS Decimal(18, 0)), CAST(20590000 AS Decimal(18, 0)), 20, 5, 3, 1, N'Images/Product/12.png', N'Thương Hiệu Lenovo
 Model THINKPAD E14 Gen 2
 CPU Intel® Core™ i7-1165G7 (tối đa 4.70 GHz, 12MB)
 RAM 8GB DDR4 3200Mhz 
@@ -519,7 +531,8 @@ Tích hợp 1x USB 2.0 1x USB 3.2 Gen 1 (Always On) 1x Thunderbolt 4 / USB4 40Gb
 Bàn phím Backlit Keyboard 
 Trọng lượng 1.59kg
 Pin 3 Cells 45 Whrs
-Hệ điều hành Free Dos')
+Hệ điều hành Free Dos',
+1)
 GO
 INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (1, 1, 1)
 GO

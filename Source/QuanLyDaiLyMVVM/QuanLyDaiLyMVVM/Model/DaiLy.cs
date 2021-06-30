@@ -23,7 +23,7 @@ namespace QuanLyDaiLyMVVM.Model
         }
 
         private int _Id;
-        public int Id { get=>_Id; set { _Id = value; OnPropertyChanged(); } }
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
         private string _Ten;
         public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
         private string _DienThoai;
@@ -44,11 +44,9 @@ namespace QuanLyDaiLyMVVM.Model
         private string _HinhAnh;
         public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
 
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietBaoCao> ChiTietBaoCaos { get; set; }
-        private LoaiDaiLy _LoaiDaiLy;
-        public virtual LoaiDaiLy LoaiDaiLy { get=>_LoaiDaiLy; set { _LoaiDaiLy = value; OnPropertyChanged(); } }
+        public virtual LoaiDaiLy LoaiDaiLy { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuDaiLy> PhieuDaiLies { get; set; }
     }

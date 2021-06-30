@@ -21,12 +21,9 @@ namespace QuanLyDaiLyMVVM
     /// </summary>
     public partial class CapNhatSanPhamWindow : Window
     {
-        CapNhatSanPhamViewModel viewModel;
-        public CapNhatSanPhamWindow(SanPhamHienThi sanPhamHienThi)
+        public CapNhatSanPhamWindow()
         {
             InitializeComponent();
-            viewModel = this.DataContext as CapNhatSanPhamViewModel;
-            viewModel.loadDataBinding(sanPhamHienThi);
         }
     }
 }

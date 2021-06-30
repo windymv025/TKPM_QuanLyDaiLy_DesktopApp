@@ -162,6 +162,7 @@
           <Property Name="IdDonViTinh" Type="int" Nullable="false" />
           <Property Name="HinhAnh" Type="nvarchar(max)" />
           <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TaiKhoan">
           <Key>
@@ -621,6 +622,7 @@
           <NavigationProperty Name="HinhAnhSanPhams" Relationship="Self.HinhAnhSanPham_fk0" FromRole="SanPham" ToRole="HinhAnhSanPham" />
           <NavigationProperty Name="LoaiSanPham" Relationship="Self.SanPham_fk0" FromRole="SanPham" ToRole="LoaiSanPham" />
           <NavigationProperty Name="NguonNhap" Relationship="Self.SanPham_fk1" FromRole="SanPham" ToRole="NguonNhap" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TaiKhoan">
           <Key>
@@ -1057,6 +1059,7 @@
           <EntitySetMapping Name="SanPhams">
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.SanPham">
               <MappingFragment StoreEntitySet="SanPham">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
