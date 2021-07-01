@@ -47,15 +47,31 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Ellipse Width="300"
-                             Height="300"
-                             VerticalAlignment="Center"
-                             HorizontalAlignment="Center" StrokeThickness="1" Stroke="Black">
-                        <Ellipse.Fill>
-                            <ImageBrush Stretch="UniformToFill"
-                                        ImageSource="{Binding NhanVien.HinhAnh}" />
-                        </Ellipse.Fill>
-                    </Ellipse>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Ellipse Width="300"
+                                 Height="300"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 StrokeThickness="1"
+                                 Stroke="Black">
+                            <Ellipse.Fill>
+                                <ImageBrush Stretch="UniformToFill" x:Name="imgEllipse"
+                                            ImageSource="{Binding NhanVien.HinhAnh}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="130" Grid.Row="1"
+                                Margin="10,0,10,0"
+                                ToolTip="Đổi hình ảnh"
+                                Command="{Binding ChangeAVTCommand}"
+                                VerticalContentAlignment="Center">
+                            Đổi hình ảnh
+                        </Button>
+                    </Grid>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="100" />

@@ -1,12 +1,15 @@
-﻿using QuanLyDaiLyMVVM.Model;
+﻿using Microsoft.Win32;
+using QuanLyDaiLyMVVM.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
@@ -28,14 +31,16 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand PasswordChangedCommandNew { get; set; }
         public ICommand WindowLoaded { get; set; }
-
+        public ICommand ChangeAVTCommand { get; set; }
+        
         public ProfileViewModel()
         {
             using (var db = new DBQuanLyCacDaiLyEntities())
             {
                 NhanVien = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault();
             }
-                        
+            NhanVien.HinhAnh = Path.GetFullPath(NhanVien.HinhAnh);
+
             ShowDoiMatKhauCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DoiMatKhauWindow wd = new DoiMatKhauWindow(); wd.ShowDialog(); });
             ShowDSNhanVienCommand = new RelayCommand<NhanVienWindow>((p) => {
                 if (p == null)
@@ -93,6 +98,36 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
             PasswordChangedCommandNew = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { NewPassword = p.Password; });
+
+            ChangeAVTCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                OpenFileDialog open = new OpenFileDialog();
+                open.Multiselect = false;
+                open.Filter = "Image Files(*.jpg; *.png; *.jpeg; *.gif; *.bmp)|*.jpg; *.png; *.jpeg; *.gif; *.bmp";
+                bool? result = open.ShowDialog();
+                if (result == true)
+                {
+                    var img = open.FileNames;
+                    //p.imgEllipse.ImageSource = new BitmapImage(new Uri(img[0].ToString()));
+                    NhanVien.HinhAnh = img[0].ToString();
+
+                    var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                    string uriImage = currentFolder.ToString();
+                    string file = NhanVien.HinhAnh;
+
+
+                    //Lấy file ảnh copy vào Images của project
+                    var info = new FileInfo(file);
+                    var newName = $"{Guid.NewGuid()}{info.Extension}";
+                    File.Copy(file, $"{uriImage}Images\\Staff\\{newName}");
+ 
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        var item = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault();
+                        item.HinhAnh = $"Images/Staff/{newName}";
+                        db.SaveChanges();
+                    }
+                }
+            });
             CloseCommand = new RelayCommand<Window>((p) => { if (p == null) return false; return true; }, (p) => { p.Close(); });
         }
     }

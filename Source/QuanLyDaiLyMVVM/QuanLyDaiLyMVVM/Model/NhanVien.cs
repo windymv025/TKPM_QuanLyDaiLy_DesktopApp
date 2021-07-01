@@ -9,17 +9,19 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
+    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class NhanVien
+    public partial class NhanVien : BaseViewModel
     {
         public int Id { get; set; }
         public string Ten { get; set; }
         public string DienThoai { get; set; }
         public string DiaChi { get; set; }
         public string Email { get; set; }
-        public string HinhAnh { get; set; }
+        private string _HinhAnh;
+        public string HinhAnh { get=>_HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
         public Nullable<int> VaiTro { get; set; }
         public Nullable<bool> isRemove { get; set; }
     
