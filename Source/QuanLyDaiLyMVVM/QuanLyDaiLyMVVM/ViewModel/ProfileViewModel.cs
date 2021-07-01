@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
-    public class ProfileViewModel: BaseViewModel
+    public class ProfileViewModel : BaseViewModel
     {
         private NhanVien _NhanVien;
         public NhanVien NhanVien { get => _NhanVien; set { _NhanVien = value; OnPropertyChanged(); } }
@@ -32,7 +32,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand PasswordChangedCommandNew { get; set; }
         public ICommand WindowLoaded { get; set; }
         public ICommand ChangeAVTCommand { get; set; }
-        
+
         public ProfileViewModel()
         {
             using (var db = new DBQuanLyCacDaiLyEntities())
@@ -79,8 +79,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         return false;
                     }
                 }
-            }, (p) => { 
-                if(!string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(NewPassword))
+            }, (p) => {
+                if (!string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(NewPassword))
                 {
                     using (var db = new DBQuanLyCacDaiLyEntities())
                     {
@@ -119,7 +119,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     var info = new FileInfo(file);
                     var newName = $"{Guid.NewGuid()}{info.Extension}";
                     File.Copy(file, $"{uriImage}Images\\Staff\\{newName}");
- 
+
                     using (var db = new DBQuanLyCacDaiLyEntities())
                     {
                         var item = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault();
