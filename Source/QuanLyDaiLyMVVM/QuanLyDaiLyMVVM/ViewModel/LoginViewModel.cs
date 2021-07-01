@@ -45,7 +45,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
             using(var db = new DBQuanLyCacDaiLyEntities())
             {
-                var accCount = db.TaiKhoans.Where(x => x.TenDangNhap == UserName && x.MatKhau == passEncode);
+                var listAccountActive = from tk in db.TaiKhoans
+                                        join nv in db.NhanViens on tk.Id equals nv.Id
+                                        where nv.isRemove == false
+                                        select new
+                                        {
+                                            Id = tk.Id,
+                                            TENDANGNHAP = tk.TenDangNhap,
+                                            MATKHAU = tk.MatKhau
+                                        };
+                var accCount = listAccountActive.Where(x => x.TENDANGNHAP == UserName && x.MATKHAU == passEncode);
+                //var accCount = db.TaiKhoans.Where(x => x.TenDangNhap == UserName && x.MatKhau == passEncode);
                 if (accCount.Count() > 0)
                 {
                     IsLogin = true;

@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
@@ -47,6 +49,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             } 
         }
+
+        public ICommand AddCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand PasswordChangedCommand { get; set; }
+
+
         public NhanVienViewModel()
         {
             ListVaiTro = new ObservableCollection<int>() { 1, 2 };
@@ -84,6 +93,174 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
                        
             }
+
+            AddCommand = new RelayCommand<NhanVienVaTaiKhoanWindow>((p) => {
+                if (p == null || string.IsNullOrEmpty(p.ten.Text.Trim()) || string.IsNullOrEmpty(p.phone.Text.Trim()) || string.IsNullOrEmpty(p.address.Text.Trim()) || string.IsNullOrEmpty(p.role.Text.Trim()) || string.IsNullOrEmpty(p.username.Text.Trim()))
+                {
+                    return false;
+                }
+                else
+                {
+                    using(var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        if(db.TaiKhoans.Where(x=>x.TenDangNhap == TenDangNhap).Count() > 0)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            if(db.NhanViens.Where(x=>x.Ten == Ten && x.DienThoai == DienThoai).Count() > 0)
+                            {
+                                return false;
+                            }
+                            else
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }, (p) => {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var nv = new NhanVien()
+                    {
+                        Ten = Ten,
+                        DienThoai = DienThoai,
+                        DiaChi = DiaChi,
+                        Email = Email,
+                        VaiTro = VaiTro,
+                        HinhAnh = null,
+                        isRemove = false
+                    };
+                    db.NhanViens.Add(nv);
+                    db.SaveChanges();
+
+                    var tk = new TaiKhoan()
+                    {
+                        //Id = db.NhanViens.Where(x => x.Ten == Ten && x.DienThoai == DienThoai).FirstOrDefault().Id,
+                        Id = nv.Id,
+                        TenDangNhap = TenDangNhap,
+                        MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau))
+                    };
+
+                    db.TaiKhoans.Add(tk);
+                    db.SaveChanges();
+                    
+                    List.Add(new NhanVienVaTaiKhoan() {
+                        Id = Id,
+                        Ten = Ten,
+                        DienThoai = DienThoai,
+                        DiaChi = DiaChi,
+                        Email = Email,
+                        VaiTro = VaiTro,
+                        TenDangNhap = TenDangNhap,
+                        MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau))
+                    });
+                }
+
+                Ten = null;
+                DienThoai = null;
+                DiaChi = null;
+                Email = null;
+                VaiTro = 2;
+                TenDangNhap = null;
+                MatKhau = null;
+                p.FloatingPasswordBox.Password = null;
+            });
+            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { MatKhau = p.Password; });
+
+            EditCommand = new RelayCommand<NhanVienVaTaiKhoanWindow>((p) =>
+            {
+                if (p == null || string.IsNullOrEmpty(p.ten.Text.Trim()) || string.IsNullOrEmpty(p.phone.Text.Trim()) || string.IsNullOrEmpty(p.address.Text.Trim()) || string.IsNullOrEmpty(p.role.Text.Trim()) || string.IsNullOrEmpty(p.username.Text.Trim()) || SelectedItem == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        if (db.TaiKhoans.Where(x => x.TenDangNhap == TenDangNhap).Count() > 0)
+                        {
+                            if (db.TaiKhoans.Where(x => x.TenDangNhap == TenDangNhap).FirstOrDefault().Id == SelectedItem.Id)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var item = db.NhanViens.Where(x => x.Id == SelectedItem.Id).FirstOrDefault();
+                    item.Ten = Ten;
+                    item.DienThoai = DienThoai;
+                    item.DiaChi = DiaChi;
+                    item.Email = Email;
+                    item.VaiTro = VaiTro;
+                    
+                    db.SaveChanges();
+
+                    var tk = db.TaiKhoans.Where(x => x.Id == SelectedItem.Id).FirstOrDefault();
+                    tk.TenDangNhap = TenDangNhap;
+                    tk.MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau));
+                    db.SaveChanges();
+
+                    SelectedItem.Ten = Ten;
+                    SelectedItem.DienThoai = DienThoai;
+                    SelectedItem.DiaChi = DiaChi;
+                    SelectedItem.Email = Email;
+                    SelectedItem.VaiTro = VaiTro;
+                    SelectedItem.TenDangNhap = TenDangNhap;
+                    SelectedItem.MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau));
+                }
+            });
+
+            DeleteCommand = new RelayCommand<NhanVienVaTaiKhoanWindow>((p) =>
+            {
+                if (SelectedItem == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    if(SelectedItem.Id == LoginViewModel.IdUser)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var item = db.NhanViens.Where(x => x.Id == SelectedItem.Id).FirstOrDefault();
+                    item.isRemove = true;
+                    db.SaveChanges();
+
+                    List.Remove(SelectedItem);
+
+                    SelectedItem = null;
+                    Ten = null;
+                    DienThoai = null;
+                    DiaChi = null;
+                    Email = null;
+                    VaiTro = 2;
+                    TenDangNhap = null;
+                    MatKhau = null;
+                    p.FloatingPasswordBox.Password = null;
+                }
+            });
+
         }
     }
 }

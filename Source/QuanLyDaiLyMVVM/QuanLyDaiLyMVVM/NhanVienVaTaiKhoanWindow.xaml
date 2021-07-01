@@ -33,42 +33,45 @@
                                  Margin="5">
                 <WrapPanel Margin="0 0 0 10">
                     <TextBox Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
+                             Margin="5 5 15 5" x:Name="ten"
                              materialDesign:HintAssist.Hint="Tên nhân viên"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
+                             Margin="5 5 15 5" x:Name="phone"
                              materialDesign:HintAssist.Hint="Điện thoại"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
+                             Margin="5 5 15 5" x:Name="address"
                              materialDesign:HintAssist.Hint="Địa chỉ"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
+                             Margin="5 5 15 5" x:Name="email"
                              materialDesign:HintAssist.Hint="Email"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding TenDangNhap, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
+                             Margin="5 5 15 5" x:Name="username"
                              materialDesign:HintAssist.Hint="Tên đăng nhập"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <TextBox Text="{Binding MatKhau, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
-                             materialDesign:HintAssist.Hint="Mật khẩu"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <PasswordBox x:Name="FloatingPasswordBox"
+                                 Margin="5 5 15 5"
+                                 materialDesign:HintAssist.Hint="Mật khẩu"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
+                                                       CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
                     <ComboBox materialDesign:HintAssist.Hint="Vai trò"
                               ItemsSource="{Binding ListVaiTro}"
-                              Width="auto"
+                              Width="auto" x:Name="role"
                               materialDesign:HintAssist.IsFloating="True"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Center"
                               Margin="0,0,100,0"
                               SelectedItem="{Binding VaiTro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding CBBVaiTroCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
                     </ComboBox>
                 </WrapPanel>
             </materialDesign:Card>
@@ -107,7 +110,7 @@
                                 <GridViewColumn Header="Điện thoại"
                                                 DisplayMemberBinding="{Binding DienThoai}"></GridViewColumn>
                                 <GridViewColumn Header="Địa chỉ"
-                                                DisplayMemberBinding="{Binding Diachi}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
                                 <GridViewColumn Header="Email"
                                                 DisplayMemberBinding="{Binding Email}"></GridViewColumn>
                                 <GridViewColumn Header="Tên đăng nhập"
