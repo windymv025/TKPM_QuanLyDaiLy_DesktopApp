@@ -530,7 +530,6 @@ GO
 
 INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'SO_LUONG_LOAI_DAI_LY', 2, N'integer', 1)
 INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN', 4, N'integer', 1)
-INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'LAI_XUAT', 0.23, N'float', 1)
 GO
 
 

@@ -60,6 +60,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
              * group by dl.Id, dl.Ten
              */
             DoanhSoHienThi = new ObservableCollection<DoanhSo>();
+            CongNoHienThi = new ObservableCollection<CongNo>();
             SeriesCollection_DoanhSo = new SeriesCollection();
             SeriesCollection_DoanhSoCot = new SeriesCollection();
             SeriesCollection_CongNoCot = new SeriesCollection();
@@ -67,13 +68,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
             using (var db = new DBQuanLyCacDaiLyEntities())
             {
                 var daily = db.DaiLies.Where(x => x.IsRemove == false).ToList();
-                var phieudaily = db.PhieuDaiLies.Where(x=>x.NgayLapPhieu.Year == Year).ToList();
+                var phieudaily = db.PhieuDaiLies.ToList();
                 var phieuxuathang = db.PhieuXuatHangs.ToList();
                 var phieuthutien = db.PhieuThuTiens.ToList();
 
                 //Kết bảng đại lý và phiếu đại lý
                 var query_daily_phieudaily = from dl in daily
                                              join pdl in phieudaily on dl.Id equals pdl.IdDaiLy
+                                             where pdl.NgayLapPhieu.Year == Year
                                              select new
                                              {
                                                  iddl = dl.Id,
@@ -103,41 +105,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
                              TENDAILY = gr.Key.TENDAILY,
                              TIEN = money
                          };
-
-                /*==========================================================================================*/
-                //Kết bảng đại lý, phiếu đại lý và phiếu xuất hàng
-                var daily_phieudaily_thutien = from p in query_daily_phieudaily
-                                                     join ptt in phieuthutien on p.idpdl equals ptt.IdPhieuDaiLy
-                                                     select new
-                                                     {
-                                                         IDDAILY = p.iddl,
-                                                         TENDAILY = p.tendl,
-                                                         TIEN = ptt.SoTienThu,
-                                                         TIME = p.time
-                                                     };
-
-                //Group by => số tiền thu
-                var kq2 = from p in daily_phieudaily_thutien
-                          group p by new { p.IDDAILY, p.TENDAILY } into gr
-                         let money = gr.Sum(x => x.TIEN)
-                         select new
-                         {
-                             IDDAILY = gr.Key.IDDAILY,
-                             TENDAILY = gr.Key.TENDAILY,
-                             TIEN = money
-                         };
-
-                //Tìm số tiền nợ
-                var result = from r1 in kq
-                             join r2 in kq2 on r1.IDDAILY equals r2.IDDAILY
-                             select new
-                             {
-                                 IDDAILY = r1.IDDAILY,
-                                 TENDAILY = r1.TENDAILY,
-                                 TIENNO = r1.TIEN - r2.TIEN
-                             };
-
-
                 decimal sum = 0;
                 sum = kq.ToList().Sum(x => x.TIEN);
                 foreach (var item in kq)
@@ -150,6 +117,65 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         Tyle = (double)(item.TIEN / sum)
                     });
                 }
+
+                /*===========================================Công nợ===============================================*/
+                //Kết bảng đại lý, phiếu đại lý và phiếu thu tiền
+                var daily_phieudaily_thutien = from dl in daily
+                                               join pdl in phieudaily on dl.Id equals pdl.IdDaiLy
+                                               join ptt in phieuthutien on pdl.Id equals ptt.IdPhieuDaiLy
+                                                     select new
+                                                     {
+                                                         IDDAILY = dl.Id,
+                                                         TENDAILY = dl.Ten,
+                                                         TIEN = ptt.SoTienThu,
+                                                         TIME = pdl.NgayLapPhieu
+                                                     };
+                var daily_phieudaily_phieuxuathang_noYear = from dl in daily
+                                                            join pdl in phieudaily on dl.Id equals pdl.IdDaiLy
+                                                            join pxh in phieuxuathang on pdl.Id equals pxh.IdPhieuDaiLy
+                                                            select new
+                                                            {
+                                                                IDDAILY = dl.Id,
+                                                                TENDAILY = dl.Ten,
+                                                                TIEN = pxh.TongTien,
+                                                                TIME = pdl.NgayLapPhieu
+                                                            };
+                
+                
+                //Group by => số tiền mua sản phẩm
+                var kq2 = from p in daily_phieudaily_phieuxuathang_noYear
+                          group p by new { p.IDDAILY, p.TENDAILY } into gr
+                          let money = gr.Sum(x => x.TIEN)
+                          select new
+                          {
+                              IDDAILY = gr.Key.IDDAILY,
+                              TENDAILY = gr.Key.TENDAILY,
+                              TIEN = money,
+                          };
+                //Group by => số tiền thu
+                var kq3 = from p in daily_phieudaily_thutien
+                          group p by new { p.IDDAILY, p.TENDAILY } into gr
+                          let money = gr.Sum(x => x.TIEN)
+                          select new
+                          {
+                              IDDAILY = gr.Key.IDDAILY,
+                              TENDAILY = gr.Key.TENDAILY,
+                              TIEN = money,
+                          };
+
+                //Tìm số tiền nợ
+                var rs = from r1 in kq2
+                             join r2 in kq3 on r1.IDDAILY equals r2.IDDAILY into a
+                             from b in a.DefaultIfEmpty()
+                             select new
+                             {
+                                 IDDAILY = r1.IDDAILY,
+                                 TENDAILY = r1.TENDAILY,
+                                 TIENNO = r1.TIEN - (b?.TIEN ?? 0)
+                             };
+
+                var result = rs.Where(x => x.TIENNO != 0);
+                
 
                 foreach (var item in DoanhSoHienThi)
                 {
@@ -174,7 +200,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
 
                 /*================================CÔNG NỢ========================*/
-                var LaiXuat = db.QuyDinhs.Where(x => x.TenQuyDinh == "LAI_XUAT" && x.TrangThai == true).FirstOrDefault().GiaTri;
+                
                 foreach (var item in result)
                 {
                     CongNoHienThi.Add(new CongNo()
@@ -182,8 +208,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         IdDaiLy = item.IDDAILY,
                         TenDaiLy = item.TENDAILY,
                         TienNo = item.TIENNO,
-                        TienPhatSinh = (decimal)((double)item.TIENNO + ((double)item.TIENNO * LaiXuat))
                     });
+                }
+                foreach(var item in CongNoHienThi)
+                {
+                    ColumnSeries columnSeries = new ColumnSeries()
+                    {
+                        Values = new ChartValues<decimal> { item.TienNo },
+                        Title = item.TenDaiLy,
+                        DataLabels = true
+                    };
+                    SeriesCollection_CongNoCot.Add(columnSeries);
                 }
             }
         }
