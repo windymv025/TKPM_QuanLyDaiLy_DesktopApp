@@ -9,17 +9,29 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
+    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuDaiLy
+    public partial class PhieuDaiLy: BaseViewModel
     {
-        public int Id { get; set; }
-        public System.DateTime NgayLapPhieu { get; set; }
-        public int IdDaiLy { get; set; }
-    
-        public virtual DaiLy DaiLy { get; set; }
-        public virtual PhieuThuTien PhieuThuTien { get; set; }
-        public virtual PhieuXuatHang PhieuXuatHang { get; set; }
+        private int _Id;
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+
+       
+        private System.DateTime _NgayLapPhieu ;
+        public System.DateTime NgayLapPhieu { get => _NgayLapPhieu; set { _NgayLapPhieu = value; OnPropertyChanged(); } }
+
+        private int _IdDaiLy ;
+        public int IdDaiLy { get => _IdDaiLy; set { _IdDaiLy = value; OnPropertyChanged(); } }
+
+        private DaiLy _DaiLy ;
+        public virtual DaiLy DaiLy { get => _DaiLy; set { _DaiLy = value; OnPropertyChanged(); } }
+
+        private PhieuThuTien _PhieuThuTien ;
+        public virtual PhieuThuTien PhieuThuTien { get => _PhieuThuTien; set { _PhieuThuTien = value; OnPropertyChanged(); } }
+
+        private PhieuXuatHang _PhieuXuatHang ;
+        public virtual PhieuXuatHang PhieuXuatHang { get => _PhieuXuatHang; set { _PhieuXuatHang = value; OnPropertyChanged(); } }
     }
 }

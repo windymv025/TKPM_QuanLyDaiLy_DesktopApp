@@ -45,7 +45,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1.5*" />
                     </Grid.ColumnDefinitions>
                     <Ellipse Width="300"
                              Height="300"
@@ -58,59 +58,60 @@
                     </Ellipse>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="100" />
+                            <RowDefinition Height="50" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="50" />
                         </Grid.RowDefinitions>
                         <TextBlock Text="{Binding NhanVien.Ten}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Foreground="Red"/>
-                        <materialDesign:Card Grid.Row="1"
+						<StackPanel Grid.Row="1" VerticalAlignment="Center">
+							<materialDesign:Card Grid.Row="1"
                                              VerticalContentAlignment="Center"
                                              Height="auto"
-                                             Margin="20" Padding="10" UniformCornerRadius="20">
-                            <StackPanel Orientation="Vertical"
+                                             Margin="20,20" Padding="10" UniformCornerRadius="20">
+								<StackPanel Orientation="Vertical"
                                         VerticalAlignment="Center">
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Phone"
+									<StackPanel Orientation="Horizontal">
+										<materialDesign:PackIcon Kind="Phone"
                                                              Width="40"
                                                              Height="40"
                                                              Foreground="Gray" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding NhanVien.DienThoai}"
+										<TextBlock Text="{Binding NhanVien.DienThoai}"
                                                VerticalAlignment="Center"
                                                FontSize="16"
                                                Foreground="DarkBlue"
                                                FontWeight="ExtraBold"
                                                Margin="20"
                                                TextWrapping="WrapWithOverflow" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="MapMarker"
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<materialDesign:PackIcon Kind="MapMarker"
                                                              Width="40"
                                                              Height="40"
                                                              Foreground="Gray" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding NhanVien.DiaChi}"
+										<TextBlock Text="{Binding NhanVien.DiaChi}"
                                                VerticalAlignment="Center"
                                                FontSize="16"
                                                Foreground="DarkBlue"
                                                FontWeight="ExtraBold"
                                                Margin="20" 
                                                TextWrapping="WrapWithOverflow"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Email"
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<materialDesign:PackIcon Kind="Email"
                                                              Width="40"
                                                              Height="40"
                                                              Foreground="Gray" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding NhanVien.Email}"
+										<TextBlock Text="{Binding NhanVien.Email}"
                                                VerticalAlignment="Center"
                                                FontSize="16"
                                                Foreground="DarkBlue"
                                                FontWeight="ExtraBold"
                                                Margin="20" />
-                                </StackPanel>
-                            </StackPanel>
-                        </materialDesign:Card>
-
-                        <StackPanel Grid.Row="2">
+									</StackPanel>
+								</StackPanel>
+							</materialDesign:Card>
+						</StackPanel>
+						<StackPanel Grid.Row="2">
                             <Button Style="{StaticResource MaterialDesignRaisedButton}"
                                     Width="150"
                                     ToolTip="Resource name: MaterialDesignRaisedButton" Command="{Binding ShowDoiMatKhauCommand}">

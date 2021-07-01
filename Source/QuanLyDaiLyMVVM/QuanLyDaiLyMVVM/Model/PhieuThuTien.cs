@@ -9,14 +9,19 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
+    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuThuTien
+    public partial class PhieuThuTien:BaseViewModel
     {
-        public int IdPhieuDaiLy { get; set; }
-        public decimal SoTienThu { get; set; }
-    
-        public virtual PhieuDaiLy PhieuDaiLy { get; set; }
+        public int _IdPhieuDaiLy;
+        public int IdPhieuDaiLy { get => _IdPhieuDaiLy; set { _IdPhieuDaiLy = value; OnPropertyChanged(); } }
+
+        public decimal _SoTienThu;
+        public decimal SoTienThu { get => _SoTienThu; set { _SoTienThu = value; OnPropertyChanged(); } }
+
+        private PhieuDaiLy _PhieuDaiLy;
+        public virtual PhieuDaiLy PhieuDaiLy { get => _PhieuDaiLy; set { _PhieuDaiLy = value; OnPropertyChanged(); } }
     }
 }

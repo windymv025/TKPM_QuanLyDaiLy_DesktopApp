@@ -177,6 +177,7 @@
     <Compile Include="Model\PhieuXuatHang.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PhieuXuatHangHienThi.cs" />
     <Compile Include="Model\QuyDinh.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>

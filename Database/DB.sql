@@ -116,6 +116,7 @@ GO
 CREATE TABLE [ChiTietPhieuXuatHang] (
 	IdSanPham int NOT NULL,
 	IdPhieuXuatHang int NOT NULL,
+	GiaBan decimal not null,
 	SoLuong int NOT NULL,
 	primary key(IdSanPham, IDPhieuXuatHang)
 )
@@ -534,29 +535,29 @@ Pin 3 Cells 45 Whrs
 Hệ điều hành Free Dos',
 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (1, 1, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (1, 1, 3000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (2, 3, 6)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (2, 3, 30000000, 6)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (3, 4, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (3, 4, 30000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (4, 5, 10)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (4, 5, 30000000, 10)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (5, 6, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (5, 6, 30000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (6, 7, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (6, 7, 30000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (7, 8, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (7, 8, 3000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (8, 9, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (8, 9, 30000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (9, 10, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (9, 10, 3000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (10, 11, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (10, 11, 3000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (11, 12, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (11, 12, 3000000, 1)
 GO
-INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [SoLuong]) VALUES (12, 13, 1)
+INSERT [dbo].[ChiTietPhieuXuatHang] ([IDSanPham], [IDPhieuXuatHang], [GiaBan], [SoLuong]) VALUES (12, 13, 35000000, 1)
 GO
 
 INSERT [dbo].[HinhAnhSanPham] ([IDSanPham], [HinhAnh]) VALUES (1, N'Images/Product/1.png')
