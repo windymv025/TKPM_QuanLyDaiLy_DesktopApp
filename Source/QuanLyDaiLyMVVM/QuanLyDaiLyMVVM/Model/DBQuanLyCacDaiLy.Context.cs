@@ -25,10 +25,6 @@ namespace QuanLyDaiLyMVVM.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BangBaoCao> BangBaoCaos { get; set; }
-        public virtual DbSet<BaoCaoCongNo> BaoCaoCongNoes { get; set; }
-        public virtual DbSet<BaoCaoDoanhSo> BaoCaoDoanhSoes { get; set; }
-        public virtual DbSet<ChiTietBaoCao> ChiTietBaoCaos { get; set; }
         public virtual DbSet<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get; set; }
         public virtual DbSet<DaiLy> DaiLies { get; set; }
         public virtual DbSet<DonViTinh> DonViTinhs { get; set; }

@@ -9,11 +9,10 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
-    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class SanPham: BaseViewModel
+    public partial class SanPham
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
@@ -21,40 +20,18 @@ namespace QuanLyDaiLyMVVM.Model
             this.ChiTietPhieuXuatHangs = new HashSet<ChiTietPhieuXuatHang>();
             this.HinhAnhSanPhams = new HashSet<HinhAnhSanPham>();
         }
-
-        private int _Id;
-        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
-
-        private string _Ten;
-        public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
-
-
-        private decimal _GiaNhap;
-        public decimal GiaNhap { get => _GiaNhap; set { _GiaNhap = value; OnPropertyChanged(); } }
-
-        private decimal _GiaBan;
-        public decimal GiaBan { get => _GiaBan; set { _GiaBan = value; OnPropertyChanged(); } }
-
-        private int _SoLuong;
-        public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
-
-        private int _IdLoaiSanPham;
-        public int IdLoaiSanPham { get => _IdLoaiSanPham; set { _IdLoaiSanPham = value; OnPropertyChanged(); } }
-
-        private int _IdNguonNhap;
-        public int IdNguonNhap { get => _IdNguonNhap; set { _IdNguonNhap = value; OnPropertyChanged(); } }
-
-        private int _IdDonViTinh;
-        public int IdDonViTinh { get => _IdDonViTinh; set { _IdDonViTinh = value; OnPropertyChanged(); } }
-
-        private string _HinhAnh;
-        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
-
-        private string _MoTa;
-        public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
-
-        private bool _TrangThai;
-        public bool TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
+    
+        public int Id { get; set; }
+        public string Ten { get; set; }
+        public decimal GiaNhap { get; set; }
+        public decimal GiaBan { get; set; }
+        public int SoLuong { get; set; }
+        public int IdLoaiSanPham { get; set; }
+        public int IdNguonNhap { get; set; }
+        public int IdDonViTinh { get; set; }
+        public string HinhAnh { get; set; }
+        public string MoTa { get; set; }
+        public bool TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get; set; }

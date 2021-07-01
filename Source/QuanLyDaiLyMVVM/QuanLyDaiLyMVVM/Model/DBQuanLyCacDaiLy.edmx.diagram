@@ -4,29 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9468dd3c59b5404ba802c9d2f0aed2e5" Name="Diagram1">
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.BangBaoCao" Width="1.5" PointX="7.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.BaoCaoCongNo" Width="1.5" PointX="10" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.BaoCaoDoanhSo" Width="1.5" PointX="10" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.ChiTietBaoCao" Width="1.5" PointX="10" PointY="9.75" IsExpanded="true" />
+      <Diagram DiagramId="7ef1a44bcae1480780088907f8c96b2a" Name="Diagram1">
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.ChiTietPhieuXuatHang" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.DaiLy" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.DaiLy" Width="1.5" PointX="1.5" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.DonViTinh" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.HinhAnhSanPham" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.LoaiDaiLy" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.LoaiSanPham" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.NguonNhap" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.NhanVien" Width="1.5" PointX="5.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.NhanVien" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.PhieuDaiLy" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.PhieuThuTien" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.PhieuXuatHang" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.QuyDinh" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.SanPham" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.TaiKhoan" Width="1.5" PointX="8" PointY="13" IsExpanded="true" />
-        <AssociationConnector Association="DBQuanLyCacDaiLyModel.BaoCaoCongNo_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="DBQuanLyCacDaiLyModel.BaoCaoDoanhSo_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="DBQuanLyCacDaiLyModel.ChiTietBaoCao_fk1" ManuallyRouted="false" />
-        <AssociationConnector Association="DBQuanLyCacDaiLyModel.ChiTietBaoCao_fk0" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.QuyDinh" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.SanPham" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuanLyCacDaiLyModel.TaiKhoan" Width="1.5" PointX="10" PointY="2.125" IsExpanded="true" />
         <AssociationConnector Association="DBQuanLyCacDaiLyModel.ChiTietPhieuXuatHang_fk0" ManuallyRouted="false" />
         <AssociationConnector Association="DBQuanLyCacDaiLyModel.ChiTietPhieuXuatHang_fk1" ManuallyRouted="false" />
         <AssociationConnector Association="DBQuanLyCacDaiLyModel.DaiLy_fk0" ManuallyRouted="false" />

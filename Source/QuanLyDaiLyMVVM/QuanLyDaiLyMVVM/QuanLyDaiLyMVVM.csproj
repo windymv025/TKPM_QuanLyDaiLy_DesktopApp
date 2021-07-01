@@ -111,18 +111,6 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\BangBaoCao.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BaoCaoCongNo.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BaoCaoDoanhSo.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ChiTietBaoCao.cs">
-      <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\ChiTietPhieuXuatHang.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
@@ -167,6 +155,7 @@
     <Compile Include="Model\NhanVien.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\NhanVienVaTaiKhoan.cs" />
     <Compile Include="Model\PagingInfo.cs" />
     <Compile Include="Model\PhieuDaiLy.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
@@ -191,6 +180,9 @@
     </Compile>
     <Compile Include="NguonNhapWindow.xaml.cs">
       <DependentUpon>NguonNhapWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienVaTaiKhoanWindow.xaml.cs">
+      <DependentUpon>NhanVienVaTaiKhoanWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="NhanVienWindow.xaml.cs">
       <DependentUpon>NhanVienWindow.xaml</DependentUpon>
@@ -282,6 +274,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NguonNhapWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NhanVienVaTaiKhoanWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -463,6 +459,16 @@
     <Content Include="Assets\Vuong.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+      <LastGenOutput>DBQuanLyCacDaiLy.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\DBQuanLyCacDaiLy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
+      <LastGenOutput>DBQuanLyCacDaiLy.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\Category\apple.png">
@@ -599,16 +605,6 @@
     </Content>
     <Content Include="Images\Staff\Vuong.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Model\DBQuanLyCacDaiLy.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBQuanLyCacDaiLy.Context.cs</LastGenOutput>
-      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model\DBQuanLyCacDaiLy.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBQuanLyCacDaiLy.edmx</DependentUpon>
-      <LastGenOutput>DBQuanLyCacDaiLy.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

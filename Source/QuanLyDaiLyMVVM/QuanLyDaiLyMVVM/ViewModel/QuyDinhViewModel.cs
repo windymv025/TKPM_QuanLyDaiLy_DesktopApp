@@ -16,8 +16,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ObservableCollection<QuyDinh> List { get => _List; set { _List = value; OnPropertyChanged(); } }
         private string _TenQuyDinh;
         public string TenQuyDinh { get => _TenQuyDinh; set { _TenQuyDinh = value;OnPropertyChanged(); } }
-        private int _GiaTri;
-        public int GiaTri { get => _GiaTri; set { _GiaTri = value; OnPropertyChanged(); } }
+        private double _GiaTri;
+        public double GiaTri { get => _GiaTri; set { _GiaTri = value; OnPropertyChanged(); } }
 
         public string _KieuDuLieu;
         public string KieuDuLieu { get => _KieuDuLieu; set { _KieuDuLieu = value; OnPropertyChanged(); } }
