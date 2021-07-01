@@ -21,6 +21,7 @@ namespace QuanLyDaiLyMVVM.Model
         public string Email { get; set; }
         public string HinhAnh { get; set; }
         public Nullable<int> VaiTro { get; set; }
+        public Nullable<bool> isRemove { get; set; }
     
         public virtual TaiKhoan TaiKhoan { get; set; }
     }

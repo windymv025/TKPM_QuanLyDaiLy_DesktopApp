@@ -155,6 +155,7 @@
     <Compile Include="Model\NhanVien.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\NhanVienVaTaiKhoan.cs" />
     <Compile Include="Model\PagingInfo.cs" />
     <Compile Include="Model\PhieuDaiLy.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
@@ -178,6 +179,9 @@
     </Compile>
     <Compile Include="NguonNhapWindow.xaml.cs">
       <DependentUpon>NguonNhapWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienVaTaiKhoanWindow.xaml.cs">
+      <DependentUpon>NhanVienVaTaiKhoanWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="NhanVienWindow.xaml.cs">
       <DependentUpon>NhanVienWindow.xaml</DependentUpon>
@@ -269,6 +273,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NguonNhapWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NhanVienVaTaiKhoanWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

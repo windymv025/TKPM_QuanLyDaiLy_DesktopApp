@@ -22,10 +22,12 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public string NewPassword { get => _NewPassword; set { _NewPassword = value; OnPropertyChanged(); } }
 
         public ICommand ShowDoiMatKhauCommand { get; set; }
+        public ICommand ShowDSNhanVienCommand { get; set; }
         public ICommand DoiMatKhauCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand PasswordChangedCommandNew { get; set; }
+        public ICommand WindowLoaded { get; set; }
 
         public ProfileViewModel()
         {
@@ -33,8 +35,32 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 NhanVien = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault();
             }
-
+                        
             ShowDoiMatKhauCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DoiMatKhauWindow wd = new DoiMatKhauWindow(); wd.ShowDialog(); });
+            ShowDSNhanVienCommand = new RelayCommand<NhanVienWindow>((p) => {
+                if (p == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        var role = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault().VaiTro;
+                        if (role != 1)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }, (p) => {
+                var wd = new NhanVienVaTaiKhoanWindow();
+                wd.ShowDialog();
+            });
             DoiMatKhauCommand = new RelayCommand<Window>((p) => {
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
@@ -67,7 +93,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
             PasswordChangedCommandNew = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { NewPassword = p.Password; });
-            CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
+            CloseCommand = new RelayCommand<Window>((p) => { if (p == null) return false; return true; }, (p) => { p.Close(); });
         }
     }
 }
