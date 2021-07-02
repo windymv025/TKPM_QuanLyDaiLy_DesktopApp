@@ -57,7 +57,7 @@
             <Setter Property="Height"
                     Value="40" />
             <Setter Property="Width"
-                    Value="100" />
+                    Value="auto" />
             <Setter Property="Margin"
                     Value="20,0,0,0" />
             <Setter Property="Background"
@@ -190,7 +190,7 @@
                   Background="White">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="65" />
+                    <ColumnDefinition Width="85" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
@@ -276,8 +276,8 @@
                     <!--TODO SomeThing-->
                     <ScrollViewer Grid.Row="2"
                                   VerticalScrollBarVisibility="Hidden">
-                        <StackPanel>
-                            <!--Sản phẩm bán chạy-->
+						<StackPanel>
+							<!--Sản phẩm bán chạy-->
 							<materialDesign:Card Margin="10,15"
 												 Background="#03a9f4"
 								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
@@ -665,7 +665,9 @@
                                 </Grid>
 
                             </materialDesign:Card>
-                        </StackPanel>
+
+							
+						</StackPanel>
                     </ScrollViewer>
 
                 </Grid>
@@ -675,7 +677,7 @@
             <!--//navigation panel // bảng điều hướng-->
             <Grid x:Name="nav_pnl"
                   HorizontalAlignment="Left"
-                  Width="65"
+                  Width="85"
                   Background="#2E333A">
                 <StackPanel x:Name="st_pnl">
                     <!--//Grid chuyển đổi menu-->
@@ -683,7 +685,7 @@
                         <!--//text tiêu để menu-->
                         <TextBlock Grid.Row="1"
                                    Grid.Column="0"
-                                   Margin="73,-20,0,0"
+                                   Margin="98,-20,0,0"
                                    Text="MENU"
                                    Foreground="White"
                                    FontSize="22"
@@ -708,9 +710,9 @@
                                       Grid.Column="0"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
-                                      Margin="18,-20,0,0"
-                                      Height="30"
-                                      Width="30"
+                                      Margin="10,-20,0,0"
+                                      Height="50"
+                                      Width="60"
                                       BorderThickness="0"
                                       Style="{StaticResource tb_style}"
                                       Unchecked="Tg_btn_Unchecked"
@@ -728,8 +730,8 @@
                                             <DoubleAnimation Storyboard.TargetName="nav_pnl"
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0"
-                                                             From="230"
-                                                             To="65"
+                                                             From="300"
+                                                             To="85"
                                                              Duration="0:0:0.2">
 
                                             </DoubleAnimation>
@@ -743,8 +745,8 @@
                                             <DoubleAnimation Storyboard.TargetName="nav_pnl"
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0"
-                                                             From="65"
-                                                             To="230"
+                                                             From="85"
+                                                             To="300"
                                                              Duration="0:0:0.3">
 
                                             </DoubleAnimation>
@@ -763,7 +765,7 @@
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <!--//HOME-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter"
                                       PreviewMouseLeftButtonDown="Image_PreviewMouseLeftButtonDown">
                             <StackPanel Orientation="Horizontal"
@@ -772,9 +774,9 @@
                                                          Foreground="LightBlue"
                                                          HorizontalAlignment="Center"
                                                          VerticalAlignment="Center"
-                                                         Width="30"
-                                                         Height="30"
-                                                         Margin="12,0,0,0" />
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0" />
                                 <TextBlock Text="Trang chủ"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
@@ -790,7 +792,7 @@
 
                         <!--//Đại lý-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -798,14 +800,12 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <StackPanel  Orientation="Horizontal"
-                                         Width="230">
+                                         Margin="0,10,0,0">
                                 <materialDesign:PackIcon Kind="HumanGreeting"
                                                          Foreground="GreenYellow"
-                                                         Width="30"
-                                                         Height="30"
-                                                         HorizontalAlignment="Center"
-                                                         VerticalAlignment="Center"
-                                                         Margin="12,0,0,0" />
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0" />
                                 <TextBlock Text="Đại lý"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
@@ -818,40 +818,133 @@
                             </ListViewItem.ToolTip>
                         </ListViewItem>
 
-                        <!--//Sản Phẩm-->
-                        <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
-                                      MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding SanPhamShowCommand}"
+						<ListViewItem >
+							<!--Danh mục sản phẩm-->
+						<TreeView Margin="0,10,0,0" MinWidth="230" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+								<TreeView.ToolTip>
+									<ToolTip Content="MENU ABOUT PRODUCT"
+                                         Style="{StaticResource tt_style}" />
+								</TreeView.ToolTip>
+								<TreeViewItem Margin="-5,0,0,0">
+								<TreeViewItem.Header>
+									<StackPanel Orientation="Horizontal">
+											<materialDesign:PackIcon Kind="Archive" Margin="0,0,0,0"
+                                                         Foreground="Cyan"
+                                                         Width="35"
+                                                         Height="35"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         />
+										<TextBlock Text="Danh mục sản phẩm"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+									</StackPanel>
+
+								</TreeViewItem.Header>
+								<TreeViewItem Margin="-20,0,0,0">
+									<TreeViewItem.Header>
+										<!--//Nguồn nhập-->
+										<ListViewItem HorizontalAlignment="Left">
+											<i:Interaction.Triggers>
+												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+													<i:InvokeCommandAction Command="{Binding NguonNhapShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel  Orientation="Horizontal"
+												</i:EventTrigger>
+											</i:Interaction.Triggers>
+											<StackPanel  Orientation="Horizontal"
                                          Width="230">
-                                <materialDesign:PackIcon Kind="Laptop"
-                                                         Foreground="LightBlue"
+												<materialDesign:PackIcon Kind="Factory"
+                                                         Foreground="Yellow"
                                                          Width="30"
                                                          Height="30"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center"
-                                                         Margin="12,0,0,0" />
-                                <TextBlock Text="Sản phẩm"
+                                                         Margin="0,0,0,0" />
+												<TextBlock Text="Nguồn nhập"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+											</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_sanpham"
+											<ListViewItem.ToolTip>
+												<ToolTip   Content="IMPORT SOURCES"
+                                         Style="{StaticResource tt_style}" />
+											</ListViewItem.ToolTip>
+										</ListViewItem>
+									</TreeViewItem.Header>
+								</TreeViewItem>
+
+								<TreeViewItem Margin="-20,0,0,0">
+									<TreeViewItem.Header>
+										<!--//Loại Sản Phẩm-->
+										<ListViewItem HorizontalAlignment="Left">
+											<i:Interaction.Triggers>
+												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+													<i:InvokeCommandAction Command="{Binding LoaiSanPhamShowCommand}"
+                                                           CommandParameter="{Binding ElementName=Tg_btn}" />
+												</i:EventTrigger>
+											</i:Interaction.Triggers>
+											<StackPanel  Orientation="Horizontal"
+                                         Width="230">
+												<materialDesign:PackIcon Kind="Shape"
+                                                         Foreground="Red"
+                                                         Width="30"
+                                                         Height="30"
+                                                         VerticalAlignment="Center"
+                                                         HorizontalAlignment="Center"
+                                                         Margin="0,0,0,0" />
+												<TextBlock Text="Loại sản phẩm"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+											</StackPanel>
+
+											<ListViewItem.ToolTip>
+												<ToolTip  Content="CATEGORIES"
+                                         Style="{StaticResource tt_style}" />
+											</ListViewItem.ToolTip>
+										</ListViewItem>
+									</TreeViewItem.Header>
+								</TreeViewItem>
+
+								<TreeViewItem Margin="-20,0,0,0">
+									<TreeViewItem.Header>
+										<!--//Sản Phẩm-->
+										<ListViewItem HorizontalAlignment="Left">
+											<i:Interaction.Triggers>
+												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+													<i:InvokeCommandAction Command="{Binding SanPhamShowCommand}"
+                                                           CommandParameter="{Binding ElementName=Tg_btn}" />
+												</i:EventTrigger>
+											</i:Interaction.Triggers>
+											<StackPanel  Orientation="Horizontal"
+                                         Width="230">
+												<materialDesign:PackIcon Kind="Laptop"
+                                                         Foreground="#18a0fb"
+                                                         Width="30"
+                                                         Height="30"
+                                                         VerticalAlignment="Center"
+                                                         HorizontalAlignment="Center"
+                                                         Margin="0,0,0,0" />
+												<TextBlock Text="Sản phẩm"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+											</StackPanel>
+
+											<ListViewItem.ToolTip>
+												<ToolTip x:Name="tt_sanpham"
                                          Content="PRODUCTS"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+											</ListViewItem.ToolTip>
+										</ListViewItem>
+									</TreeViewItem.Header>
+								</TreeViewItem>
+							</TreeViewItem>
+
+						</TreeView>
+						</ListViewItem>
 
                         <!--//Phiếu thu tiền-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -860,12 +953,12 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <StackPanel  Orientation="Horizontal"
-                                         Width="230">
+                                         Margin="0,10,0,0">
                                 <materialDesign:PackIcon Kind="Receipt"
                                                          Foreground="Yellow"
-                                                         Width="30"
-                                                         Height="30"
-                                                         Margin="12,0,0,0"
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center" />
                                 <TextBlock Text="Phiếu thu tiền"
@@ -882,7 +975,7 @@
 
                         <!--//Phiếu xuất hàng-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -890,15 +983,15 @@
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                            <StackPanel  Orientation="Horizontal"
-                                         Width="230">
+                            <StackPanel  Orientation="Horizontal" Margin="0,10,0,0">
                                 <materialDesign:PackIcon Kind="ClipboardText"
                                                          Foreground="LightBlue"
-                                                         Width="30"
-                                                         Height="30"
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center"
-                                                         Margin="12,0,0,0" />
+                                                         />
                                 <TextBlock Text="Phiếu xuất hàng"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
@@ -913,7 +1006,7 @@
 
                         <!--//Revenue-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -922,14 +1015,12 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Margin="0,10,0,0">
                                 <materialDesign:PackIcon Kind="ChartAreaspline"
                                                          Foreground="OrangeRed"
-                                                         Width="30"
-                                                         Height="30"
-                                                         VerticalAlignment="Center"
-                                                         HorizontalAlignment="Center"
-                                                         Margin="12,0,0,0" />
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0" />
                                 <TextBlock Text="Doanh thu"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
@@ -944,7 +1035,7 @@
 
                         <!--//Accounts-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -953,14 +1044,12 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Margin="0,10,0,0">
                                 <materialDesign:PackIcon Kind="Account"
                                                          Foreground="LightCyan"
-                                                         Width="30"
-                                                         Height="30"
-                                                         VerticalAlignment="Center"
-                                                         HorizontalAlignment="Center"
-                                                         Margin="12,0,0,0" />
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0" />
                                 <TextBlock Text="Đội ngũ"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
@@ -975,7 +1064,7 @@
 
                         <!--//Contact-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -984,14 +1073,12 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Margin="0,10,0,0">
                                 <materialDesign:PackIcon Kind="CommentQuestion"
                                                          Foreground="Red"
-                                                         Width="30"
-                                                         Height="30"
-                                                         VerticalAlignment="Center"
-                                                         HorizontalAlignment="Center"
-                                                         Margin="12,0,0,0" />
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0" />
                                 <TextBlock Text="Quy định"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
@@ -1006,7 +1093,7 @@
 
                         <!--//Contact-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
+                                      Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -1015,14 +1102,12 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Margin="0,10,0,0">
                                 <materialDesign:PackIcon Kind="ContactMail"
                                                          Foreground="Yellow"
-                                                         Width="30"
-                                                         Height="30"
-                                                         VerticalAlignment="Center"
-                                                         HorizontalAlignment="Center"
-                                                         Margin="12,0,0,0" />
+                                                         Width="35"
+                                                         Height="35"
+                                                         Margin="15,0,0,0" />
                                 <TextBlock Text="Liên hệ"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
@@ -1034,15 +1119,15 @@
                                          Style="{StaticResource tt_style}" />
                             </ListViewItem.ToolTip>
                         </ListViewItem>
-                        
-                        <!--//Style-->
+
+						<!--//Style-->
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ListViewItem}">
                                             <Border x:Name="Bd"
-                                                    Height="50"
+                                                    Height="auto"
                                                     BorderBrush="{TemplateBinding BorderBrush}"
                                                     BorderThickness="{TemplateBinding BorderThickness}"
                                                     Background="{TemplateBinding Background}"
