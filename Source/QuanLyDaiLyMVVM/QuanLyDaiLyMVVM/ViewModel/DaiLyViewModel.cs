@@ -102,7 +102,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand DeleteCommand { get; set; }
 
 
-
         public DaiLyViewModel()
         {
             //load data
@@ -216,7 +215,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         }
                         else
                         {
-                            MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn.");
+                            MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn. Bạn có thể vào Quy định cấu hình lại mục SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN để sửa đổi nếu cần thiết");
                             return;
                         }
                         
@@ -430,7 +429,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     }
                     else
                     {
-                        MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn.");
+                        MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn. Bạn có thể vào Quy định cấu hình lại mục SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN để sửa đổi nếu cần thiết");
                     }
                     
                 }
