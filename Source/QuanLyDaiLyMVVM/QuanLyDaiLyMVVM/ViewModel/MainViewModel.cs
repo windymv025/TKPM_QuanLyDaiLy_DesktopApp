@@ -42,8 +42,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand AccountShowCommand { get; set; }
         public ICommand QuyDinhShowCommand { get; set; }
         public ICommand ContactShowCommand { get; set; }
-        
-
+        public ICommand NguonNhapShowCommand { get; set; }
+        public ICommand LoaiSanPhamShowCommand { get; set; }
 
         public ICommand SanPhamTop1_MouseDownCommand { get; set; }
         public ICommand SanPhamTop2_MouseDownCommand { get; set; }
@@ -84,6 +84,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
             DaiLyShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 DaiLyWindow wd = new DaiLyWindow();
+                wd.ShowDialog();
+            });
+
+            NguonNhapShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
+                NguonNhapWindow wd = new NguonNhapWindow();
+                wd.ShowDialog();
+            });
+
+            LoaiSanPhamShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
+                p.IsChecked = false;
+                LoaiSanPhamWindow wd = new LoaiSanPhamWindow();
                 wd.ShowDialog();
             });
 
