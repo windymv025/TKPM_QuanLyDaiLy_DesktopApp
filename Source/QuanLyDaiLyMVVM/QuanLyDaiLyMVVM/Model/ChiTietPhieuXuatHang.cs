@@ -9,28 +9,17 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
-    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietPhieuXuatHang : BaseViewModel
+    public partial class ChiTietPhieuXuatHang
     {
-        private int _IdSanPham;
-        public int IdSanPham { get => _IdSanPham; set { _IdSanPham = value; OnPropertyChanged(); } }
-
-        private int _IdPhieuXuatHang;
-        public int IdPhieuXuatHang { get => _IdPhieuXuatHang; set { _IdPhieuXuatHang = value; OnPropertyChanged(); } }
-
-        private int _SoLuong;
-        public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
-
-        private decimal _GiaBan ;
-        public decimal GiaBan { get => _GiaBan; set { _GiaBan = value; OnPropertyChanged(); } }
-
-        private SanPham _SanPham ;
-        public virtual SanPham SanPham { get => _SanPham; set { _SanPham = value; OnPropertyChanged(); } }
-
-        private PhieuXuatHang _PhieuXuatHang ;
-        public virtual PhieuXuatHang PhieuXuatHang { get => _PhieuXuatHang; set { _PhieuXuatHang = value; OnPropertyChanged(); } }
+        public int IdSanPham { get; set; }
+        public int IdPhieuXuatHang { get; set; }
+        public int SoLuong { get; set; }
+        public decimal GiaBan { get; set; }
+    
+        public virtual SanPham SanPham { get; set; }
+        public virtual PhieuXuatHang PhieuXuatHang { get; set; }
     }
 }

@@ -81,7 +81,7 @@
           <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="HinhAnh" Type="nvarchar(max)" />
-          <Property Name="VaiTro" Type="int" />
+          <Property Name="VaiTro" Type="int" Nullable="false" />
           <Property Name="isRemove" Type="bit" />
         </EntityType>
         <EntityType Name="PhieuDaiLy">
@@ -421,7 +421,7 @@
           <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="VaiTro" Type="Int32" />
+          <Property Name="VaiTro" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TaiKhoan" Relationship="Self.TaiKhoan_fk0" FromRole="NhanVien" ToRole="TaiKhoan" />
           <Property Name="isRemove" Type="Boolean" />
         </EntityType>

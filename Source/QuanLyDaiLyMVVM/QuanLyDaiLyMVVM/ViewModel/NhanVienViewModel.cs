@@ -86,7 +86,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         DienThoai = nv.DienThoai,
                         DiaChi = nv.DiaChi,
                         Email = nv.Email,
-                        VaiTro = nv.VaiTro ?? 2,
+                        VaiTro = nv.VaiTro,
                         TenDangNhap = nv.TenDangNhap,
                         MatKhau = nv.MatKhau
                     });

@@ -9,30 +9,22 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
-    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuXuatHang: BaseViewModel
+    public partial class PhieuXuatHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhieuXuatHang()
         {
             this.ChiTietPhieuXuatHangs = new HashSet<ChiTietPhieuXuatHang>();
         }
-
-        private int _IdPhieuDaiLy;
-        public int IdPhieuDaiLy { get => _IdPhieuDaiLy; set { _IdPhieuDaiLy = value;  OnPropertyChanged(); } }
-
-        private decimal _TongTien;
-        public decimal TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
-
+    
+        public int IdPhieuDaiLy { get; set; }
+        public decimal TongTien { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-        private ICollection<ChiTietPhieuXuatHang> _ChiTietPhieuXuatHangs;
-        public virtual ICollection<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get => _ChiTietPhieuXuatHangs; set { _ChiTietPhieuXuatHangs = value; OnPropertyChanged(); } }
-
-        private PhieuDaiLy _PhieuDaiLy;
-        public virtual PhieuDaiLy PhieuDaiLy { get => _PhieuDaiLy; set { _PhieuDaiLy = value; OnPropertyChanged(); } }
+        public virtual ICollection<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get; set; }
+        public virtual PhieuDaiLy PhieuDaiLy { get; set; }
     }
 }

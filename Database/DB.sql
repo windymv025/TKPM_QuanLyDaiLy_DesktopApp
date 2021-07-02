@@ -112,7 +112,7 @@ CREATE TABLE [NhanVien] (
 	DiaChi nvarchar(max) not null,
 	Email varchar(100),
 	HinhAnh nvarchar(max),
-	VaiTro int default 2,			/*1 - admin, 2 - staff*/
+	VaiTro int not null,			/*1 - admin, 2 - staff*/
 	isRemove bit default 0,
 	primary key(Id)
 )
