@@ -22,199 +22,203 @@
         
         DataContext="{StaticResource MainVM}"
         Name="mainWindow">
-    
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
 
 
-    <Window.Resources>
-        <!--//Toggle btn style-->
-        <ImageBrush ImageSource="Assets/tgBtn_MouseOver.png"
+	<Window.Resources>
+		<!--//Toggle btn style-->
+		<ImageBrush ImageSource="Assets/tgBtn_MouseOver.png"
                     x:Key="tb_mouse_over" />
-        <!--//Text font style-->
-        <Style x:Key="font_style"
+		<!--//Text font style-->
+		<Style x:Key="font_style"
                TargetType="TextBlock">
-            <Setter Property="FontFamily"
+			<Setter Property="FontFamily"
                     Value="Fonts/Roboto-Light.ttf #Roboto" />
-            <Setter Property="VerticalAlignment"
+			<Setter Property="VerticalAlignment"
                     Value="Center" />
-            <Setter Property="HorizontalAlignment"
+			<Setter Property="HorizontalAlignment"
                     Value="Left" />
-            <Setter Property="Foreground"
+			<Setter Property="Foreground"
                     Value="White" />
-            <Setter Property="FontSize"
+			<Setter Property="FontSize"
                     Value="20" />
-        </Style>
+		</Style>
 
-        <!--//Tooltip Style-->
-        <Style TargetType="ToolTip"
+		<!--//Tooltip Style-->
+		<Style TargetType="ToolTip"
                x:Key="tt_style">
-            <Setter Property="Placement"
+			<Setter Property="Placement"
                     Value="Right" />
-            <Setter Property="Height"
+			<Setter Property="Height"
                     Value="40" />
-            <Setter Property="Width"
+			<Setter Property="Width"
                     Value="auto" />
-            <Setter Property="Margin"
+			<Setter Property="Margin"
                     Value="20,0,0,0" />
-            <Setter Property="Background"
+			<Setter Property="Background"
                     Value="#4A5668" />
-            <Setter Property="BorderBrush"
+			<Setter Property="BorderBrush"
                     Value="Transparent" />
-            <Setter Property="Foreground"
+			<Setter Property="Foreground"
                     Value="White" />
-            <Setter Property="FontFamily"
+			<Setter Property="FontFamily"
                     Value="Fonts/Roboto-Light.ttf #Roboto" />
-            <Setter Property="FontSize"
+			<Setter Property="FontSize"
                     Value="16" />
-            <Setter Property="PlacementRectangle"
+			<Setter Property="PlacementRectangle"
                     Value="60,0,0,0" />
-            <Setter Property="HorizontalOffset"
+			<Setter Property="HorizontalOffset"
                     Value="15" />
-            <Setter Property="VerticalOffset"
+			<Setter Property="VerticalOffset"
                     Value="6" />
-            <Setter Property="HasDropShadow"
+			<Setter Property="HasDropShadow"
                     Value="True" />
-            <Setter Property="HorizontalContentAlignment"
+			<Setter Property="HorizontalContentAlignment"
                     Value="Center" />
-        </Style>
+		</Style>
 
-        <!--//togglebutton style-->
-        <Style x:Key="tb_style"
+		<!--//togglebutton style-->
+		<Style x:Key="tb_style"
                TargetType="{x:Type ToggleButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border x:Name="border"
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ToggleButton}">
+						<Border x:Name="border"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True">
 
-                        </Border>
+						</Border>
 
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver"
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver"
                                      Value="True">
-                                <Setter Property="Background"
+								<Setter Property="Background"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}">
 
-                                </Setter>
+								</Setter>
 
-                                <Setter Property="BorderBrush"
+								<Setter Property="BorderBrush"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}">
 
-                                </Setter>
-                            </Trigger>
+								</Setter>
+							</Trigger>
 
-                            <Trigger Property="IsChecked"
+							<Trigger Property="IsChecked"
                                      Value="True">
-                                <Setter Property="Background"
+								<Setter Property="Background"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}" />
-                                <Setter Property="BorderBrush"
+								<Setter Property="BorderBrush"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}" />
-                            </Trigger>
+							</Trigger>
 
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 
-        <!--//button next, prev style-->
-        <Style x:Key="next_prev_btn"
+		<!--//button next, prev style-->
+		<Style x:Key="next_prev_btn"
                TargetType="{x:Type Button}">
 
-            <Setter Property="Template">
+			<Setter Property="Template">
 
-                <Setter.Value>
+				<Setter.Value>
 
-                    <ControlTemplate TargetType="{x:Type Button}">
+					<ControlTemplate TargetType="{x:Type Button}">
 
-                        <Border x:Name="button"
+						<Border x:Name="button"
                                 BorderThickness="0"
                                 Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True">
 
-                        </Border>
+						</Border>
 
-                    </ControlTemplate>
+					</ControlTemplate>
 
-                </Setter.Value>
+				</Setter.Value>
 
-            </Setter>
+			</Setter>
 
-        </Style>
+		</Style>
 
-        <!--//dish-->
-        <Style x:Key="dish_btn"
+		<!--//dish-->
+		<Style x:Key="dish_btn"
                TargetType="{x:Type Button}">
 
-            <Setter Property="Template">
+			<Setter Property="Template">
 
-                <Setter.Value>
+				<Setter.Value>
 
-                    <ControlTemplate TargetType="{x:Type Button}">
+					<ControlTemplate TargetType="{x:Type Button}">
 
-                        <Border x:Name="button"
+						<Border x:Name="button"
                                 BorderThickness="0"
                                 Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True">
 
-                        </Border>
+						</Border>
 
-                    </ControlTemplate>
+					</ControlTemplate>
 
-                </Setter.Value>
+				</Setter.Value>
 
-            </Setter>
+			</Setter>
 
-        </Style>
-    </Window.Resources>
+		</Style>
+	</Window.Resources>
 
-    <Grid>
-        <!--//Background color-->
-        <Grid Background="Black">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="45*"/>
+			<ColumnDefinition Width="82*"/>
+		</Grid.ColumnDefinitions>
+		<!--//Background color-->
+		<Grid Background="Black" Grid.ColumnSpan="2">
 
-            <!--//background image-->
-            <Grid x:Name="bg"
+			<!--//background image-->
+			<Grid x:Name="bg"
                   PreviewMouseLeftButtonDown="bg_PreviewMouseLeftButtonDown"
                   Margin="0,2,0,-2"
                   Visibility="Visible"
                   Background="White">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="85" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="80" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
 
-                <!--Background Home Screen-->
-                <Grid x:Name="bg_home"
+				<!--Background Home Screen-->
+				<Grid x:Name="bg_home"
                       Grid.Column="1"
                       Visibility="Visible">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="70" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Border  Background="#2E333A"
+					<Grid.RowDefinitions>
+						<RowDefinition Height="70" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Border  Background="#2E333A"
                              Padding="10,0,0,0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="150" />
-                                <ColumnDefinition Width="320" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0"
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="150" />
+								<ColumnDefinition Width="320" />
+							</Grid.ColumnDefinitions>
+							<Label Grid.Column="0"
                                    Content="QUẢN LÝ ĐẠI LÝ"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
@@ -223,9 +227,9 @@
                                    Foreground="#FFFFBD0B"
                                    Background="{x:Null}" />
 
-                            <Grid Grid.Column="2"
+							<Grid Grid.Column="2"
                                   Margin="10,0">
-                                <TextBox x:Name="textbox_search"
+								<TextBox x:Name="textbox_search"
                                          Grid.Column="1"
                                          HorizontalAlignment="Right"
                                          Visibility="Visible"
@@ -239,7 +243,7 @@
                                          materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                          materialDesign:TextFieldAssist.TextFieldCornerRadius="8"
                                          TextChanged="textbox_search_TextChanged" />
-                                <materialDesign:PackIcon Grid.Column="2"
+								<materialDesign:PackIcon Grid.Column="2"
                                                          Kind="Magnify"
                                                          Width="40"
                                                          Height="40"
@@ -247,34 +251,34 @@
                                                          Panel.ZIndex="5"
                                                          HorizontalAlignment="Right"
                                                          VerticalAlignment="Center" />
-                            </Grid>
+							</Grid>
 
-                            <Border CornerRadius="10"
+							<Border CornerRadius="10"
                                     Grid.Column="1">
-                                <ComboBox Padding="5,15,0,15"
+								<ComboBox Padding="5,15,0,15"
                                           Background="White"
                                           HorizontalAlignment="Right"
                                           Width="120">
-                                    <ComboBoxItem IsSelected="True">
-                                        <TextBlock Text="Đại lý"
+									<ComboBoxItem IsSelected="True">
+										<TextBlock Text="Đại lý"
                                                    FontWeight="Bold" />
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        <TextBlock Text="Sản phẩm"
+									</ComboBoxItem>
+									<ComboBoxItem>
+										<TextBlock Text="Sản phẩm"
                                                    FontWeight="Bold" />
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        <TextBlock Text="Nhà cung cấp"
+									</ComboBoxItem>
+									<ComboBoxItem>
+										<TextBlock Text="Nhà cung cấp"
                                                    FontWeight="Bold" />
-                                    </ComboBoxItem>
+									</ComboBoxItem>
 
-                                </ComboBox>
-                            </Border>
-                        </Grid>
-                    </Border>
+								</ComboBox>
+							</Border>
+						</Grid>
+					</Border>
 
-                    <!--TODO SomeThing-->
-                    <ScrollViewer Grid.Row="2"
+					<!--TODO SomeThing-->
+					<ScrollViewer Grid.Row="2"
                                   VerticalScrollBarVisibility="Hidden">
 						<StackPanel>
 							<!--Sản phẩm bán chạy-->
@@ -296,18 +300,18 @@
 							<materialDesign:Card Height="255"
                                     Margin="40,0">
 								<materialDesign:Card.Background>
-                                    <ImageBrush Stretch="Fill"
+									<ImageBrush Stretch="Fill"
                                                 ImageSource="Assets/podium_awards.png" />
-                                </materialDesign:Card.Background>
+								</materialDesign:Card.Background>
 
-                                <Grid Margin="35,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="1.2*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <!--top 2-->
-                                    <StackPanel VerticalAlignment="Top"
+								<Grid Margin="35,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="1.2*" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<!--top 2-->
+									<StackPanel VerticalAlignment="Top"
 												DataContext="{Binding SanPhamTop2}"
 												HorizontalAlignment="Right">
 										<i:Interaction.Triggers>
@@ -323,10 +327,10 @@
                                                  CornerRadius="20"
                                                  Height="120"
                                                  Width="200">
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding HinhAnh}"
+											<Border.Background>
+												<ImageBrush ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
-                                            </Border.Background>
+											</Border.Background>
 
 											<materialDesign:Card
 												Background="Yellow"
@@ -345,21 +349,21 @@
                                                       />
 											</materialDesign:Card>
 										</Border>
-                                        <StackPanel Orientation="Horizontal"
+										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-                                            <TextBlock Text="Đã bán: "
+											<TextBlock Text="Đã bán: "
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Black" />
-                                            <TextBlock Text="{Binding SoLuong}"
+											<TextBlock Text="{Binding SoLuong}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
-                                        </StackPanel>
-                                    </StackPanel>
+										</StackPanel>
+									</StackPanel>
 
-                                    <!--top 1-->
-                                    <StackPanel  Grid.Column="1"
+									<!--top 1-->
+									<StackPanel  Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
 										<i:Interaction.Triggers>
@@ -369,18 +373,18 @@
 													CommandParameter="{Binding ElementName=mainWindow}" />
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
-										
-                                        <Border  Margin="0,0,0,0"
+
+										<Border  Margin="0,0,0,0"
                                                  BorderBrush="Red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="130"
                                                  Width="200">
-                                            <Border.Background>
-                                                <ImageBrush x:Name="imgSanPhamTop1"
+											<Border.Background>
+												<ImageBrush x:Name="imgSanPhamTop1"
                                                             ImageSource="{Binding SanPhamTop1.HinhAnh}"
                                                             Stretch="Uniform" />
-                                            </Border.Background>
+											</Border.Background>
 											<materialDesign:Card
 												Foreground="Blue"
 												Background="Yellow"
@@ -397,11 +401,11 @@
                                                        TextTrimming="CharacterEllipsis"
                                                       />
 											</materialDesign:Card>
-											
-                                        </Border>
-                                        <StackPanel Orientation="Horizontal"
+
+										</Border>
+										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-                                            <TextBlock Text="Đã bán: "
+											<TextBlock Text="Đã bán: "
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Black" />
@@ -409,11 +413,11 @@
                                                         FontSize="14"
                                                         FontWeight="Black"
                                                         Foreground="Red" />
-                                        </StackPanel>
-                                    </StackPanel>
+										</StackPanel>
+									</StackPanel>
 
-                                    <!--top 3-->
-                                    <StackPanel DataContext="{Binding SanPhamTop3}"
+									<!--top 3-->
+									<StackPanel DataContext="{Binding SanPhamTop3}"
                                                 Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
@@ -432,11 +436,11 @@
                                                  CornerRadius="20"
                                                  Height="130"
                                                  Width="200">
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding HinhAnh}"
+											<Border.Background>
+												<ImageBrush ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
 
-                                            </Border.Background>
+											</Border.Background>
 											<materialDesign:Card
 												Background="Yellow"
 												Foreground="Blue"
@@ -455,22 +459,22 @@
 											</materialDesign:Card>
 
 										</Border>
-                                        <StackPanel Orientation="Horizontal"
+										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-                                            <TextBlock Text="Đã bán: "
+											<TextBlock Text="Đã bán: "
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Black" />
-                                            <TextBlock Text="{Binding SoLuong}"
+											<TextBlock Text="{Binding SoLuong}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </materialDesign:Card>
+										</StackPanel>
+									</StackPanel>
+								</Grid>
+							</materialDesign:Card>
 
-                            <!--Top Đại lý-->
+							<!--Top Đại lý-->
 							<materialDesign:Card Margin="10,20,10,15" Background="#03a9f4"
 								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
 								  Padding="8">
@@ -486,18 +490,18 @@
 							<materialDesign:Card Height="255"
                                     Margin="40,0, 40, 20">
 								<materialDesign:Card.Background>
-                                    <ImageBrush Stretch="Fill"
+									<ImageBrush Stretch="Fill"
                                                 ImageSource="Assets/podium_awards.png" />
-                                </materialDesign:Card.Background>
+								</materialDesign:Card.Background>
 
-                                <Grid Margin="35,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="1.2*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <!--top 2-->
-                                    <StackPanel DataContext="{Binding DaiLyTop2}"
+								<Grid Margin="35,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="1.2*" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<!--top 2-->
+									<StackPanel DataContext="{Binding DaiLyTop2}"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Right">
 
@@ -508,19 +512,19 @@
 													CommandParameter="{Binding ElementName=mainWindow}" />
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
-										
+
 										<Border Margin="0,45,0,0"
                                                 BorderBrush="Red"
                                                 BorderThickness="2"
                                                 CornerRadius="20"
                                                 Height="120"
                                                 Width="200">
-                                            <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop2"
+											<Border.Background>
+												<ImageBrush x:Name="imgDaiLyTop2"
                                                             ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
 
-                                            </Border.Background>
+											</Border.Background>
 											<materialDesign:Card
 												Background="Yellow"
 												Foreground="Blue"
@@ -538,26 +542,26 @@
                                                       />
 											</materialDesign:Card>
 										</Border>
-                                        <StackPanel Orientation="Horizontal"
+										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-                                            <TextBlock x:Name="txtDaiLyTop2"
+											<TextBlock x:Name="txtDaiLyTop2"
                                                        Text="{Binding TongTienXuat}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
-                                            <TextBlock Text=" VNĐ"
+											<TextBlock Text=" VNĐ"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
-                                        </StackPanel>
-                                    </StackPanel>
+										</StackPanel>
+									</StackPanel>
 
-                                    <!--top 1-->
-                                    <StackPanel DataContext="{Binding DaiLyTop1}"
+									<!--top 1-->
+									<StackPanel DataContext="{Binding DaiLyTop1}"
                                                 Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
-										
+
 										<i:Interaction.Triggers>
 											<i:EventTrigger EventName="MouseDown">
 												<i:InvokeCommandAction 
@@ -565,18 +569,18 @@
 													CommandParameter="{Binding ElementName=mainWindow}" />
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
-										
-                                        <Border  Margin="0,0,0,0"
+
+										<Border  Margin="0,0,0,0"
                                                  BorderBrush="red"
                                                  BorderThickness="2"
                                                  CornerRadius="20"
                                                  Height="130"
                                                  Width="200">
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding HinhAnh}"
+											<Border.Background>
+												<ImageBrush ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
 
-                                            </Border.Background>
+											</Border.Background>
 											<materialDesign:Card
 												Background="Yellow"
 												Foreground="Blue"
@@ -594,22 +598,22 @@
                                                       />
 											</materialDesign:Card>
 										</Border>
-                                        <StackPanel Orientation="Horizontal"
+										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding TongTienXuat}"
+											<TextBlock Text="{Binding TongTienXuat}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
-                                            <TextBlock Text=" VNĐ"
+											<TextBlock Text=" VNĐ"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
 
-                                        </StackPanel>
-                                    </StackPanel>
+										</StackPanel>
+									</StackPanel>
 
-                                    <!--top 3-->
-                                    <StackPanel DataContext="{Binding DaiLyTop3}"
+									<!--top 3-->
+									<StackPanel DataContext="{Binding DaiLyTop3}"
                                                 Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
@@ -628,11 +632,11 @@
                                                   CornerRadius="20"
                                                   Height="130"
                                                   Width="200">
-                                            <Border.Background>
-                                                <ImageBrush x:Name="imgDaiLyTop3"
+											<Border.Background>
+												<ImageBrush x:Name="imgDaiLyTop3"
                                                             ImageSource="{Binding HinhAnh}"
                                                             Stretch="Uniform" />
-                                            </Border.Background>
+											</Border.Background>
 											<materialDesign:Card
 												Background="Yellow"
 												Foreground="Blue"
@@ -650,40 +654,40 @@
                                                       />
 											</materialDesign:Card>
 										</Border>
-                                        <StackPanel Orientation="Horizontal"
+										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding TongTienXuat}"
+											<TextBlock Text="{Binding TongTienXuat}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
-                                            <TextBlock Text=" VNĐ"
+											<TextBlock Text=" VNĐ"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
+										</StackPanel>
+									</StackPanel>
+								</Grid>
 
-                            </materialDesign:Card>
+							</materialDesign:Card>
 
-							
+
 						</StackPanel>
-                    </ScrollViewer>
+					</ScrollViewer>
 
-                </Grid>
-            </Grid>
+				</Grid>
+			</Grid>
 
 
-            <!--//navigation panel // bảng điều hướng-->
-            <Grid x:Name="nav_pnl"
+			<!--//navigation panel // bảng điều hướng-->
+			<Grid x:Name="nav_pnl"
                   HorizontalAlignment="Left"
-                  Width="85"
+                  Width="80"
                   Background="#2E333A">
-                <StackPanel x:Name="st_pnl">
-                    <!--//Grid chuyển đổi menu-->
-                    <Grid Height="90">
-                        <!--//text tiêu để menu-->
-                        <TextBlock Grid.Row="1"
+				<StackPanel x:Name="st_pnl">
+					<!--//Grid chuyển đổi menu-->
+					<Grid Height="90">
+						<!--//text tiêu để menu-->
+						<TextBlock Grid.Row="1"
                                    Grid.Column="0"
                                    Margin="98,-20,0,0"
                                    Text="MENU"
@@ -695,18 +699,18 @@
                                    Style="{StaticResource font_style}">
                             
                             <!--//Shadow-->
-                            <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="10"
+							<TextBlock.Effect>
+								<DropShadowEffect BlurRadius="10"
                                                   ShadowDepth="1"
                                                   Direction="-90"
                                                   Color="White" />
-                            </TextBlock.Effect>
+							</TextBlock.Effect>
 
-                        </TextBlock>
+						</TextBlock>
 
 
-                        <!--//Toggle btn-->
-                        <ToggleButton x:Name="Tg_btn"
+						<!--//Toggle btn-->
+						<ToggleButton x:Name="Tg_btn"
                                       Grid.Column="0"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
@@ -717,117 +721,118 @@
                                       Style="{StaticResource tb_style}"
                                       Unchecked="Tg_btn_Unchecked"
                                       Checked="Tg_btn_Checked">
-                            <ToggleButton.Background>
-                                <ImageBrush ImageSource="Assets/tgBtn_default.png"
+							<ToggleButton.Background>
+								<ImageBrush ImageSource="Assets/tgBtn_default.png"
                                             Stretch="None"></ImageBrush>
-                            </ToggleButton.Background>
+							</ToggleButton.Background>
 
-                            <!--//Check, uncheck event-->
-                            <ToggleButton.Triggers>
-                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="HideStackPanel">
-                                            <DoubleAnimation Storyboard.TargetName="nav_pnl"
+							<!--//Check, uncheck event-->
+							<ToggleButton.Triggers>
+								<EventTrigger RoutedEvent="ToggleButton.Unchecked">
+									<BeginStoryboard>
+										<Storyboard x:Name="HideStackPanel">
+											<DoubleAnimation Storyboard.TargetName="nav_pnl"
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0"
                                                              From="300"
-                                                             To="85"
+                                                             To="80"
                                                              Duration="0:0:0.2">
 
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
 
-                                <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="ShowStackPanel">
-                                            <DoubleAnimation Storyboard.TargetName="nav_pnl"
+								<EventTrigger RoutedEvent="ToggleButton.Checked">
+									<BeginStoryboard>
+										<Storyboard x:Name="ShowStackPanel">
+											<DoubleAnimation Storyboard.TargetName="nav_pnl"
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0"
-                                                             From="85"
+                                                             From="80"
                                                              To="300"
                                                              Duration="0:0:0.3">
 
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
 
-                            </ToggleButton.Triggers>
-                        </ToggleButton>
-                    </Grid>
+							</ToggleButton.Triggers>
+						</ToggleButton>
+					</Grid>
 
-                    <!--//List items //ListView-->
-                    <ListView x:Name="LV"
+					<!--//List items //ListView-->
+					<ListView x:Name="LV"
                               Background="Transparent"
                               BorderBrush="Transparent"
+							  ScrollViewer.VerticalScrollBarVisibility="Hidden"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <!--//HOME-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//HOME-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter"
                                       PreviewMouseLeftButtonDown="Image_PreviewMouseLeftButtonDown">
-                            <StackPanel Orientation="Horizontal"
+							<StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <materialDesign:PackIcon Kind="Home"
+								<materialDesign:PackIcon Kind="Home"
                                                          Foreground="LightBlue"
                                                          HorizontalAlignment="Center"
                                                          VerticalAlignment="Center"
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0" />
-                                <TextBlock Text="Trang chủ"
+								<TextBlock Text="Trang chủ"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_home"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_home"
                                          Content="HOME"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
 
-                        <!--//Đại lý-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//Đại lý-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding DaiLyShowCommand}" CommandParameter="{Binding ElementName=Tg_btn}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel  Orientation="Horizontal"
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+									<i:InvokeCommandAction Command="{Binding DaiLyShowCommand}" CommandParameter="{Binding ElementName=Tg_btn}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<StackPanel  Orientation="Horizontal"
                                          Margin="0,10,0,0">
-                                <materialDesign:PackIcon Kind="HumanGreeting"
+								<materialDesign:PackIcon Kind="HumanGreeting"
                                                          Foreground="GreenYellow"
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0" />
-                                <TextBlock Text="Đại lý"
+								<TextBlock Text="Đại lý"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_daily"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_daily"
                                          Content="AGENCY"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
 						<ListViewItem >
 							<!--Danh mục sản phẩm-->
-						<TreeView Margin="0,10,0,0" MinWidth="230" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+							<TreeView Margin="0,10,0,0" MinWidth="230" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
 								<TreeView.ToolTip>
 									<ToolTip Content="MENU ABOUT PRODUCT"
                                          Style="{StaticResource tt_style}" />
 								</TreeView.ToolTip>
 								<TreeViewItem Margin="-5,0,0,0">
-								<TreeViewItem.Header>
-									<StackPanel Orientation="Horizontal">
+									<TreeViewItem.Header>
+										<StackPanel Orientation="Horizontal">
 											<materialDesign:PackIcon Kind="Archive" Margin="0,0,0,0"
                                                          Foreground="Cyan"
                                                          Width="35"
@@ -835,156 +840,156 @@
                                                          HorizontalAlignment="Left"
                                                          VerticalAlignment="Center"
                                                          />
-										<TextBlock Text="Danh mục sản phẩm"
+											<TextBlock Text="Danh mục sản phẩm"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-									</StackPanel>
+										</StackPanel>
 
-								</TreeViewItem.Header>
-								<TreeViewItem Margin="-20,0,0,0">
-									<TreeViewItem.Header>
-										<!--//Nguồn nhập-->
-										<ListViewItem HorizontalAlignment="Left">
-											<i:Interaction.Triggers>
-												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-													<i:InvokeCommandAction Command="{Binding NguonNhapShowCommand}"
+									</TreeViewItem.Header>
+									<TreeViewItem Margin="-20,0,0,0">
+										<TreeViewItem.Header>
+											<!--//Nguồn nhập-->
+											<ListViewItem HorizontalAlignment="Left">
+												<i:Interaction.Triggers>
+													<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+														<i:InvokeCommandAction Command="{Binding NguonNhapShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-												</i:EventTrigger>
-											</i:Interaction.Triggers>
-											<StackPanel  Orientation="Horizontal"
+													</i:EventTrigger>
+												</i:Interaction.Triggers>
+												<StackPanel  Orientation="Horizontal"
                                          Width="230">
-												<materialDesign:PackIcon Kind="Factory"
+													<materialDesign:PackIcon Kind="Factory"
                                                          Foreground="Yellow"
                                                          Width="30"
                                                          Height="30"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center"
                                                          Margin="0,0,0,0" />
-												<TextBlock Text="Nguồn nhập"
+													<TextBlock Text="Nguồn nhập"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-											</StackPanel>
+												</StackPanel>
 
-											<ListViewItem.ToolTip>
-												<ToolTip   Content="IMPORT SOURCES"
+												<ListViewItem.ToolTip>
+													<ToolTip   Content="IMPORT SOURCES"
                                          Style="{StaticResource tt_style}" />
-											</ListViewItem.ToolTip>
-										</ListViewItem>
-									</TreeViewItem.Header>
-								</TreeViewItem>
+												</ListViewItem.ToolTip>
+											</ListViewItem>
+										</TreeViewItem.Header>
+									</TreeViewItem>
 
-								<TreeViewItem Margin="-20,0,0,0">
-									<TreeViewItem.Header>
-										<!--//Loại Sản Phẩm-->
-										<ListViewItem HorizontalAlignment="Left">
-											<i:Interaction.Triggers>
-												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-													<i:InvokeCommandAction Command="{Binding LoaiSanPhamShowCommand}"
+									<TreeViewItem Margin="-20,0,0,0">
+										<TreeViewItem.Header>
+											<!--//Loại Sản Phẩm-->
+											<ListViewItem HorizontalAlignment="Left">
+												<i:Interaction.Triggers>
+													<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+														<i:InvokeCommandAction Command="{Binding LoaiSanPhamShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-												</i:EventTrigger>
-											</i:Interaction.Triggers>
-											<StackPanel  Orientation="Horizontal"
+													</i:EventTrigger>
+												</i:Interaction.Triggers>
+												<StackPanel  Orientation="Horizontal"
                                          Width="230">
-												<materialDesign:PackIcon Kind="Shape"
+													<materialDesign:PackIcon Kind="Shape"
                                                          Foreground="Red"
                                                          Width="30"
                                                          Height="30"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center"
                                                          Margin="0,0,0,0" />
-												<TextBlock Text="Loại sản phẩm"
+													<TextBlock Text="Loại sản phẩm"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-											</StackPanel>
+												</StackPanel>
 
-											<ListViewItem.ToolTip>
-												<ToolTip  Content="CATEGORIES"
+												<ListViewItem.ToolTip>
+													<ToolTip  Content="CATEGORIES"
                                          Style="{StaticResource tt_style}" />
-											</ListViewItem.ToolTip>
-										</ListViewItem>
-									</TreeViewItem.Header>
-								</TreeViewItem>
+												</ListViewItem.ToolTip>
+											</ListViewItem>
+										</TreeViewItem.Header>
+									</TreeViewItem>
 
-								<TreeViewItem Margin="-20,0,0,0">
-									<TreeViewItem.Header>
-										<!--//Sản Phẩm-->
-										<ListViewItem HorizontalAlignment="Left">
-											<i:Interaction.Triggers>
-												<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-													<i:InvokeCommandAction Command="{Binding SanPhamShowCommand}"
+									<TreeViewItem Margin="-20,0,0,0">
+										<TreeViewItem.Header>
+											<!--//Sản Phẩm-->
+											<ListViewItem HorizontalAlignment="Left">
+												<i:Interaction.Triggers>
+													<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+														<i:InvokeCommandAction Command="{Binding SanPhamShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-												</i:EventTrigger>
-											</i:Interaction.Triggers>
-											<StackPanel  Orientation="Horizontal"
+													</i:EventTrigger>
+												</i:Interaction.Triggers>
+												<StackPanel  Orientation="Horizontal"
                                          Width="230">
-												<materialDesign:PackIcon Kind="Laptop"
+													<materialDesign:PackIcon Kind="Laptop"
                                                          Foreground="#18a0fb"
                                                          Width="30"
                                                          Height="30"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center"
                                                          Margin="0,0,0,0" />
-												<TextBlock Text="Sản phẩm"
+													<TextBlock Text="Sản phẩm"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-											</StackPanel>
+												</StackPanel>
 
-											<ListViewItem.ToolTip>
-												<ToolTip x:Name="tt_sanpham"
+												<ListViewItem.ToolTip>
+													<ToolTip x:Name="tt_sanpham"
                                          Content="PRODUCTS"
                                          Style="{StaticResource tt_style}" />
-											</ListViewItem.ToolTip>
-										</ListViewItem>
-									</TreeViewItem.Header>
+												</ListViewItem.ToolTip>
+											</ListViewItem>
+										</TreeViewItem.Header>
+									</TreeViewItem>
 								</TreeViewItem>
-							</TreeViewItem>
 
-						</TreeView>
+							</TreeView>
 						</ListViewItem>
 
-                        <!--//Phiếu thu tiền-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//Phiếu thu tiền-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding PhieuThuTienShowCommand}"
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+									<i:InvokeCommandAction Command="{Binding PhieuThuTienShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel  Orientation="Horizontal"
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<StackPanel  Orientation="Horizontal"
                                          Margin="0,10,0,0">
-                                <materialDesign:PackIcon Kind="Receipt"
+								<materialDesign:PackIcon Kind="Receipt"
                                                          Foreground="Yellow"
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center" />
-                                <TextBlock Text="Phiếu thu tiền"
+								<TextBlock Text="Phiếu thu tiền"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_phieuthutien"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_phieuthutien"
                                          Content="BILL"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//Phiếu xuất hàng-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//Phiếu xuất hàng-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding PhieuXuatHangShowCommand}"
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+									<i:InvokeCommandAction Command="{Binding PhieuXuatHangShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel  Orientation="Horizontal" Margin="0,10,0,0">
-                                <materialDesign:PackIcon Kind="ClipboardText"
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<StackPanel  Orientation="Horizontal" Margin="0,10,0,0">
+								<materialDesign:PackIcon Kind="ClipboardText"
                                                          Foreground="LightBlue"
                                                          Width="35"
                                                          Height="35"
@@ -992,178 +997,178 @@
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center"
                                                          />
-                                <TextBlock Text="Phiếu xuất hàng"
+								<TextBlock Text="Phiếu xuất hàng"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_phieuxuathang"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_phieuxuathang"
                                          Content="DELIVERY"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//Revenue-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//Revenue-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding RevenueShowCommand}"
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+									<i:InvokeCommandAction Command="{Binding RevenueShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel Orientation="Horizontal"
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<StackPanel Orientation="Horizontal"
                                         Margin="0,10,0,0">
-                                <materialDesign:PackIcon Kind="ChartAreaspline"
+								<materialDesign:PackIcon Kind="ChartAreaspline"
                                                          Foreground="OrangeRed"
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0" />
-                                <TextBlock Text="Doanh thu"
+								<TextBlock Text="Doanh thu"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_revenue"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_revenue"
                                          Content="REVENUE"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//Accounts-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//Accounts-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding AccountShowCommand}"
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+									<i:InvokeCommandAction Command="{Binding AccountShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel Orientation="Horizontal"
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<StackPanel Orientation="Horizontal"
                                         Margin="0,10,0,0">
-                                <materialDesign:PackIcon Kind="Account"
+								<materialDesign:PackIcon Kind="Account"
                                                          Foreground="LightCyan"
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0" />
-                                <TextBlock Text="Đội ngũ"
+								<TextBlock Text="Đội ngũ"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_account"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_account"
                                          Content="STAFF"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//Contact-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//Contact-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding QuyDinhShowCommand}"
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+									<i:InvokeCommandAction Command="{Binding QuyDinhShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel Orientation="Horizontal"
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<StackPanel Orientation="Horizontal"
                                         Margin="0,10,0,0">
-                                <materialDesign:PackIcon Kind="CommentQuestion"
+								<materialDesign:PackIcon Kind="CommentQuestion"
                                                          Foreground="Red"
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0" />
-                                <TextBlock Text="Quy định"
+								<TextBlock Text="Quy định"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_quydinh"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_quydinh"
                                          Content="REGULATION"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
-                        <!--//Contact-->
-                        <ListViewItem HorizontalAlignment="Left"
+						<!--//Contact-->
+						<ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,10"
                                       MouseEnter="ListViewItem_MouseEnter">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding ContactShowCommand}"
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+									<i:InvokeCommandAction Command="{Binding ContactShowCommand}"
                                                            CommandParameter="{Binding ElementName=Tg_btn}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <StackPanel Orientation="Horizontal"
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+							<StackPanel Orientation="Horizontal"
                                         Margin="0,10,0,0">
-                                <materialDesign:PackIcon Kind="ContactMail"
+								<materialDesign:PackIcon Kind="ContactMail"
                                                          Foreground="Yellow"
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0" />
-                                <TextBlock Text="Liên hệ"
+								<TextBlock Text="Liên hệ"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
-                            </StackPanel>
+							</StackPanel>
 
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_contact"
+							<ListViewItem.ToolTip>
+								<ToolTip x:Name="tt_contact"
                                          Content="CONTACT"
                                          Style="{StaticResource tt_style}" />
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
+							</ListViewItem.ToolTip>
+						</ListViewItem>
 
 						<!--//Style-->
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <Border x:Name="Bd"
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="{x:Type ListViewItem}">
+											<Border x:Name="Bd"
                                                     Height="auto"
                                                     BorderBrush="{TemplateBinding BorderBrush}"
                                                     BorderThickness="{TemplateBinding BorderThickness}"
                                                     Background="{TemplateBinding Background}"
                                                     Padding="{TemplateBinding Padding}"
                                                     SnapsToDevicePixels="True">
-                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+												<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                                   VerticalAlignment="{TemplateBinding VerticalAlignment}" />
-                                            </Border>
+											</Border>
 
-                                            <ControlTemplate.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="IsMouseOver"
+											<ControlTemplate.Triggers>
+												<MultiTrigger>
+													<MultiTrigger.Conditions>
+														<Condition Property="IsMouseOver"
                                                                    Value="True" />
-                                                    </MultiTrigger.Conditions>
+													</MultiTrigger.Conditions>
 
-                                                    <Setter Property="Background"
+													<Setter Property="Background"
                                                             TargetName="Bd"
                                                             Value="#404D5B" />
-                                                    <Setter Property="BorderBrush"
+													<Setter Property="BorderBrush"
                                                             TargetName="Bd"
                                                             Value="#404D5B" />
 
-                                                </MultiTrigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+												</MultiTrigger>
+											</ControlTemplate.Triggers>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ListView.ItemContainerStyle>
 
-                    </ListView>
+					</ListView>
 
-                </StackPanel>
-            </Grid>
-        </Grid>
-    </Grid>
+				</StackPanel>
+			</Grid>
+		</Grid>
+	</Grid>
 </Window>
