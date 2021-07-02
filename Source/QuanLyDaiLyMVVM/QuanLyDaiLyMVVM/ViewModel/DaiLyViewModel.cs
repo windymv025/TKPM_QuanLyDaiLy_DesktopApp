@@ -20,6 +20,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
     {
         private ObservableCollection<DaiLy> _List;
         public ObservableCollection<DaiLy> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        
         private DaiLy _SelectedItem;
         public DaiLy SelectedItem { get => _SelectedItem; 
             set
@@ -39,6 +40,22 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             } 
         }
+
+        private LoaiDaiLy _SelectedItemLoaiDaiLy;
+        public LoaiDaiLy SelectedItemLoaiDaiLy { get => _SelectedItemLoaiDaiLy; set { 
+                _SelectedItemLoaiDaiLy = value; OnPropertyChanged();
+                if(SelectedItemLoaiDaiLy != null)
+                {
+                    TenLoaiDaiLy = SelectedItemLoaiDaiLy.Ten;
+                    SoTienNoToiDa = SelectedItemLoaiDaiLy.SoTienNoToiDa;
+                }
+            }
+        }
+
+        private string _TenLoaiDaiLy;
+        public string TenLoaiDaiLy { get => _TenLoaiDaiLy; set { _TenLoaiDaiLy = value; OnPropertyChanged(); } }
+        private decimal _SoTienNoToiDa;
+        public decimal SoTienNoToiDa { get => _SoTienNoToiDa; set { _SoTienNoToiDa = value; OnPropertyChanged(); } }
 
         private string _Ten;
         public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
@@ -71,6 +88,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         public ICommand ShowAddLoaiDaiLyCommand { get; set; }
         public ICommand AddLoaiDaiLyCommand { get; set; }
+        public ICommand EditLoaiDaiLyCommand { get; set; }
+        public ICommand DeleteLoaiDaiLyCommand { get; set; }
         public ICommand TextChangedMaxMoneyCommand { get; set; }
         public ICommand ExitThemLoaiDaiLyCommand { get; set; }
         
@@ -182,9 +201,25 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     using (var db = new DBQuanLyCacDaiLyEntities())
                     {
                         daiLy.LoaiDaiLy = db.LoaiDaiLies.Where(x => x.Id == daiLy.IdLoaiDaiLy).SingleOrDefault();
-                        db.DaiLies.Add(daiLy);
-                        db.SaveChanges();
-                        List.Add(daiLy);
+
+                        double? count = db.QuyDinhs.Where(x => x.TenQuyDinh == "SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN").FirstOrDefault()?.GiaTri;
+                        if(count == null)
+                        {
+                            count = 4;
+                        }
+
+                        if(count > db.DaiLies.Where(x=>x.Quan == p.DaiLy_textbox_district.Text.Trim()).Count())
+                        {
+                            db.DaiLies.Add(daiLy);
+                            db.SaveChanges();
+                            List.Add(daiLy);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn.");
+                            return;
+                        }
+                        
                     }
 
                     p.Close();
@@ -213,21 +248,110 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
 
             //thêm
-            AddLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { if (p == null) return false; else return true; }, (p) =>
+            AddLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => {
+                if (p == null)
+                    return false;
+                else
+                {
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        if (db.LoaiDaiLies.Where(x => x.Ten == TenLoaiDaiLy).Count() > 0 || string.IsNullOrEmpty(p.tenldl.Text.Trim()) || string.IsNullOrEmpty(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Trim()))
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+
+                    }
+                }
+            }, (p) =>
             {
-                var category = new LoaiDaiLy() { Ten = p.TenLoaiDaiLyMoi.Text.Trim(), SoTienNoToiDa = Decimal.Parse(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Trim()) };
+                var category = new LoaiDaiLy() { Ten = TenLoaiDaiLy, SoTienNoToiDa = SoTienNoToiDa };
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
-                    if (db.LoaiDaiLies.Where(x => x.Ten == p.TenLoaiDaiLyMoi.Text.Trim()).Count() > 0 || string.IsNullOrEmpty(p.TenLoaiDaiLyMoi.Text.Trim()))
+                    double? count = count = db.QuyDinhs.Where(x => x.TenQuyDinh == "SO_LUONG_LOAI_DAI_LY").FirstOrDefault()?.GiaTri;
+                    if(count == null)
                     {
-                        MessageBox.Show("Tên loại không phù hợp");
+                        count = 2;
+                    }
+                    
+                    if ((int)count > db.LoaiDaiLies.Count())
+                    {
+                        db.LoaiDaiLies.Add(category);
+                        db.SaveChanges();
+                        LoaiDaiLy.Add(category);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vượt quá số lượng loại đại lý quy định");
                         return;
                     }
-                    db.LoaiDaiLies.Add(category);
+                }
+                
+            });
+            EditLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => {
+                if (p == null || SelectedItemLoaiDaiLy == null || string.IsNullOrEmpty(p.tenldl.Text.Trim()) || string.IsNullOrEmpty(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Trim()))
+                    return false;
+                else
+                {
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        if (db.LoaiDaiLies.Where(x => x.Ten == TenLoaiDaiLy).Count() > 0)
+                        {
+                            if(TenLoaiDaiLy == SelectedItemLoaiDaiLy.Ten)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return true;
+                        }
+
+                    }
+                }
+            }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var item = db.LoaiDaiLies.Where(x => x.Id == SelectedItemLoaiDaiLy.Id).FirstOrDefault();
+                    item.Ten = TenLoaiDaiLy;
+                    item.SoTienNoToiDa = SoTienNoToiDa;
                     db.SaveChanges();
                 }
-                LoaiDaiLy.Add(category);
-                p.Close();
+                SelectedItemLoaiDaiLy.Ten = Ten;
+                SelectedItemLoaiDaiLy.SoTienNoToiDa = SoTienNoToiDa;
+            });
+            DeleteLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => {
+                if (p == null || SelectedItemLoaiDaiLy == null)
+                    return false;
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    if (db.DaiLies.Where(x=>x.IdLoaiDaiLy == SelectedItemLoaiDaiLy.Id).Count() > 0)
+                    {
+                        MessageBox.Show("Có đại lý đang thuộc loại này nên không thể xóa.");
+                        return;
+                    }
+                    else
+                    {
+                        db.LoaiDaiLies.Remove(db.LoaiDaiLies.Where(x=>x.Ten == SelectedItemLoaiDaiLy.Ten).FirstOrDefault());
+                        db.SaveChanges();
+                    }
+                }
+                LoaiDaiLy.Remove(SelectedItemLoaiDaiLy);
+                SelectedItemLoaiDaiLy = null;
             });
 
             //Thoát
@@ -256,45 +380,59 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
-                    var dl = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                    dl.Ten = Ten;
-                    dl.DienThoai = DienThoai;
-                    dl.DiaChi = DiaChi;
-                    dl.NgayTiepNhan = NgayTiepNhan;
-                    dl.Quan = Quan;
-                    dl.Email = Email;
+                    double? count = db.QuyDinhs.Where(x => x.TenQuyDinh == "SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN").FirstOrDefault()?.GiaTri;
+                    if (count == null)
+                    {
+                        count = 4;
+                    }
 
-                    var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
-                    string uriImage = currentFolder.ToString();
-                    //string file = p.avatar_DaiLy.Source.ToString().Substring(8);
-                    string file = HinhAnh;
-                    var info = new FileInfo(file);
-                    var newName = $"{Guid.NewGuid()}{info.Extension}";
-                    File.Copy(file, $"{uriImage}Images\\DaiLy\\{newName}");
-                    HinhAnh = $"Images/DaiLy/{newName}";
-                    dl.HinhAnh = HinhAnh;
+                    if (count > db.DaiLies.Where(x => x.Quan == p.DaiLy_textbox_district.Text.Trim()).Count())
+                    {
+                        var dl = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                        dl.Ten = Ten;
+                        dl.DienThoai = DienThoai;
+                        dl.DiaChi = DiaChi;
+                        dl.NgayTiepNhan = NgayTiepNhan;
+                        dl.Quan = Quan;
+                        dl.Email = Email;
 
-                    dl.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
+                        var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                        string uriImage = currentFolder.ToString();
+                        //string file = p.avatar_DaiLy.Source.ToString().Substring(8);
+                        string file = HinhAnh;
+                        var info = new FileInfo(file);
+                        var newName = $"{Guid.NewGuid()}{info.Extension}";
+                        File.Copy(file, $"{uriImage}Images\\DaiLy\\{newName}");
+                        HinhAnh = $"Images/DaiLy/{newName}";
+                        dl.HinhAnh = HinhAnh;
 
-                    dl.LoaiDaiLy = db.LoaiDaiLies.Where(x => x.Id == dl.IdLoaiDaiLy).SingleOrDefault();
+                        dl.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
 
-                    db.SaveChanges();
+                        dl.LoaiDaiLy = db.LoaiDaiLies.Where(x => x.Id == dl.IdLoaiDaiLy).SingleOrDefault();
 
-                    SelectedItem.Ten = Ten;
-                    SelectedItem.DienThoai = DienThoai;
-                    SelectedItem.DiaChi = DiaChi;
-                    SelectedItem.NgayTiepNhan = NgayTiepNhan;
-                    SelectedItem.Quan = Quan;
-                    SelectedItem.Email = Email;
+                        db.SaveChanges();
 
-                    var info1 = new FileInfo(uriImage).ToString();
+                        SelectedItem.Ten = Ten;
+                        SelectedItem.DienThoai = DienThoai;
+                        SelectedItem.DiaChi = DiaChi;
+                        SelectedItem.NgayTiepNhan = NgayTiepNhan;
+                        SelectedItem.Quan = Quan;
+                        SelectedItem.Email = Email;
+
+                        var info1 = new FileInfo(uriImage).ToString();
 
 
-                    //SelectedItem.HinhAnh = $"{info1}{HinhAnh}";
-                    SelectedItem.HinhAnh = Path.GetFullPath(HinhAnh);
+                        //SelectedItem.HinhAnh = $"{info1}{HinhAnh}";
+                        SelectedItem.HinhAnh = Path.GetFullPath(HinhAnh);
 
-                    SelectedItem.HinhAnh = HinhAnh;
-                    SelectedItem.LoaiDaiLy = SelectedLoaiDaiLy;
+                        SelectedItem.HinhAnh = HinhAnh;
+                        SelectedItem.LoaiDaiLy = SelectedLoaiDaiLy;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn.");
+                    }
+                    
                 }
                 p.Close();
             });
