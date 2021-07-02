@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Height="200"
-        Width="300"
+        Title="Loại đại lý"
+        Height="700"
+        Width="1024"
+        DataContext="{StaticResource DaiLyVM}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -16,58 +18,79 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        Name="themloaidailywindow"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        DataContext="{StaticResource DaiLyVM}"
-        WindowStyle="None" ResizeMode="NoResize">
+        Name="loaidailywindow">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
-        </Grid.RowDefinitions>
-        <TextBox x:Name="TenLoaiDaiLyMoi" HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="240"
-                 BorderThickness="1"
-                 materialDesign:HintAssist.Hint="Nhập tên loại..."
-                 materialDesign:HintAssist.IsFloating="True"
-                 materialDesign:TextFieldAssist.HasClearButton="True"
-                 materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-                 materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4">
-        </TextBox>
-        <TextBox x:Name="LoaiDaiLy_textbox_SoTienNoToiDa" Grid.Row="1"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="240"
-                 BorderThickness="1"
-                 materialDesign:HintAssist.Hint="Nhập số tiền nợ tối đa..."
-                 materialDesign:HintAssist.IsFloating="True"
-                 materialDesign:TextFieldAssist.HasClearButton="True"
-                 materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-                 materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="TextChanged">
-                    <i:InvokeCommandAction Command="{Binding TextChangedMaxMoneyCommand}" CommandParameter="{Binding ElementName=themloaidailywindow}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
-        <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-            <Button x:Name="btn_OK"
-                    Content="Lưu"
-                    FontSize="20"
-                    Command="{Binding AddLoaiDaiLyCommand}" CommandParameter="{Binding ElementName=themloaidailywindow}"/>
-            <Button x:Name="btn_Cancel"
-                    Content="Thoát"
-                    FontSize="20"
-                    Margin="20,0,20,0"
-                    Command="{Binding ExitThemLoaiDaiLyCommand}" CommandParameter="{Binding ElementName=themloaidailywindow}"/>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--các element binding từ selected item-->
+            <materialDesign:Card Grid.Row="0"
+                                 Margin="5">
+                <WrapPanel Margin="0 0 0 10">
+                    <TextBox Text="{Binding TenLoaiDaiLy, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="5 5 15 5" x:Name="tenldl"
+                             materialDesign:HintAssist.Hint="Tên loại đại lý"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding SoTienNoToiDa, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="5 5 15 5"
+                             x:Name="LoaiDaiLy_textbox_SoTienNoToiDa"
+                             materialDesign:HintAssist.Hint="Số tiền nợ tối đa"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding TextChangedMaxMoneyCommand}"
+                                                       CommandParameter="{Binding ElementName=loaidailywindow}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="1"
+                                 Margin="5">
+                <WrapPanel>
+                    <Button Command="{Binding AddLoaiDaiLyCommand}"
+                            Content="Thêm"
+                            Margin="5"
+                            Width="100"
+                            CommandParameter="{Binding ElementName=loaidailywindow}"></Button>
+                    <Button Command="{Binding EditLoaiDaiLyCommand}"
+                            Content="Sửa"
+                            Margin="5"
+                            Width="100"
+                            CommandParameter="{Binding ElementName=loaidailywindow}"></Button>
+                    <Button Command="{Binding DeleteLoaiDaiLyCommand}"
+                            Content="Xóa"
+                            Margin="5"
+                            Width="100"
+                            CommandParameter="{Binding ElementName=loaidailywindow}"></Button>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2"
+                                 Margin="5"
+                                 VerticalAlignment="Stretch">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding LoaiDaiLy}"
+                              SelectedItem="{Binding SelectedItemLoaiDaiLy, Mode=OneWayToSource}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên loại đại lý"
+                                                DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Số tiền nợ tối đa"
+                                                DisplayMemberBinding="{Binding SoTienNoToiDa}"></GridViewColumn>
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
     </Grid>
 </Window>
+
