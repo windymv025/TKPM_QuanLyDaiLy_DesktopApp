@@ -15,6 +15,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
 {
     public class SanPhamViewModel: BaseViewModel
     {
+        private int loaiSapXep = -1;
+        private bool IsSXTang = true;
+
         private ObservableCollection<SanPhamHienThi> _ListSanPhamHienThiTheotrang;
         public ObservableCollection<SanPhamHienThi> ListSanPhamHienThiTheotrang { get => _ListSanPhamHienThiTheotrang; set { _ListSanPhamHienThiTheotrang = value; OnPropertyChanged(); } }
 
@@ -37,7 +40,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand NextBtnCommand { get; set; }
         public ICommand SelectionChangedCommand { get; set; }
         public ICommand ThemCommand { get; set; }
-
+        public ICommand RefreshCommand { get; set; }
+        public ICommand ThayDoiLoaiSapXepCommand { get; set; }
+        public ICommand ThayDoiSapXepCommand { get; set; }
         private PagingInfo _PagingInfo;
         public PagingInfo PagingInfo { get => _PagingInfo; set { _PagingInfo = value; OnPropertyChanged(); } }
 
@@ -63,7 +68,145 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         ListSanPhamHienThiTheotrang = loadPageHienThi(1);
                     }
                 });
+            RefreshCommand = new RelayCommand<SanPhamWindow>((p) => { return true; }, (p) =>
+            {
+                p.cbb_SapXepTheo.SelectedIndex = -1;
+                p.SanPham_textbox_search.Text = "";
+                p.cbb_KieuSapXep.SelectedIndex = 0;
 
+                loadData();
+                PagingInfo = new PagingInfo(5, ListSanPham.Count);
+                ListSanPhamHienThiTheotrang = loadPageHienThi(1);
+            });
+
+            
+            ThayDoiLoaiSapXepCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
+            {
+                loaiSapXep = p.SelectedIndex;
+                switch (loaiSapXep)
+                {
+                    case 0:
+                        sapXepTheoTen();
+                        break;
+
+                    case 1:
+                        sapXepTheoGiaBan();
+                        break;
+
+                    case 2:
+                        sapXepTheoGiaNhap();
+                        break;
+
+                    case 3:
+                        sapXepTheoSoLuong();
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+
+            ThayDoiSapXepCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
+            {
+                IsSXTang = !IsSXTang;
+                switch (loaiSapXep)
+                {
+                    case 0:
+                        sapXepTheoTen();
+                        break;
+
+                    case 1:
+                        sapXepTheoGiaBan();
+                        break;
+
+                    case 2:
+                        sapXepTheoGiaNhap();
+                        break;
+
+                    case 3:
+                        sapXepTheoSoLuong();
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+        }
+
+        private void sapXepTheoTen()
+        {
+            if (IsSXTang)
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                    from p in ListSanPham
+                    orderby p.SanPham.Ten ascending
+                    select p);
+            }
+            else
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                   from p in ListSanPham
+                   orderby p.SanPham.Ten descending
+                   select p);
+            }
+            ListSanPhamHienThiTheotrang = loadPageHienThi(1);
+        }
+
+        private void sapXepTheoGiaBan()
+        {
+            if (IsSXTang)
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                    from p in ListSanPham
+                    orderby p.SanPham.GiaBan ascending
+                    select p);
+            }
+            else
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                   from p in ListSanPham
+                   orderby p.SanPham.GiaBan descending
+                   select p);
+            }
+            ListSanPhamHienThiTheotrang = loadPageHienThi(1);
+        }
+
+        private void sapXepTheoGiaNhap()
+        {
+            if (IsSXTang)
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                    from p in ListSanPham
+                    orderby p.SanPham.GiaNhap ascending
+                    select p);
+            }
+            else
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                   from p in ListSanPham
+                   orderby p.SanPham.GiaNhap descending
+                   select p);
+            }
+            ListSanPhamHienThiTheotrang = loadPageHienThi(1);
+        }
+
+        private void sapXepTheoSoLuong()
+        {
+            if (IsSXTang)
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                    from p in ListSanPham
+                    orderby p.SanPham.SoLuong ascending
+                    select p);
+            }
+            else
+            {
+                ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                   from p in ListSanPham
+                   orderby p.SanPham.SoLuong descending
+                   select p);
+            }
+            ListSanPhamHienThiTheotrang = loadPageHienThi(1);
         }
 
         private void selectionChanged(ListView p)

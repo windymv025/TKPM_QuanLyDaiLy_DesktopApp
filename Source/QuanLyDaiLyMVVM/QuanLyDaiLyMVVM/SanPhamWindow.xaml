@@ -24,6 +24,7 @@
     <Grid x:Name="bg_sanpham">
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
@@ -98,8 +99,57 @@
 
 
         <!--Row 2-->
-        <materialDesign:Card Grid.Row="1"
-                             Margin="20"
+
+		<WrapPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+			<ComboBox  materialDesign:HintAssist.Hint="Sắp xếp theo"
+						   Margin="10" Name="cbb_SapXepTheo"
+						   Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="SelectionChanged">
+						<i:InvokeCommandAction Command="{Binding ThayDoiLoaiSapXepCommand}"
+												   CommandParameter="{Binding ElementName=cbb_SapXepTheo}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+				<ComboBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<VirtualizingStackPanel />
+					</ItemsPanelTemplate>
+				</ComboBox.ItemsPanel>
+				<ComboBoxItem>Tên sản phẩm</ComboBoxItem>
+				<ComboBoxItem>Giá bán</ComboBoxItem>
+				<ComboBoxItem>Giá nhập</ComboBoxItem>
+				<ComboBoxItem>Số lượng</ComboBoxItem>
+			</ComboBox>
+
+			<ComboBox  Margin="10" Name="cbb_KieuSapXep"
+						   Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="SelectionChanged">
+						<i:InvokeCommandAction Command="{Binding ThayDoiSapXepCommand}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+
+				<ComboBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<VirtualizingStackPanel />
+					</ItemsPanelTemplate>
+				</ComboBox.ItemsPanel>
+				<ComboBoxItem IsSelected="True">Tăng dần</ComboBoxItem>
+				<ComboBoxItem>Giảm dần</ComboBoxItem>
+			</ComboBox>
+			<Button Grid.Row="1" 
+					Command="{Binding RefreshCommand}"
+						CommandParameter="{Binding ElementName=sanPhamWindow}"
+					Content="Refresh"
+						FontWeight="Bold"
+					Height="45"
+					Margin="10,0"
+					Width="100"></Button>
+		</WrapPanel>
+
+		<!--Row 3-->
+        <materialDesign:Card Grid.Row="2"
+                             Margin="20,0,20,0"
                              UniformCornerRadius="10">
             <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ItemsSource="{Binding ListSanPhamHienThiTheotrang}"
@@ -220,7 +270,7 @@
 
         <!--Row 3-->
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Margin="0,5,0,10"
                     HorizontalAlignment="Center"
                     Name="sp_PhanTrang_SanPham">
