@@ -29,5 +29,11 @@ namespace QuanLyDaiLyMVVM.Model
 
         private string _SoLuong;
         public string SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+
+        private string _ThanhTien;
+        public string ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
+
+        private decimal _ThanhTienNum;
+        public decimal ThanhTienNum { get => _ThanhTienNum; set { _ThanhTienNum = value; OnPropertyChanged(); } }
     }
 }

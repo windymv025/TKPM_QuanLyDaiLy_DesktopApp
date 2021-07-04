@@ -5,9 +5,240 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLyMVVM"
         mc:Ignorable="d"
-        Title="PhieuThuTienWindow" Height="450" Width="800"
-        DataContext="{StaticResource PhieuThuTienVM}">
-    <Grid>
+        Title="PhieuThuTienWindow" 
+		
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Height="700"
+        Width="1024"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
         
-    </Grid>
+		DataContext="{StaticResource PhieuThuTienVM}">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition Height="auto" MinHeight="50"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--Header-->
+
+		<Border  Background="#2E333A"
+                             Padding="10,0,0,0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="100" />
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="320" />
+				</Grid.ColumnDefinitions>
+				<Label Grid.Column="0"
+                                   Content="PHIẾU THU TIỀN"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="35"
+                                   FontWeight="ExtraBold"
+                                   Foreground="#FFFFBD0B"
+                                   Background="{x:Null}" />
+
+				<Button 
+					Grid.Column="1" Height="auto" Width="60" Margin="10"
+						FontSize="20" FontWeight="Bold"
+					Foreground="Green" Background="LightYellow"
+						Command="{Binding XuatFileExcelCommand}"
+						Style="{StaticResource MaterialDesignOutlinedButton}" Padding="-5,0,0,0"
+						ToolTip="Xuất file Excel"
+						>
+					<materialDesign:PackIcon Kind="MicrosoftExcel" Width="45" Height="45" Foreground="Green" />
+				</Button>
+
+
+				<!--Tìm kiếm theo ngày-->
+				<Border x:Name="datePickerSearch" Grid.Column="3" Margin="10,5" CornerRadius="4" Visibility="Collapsed"
+								Background="White">
+					<DatePicker Width="300" Height="60" Name="datePicker_Search"
+								 materialDesign:HintAssist.Hint="Pick Date"
+								 Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+				</Border>
+
+				<!--Tìm kiếm key search-->
+				<Grid x:Name="txtSearch" Grid.Column="3"  Margin="10,0"  Visibility="Visible">
+					<TextBox x:Name="textbox_search"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Right"
+                                         Visibility="Visible"
+                                         VerticalAlignment="Center"
+                                         Background="White"
+                                         FontSize="18"
+                                         Width="300"
+                                         BorderThickness="0"
+                                         materialDesign:HintAssist.Hint="Enter the keyword..."
+                                         materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                         materialDesign:TextFieldAssist.TextFieldCornerRadius="8"
+                                         />
+					<materialDesign:PackIcon Grid.Column="2"
+                                                         Kind="Magnify"
+                                                         Width="40"
+                                                         Height="40"
+                                                         Margin="0,0,10,0"
+                                                         Panel.ZIndex="5"
+                                                         HorizontalAlignment="Right"
+                                                         VerticalAlignment="Center" />
+				</Grid>
+
+				<Border CornerRadius="10" Grid.Column="2">
+					<ComboBox x:Name="cbb_LoaiTimKiem"
+								Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+								  Padding="10,15,10,15" 
+								  Background="White"
+								  HorizontalAlignment="Right" >
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding ThayDoiLoaiTimKiemCommand}"
+														   CommandParameter="{Binding ElementName=phieuXuatHangWindow}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+						<ComboBoxItem IsSelected="True">
+							<TextBlock Text="Đại lý"  FontWeight="Bold" />
+						</ComboBoxItem>
+						<ComboBoxItem>
+							<TextBlock Text="Ngày thu tiền" FontWeight="Bold" />
+						</ComboBoxItem>
+					</ComboBox>
+				</Border>
+			</Grid>
+		</Border>
+
+		<!--Chức năng chính-->
+		<materialDesign:Card Grid.Row="1">
+			<StackPanel VerticalAlignment="Center">
+
+				<WrapPanel Margin="15,10" >
+					<!--Đại lý-->
+					<ComboBox  materialDesign:HintAssist.Hint="Đại lý" MinWidth="200" VerticalAlignment="Bottom" Margin="15,5"
+									   ItemsSource="{Binding NguonNhaps}"  SelectedItem="{Binding NguonNhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
+														   CommandParameter="{Binding ElementName=btnLuu}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+						<ComboBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<VirtualizingStackPanel />
+							</ItemsPanelTemplate>
+						</ComboBox.ItemsPanel>
+						<ComboBox.ItemTemplate>
+							<DataTemplate>
+								<Grid Height="120" Width="540">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition/>
+										<ColumnDefinition Width="2*"/>
+									</Grid.ColumnDefinitions>
+									<Image Source="{Binding DaiLy.HinhAnh}" Stretch="Uniform" 
+														   RenderOptions.BitmapScalingMode="HighQuality"/>
+									<StackPanel Grid.Column="1" VerticalAlignment="Center" >
+										<TextBlock Text="{Binding DaiLy.Ten}" TextWrapping="WrapWithOverflow" FontWeight="Bold" Margin="5,0,0,0"/>
+										<TextBlock Text="{Binding DaiLy.DienThoai}" TextWrapping="WrapWithOverflow"	Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding DaiLy.Email}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding DaiLy.DiaChi}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
+									</StackPanel>
+								</Grid>
+							</DataTemplate>
+						</ComboBox.ItemTemplate>
+					</ComboBox>
+
+					<TextBox Margin="15,5"  Name="SoTienThuTxt" MinWidth="200"
+								  materialDesign:HintAssist.Hint="Số tiền thu"
+							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							Text="{Binding GiaBan}" Foreground="Red"
+						    FontWeight="Bold"	  Padding="5"
+							VerticalAlignment="Center"
+							materialDesign:TextFieldAssist.PrefixText=" đ "
+							materialDesign:TextFieldAssist.SuffixText="VNĐ">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="TextChanged">
+								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuSoCommand}"
+														   CommandParameter="{Binding ElementName=SoTienThuTxt}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</TextBox>
+
+					<DatePicker Margin="15,5"  Name="ngayThuTien_dp" MinWidth="200"  VerticalAlignment="Bottom"
+								materialDesign:HintAssist.Hint="Ngày thu tiền"  
+								Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
+						
+					</DatePicker>
+				</WrapPanel>
+
+			</StackPanel>
+		</materialDesign:Card>
+
+		<!--Button Add Remove-->
+		<materialDesign:Card Grid.Row="2"
+                                 Margin="5,15,5,0">
+			<WrapPanel>
+				<Button Command="{Binding AddCommand}"
+                            Content="Thêm"
+							Background="Blue"
+                            Margin="5"
+                            Width="100"></Button>
+				<Button Command="{Binding EditCommand}"
+							CommandParameter="{Binding ElementName=lv_DanhSachNguonNhap}"
+                            Content="Sửa"
+							Background="Blue"
+                            Margin="5"
+                            Width="100"></Button>
+				<Button Command="{Binding DeleteCommand}"
+                            Content="Xóa"
+							Background="Red"
+                            Margin="5"
+                            Width="100"></Button>
+			</WrapPanel>
+		</materialDesign:Card>
+		<!--Product-->
+		<materialDesign:Card Grid.Row="3"
+                                 Margin="5,15,5,15"
+                                 VerticalAlignment="Stretch">
+			<ScrollViewer VerticalScrollBarVisibility="Auto">
+				<ListView x:Name="lv_DanhSachSanPhamXuat" Height="auto" ItemsSource="{Binding SanPhamXuats}" 
+                              SelectedItem="{Binding SanPhamXuat, Mode=TwoWay}">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="SelectionChanged">
+							<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
+													   CommandParameter="{Binding ElementName=lv_DanhSachSanPhamXuat}"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+					<ListView.View>
+						<GridView>
+
+							<GridViewColumn Header="Tên đại lý" Width="auto"
+                                                DisplayMemberBinding="{Binding SanPham.Ten}"></GridViewColumn>
+							<GridViewColumn Header="Số điện thoại" Width="auto"
+                                                DisplayMemberBinding="{Binding DonViTinh.Ten}"></GridViewColumn>
+							<GridViewColumn Header="Email" Width="auto"
+                                                DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
+							<GridViewColumn Header="Địa chỉ" Width="auto"
+                                                DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
+							<GridViewColumn Header="Ngày thu tiền" Width="auto"
+                                                DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
+							<GridViewColumn Header="Số tiền thu" Width="auto"
+                                                DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
+
+						</GridView>
+					</ListView.View>
+				</ListView>
+			</ScrollViewer>
+		</materialDesign:Card>
+
+	</Grid>
 </Window>

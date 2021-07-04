@@ -90,6 +90,9 @@
     <Compile Include="CapNhatDaiLyWindow.xaml.cs">
       <DependentUpon>CapNhatDaiLyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CapNhatPhieuXuatHangWindow.xaml.cs">
+      <DependentUpon>CapNhatPhieuXuatHangWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CapNhatSanPhamWindow.xaml.cs">
       <DependentUpon>CapNhatSanPhamWindow.xaml</DependentUpon>
     </Compile>
@@ -205,11 +208,15 @@
     <Compile Include="ThemLoaiDaiLyWindow.xaml.cs">
       <DependentUpon>ThemLoaiDaiLyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ThemPhieuXuatHangWindow.xaml.cs">
+      <DependentUpon>ThemPhieuXuatHangWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ThemSanPhamWindow.xaml.cs">
       <DependentUpon>ThemSanPhamWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaoCaoViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CapNhatPhieuXuatHangViewModel.cs" />
     <Compile Include="ViewModel\CapNhatSanPhamViewModel.cs" />
     <Compile Include="ViewModel\DaiLyViewModel.cs" />
     <Compile Include="ViewModel\LienHeViewModel.cs" />
@@ -224,6 +231,7 @@
     <Compile Include="ViewModel\DonViTinhViewModel.cs" />
     <Compile Include="ViewModel\LoaiSanPhamViewModel.cs" />
     <Compile Include="ViewModel\NguonNhapViewModel.cs" />
+    <Compile Include="ViewModel\ThemPhieuXuatHangViewModel.cs" />
     <Compile Include="ViewModel\ThemSanPhamViewModel.cs" />
     <Page Include="BaoCaoWindow.xaml">
       <SubType>Designer</SubType>
@@ -232,6 +240,10 @@
     <Page Include="CapNhatDaiLyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CapNhatPhieuXuatHangWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CapNhatSanPhamWindow.xaml">
       <SubType>Designer</SubType>
@@ -310,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ThemLoaiDaiLyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemPhieuXuatHangWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
