@@ -521,15 +521,15 @@
 									</Grid.ColumnDefinitions>
 									<!--top 2-->
 									<StackPanel VerticalAlignment="Top"
-												DataContext="{Binding SanPhamTop2}"
-												HorizontalAlignment="Right">
+												HorizontalAlignment="Right" >
 										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
+											<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
 												<i:InvokeCommandAction 
 													Command="{Binding SanPhamTop2_MouseDownCommand}" 
 													CommandParameter="{Binding ElementName=mainWindow}" />
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
+
 										<Border  Margin="0,45,0,0"
                                                  BorderBrush="red"
                                                  BorderThickness="2"
@@ -537,10 +537,10 @@
                                                  Height="120"
                                                  Width="200">
 											<Border.Background>
-												<ImageBrush ImageSource="{Binding HinhAnh}"
+												<ImageBrush ImageSource="{Binding SanPhamTop2.HinhAnh}"
                                                             Stretch="Uniform" />
 											</Border.Background>
-
+											
 											<materialDesign:Card
 												Background="Yellow"
 												Foreground="Blue"
@@ -549,7 +549,7 @@
 												 Margin="10,0,10,5"
                                                  Padding="5,5" >
 
-												<TextBlock Text="{Binding Ten}"
+												<TextBlock Text="{Binding SanPhamTop2.Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
                                                        VerticalAlignment="Bottom"
@@ -564,7 +564,7 @@
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Black" />
-											<TextBlock Text="{Binding SoLuong}"
+											<TextBlock Text="{Binding SanPhamTop2.SoLuong}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
@@ -576,7 +576,7 @@
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
 										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
+											<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
 												<i:InvokeCommandAction 
 													Command="{Binding SanPhamTop1_MouseDownCommand}" 
 													CommandParameter="{Binding ElementName=mainWindow}" />
@@ -626,13 +626,12 @@
 									</StackPanel>
 
 									<!--top 3-->
-									<StackPanel DataContext="{Binding SanPhamTop3}"
-                                                Grid.Column="2"
+									<StackPanel Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
 
 										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
+											<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
 												<i:InvokeCommandAction 
 													Command="{Binding SanPhamTop3_MouseDownCommand}" 
 													CommandParameter="{Binding ElementName=mainWindow}" />
@@ -646,7 +645,7 @@
                                                  Height="130"
                                                  Width="200">
 											<Border.Background>
-												<ImageBrush ImageSource="{Binding HinhAnh}"
+												<ImageBrush ImageSource="{Binding SanPhamTop3.HinhAnh}"
                                                             Stretch="Uniform" />
 
 											</Border.Background>
@@ -658,7 +657,7 @@
 												 Margin="10,0,10,5"
                                                  Padding="5,5" >
 
-												<TextBlock Text="{Binding Ten}"
+												<TextBlock Text="{Binding SanPhamTop3.Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
                                                        VerticalAlignment="Bottom"
@@ -674,7 +673,7 @@
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Black" />
-											<TextBlock Text="{Binding SoLuong}"
+											<TextBlock Text="{Binding SanPhamTop3.SoLuong}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
@@ -710,12 +709,11 @@
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
 									<!--top 2-->
-									<StackPanel DataContext="{Binding DaiLyTop2}"
-                                                VerticalAlignment="Top"
+									<StackPanel VerticalAlignment="Top"
                                                 HorizontalAlignment="Right">
 
 										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
+											<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
 												<i:InvokeCommandAction 
 													Command="{Binding DaiLyTop2_MouseDownCommand}" 
 													CommandParameter="{Binding ElementName=mainWindow}" />
@@ -730,7 +728,7 @@
                                                 Width="200">
 											<Border.Background>
 												<ImageBrush x:Name="imgDaiLyTop2"
-                                                            ImageSource="{Binding HinhAnh}"
+                                                            ImageSource="{Binding DaiLyTop2.HinhAnh}"
                                                             Stretch="Uniform" />
 
 											</Border.Background>
@@ -742,7 +740,7 @@
 												 Margin="10,0,10,5"
                                                  Padding="5,5" >
 
-												<TextBlock Text="{Binding Ten}"
+												<TextBlock Text="{Binding DaiLyTop2.Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
                                                        VerticalAlignment="Bottom"
@@ -754,7 +752,7 @@
 										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
 											<TextBlock x:Name="txtDaiLyTop2"
-                                                       Text="{Binding TongTienXuat}"
+                                                       Text="{Binding DaiLyTop2.TongTienXuat}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
@@ -766,13 +764,12 @@
 									</StackPanel>
 
 									<!--top 1-->
-									<StackPanel DataContext="{Binding DaiLyTop1}"
-                                                Grid.Column="1"
+									<StackPanel  Grid.Column="1"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center">
 
 										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
+											<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
 												<i:InvokeCommandAction 
 													Command="{Binding DaiLyTop1_MouseDownCommand}" 
 													CommandParameter="{Binding ElementName=mainWindow}" />
@@ -786,7 +783,7 @@
                                                  Height="130"
                                                  Width="200">
 											<Border.Background>
-												<ImageBrush ImageSource="{Binding HinhAnh}"
+												<ImageBrush ImageSource="{Binding DaiLyTop1.HinhAnh}"
                                                             Stretch="Uniform" />
 
 											</Border.Background>
@@ -798,7 +795,7 @@
 												 Margin="10,0,10,5"
                                                  Padding="5,5" >
 
-												<TextBlock Text="{Binding Ten}"
+												<TextBlock Text="{Binding DaiLyTop1.Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
                                                        VerticalAlignment="Bottom"
@@ -809,7 +806,7 @@
 										</Border>
 										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-											<TextBlock Text="{Binding TongTienXuat}"
+											<TextBlock Text="{Binding DaiLyTop1.TongTienXuat}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
@@ -822,16 +819,14 @@
 									</StackPanel>
 
 									<!--top 3-->
-									<StackPanel DataContext="{Binding DaiLyTop3}"
-                                                Grid.Column="2"
+									<StackPanel  Grid.Column="2"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left">
 
 										<i:Interaction.Triggers>
-											<i:EventTrigger EventName="MouseDown">
+											<i:EventTrigger EventName="PreviewMouseLeftButtonDown">
 												<i:InvokeCommandAction 
-													Command="{Binding DaiLyTop3_MouseDownCommand}" 
-													CommandParameter="{Binding ElementName=mainWindow}" />
+													Command="{Binding DaiLyTop3_MouseDownCommand}" />
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
 
@@ -843,7 +838,7 @@
                                                   Width="200">
 											<Border.Background>
 												<ImageBrush x:Name="imgDaiLyTop3"
-                                                            ImageSource="{Binding HinhAnh}"
+                                                            ImageSource="{Binding DaiLyTop3.HinhAnh}"
                                                             Stretch="Uniform" />
 											</Border.Background>
 											<materialDesign:Card
@@ -854,7 +849,7 @@
 												 Margin="10,0,10,5"
                                                  Padding="5,5" >
 
-												<TextBlock Text="{Binding Ten}"
+												<TextBlock Text="{Binding DaiLyTop3.Ten}"
                                                        FontSize="13"
                                                        FontWeight="DemiBold"
                                                        VerticalAlignment="Bottom"
@@ -865,7 +860,7 @@
 										</Border>
 										<StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
-											<TextBlock Text="{Binding TongTienXuat}"
+											<TextBlock Text="{Binding DaiLyTop3.TongTienXuat}"
                                                        FontSize="14"
                                                        FontWeight="Black"
                                                        Foreground="Red" />
@@ -923,9 +918,11 @@
                                       Grid.Column="0"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
-                                      Margin="10,-20,0,0"
+                                      Margin="15,-20,0,0"
                                       Height="50"
-                                      Width="60"
+                                      Width="50"
+									  MaxHeight="50"
+                                      MaxWidth="50"
                                       BorderThickness="0"
                                       Style="{StaticResource tb_style}"
                                       Unchecked="Tg_btn_Unchecked"

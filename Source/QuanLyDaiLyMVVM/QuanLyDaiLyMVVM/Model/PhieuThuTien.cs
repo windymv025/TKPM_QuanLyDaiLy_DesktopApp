@@ -15,10 +15,10 @@ namespace QuanLyDaiLyMVVM.Model
 
     public partial class PhieuThuTien : BaseViewModel
     {
-        public int _IdPhieuDaiLy;
+        private int _IdPhieuDaiLy;
         public int IdPhieuDaiLy { get => _IdPhieuDaiLy; set { _IdPhieuDaiLy = value; OnPropertyChanged(); } }
 
-        public decimal _SoTienThu;
+        private decimal _SoTienThu;
         public decimal SoTienThu { get => _SoTienThu; set { _SoTienThu = value; OnPropertyChanged(); } }
 
         private PhieuDaiLy _PhieuDaiLy;
