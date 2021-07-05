@@ -68,6 +68,10 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </ComboBox>
+                        <Button Command="{Binding ExportDoanhThuCommand}"
+                                Content="Xuất excel"
+                                Margin="20,0,0,0" HorizontalAlignment="Left"
+                                Width="100"></Button>
                         <Grid Grid.Row="1"
                               Margin="10"
                               MaxHeight="1000">
@@ -161,6 +165,11 @@
                                    FontSize="30"
                                    FontWeight="ExtraBold"
                                    Margin="10" />
+                        <Button Command="{Binding ExportCongNoCommand}"
+                                Content="Xuất excel"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                Width="100"></Button>
                         <Grid Grid.Row="1"
                               Margin="10"
                               MaxHeight="1000">
