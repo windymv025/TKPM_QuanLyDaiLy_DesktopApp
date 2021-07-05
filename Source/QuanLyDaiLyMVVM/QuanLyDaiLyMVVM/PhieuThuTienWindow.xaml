@@ -125,11 +125,10 @@
 				<WrapPanel Margin="15,10" >
 					<!--Đại lý-->
 					<ComboBox  materialDesign:HintAssist.Hint="Đại lý" MinWidth="200" VerticalAlignment="Bottom" Margin="15,5"
-									   ItemsSource="{Binding NguonNhaps}"  SelectedItem="{Binding NguonNhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+									   ItemsSource="{Binding DaiLys}"  SelectedItem="{Binding DaiLy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
-								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
-														   CommandParameter="{Binding ElementName=btnLuu}"/>
+								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
 						<ComboBox.ItemsPanel>
@@ -160,7 +159,7 @@
 					<TextBox Margin="15,5"  Name="SoTienThuTxt" MinWidth="200"
 								  materialDesign:HintAssist.Hint="Số tiền thu"
 							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-							Text="{Binding GiaBan}" Foreground="Red"
+							Text="{Binding SoTienThu}" Foreground="Red"
 						    FontWeight="Bold"	  Padding="5"
 							VerticalAlignment="Center"
 							materialDesign:TextFieldAssist.PrefixText=" đ "
@@ -175,6 +174,7 @@
 
 					<DatePicker Margin="15,5"  Name="ngayThuTien_dp" MinWidth="200"  VerticalAlignment="Bottom"
 								materialDesign:HintAssist.Hint="Ngày thu tiền"  
+								SelectedDate="{Binding NgayLapPhieu, Mode=TwoWay}"
 								Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
 						
 					</DatePicker>
@@ -184,9 +184,13 @@
 		</materialDesign:Card>
 
 		<!--Button Add Remove-->
-		<materialDesign:Card Grid.Row="2"
+		<materialDesign:Card Grid.Row="2" Padding="0,5"
                                  Margin="5,15,5,0">
 			<WrapPanel>
+				<Button Command="{Binding RefreshCommand}"
+                            Content="Refresh"
+                            Margin="5"
+                            Width="100"></Button>
 				<Button Command="{Binding AddCommand}"
                             Content="Thêm"
 							Background="Blue"
@@ -210,29 +214,29 @@
                                  Margin="5,15,5,15"
                                  VerticalAlignment="Stretch">
 			<ScrollViewer VerticalScrollBarVisibility="Auto">
-				<ListView x:Name="lv_DanhSachSanPhamXuat" Height="auto" ItemsSource="{Binding SanPhamXuats}" 
-                              SelectedItem="{Binding SanPhamXuat, Mode=TwoWay}">
+				<ListView x:Name="lv_DanhSachPhieuThuTien" Height="auto" ItemsSource="{Binding PhieuThuTiens}" 
+                              SelectedItem="{Binding PhieuThuTien, Mode=TwoWay}">
 					<i:Interaction.Triggers>
 						<i:EventTrigger EventName="SelectionChanged">
 							<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
-													   CommandParameter="{Binding ElementName=lv_DanhSachSanPhamXuat}"/>
+													   CommandParameter="{Binding ElementName=lv_DanhSachPhieuThuTien}"/>
 						</i:EventTrigger>
 					</i:Interaction.Triggers>
 					<ListView.View>
 						<GridView>
 
 							<GridViewColumn Header="Tên đại lý" Width="auto"
-                                                DisplayMemberBinding="{Binding SanPham.Ten}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding DaiLy.Ten}"></GridViewColumn>
 							<GridViewColumn Header="Số điện thoại" Width="auto"
-                                                DisplayMemberBinding="{Binding DonViTinh.Ten}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding DaiLy.DienThoai}"></GridViewColumn>
 							<GridViewColumn Header="Email" Width="auto"
-                                                DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding DaiLy.Email}"></GridViewColumn>
 							<GridViewColumn Header="Địa chỉ" Width="auto"
-                                                DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding DaiLy.DiaChi}"></GridViewColumn>
 							<GridViewColumn Header="Ngày thu tiền" Width="auto"
-                                                DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding PhieuDaiLy.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
 							<GridViewColumn Header="Số tiền thu" Width="auto"
-                                                DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding SoTienThu}"></GridViewColumn>
 
 						</GridView>
 					</ListView.View>

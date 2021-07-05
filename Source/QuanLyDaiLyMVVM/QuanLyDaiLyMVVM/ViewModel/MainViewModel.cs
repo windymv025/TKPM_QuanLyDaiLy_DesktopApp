@@ -701,9 +701,16 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                NgayBatDau = (from i in db.PhieuDaiLies
-                              orderby i.NgayLapPhieu ascending
-                              select i).FirstOrDefault().NgayLapPhieu;
+                if (db.PhieuDaiLies.Count() > 0)
+                {
+                    NgayBatDau = (from i in db.PhieuDaiLies
+                                  orderby i.NgayLapPhieu ascending
+                                  select i).FirstOrDefault().NgayLapPhieu;
+                }
+                else
+                {
+                    NgayBatDau = DateTime.MinValue;
+                }
 
                 ListDaiLy = new ObservableCollection<DaiLy>(db.DaiLies.Where(p => p.IsRemove == false));
                 ListSanPham = new ObservableCollection<SanPham>(db.SanPhams.Where(p => p.TrangThai == true));
