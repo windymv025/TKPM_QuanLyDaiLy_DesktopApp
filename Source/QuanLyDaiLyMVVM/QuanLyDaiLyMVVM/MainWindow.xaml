@@ -229,7 +229,7 @@
 
 							<Grid Grid.Column="2"
                                   Margin="10,0">
-								<TextBox x:Name="textbox_search"
+								<ComboBox x:Name="textbox_search" ItemsSource="{Binding ListDaiLy}"
                                          Grid.Column="1"
                                          HorizontalAlignment="Right"
                                          Visibility="Visible"
@@ -238,42 +238,74 @@
                                          FontSize="18"
                                          Width="300"
                                          BorderThickness="0"
-                                         materialDesign:HintAssist.Hint="Enter the keyword..."
+                                         materialDesign:HintAssist.Hint="Search"
                                          materialDesign:TextFieldAssist.HasOutlinedTextField="True"
                                          materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                                         materialDesign:TextFieldAssist.TextFieldCornerRadius="8"
-                                         TextChanged="textbox_search_TextChanged" />
+										  IsEditable="True"
+										  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+										  materialDesign:HintAssist.HintOpacity=".26"
+                                         >
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="KeyDown">
+											<i:InvokeCommandAction Command="{Binding TimKiemCommand}" 
+																   CommandParameter="{Binding ElementName=textbox_search}"/>
+										</i:EventTrigger>
+										<i:EventTrigger EventName="SelectionChanged">
+											<i:InvokeCommandAction Command="{Binding SelectedSearchCommand}" 
+																   CommandParameter="{Binding ElementName=textbox_search}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+									<ComboBox.ItemTemplate>
+										<DataTemplate>
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="80"/>
+													<ColumnDefinition/>
+												</Grid.ColumnDefinitions>
+												<Image Source="{Binding HinhAnh}" RenderOptions.BitmapScalingMode="HighQuality"		
+													   Stretch="Uniform" Height="80"/>
+												<Grid Grid.Column="1">
+													<TextBlock VerticalAlignment="Center" Margin="5" Text="{Binding Ten}"/>
+												</Grid>
+											</Grid>
+										</DataTemplate>
+									</ComboBox.ItemTemplate>
+								</ComboBox>
 								<materialDesign:PackIcon Grid.Column="2"
                                                          Kind="Magnify"
                                                          Width="40"
                                                          Height="40"
-                                                         Margin="0,0,10,0"
+                                                         Margin="0,0,4,0"
                                                          Panel.ZIndex="5"
                                                          HorizontalAlignment="Right"
                                                          VerticalAlignment="Center" />
 							</Grid>
 
-							<Border CornerRadius="10"
-                                    Grid.Column="1">
-								<ComboBox Padding="5,15,0,15"
+							<ComboBox Name="cbb_loaiTimKiem"
+								Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           Background="White"
                                           HorizontalAlignment="Right"
                                           Width="120">
-									<ComboBoxItem IsSelected="True">
-										<TextBlock Text="Đại lý"
+								<i:Interaction.Triggers>
+									<i:EventTrigger EventName="SelectionChanged">
+										<i:InvokeCommandAction Command="{Binding LoaiTimKiemCommand}"
+															   CommandParameter="{Binding ElementName=mainWindow}"/>
+									</i:EventTrigger>
+								</i:Interaction.Triggers>
+								<ComboBoxItem IsSelected="True">
+									<TextBlock Text="Đại lý"
                                                    FontWeight="Bold" />
-									</ComboBoxItem>
-									<ComboBoxItem>
-										<TextBlock Text="Sản phẩm"
+								</ComboBoxItem>
+								<ComboBoxItem>
+									<TextBlock Text="Sản phẩm"
                                                    FontWeight="Bold" />
-									</ComboBoxItem>
-									<ComboBoxItem>
-										<TextBlock Text="Nhà cung cấp"
+								</ComboBoxItem>
+								<ComboBoxItem>
+									<TextBlock Text="Nguồn nhập"
                                                    FontWeight="Bold" />
-									</ComboBoxItem>
+								</ComboBoxItem>
 
-								</ComboBox>
-							</Border>
+							</ComboBox>
 						</Grid>
 					</Border>
 
@@ -281,6 +313,183 @@
 					<ScrollViewer Grid.Row="2"
                                   VerticalScrollBarVisibility="Hidden">
 						<StackPanel>
+							<!--Filter-->
+							<Grid>
+								<materialDesign:Card Margin="5">
+									<Grid Grid.Row="0">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="auto"></RowDefinition>
+											<RowDefinition Height="auto"></RowDefinition>
+											<RowDefinition></RowDefinition>
+										</Grid.RowDefinitions>
+										<Grid Grid.Row="0" Margin="5">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="auto"></ColumnDefinition>
+												<ColumnDefinition Width="auto"></ColumnDefinition>
+												<ColumnDefinition Width="auto"></ColumnDefinition>
+											</Grid.ColumnDefinitions>
+
+											<Grid Grid.Column="0">
+												<DatePicker VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" 
+															Margin="5,0,10,0" SelectedDate="{Binding NgayBatDau}"
+															materialDesign:HintAssist.Hint="Ngày bắt đầu" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+											</Grid>
+											<Grid Grid.Column="1">
+												<DatePicker VerticalAlignment="Center" SelectedDate="{Binding NgayKetThuc}"
+															HorizontalAlignment="Left" Width="150"
+															materialDesign:HintAssist.Hint="Ngày kết thúc" 
+															Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+											</Grid>
+											<Grid Grid.Column="2">
+												<Button Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5"
+														Width="80" Content="Lọc"
+														Command="{Binding LocTheoNgayCommand}"
+                                            ToolTip="Resource name: MaterialDesignRaisedButton"></Button>
+											</Grid>
+										</Grid>
+										<Grid Grid.Row="1">
+											<Separator Margin="5"></Separator>
+										</Grid>
+										<Grid Grid.Row="2">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition/>
+												<ColumnDefinition/>
+												<ColumnDefinition/>
+												<ColumnDefinition/>
+												<ColumnDefinition/>
+											</Grid.ColumnDefinitions>
+
+											<!--Doanh thu-->
+											<Grid>
+												<materialDesign:Card Background="#03a9f4"  Margin="5"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         Padding="0" >
+													<!--Doanh Thu-->
+													<Grid>
+														<Grid.RowDefinitions>
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+														</Grid.RowDefinitions>
+														<TextBlock Grid.Row="0" Margin="16 16 16 4"  FontWeight="Black"    
+                                                       Text="Doanh thu">
+
+														</TextBlock>
+														<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+														<TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Left"      
+                                                       Text="{Binding DoanhThu}">
+														</TextBlock>
+														
+													</Grid>
+												</materialDesign:Card>
+											</Grid>
+
+											<!--Lợi nhuận-->
+											<Grid Grid.Column="1">
+												<materialDesign:Card Background="#03a9f4"  Margin="5"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         Padding="0">
+													<Grid>
+														<Grid.RowDefinitions>
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+														</Grid.RowDefinitions>
+														<TextBlock Grid.Row="0" Margin="16 16 16 4"  FontWeight="Black"    
+                                                       Text="Lợi nhuận">
+
+														</TextBlock>
+														<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+														<TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Left"      
+                                                       Text="{Binding LoiNhuan}">
+														</TextBlock>
+
+													</Grid>
+												</materialDesign:Card>
+											</Grid>
+
+											<!--Tong cong no-->
+											<Grid Grid.Column="2">
+												<materialDesign:Card Background="#03a9f4" Margin="5"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         Padding="0" >
+													<Grid>
+														<Grid.RowDefinitions>
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+														</Grid.RowDefinitions>
+														<TextBlock Grid.Row="0" Margin="16 16 16 4" FontWeight="Black"    
+                                                       Text="Tổng công nợ">
+
+														</TextBlock>
+														<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+														<TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Left"      
+                                                       Text="{Binding TongCongNo}">
+														</TextBlock>
+														
+													</Grid>
+												</materialDesign:Card>
+											</Grid>
+
+											<!--Sản phẩm tồn kho-->
+											<Grid Grid.Column="3">
+												<materialDesign:Card Background="#03a9f4"  Margin="5"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         Padding="0" >
+													<Grid>
+														<Grid.RowDefinitions>
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+														</Grid.RowDefinitions>
+														<TextBlock Grid.Row="0" Margin="16 16 16 4" FontWeight="Black"    
+                                                       Text="Sản phẩm tồn kho">
+
+														</TextBlock>
+														<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+														<TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Left"      
+                                                       Text="{Binding SanPhamTonKho}">
+														</TextBlock>
+														
+													</Grid>
+												</materialDesign:Card>
+											</Grid>
+
+											<!--Tổng số đại lý-->
+											<Grid Grid.Column="4">
+												<materialDesign:Card Background="#03a9f4"  Margin="5"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         Padding="0" >
+													<Grid>
+														<Grid.RowDefinitions>
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+															<RowDefinition Height="Auto" />
+														</Grid.RowDefinitions>
+														<TextBlock Grid.Row="0" Margin="16 16 16 4" FontWeight="Black"    
+                                                       Text="Tổng số đại lý">
+
+														</TextBlock>
+														<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+														<TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Left"      
+                                                       Text="{Binding TongSoDaiLy}">
+														</TextBlock>
+
+													</Grid>
+												</materialDesign:Card>
+											</Grid>
+
+										</Grid>
+									</Grid>
+								</materialDesign:Card>
+							</Grid>
+							
 							<!--Sản phẩm bán chạy-->
 							<materialDesign:Card Margin="10,15"
 												 Background="#03a9f4"

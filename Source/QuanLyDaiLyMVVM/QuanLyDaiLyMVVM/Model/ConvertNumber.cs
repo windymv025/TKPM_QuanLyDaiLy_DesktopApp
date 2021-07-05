@@ -35,7 +35,14 @@ namespace QuanLyDaiLyMVVM.Model
         {
             string temp = "";
             string result = "";
+            decimal dau = 1;
             string number = num.ToString().Split('.')[0];
+
+            if(num < 0)
+            {
+                dau = -1;
+                number = (num * -1).ToString().Split('.')[0];
+            }
 
             for (int i = number.Length - 1; i >= 0; i--)
             {
@@ -52,7 +59,10 @@ namespace QuanLyDaiLyMVVM.Model
             }
 
             //result += "," + num.ToString().Split('.')[1];
-
+            if (dau == -1) 
+            {
+                result = "-" + result;
+            }
             return result;
         }
 

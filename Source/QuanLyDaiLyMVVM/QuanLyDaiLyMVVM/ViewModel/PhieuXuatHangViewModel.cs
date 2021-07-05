@@ -18,6 +18,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
         private bool IsSXTang = true;
         private bool IsNgayLapPhieu = false;
 
+        private PhieuXuatHangHienThi _SelectPhieuXuatHang;
+        public PhieuXuatHangHienThi SelectPhieuXuatHang { get => _SelectPhieuXuatHang; set { _SelectPhieuXuatHang = value; OnPropertyChanged(); } }
+
         private ObservableCollection<PhieuXuatHangHienThi> _PhieuXuatHangs;
         public ObservableCollection<PhieuXuatHangHienThi> PhieuXuatHangs { get => _PhieuXuatHangs; set { _PhieuXuatHangs = value; OnPropertyChanged(); } }
 
@@ -34,6 +37,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand ThayDoiLoaiTimKiemCommand { get; set; }
         public ICommand ThayDoiLoaiSapXepCommand { get; set; }
         public ICommand ThayDoiSapXepCommand { get; set; }
+        public ICommand SelectionChangedCommand { get; set; }
 
 
         public PhieuXuatHangViewModel()
@@ -118,7 +122,19 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 return true;
             }, (p) =>
             {
+                var wd = new ThemPhieuXuatHangWindow();
+                wd.ShowDialog();
+            });
 
+            SelectionChangedCommand = new RelayCommand<ListView>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                var wd = new CapNhatPhieuXuatHangWindow();
+                var vm = new CapNhatPhieuXuatHangViewModel(SelectPhieuXuatHang);
+                wd.DataContext = vm;
+                wd.ShowDialog();
             });
 
         }

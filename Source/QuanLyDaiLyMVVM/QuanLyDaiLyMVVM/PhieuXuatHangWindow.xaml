@@ -163,7 +163,12 @@
 			<!--TODO SomeThing-->
 
 			<materialDesign:Card Margin="20,10" Grid.Row="2">
-				<ListView ItemsSource="{Binding ListHienThiTheotrang}">
+				<ListView ItemsSource="{Binding ListHienThiTheotrang}" Name="lv_phieuXuatHang" SelectedItem="{Binding SelectPhieuXuatHang, Mode=TwoWay}">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="SelectionChanged">
+							<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=lv_phieuXuatHang}" />
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
 					<ListView.View>
 						<GridView>
 							<GridViewColumn Header="Ngày lập phiếu">

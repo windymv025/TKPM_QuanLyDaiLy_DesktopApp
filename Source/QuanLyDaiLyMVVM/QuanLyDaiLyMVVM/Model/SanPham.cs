@@ -57,11 +57,20 @@ namespace QuanLyDaiLyMVVM.Model
         public bool TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get; set; }
-        public virtual DonViTinh DonViTinh { get; set; }
+        private ICollection<ChiTietPhieuXuatHang> _ChiTietPhieuXuatHangs;
+        public virtual ICollection<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get => _ChiTietPhieuXuatHangs; set { _ChiTietPhieuXuatHangs = value; OnPropertyChanged(); } }
+
+        private DonViTinh _DonViTinh;
+        public virtual DonViTinh DonViTinh { get => _DonViTinh; set { _DonViTinh = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HinhAnhSanPham> HinhAnhSanPhams { get; set; }
-        public virtual LoaiSanPham LoaiSanPham { get; set; }
-        public virtual NguonNhap NguonNhap { get; set; }
+        private ICollection<HinhAnhSanPham> _HinhAnhSanPhams;
+        public virtual ICollection<HinhAnhSanPham> HinhAnhSanPhams { get => _HinhAnhSanPhams; set { _HinhAnhSanPhams = value; OnPropertyChanged(); } }
+
+        private LoaiSanPham _LoaiSanPham;
+        public virtual LoaiSanPham LoaiSanPham { get => _LoaiSanPham; set { _LoaiSanPham = value; OnPropertyChanged(); } }
+
+        private NguonNhap _NguonNhap;
+        public virtual NguonNhap NguonNhap { get => _NguonNhap; set { _NguonNhap = value; OnPropertyChanged(); } }
     }
 }

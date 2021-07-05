@@ -1,6 +1,7 @@
 ﻿using QuanLyDaiLyMVVM.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,29 @@ namespace QuanLyDaiLyMVVM.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private int loaiTimKiem = 0;
+
+        private string _DoanhThu;
+        public string DoanhThu { get => _DoanhThu; set { _DoanhThu = value; OnPropertyChanged(); } }
+        
+        private string _LoiNhuan;
+        public string LoiNhuan { get => _LoiNhuan; set { _LoiNhuan = value; OnPropertyChanged(); } }
+
+        private string _TongCongNo;
+        public string TongCongNo { get => _TongCongNo; set { _TongCongNo = value; OnPropertyChanged(); } }
+
+        private string _SanPhamTonKho;
+        public string SanPhamTonKho { get => _SanPhamTonKho; set { _SanPhamTonKho = value; OnPropertyChanged(); } }
+
+        private string _TongSoDaiLy; 
+        public string TongSoDaiLy { get => _TongSoDaiLy; set { _TongSoDaiLy = value; OnPropertyChanged(); } }
+
+        private DateTime _NgayBatDau;
+        public DateTime NgayBatDau { get => _NgayBatDau; set { _NgayBatDau = value; OnPropertyChanged(); } }
+        
+        private DateTime _NgayKetThuc;
+        public DateTime NgayKetThuc { get => _NgayKetThuc; set { _NgayKetThuc = value; OnPropertyChanged(); } }
+
         private SanPhamTop _SanPhamTop1;
         public SanPhamTop SanPhamTop1 { get => _SanPhamTop1; set { _SanPhamTop1 = value; OnPropertyChanged();} }
 
@@ -32,6 +56,15 @@ namespace QuanLyDaiLyMVVM.ViewModel
         private DaiLyTop _DaiLyTop3;
         public DaiLyTop DaiLyTop3 { get => _DaiLyTop3; set { _DaiLyTop3 = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<DaiLy> _ListDaiLy;
+        public ObservableCollection<DaiLy> ListDaiLy { get => _ListDaiLy; set { _ListDaiLy = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<SanPham> _ListSanPham;
+        public ObservableCollection<SanPham> ListSanPham { get => _ListSanPham; set { _ListSanPham = value; OnPropertyChanged(); } }
+        
+        private ObservableCollection<NguonNhap> _ListNguonNhap;
+        public ObservableCollection<NguonNhap> ListNguonNhap { get => _ListNguonNhap; set { _ListNguonNhap = value; OnPropertyChanged(); } }
+
         public bool Isloaded = false;
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand DaiLyShowCommand { get; set; }
@@ -44,6 +77,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand ContactShowCommand { get; set; }
         public ICommand NguonNhapShowCommand { get; set; }
         public ICommand LoaiSanPhamShowCommand { get; set; }
+        public ICommand LocTheoNgayCommand { get; set; }
+        public ICommand TimKiemCommand { get; set; }
+        public ICommand SelectedSearchCommand { get; set; }
+        public ICommand LoaiTimKiemCommand { get; set; }
 
         public ICommand SanPhamTop1_MouseDownCommand { get; set; }
         public ICommand SanPhamTop2_MouseDownCommand { get; set; }
@@ -142,6 +179,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 wd.ShowDialog();
             });
 
+            LocTheoNgayCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { 
+                LocThongkeTheoNgay(); 
+            });
+
             SanPhamTop1_MouseDownCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { SanPhamTop1_MouseDown(p); });
 
             SanPhamTop2_MouseDownCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { SanPhamTop2_MouseDown(p); });
@@ -151,6 +192,137 @@ namespace QuanLyDaiLyMVVM.ViewModel
             DaiLyTop1_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DaiLyTop1_MouseDown(p); });
             DaiLyTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DaiLyTop2_MouseDown(p); });
             DaiLyTop3_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DaiLyTop3_MouseDown(p); });
+
+            TimKiemCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => {
+                string keySearch = p.Text;
+                string sql = "";
+                using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+                {
+                    switch (loaiTimKiem)
+                    {
+                        case 0:
+                            sql = $"select* from DaiLy where freetext((Ten,DienThoai, DiaChi, Email, Quan), N'%{keySearch}%')  AND IsRemove = 0";
+                            ListDaiLy = new ObservableCollection<DaiLy>(db.DaiLies.SqlQuery(sql));
+                            p.ItemsSource = ListDaiLy;
+                            break;
+                        case 1:
+                            sql = $"select* from SanPham where freetext((Ten, MoTa), N'%{keySearch}%') AND TrangThai = 1";
+                            ListSanPham = new ObservableCollection<SanPham>(db.SanPhams.SqlQuery(sql));
+                            p.ItemsSource = ListSanPham;
+                            break;
+                        case 2:
+                            sql = $"select* from NguonNhap where freetext((Ten, DiaChi, SoDienThoai), N'%{keySearch}%')";
+                            ListNguonNhap = new ObservableCollection<NguonNhap>(db.NguonNhaps.SqlQuery(sql));
+                            p.ItemsSource = ListNguonNhap;
+                            break;
+                        default:
+                            break;
+                    }
+                    loadHinhAnh();
+                }
+            });
+
+            SelectedSearchCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => {
+                if (p.SelectedIndex > -1)
+                {
+                    using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        switch (loaiTimKiem)
+                        {
+                            case 0:
+                                var daiLyWD = new CapNhatDaiLyWindow();
+                                DaiLyViewModel vm = new DaiLyViewModel();
+
+                                DaiLy dl = db.DaiLies.Where(d => d.Id == DaiLyTop1.ID && d.IsRemove == false).FirstOrDefault();
+                                vm.Ten = dl.Ten;
+                                vm.Quan = dl.Quan;
+                                vm.DiaChi = dl.DiaChi;
+                                vm.DienThoai = dl.DienThoai;
+                                vm.Email = dl.Email;
+                                vm.HinhAnh = Path.GetFullPath(dl.HinhAnh);
+                                vm.NgayTiepNhan = dl.NgayTiepNhan;
+
+                                vm.SelectedLoaiDaiLy = vm.LoaiDaiLy.Where(x => x.Id == (dl.IdLoaiDaiLy)).SingleOrDefault();
+                                vm.SelectedItem = new DaiLy()
+                                {
+                                    Id = dl.Id,
+                                    Ten = dl.Ten,
+                                    DienThoai = dl.DienThoai,
+                                    DiaChi = dl.DiaChi,
+                                    NgayTiepNhan = dl.NgayTiepNhan,
+                                    Quan = dl.Quan,
+                                    Email = dl.Email,
+                                    HinhAnh = Path.GetFullPath(dl.HinhAnh),
+                                    IdLoaiDaiLy = dl.IdLoaiDaiLy
+                                };
+                                daiLyWD.DataContext = vm;
+                                daiLyWD.ShowDialog();
+                                loadAllData();
+                                break;
+                            case 1:
+                                var sanPhamWD = new CapNhatSanPhamWindow();
+                                SanPham sanPhamSeleted = ListSanPham.ToList()[p.SelectedIndex];
+                                SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
+
+                                var SanPham = db.SanPhams.Where(sp => sp.Id == sanPhamSeleted.Id).FirstOrDefault();
+                                SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+
+                                sanPhamHienThi.SanPham = SanPham;
+
+                                sanPhamHienThi.NguonNhap = SanPham.NguonNhap;
+                                sanPhamHienThi.LoaiSanPham = SanPham.LoaiSanPham;
+                                sanPhamHienThi.DonViTinh = SanPham.DonViTinh;
+
+                                sanPhamHienThi.GiaBan = ConvertNumber.convertNumberDecimalToString(SanPham.GiaBan);
+                                sanPhamHienThi.GiaNhap = ConvertNumber.convertNumberDecimalToString(SanPham.GiaNhap);
+                                sanPhamHienThi.SoLuong = ConvertNumber.convertNumberDecimalToString(SanPham.SoLuong);
+
+                                var sanPhamVM = new CapNhatSanPhamViewModel(sanPhamHienThi);
+                                sanPhamWD.DataContext = sanPhamVM;
+                                sanPhamWD.ShowDialog();
+                                loadAllData();
+                                break;
+                            case 2:
+                                var nguonNhapWD = new NguonNhapWindow();
+                                var nguonNhapVM = new NguonNhapViewModel();
+                                nguonNhapVM.SelectNguonNhap = nguonNhapVM.NguonNhaps.Where(nn => nn.Id == (p.SelectedItem as NguonNhap).Id).FirstOrDefault();
+
+                                nguonNhapVM.HinhAnh = nguonNhapVM.SelectNguonNhap.HinhAnh;
+                                nguonNhapVM.Ten = nguonNhapVM.SelectNguonNhap.Ten;
+                                nguonNhapVM.SoDienThoai = nguonNhapVM.SelectNguonNhap.SoDienThoai;
+                                nguonNhapVM.DiaChi = nguonNhapVM.SelectNguonNhap.DiaChi;
+
+                                nguonNhapWD.DataContext = nguonNhapVM;
+
+                                nguonNhapWD.ShowDialog();
+
+                                loadAllData();
+                                break;
+                            default:
+                                break;
+                        }
+                        p.Text = "";
+                    }
+                }
+            });
+
+            LoaiTimKiemCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) => {
+                loaiTimKiem = p.cbb_loaiTimKiem.SelectedIndex;
+                switch(loaiTimKiem)
+                {
+                    case 0:
+                        p.textbox_search.ItemsSource = ListDaiLy;
+                        break;
+                    case 1:
+                        p.textbox_search.ItemsSource = ListSanPham;
+                        break;
+                    case 2:
+                        p.textbox_search.ItemsSource = ListNguonNhap;
+                        break;
+                    default:
+                        break;
+                }
+            });
 
         }
 
@@ -333,22 +505,12 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         }
 
-        private void khoiTaoThuocTinh()
-        {
-            _SanPhamTop1 = new SanPhamTop();
-            _SanPhamTop2 = new SanPhamTop();
-            _SanPhamTop3 = new SanPhamTop();
-
-            _DaiLyTop1 = new DaiLyTop();
-            _DaiLyTop2 = new DaiLyTop();
-            _DaiLyTop3 = new DaiLyTop();
-        }
-
         private void loadAllData()
         {
             khoiTaoThuocTinh();
             loadTopSanPham();
             loadTopDaiLy();
+            LocThongkeTheoNgay();
         }
 
         private void loadTopSanPham()
@@ -502,7 +664,111 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }
         }
 
-        
+        private void khoiTaoThuocTinh()
+        {
+            SanPhamTop1 = new SanPhamTop();
+            SanPhamTop2 = new SanPhamTop();
+            SanPhamTop3 = new SanPhamTop();
+
+            DaiLyTop1 = new DaiLyTop();
+            DaiLyTop2 = new DaiLyTop();
+            DaiLyTop3 = new DaiLyTop();
+
+            NgayKetThuc = DateTime.Now;
+
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                NgayBatDau = (from i in db.PhieuDaiLies
+                              orderby i.NgayLapPhieu ascending
+                              select i).FirstOrDefault().NgayLapPhieu;
+
+                ListDaiLy = new ObservableCollection<DaiLy>(db.DaiLies.Where(p => p.IsRemove == false));
+                ListSanPham = new ObservableCollection<SanPham>(db.SanPhams.Where(p => p.TrangThai == true));
+                ListNguonNhap = new ObservableCollection<NguonNhap>(db.NguonNhaps);
+            }
+
+            loadHinhAnh();
+        }
+
+        private void LocThongkeTheoNgay()
+        {
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                int soLuongDaiLy = db.DaiLies.Count();
+                int sanPhamTonKho = 0;
+                decimal doanhThu = 0;
+                decimal tongTienThu = 0;
+                decimal loiNhuan = 0;
+                decimal tongCongNo = 0;
+
+                foreach (var i in db.SanPhams)
+                {
+                    sanPhamTonKho += i.SoLuong;
+                }
+
+                foreach (var i in db.PhieuXuatHangs.Where(p => p.PhieuDaiLy.NgayLapPhieu >= NgayBatDau && p.PhieuDaiLy.NgayLapPhieu <= NgayKetThuc))
+                {
+                    doanhThu += i.TongTien;
+                }
+
+                foreach (var i in db.PhieuThuTiens.Where(p => p.PhieuDaiLy.NgayLapPhieu >= NgayBatDau && p.PhieuDaiLy.NgayLapPhieu <= NgayKetThuc))
+                {
+                    tongTienThu += i.SoTienThu;
+                }
+
+                foreach (var i in db.ChiTietPhieuXuatHangs.Where(p => p.PhieuXuatHang.PhieuDaiLy.NgayLapPhieu >= NgayBatDau && p.PhieuXuatHang.PhieuDaiLy.NgayLapPhieu <= NgayKetThuc))
+                {
+                    loiNhuan += i.SoLuong * (i.GiaBan - i.SanPham.GiaNhap);
+                }
+
+                tongCongNo = doanhThu - tongTienThu;
+                doanhThu -= tongCongNo;
+
+                DoanhThu = ConvertNumber.convertNumberDecimalToString(doanhThu);
+                TongCongNo = ConvertNumber.convertNumberDecimalToString(tongCongNo);
+                LoiNhuan = ConvertNumber.convertNumberDecimalToString(loiNhuan);
+                SanPhamTonKho = ConvertNumber.convertNumberToString(sanPhamTonKho);
+                TongSoDaiLy = ConvertNumber.convertNumberToString(soLuongDaiLy);
+            }
+        }
+
+        private void loadHinhAnh()
+        {
+            foreach (var i in ListDaiLy)
+            {
+                if (!string.IsNullOrEmpty(i.HinhAnh))
+                {
+                    i.HinhAnh = Path.GetFullPath(i.HinhAnh);
+                }
+                else
+                {
+                    i.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
+                }
+            }
+            foreach (var i in ListSanPham)
+            {
+                if (!string.IsNullOrEmpty(i.HinhAnh))
+                {
+                    i.HinhAnh = Path.GetFullPath(i.HinhAnh);
+                }
+                else
+                {
+                    i.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
+                }
+            }
+            foreach (var i in ListNguonNhap)
+            {
+                if (!string.IsNullOrEmpty(i.HinhAnh))
+                {
+                    i.HinhAnh = Path.GetFullPath(i.HinhAnh);
+                }
+                else
+                {
+                    i.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
+                }
+            }
+        }
+
         FrameworkElement GetWindowParent(object p, string name)
         {
             var parent = p as FrameworkElement;
