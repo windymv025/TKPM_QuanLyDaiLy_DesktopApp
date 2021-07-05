@@ -122,43 +122,49 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 p.IsChecked = false;
                 DaiLyWindow wd = new DaiLyWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             NguonNhapShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 NguonNhapWindow wd = new NguonNhapWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             LoaiSanPhamShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 LoaiSanPhamWindow wd = new LoaiSanPhamWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             SanPhamShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
-                //new CapNhatSanPhamWindow().ShowDialog();
                 SanPhamWindow wd = new SanPhamWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             PhieuThuTienShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 PhieuThuTienWindow wd = new PhieuThuTienWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             PhieuXuatHangShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 PhieuXuatHangWindow wd = new PhieuXuatHangWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             RevenueShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 BaoCaoWindow wd = new BaoCaoWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             AccountShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
@@ -171,6 +177,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 p.IsChecked = false;
                 QuyDinhWindow wd = new QuyDinhWindow();
                 wd.ShowDialog();
+                loadAllData();
             });
 
             ContactShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
@@ -183,15 +190,31 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 LocThongkeTheoNgay(); 
             });
 
-            SanPhamTop1_MouseDownCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { SanPhamTop1_MouseDown(p); });
+            SanPhamTop1_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                SanPhamTop1_MouseDown(p);
+            });
 
-            SanPhamTop2_MouseDownCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { SanPhamTop2_MouseDown(p); });
+            SanPhamTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                SanPhamTop2_MouseDown(p);
+            });
 
-            SanPhamTop3_MouseDownCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { SanPhamTop3_MouseDown(p); });
+            SanPhamTop3_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                SanPhamTop3_MouseDown(p);
+            });
 
-            DaiLyTop1_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DaiLyTop1_MouseDown(p); });
-            DaiLyTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DaiLyTop2_MouseDown(p); });
-            DaiLyTop3_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DaiLyTop3_MouseDown(p); });
+            DaiLyTop1_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                DaiLyTop1_MouseDown(p);
+            });
+            DaiLyTop2_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { 
+                DaiLyTop2_MouseDown(p);
+            });
+            DaiLyTop3_MouseDownCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { 
+                DaiLyTop3_MouseDown(p);
+            });
 
             TimKiemCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => {
                 string keySearch = p.Text;
@@ -358,7 +381,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             wd.DataContext = vm;
 
             wd.ShowDialog();
-            loadTopDaiLy();
+            loadAllData();
         }
 
         private void DaiLyTop2_MouseDown(Window p)
@@ -393,7 +416,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             wd.DataContext = vm;
 
             wd.ShowDialog();
-            loadTopDaiLy();
+            loadAllData();
         }
 
         private void DaiLyTop3_MouseDown(Window p)
@@ -428,16 +451,16 @@ namespace QuanLyDaiLyMVVM.ViewModel
             wd.DataContext = vm;
 
             wd.ShowDialog();
-            loadTopDaiLy();
+            loadAllData();
         }
 
-        private void SanPhamTop1_MouseDown(Button p)
+        private void SanPhamTop1_MouseDown(Window p)
         {
             CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
             SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
             using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop1.ID).FirstOrDefault();
+                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop1.ID && sp.TrangThai == true).FirstOrDefault();
                 SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
 
                 sanPhamHienThi.SanPham = SanPham;
@@ -453,15 +476,15 @@ namespace QuanLyDaiLyMVVM.ViewModel
             var vm = new CapNhatSanPhamViewModel(sanPhamHienThi);
             wd.DataContext = vm;
             wd.ShowDialog();
-            loadTopSanPham();
+            loadAllData();
         }
-        private void SanPhamTop2_MouseDown(Button p)
+        private void SanPhamTop2_MouseDown(Window p)
         {
             CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
             SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop2.ID).FirstOrDefault();
+                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop2.ID && sp.TrangThai == true).FirstOrDefault();
                 SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
 
                 sanPhamHienThi.SanPham = SanPham;
@@ -477,15 +500,15 @@ namespace QuanLyDaiLyMVVM.ViewModel
             var vm = new CapNhatSanPhamViewModel(sanPhamHienThi);
             wd.DataContext = vm;
             wd.ShowDialog();
-            loadTopSanPham();
+            loadAllData();
         }
-        private void SanPhamTop3_MouseDown(Button p)
+        private void SanPhamTop3_MouseDown(Window p)
         {
             CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
             SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop3.ID).FirstOrDefault();
+                var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop3.ID && sp.TrangThai == true).FirstOrDefault();
                 SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
 
                 sanPhamHienThi.SanPham = SanPham;
@@ -501,7 +524,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             var vm = new CapNhatSanPhamViewModel(sanPhamHienThi);
             wd.DataContext = vm;
             wd.ShowDialog();
-            loadTopSanPham();
+            loadAllData();
 
         }
 
@@ -518,7 +541,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             var listSanPhamTop = new List<SanPhamTop>();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                var listPhieuXuat = db.ChiTietPhieuXuatHangs.GroupBy(t => t.IdSanPham);
+                var listPhieuXuat = db.ChiTietPhieuXuatHangs.Where(ct => ct.SanPham.TrangThai == true).GroupBy(t => t.IdSanPham);
 
                 foreach (var group in listPhieuXuat)
                 {
@@ -533,7 +556,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
 
 
-                for (int i = 0; i < listSanPhamTop.Count; i++)
+                for (int i = 0; i < listSanPhamTop.Count - 1; i++)
                 {
                     for (int j = i + 1; j < listSanPhamTop.Count; j++)
                     {
@@ -694,14 +717,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
         {
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
-                int soLuongDaiLy = db.DaiLies.Count();
+                int soLuongDaiLy = db.DaiLies.Where(dl => dl.IsRemove == false).Count();
                 int sanPhamTonKho = 0;
                 decimal doanhThu = 0;
                 decimal tongTienThu = 0;
                 decimal loiNhuan = 0;
                 decimal tongCongNo = 0;
 
-                foreach (var i in db.SanPhams)
+                foreach (var i in db.SanPhams.Where(sp => sp.TrangThai == true)) 
                 {
                     sanPhamTonKho += i.SoLuong;
                 }
