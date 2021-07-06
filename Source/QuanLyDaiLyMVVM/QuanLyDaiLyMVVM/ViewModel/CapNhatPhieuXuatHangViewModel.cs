@@ -5,12 +5,30 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
     public class CapNhatPhieuXuatHangViewModel: BaseViewModel
     {
+        private bool _IsSave;
+        public bool IsSave { get => _IsSave; set { _IsSave = value; OnPropertyChanged(); } }
+        
+        private bool _IsChange;
+        public bool IsChange { get => _IsChange; set { _IsChange = value; OnPropertyChanged(); } }
+        
+        private bool _IsAdd;
+        public bool IsAdd { get => _IsAdd; set { _IsAdd = value; OnPropertyChanged(); } }
+        
+        private bool _IsRemove;
+        public bool IsRemove { get => _IsRemove; set { _IsRemove = value; OnPropertyChanged(); } }
+
+        private bool isChooseSPX = false;
+
         private string _TongTien;
         public string TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
 
@@ -18,34 +36,38 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public string SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
 
         private string _GiaBan;
-        public string GiaBan { get => _GiaBan; set { _GiaBan = value; OnPropertyChanged(); } }
-
-        private DaiLy _DaiLy;
-        public DaiLy DaiLy { get => _DaiLy; set { _DaiLy = value; OnPropertyChanged(); } }
-
-        private PhieuXuatHang _PhieuXuatHang;
-        public PhieuXuatHang PhieuXuatHang { get => _PhieuXuatHang; set { _PhieuXuatHang = value; OnPropertyChanged(); } }
-
-        private SanPhamHienThi _SanPham;
-        public SanPhamHienThi SanPham { get => _SanPham; set { _SanPham = value; OnPropertyChanged(); } }
-
-        private SanPhamXuat _SanPhamXuat;
-        public SanPhamXuat SanPhamXuat { get => _SanPhamXuat; set { _SanPhamXuat = value; OnPropertyChanged(); } }
+        public string GiaBan { get => _GiaBan; set { _GiaBan = value; OnPropertyChanged(); } }        
 
         private PhieuXuatHangHienThi _PhieuXuatHangHienThi;
         public PhieuXuatHangHienThi PhieuXuatHangHienThi { get => _PhieuXuatHangHienThi; set { _PhieuXuatHangHienThi = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<ChiTietPhieuXuatHang> _ChiTietPhieuXuatHangs;
-        public virtual ObservableCollection<ChiTietPhieuXuatHang> ChiTietPhieuXuatHangs { get => _ChiTietPhieuXuatHangs; set { _ChiTietPhieuXuatHangs = value; OnPropertyChanged(); } }
-        
+        //Binding combobox
+        private DaiLy _DaiLy;
+        public DaiLy DaiLy { get => _DaiLy; set { _DaiLy = value; OnPropertyChanged(); } }
+
         private ObservableCollection<DaiLy> _DaiLys;
         public virtual ObservableCollection<DaiLy> DaiLys { get => _DaiLys; set { _DaiLys = value; OnPropertyChanged(); } }
-        
+
+        private SanPhamHienThi _SanPham;
+        public SanPhamHienThi SanPham { get => _SanPham; set { _SanPham = value; OnPropertyChanged(); } }
+
         private ObservableCollection<SanPhamHienThi> _SanPhams;
         public ObservableCollection<SanPhamHienThi> SanPhams { get => _SanPhams; set { _SanPhams = value; OnPropertyChanged(); } }
 
+        private SanPhamXuat _SanPhamXuat;
+        public SanPhamXuat SanPhamXuat { get => _SanPhamXuat; set { _SanPhamXuat = value; OnPropertyChanged(); } }
+
         private ObservableCollection<SanPhamXuat> _SanPhamXuats;
         public ObservableCollection<SanPhamXuat> SanPhamXuats { get => _SanPhamXuats; set { _SanPhamXuats = value; OnPropertyChanged(); } }
+
+        public ICommand ThayDoiDuLieuSoCommand { get; set; }
+        public ICommand ThayDoiDuLieuCommand { get; set; }
+        public ICommand ThayDoiDaiLyCommand { get; set; }
+        public ICommand SelectionChangedCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
+        public ICommand LuuThayDoiCommand { get; set; }
+        public ICommand ThoatCommand { get; set; }
+        public ICommand XoaCommand { get; set; }
 
         public CapNhatPhieuXuatHangViewModel()
         {
@@ -54,7 +76,108 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public CapNhatPhieuXuatHangViewModel(PhieuXuatHangHienThi phieuXuatHangHienThi)
         {
             loadData(phieuXuatHangHienThi);
+            RefreshCommand = new RelayCommand<CapNhatPhieuXuatHangWindow>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                p.cbb_DSSanPham.SelectedIndex = -1;
+                p.GiaBanTxt.Text = "0";
+                p.soLuongTxt.Text = "0";
 
+            });
+            
+            ThayDoiDuLieuCommand = new RelayCommand<Button>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                if (isChooseSPX)
+                    IsChange = true;
+                IsAdd = true;
+
+            });
+
+            ThayDoiDaiLyCommand = new RelayCommand<Button>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                IsSave = true;
+            });
+
+            ThayDoiDuLieuSoCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => {
+                int caretIndex = p.CaretIndex;
+                p.Text = Regex.Replace(p.Text, "[^0-9.]+", "");
+                string numberString = p.Text;
+                string newNumStr = "";
+                for (int i = 0; i < numberString.Length; i++)
+                {
+                    if (numberString[i] != '.')
+                    {
+                        newNumStr += numberString[i];
+                    }
+                }
+                if (newNumStr == "")
+                {
+                    newNumStr = "0";
+                }
+                decimal number = decimal.Parse(newNumStr);
+                p.Text = ConvertNumber.convertNumberDecimalToString(number);
+                p.CaretIndex = caretIndex;
+
+                if(number > 0)
+                {
+                    IsAdd = true;
+                    if (isChooseSPX)
+                        IsChange = true;
+                }
+                else
+                {
+                    IsAdd = false;
+                    IsChange = false;
+                }
+            });
+
+            SelectionChangedCommand = new RelayCommand<ListView>((p) => { return true; }, (p) => {
+                if (p.SelectedIndex > -1)
+                {
+                    SanPham = SanPhams.Where(sp => sp.SanPham.Id == SanPhamXuat.SanPham.Id).FirstOrDefault();
+                    GiaBan = SanPhamXuat.GiaBan;
+                    SoLuong = SanPhamXuat.SoLuong;
+
+                    IsAdd = true;
+                    IsChange = false;
+                    IsRemove = true;
+                    isChooseSPX = true;
+                }
+                else
+                {
+                    IsAdd = false;
+                    IsChange = false;
+                    IsRemove = false;
+                    isChooseSPX = false;
+                }
+            });
+
+            XoaCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                
+                p.Close();
+            });
+
+            LuuThayDoiCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+
+                MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                   
+
+                    p.Close();
+                }
+            });
+
+            ThoatCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
         }
 
         private void loadData(PhieuXuatHangHienThi phieuXuatHangHienThi)
@@ -62,7 +185,12 @@ namespace QuanLyDaiLyMVVM.ViewModel
             SanPham = new SanPhamHienThi();
             SoLuong = "0";
             GiaBan = "0";
+            IsChange = false;
+            IsAdd = false;
+            IsRemove = false;
+            IsSave = false;
 
+            PhieuXuatHangHienThi = phieuXuatHangHienThi;
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
                // Load list san pham

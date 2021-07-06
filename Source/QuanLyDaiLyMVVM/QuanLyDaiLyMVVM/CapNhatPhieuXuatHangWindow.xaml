@@ -43,11 +43,11 @@
 					<ColumnDefinition Width="150" />
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0"
-						   Text="{Binding PhieuXuatHang.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
+						   Text="{Binding PhieuXuatHangHienThi.PhieuXuatHang.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
 						   HorizontalAlignment="Center"
 						   VerticalAlignment="Center"
 						   FontSize="35"
-						   ToolTip="{Binding PhieuXuatHang.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
+						   ToolTip="{Binding PhieuXuatHangHienThi.PhieuXuatHang.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
 						   TextWrapping="WrapWithOverflow"
 						   TextTrimming="CharacterEllipsis"
 						   FontWeight="ExtraBold"
@@ -75,7 +75,7 @@
 						Content="Xóa" />
 
 				<Button x:Name="btnLuu"
-					Grid.Column="3" Height="auto" Margin="10" IsEnabled="False"
+					Grid.Column="3" Height="auto" Margin="10" IsEnabled="{Binding IsSave}"
 						FontSize="20" FontWeight="Bold"
 						Background="#18a0fb"
 						Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -106,7 +106,7 @@
 									   ItemsSource="{Binding DaiLys}"  SelectedItem="{Binding DaiLy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
-								<i:InvokeCommandAction Command="{Binding SelectionDaiLyCommand}"
+								<i:InvokeCommandAction Command="{Binding ThayDoiDaiLyCommand}"
 														   CommandParameter="{Binding ElementName=btnLuu}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
@@ -117,18 +117,18 @@
 						</ComboBox.ItemsPanel>
 						<ComboBox.ItemTemplate>
 							<DataTemplate>
-								<Grid Height="120">
+								<Grid Height="70">
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="120"/>
+										<ColumnDefinition Width="70"/>
 										<ColumnDefinition Width="2*"/>
 									</Grid.ColumnDefinitions>
 									<Image Source="{Binding HinhAnh}" Stretch="Uniform" 
 														   RenderOptions.BitmapScalingMode="HighQuality"/>
 									<StackPanel Grid.Column="1" VerticalAlignment="Center" >
 										<TextBlock Text="{Binding Ten}" TextWrapping="WrapWithOverflow" FontWeight="Bold" Margin="5,0,0,0"/>
-										<TextBlock Text="{Binding DienThoai}" TextWrapping="WrapWithOverflow"	Margin="5,5,0,0"/>
-										<TextBlock Text="{Binding Email}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
-										<TextBlock Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding DienThoai}" TextWrapping="WrapWithOverflow"	Margin="5,0,0,0"/>
+										<TextBlock Text="{Binding Email}" TextWrapping="WrapWithOverflow" Margin="5,0,0,0"/>
+										<TextBlock Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Margin="5,0,0,0"/>
 									</StackPanel>
 								</Grid>
 							</DataTemplate>
@@ -138,11 +138,11 @@
 
 				<WrapPanel>
 					<!--sản phẩm-->
-					<ComboBox  materialDesign:HintAssist.Hint="Sản phẩm" MinWidth="200" VerticalAlignment="Bottom"
+					<ComboBox x:Name="cbb_DSSanPham"  materialDesign:HintAssist.Hint="Sản phẩm" MinWidth="200" VerticalAlignment="Bottom"
 									   ItemsSource="{Binding SanPhams}"  SelectedItem="{Binding SanPham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="15,5" >
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
-								<i:InvokeCommandAction Command="{Binding SelectionSanPhamCommand}"
+								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
 														   CommandParameter="{Binding ElementName=btnLuu}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
@@ -155,10 +155,10 @@
 							<DataTemplate>
 								<Grid>
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="200" />
+										<ColumnDefinition Width="80" />
 										<ColumnDefinition Width="auto" />
 									</Grid.ColumnDefinitions>
-									<materialDesign:Card Height="150"
+									<materialDesign:Card Height="60"
                                     BorderThickness="2"
                                     BorderBrush="#18a0fb"
                                     VerticalAlignment="Top"
@@ -168,11 +168,11 @@
                                                 Stretch="Uniform"
                                                 RenderOptions.BitmapScalingMode="HighQuality" />
 										</materialDesign:Card.Background>
-										<StackPanel Width="45"
+										<StackPanel Width="20"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Top"
                                             Margin="3">
-											<Image Source="{Binding LoaiSanPham.HinhAnh}"
+											<Image Source="{Binding LoaiSanPham.HinhAnh}" 
                                            Margin="0,0,0,2"
                                            RenderOptions.BitmapScalingMode="HighQuality" />
 											<Image Source="{Binding NguonNhap.HinhAnh}"
@@ -247,6 +247,8 @@
 							materialDesign:TextFieldAssist.SuffixText="VNĐ">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="TextChanged">
+								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
+														   CommandParameter="{Binding ElementName=btnLuu}"/>
 								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuSoCommand}"
 														   CommandParameter="{Binding ElementName=GiaBanTxt}"/>
 							</i:EventTrigger>
@@ -260,6 +262,8 @@
 									 Text="{Binding  SoLuong}" FontSize="20">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="TextChanged">
+								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
+														   CommandParameter="{Binding ElementName=btnLuu}"/>
 								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuSoCommand}"
 														   CommandParameter="{Binding ElementName=soLuongTxt}"/>
 							</i:EventTrigger>
@@ -275,19 +279,27 @@
 		<materialDesign:Card Grid.Row="2"
                                  Margin="5">
 			<WrapPanel>
+				<Button Command="{Binding RefreshCommand}"
+                            Content="Refresh"
+							CommandParameter="{Binding ElementName=capNhatPhieuXuatWindow}"
+                            Margin="5"
+                            Width="100"></Button>
 				<Button Command="{Binding AddCommand}"
                             Content="Thêm"
 							Background="Blue"
                             Margin="5"
+						IsEnabled="{Binding IsAdd}"
                             Width="100"></Button>
 				<Button Command="{Binding EditCommand}"
 							CommandParameter="{Binding ElementName=lv_DanhSachNguonNhap}"
                             Content="Sửa"
 							Background="Blue"
+						IsEnabled="{Binding IsChange}"
                             Margin="5"
                             Width="100"></Button>
 				<Button Command="{Binding DeleteCommand}"
                             Content="Xóa"
+						IsEnabled="{Binding IsRemove}"
 							Background="Red"
                             Margin="5"
                             Width="100"></Button>
