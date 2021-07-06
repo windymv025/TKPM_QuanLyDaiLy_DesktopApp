@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -54,6 +55,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
+        public ICommand TextChangedPhoneCommand { get; set; }
 
 
         public NhanVienViewModel()
@@ -168,7 +170,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 MatKhau = null;
                 p.FloatingPasswordBox.Password = null;
             });
-            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { MatKhau = p.Password; });
+            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { if (p == null) return false; else return true; }, (p) => { MatKhau = p.Password; });
+            TextChangedPhoneCommand = new RelayCommand<TextBox>((p) => { if (p == null) return false; else return true; }, (p) => { 
+                p.Text = Regex.Replace(p.Text, "[^0-9]+", "");
+            });
 
             EditCommand = new RelayCommand<NhanVienVaTaiKhoanWindow>((p) =>
             {

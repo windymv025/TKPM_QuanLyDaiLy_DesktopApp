@@ -9,15 +9,21 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
+    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class QuyDinh
+    public partial class QuyDinh: BaseViewModel
     {
-        public int Id { get; set; }
-        public string TenQuyDinh { get; set; }
-        public double GiaTri { get; set; }
-        public string KieuDuLieu { get; set; }
-        public bool TrangThai { get; set; }
+        private int _Id;
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+        private string _TenQuyDinh;
+        public string TenQuyDinh { get => _TenQuyDinh; set { _TenQuyDinh = value; OnPropertyChanged(); } }
+        private double _GiaTri;
+        public double GiaTri { get => _GiaTri; set { _GiaTri = value; OnPropertyChanged(); } }
+        private string _KieuDuLieu;
+        public string KieuDuLieu { get => _KieuDuLieu; set { _KieuDuLieu = value; OnPropertyChanged(); } }
+        private bool _TrangThai;
+        public bool TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
     }
 }

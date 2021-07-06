@@ -37,9 +37,17 @@
                              materialDesign:HintAssist.Hint="Tên nhân viên"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5" x:Name="phone"
+                             Margin="5 5 15 5"
+                             x:Name="phone"
                              materialDesign:HintAssist.Hint="Điện thoại"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding TextChangedPhoneCommand}"
+                                                       CommandParameter="{Binding ElementName=phone}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                     <TextBox Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"
                              Margin="5 5 15 5" x:Name="address"
                              materialDesign:HintAssist.Hint="Địa chỉ"
