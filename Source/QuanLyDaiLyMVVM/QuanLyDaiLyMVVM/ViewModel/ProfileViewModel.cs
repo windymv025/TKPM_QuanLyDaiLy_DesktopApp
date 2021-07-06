@@ -39,7 +39,11 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 NhanVien = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault();
             }
-            NhanVien.HinhAnh = Path.GetFullPath(NhanVien.HinhAnh);
+            
+            if(NhanVien.HinhAnh != null)
+            {
+                NhanVien.HinhAnh = Path.GetFullPath(NhanVien.HinhAnh);
+            }
 
             ShowDoiMatKhauCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DoiMatKhauWindow wd = new DoiMatKhauWindow(); wd.ShowDialog(); });
             ShowDSNhanVienCommand = new RelayCommand<NhanVienWindow>((p) => {

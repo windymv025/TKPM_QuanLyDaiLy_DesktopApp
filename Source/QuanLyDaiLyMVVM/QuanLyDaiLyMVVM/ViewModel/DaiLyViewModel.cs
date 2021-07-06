@@ -36,7 +36,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     Quan = SelectedItem.Quan;
                     Email = SelectedItem.Email;
                     HinhAnh = Path.GetFullPath(SelectedItem.HinhAnh);
-                    SelectedLoaiDaiLy = LoaiDaiLy.Where(x => x.Id == (SelectedItem.IdLoaiDaiLy)).SingleOrDefault();
+                    SelectedLoaiDaiLy = LoaiDaiLy.Where(x => x.Id == (SelectedItem.IdLoaiDaiLy)).FirstOrDefault();
                 }
             } 
         }
@@ -377,63 +377,69 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }, (p) =>
             {
-                using (var db = new DBQuanLyCacDaiLyEntities())
+                MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu thay đổi?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    double? count = db.QuyDinhs.Where(x => x.TenQuyDinh == "SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN").FirstOrDefault()?.GiaTri;
-                    if (count == null)
+                    using (var db = new DBQuanLyCacDaiLyEntities())
                     {
-                        count = 4;
+                        double? count = db.QuyDinhs.Where(x => x.TenQuyDinh == "SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN").FirstOrDefault()?.GiaTri;
+                        if (count == null)
+                        {
+                            count = 4;
+                        }
+
+                        if (count > db.DaiLies.Where(x => x.Quan == p.DaiLy_textbox_district.Text.Trim()).Count())
+                        {
+                            var dl = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                            dl.Ten = Ten;
+                            dl.DienThoai = DienThoai;
+                            dl.DiaChi = DiaChi;
+                            dl.NgayTiepNhan = NgayTiepNhan;
+                            dl.Quan = Quan;
+                            dl.Email = Email;
+
+                            var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                            string uriImage = currentFolder.ToString();
+                            //string file = p.avatar_DaiLy.Source.ToString().Substring(8);
+                            string file = HinhAnh;
+                            var info = new FileInfo(file);
+                            var newName = $"{Guid.NewGuid()}{info.Extension}";
+                            File.Copy(file, $"{uriImage}Images\\DaiLy\\{newName}");
+                            HinhAnh = $"Images/DaiLy/{newName}";
+                            dl.HinhAnh = HinhAnh;
+
+                            dl.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
+
+                            dl.LoaiDaiLy = db.LoaiDaiLies.Where(x => x.Id == dl.IdLoaiDaiLy).SingleOrDefault();
+
+                            db.SaveChanges();
+
+                            SelectedItem.Ten = Ten;
+                            SelectedItem.DienThoai = DienThoai;
+                            SelectedItem.DiaChi = DiaChi;
+                            SelectedItem.NgayTiepNhan = NgayTiepNhan;
+                            SelectedItem.Quan = Quan;
+                            SelectedItem.Email = Email;
+
+                            var info1 = new FileInfo(uriImage).ToString();
+
+
+                            //SelectedItem.HinhAnh = $"{info1}{HinhAnh}";
+                            SelectedItem.HinhAnh = Path.GetFullPath(HinhAnh);
+
+                            //SelectedItem.HinhAnh = HinhAnh;
+                            SelectedItem.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
+                            SelectedItem.LoaiDaiLy = SelectedLoaiDaiLy;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn. Bạn có thể vào Quy định cấu hình lại mục SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN để sửa đổi nếu cần thiết");
+                        }
+
                     }
-
-                    if (count > db.DaiLies.Where(x => x.Quan == p.DaiLy_textbox_district.Text.Trim()).Count())
-                    {
-                        var dl = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                        dl.Ten = Ten;
-                        dl.DienThoai = DienThoai;
-                        dl.DiaChi = DiaChi;
-                        dl.NgayTiepNhan = NgayTiepNhan;
-                        dl.Quan = Quan;
-                        dl.Email = Email;
-
-                        var currentFolder = AppDomain.CurrentDomain.BaseDirectory.ToString();
-                        string uriImage = currentFolder.ToString();
-                        //string file = p.avatar_DaiLy.Source.ToString().Substring(8);
-                        string file = HinhAnh;
-                        var info = new FileInfo(file);
-                        var newName = $"{Guid.NewGuid()}{info.Extension}";
-                        File.Copy(file, $"{uriImage}Images\\DaiLy\\{newName}");
-                        HinhAnh = $"Images/DaiLy/{newName}";
-                        dl.HinhAnh = HinhAnh;
-
-                        dl.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
-
-                        dl.LoaiDaiLy = db.LoaiDaiLies.Where(x => x.Id == dl.IdLoaiDaiLy).SingleOrDefault();
-
-                        db.SaveChanges();
-
-                        SelectedItem.Ten = Ten;
-                        SelectedItem.DienThoai = DienThoai;
-                        SelectedItem.DiaChi = DiaChi;
-                        SelectedItem.NgayTiepNhan = NgayTiepNhan;
-                        SelectedItem.Quan = Quan;
-                        SelectedItem.Email = Email;
-
-                        var info1 = new FileInfo(uriImage).ToString();
-
-
-                        //SelectedItem.HinhAnh = $"{info1}{HinhAnh}";
-                        SelectedItem.HinhAnh = Path.GetFullPath(HinhAnh);
-
-                        SelectedItem.HinhAnh = HinhAnh;
-                        SelectedItem.LoaiDaiLy = SelectedLoaiDaiLy;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Số lượng đại lý trong một quận vượt quá giới hạn. Bạn có thể vào Quy định cấu hình lại mục SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN để sửa đổi nếu cần thiết");
-                    }
-                    
+                    p.Close();
                 }
-                p.Close();
+                    
             });
             ExitUpdateCommand = new RelayCommand<Window>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
@@ -453,7 +459,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }, (p) =>
             {
-                SelectedLoaiDaiLy = LoaiDaiLy.Where(x => x.Id == (SelectedItem.IdLoaiDaiLy)).SingleOrDefault();
+                SelectedLoaiDaiLy = LoaiDaiLy.Where(x => x.Id == (SelectedItem.IdLoaiDaiLy)).FirstOrDefault();
                 CapNhatDaiLyWindow wd = new CapNhatDaiLyWindow();
                 wd.DataContext = this;
                 wd.ShowDialog();
@@ -470,13 +476,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }, (p) =>
             {
-                using(var db = new DBQuanLyCacDaiLyEntities())
+                MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa đại lý?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    var item = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                    item.IsRemove = true;
-                    db.SaveChanges();
-                    List.Remove(SelectedItem);
-                    p.Close();
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        var item = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                        item.IsRemove = true;
+                        db.SaveChanges();
+                        List.Remove(SelectedItem);
+                        p.Close();
+                    }
                 }
             });
 

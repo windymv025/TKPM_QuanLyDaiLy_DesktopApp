@@ -34,6 +34,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
         private ObservableCollection<int> _ListVaiTro;
         public ObservableCollection<int> ListVaiTro { get => _ListVaiTro; set { _ListVaiTro = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         private NhanVienVaTaiKhoan _SelectedItem;
         public NhanVienVaTaiKhoan SelectedItem { get => _SelectedItem; set {
                 _SelectedItem = value; OnPropertyChanged();
@@ -56,48 +59,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand TextChangedPhoneCommand { get; set; }
+        public ICommand SearchTextChangedCommand { get; set; }
 
 
         public NhanVienViewModel()
         {
             ListVaiTro = new ObservableCollection<int>() { 1, 2 };
-            List = new ObservableCollection<NhanVienVaTaiKhoan>();
-            using (var db = new DBQuanLyCacDaiLyEntities())
-            {
-                var nhanvien = db.NhanViens.Where(x=>x.isRemove == false).ToList();
-                var taikhoan = db.TaiKhoans.ToList();
-                var list = (from nv in nhanvien
-                            join tk in taikhoan on nv.Id equals tk.Id
-                            select new
-                            {
-                                Id = nv.Id,
-                                Ten = nv.Ten,
-                                DienThoai = nv.DienThoai,
-                                DiaChi = nv.DiaChi,
-                                Email =nv.Email,
-                                VaiTro = nv.VaiTro,
-                                TenDangNhap = tk.TenDangNhap,
-                                MatKhau = tk.MatKhau
-                            });
-                foreach(var nv in list)
-                {
-                    List.Add(new NhanVienVaTaiKhoan()
-                    {
-                        Id = nv.Id,
-                        Ten = nv.Ten,
-                        DienThoai = nv.DienThoai,
-                        DiaChi = nv.DiaChi,
-                        Email = nv.Email,
-                        VaiTro = nv.VaiTro,
-                        TenDangNhap = nv.TenDangNhap,
-                        MatKhau = nv.MatKhau
-                    });
-                }
-                       
-            }
+            
+            KhoiTaoList(null);
 
             AddCommand = new RelayCommand<NhanVienVaTaiKhoanWindow>((p) => {
-                if (p == null || string.IsNullOrEmpty(p.ten.Text.Trim()) || string.IsNullOrEmpty(p.phone.Text.Trim()) || string.IsNullOrEmpty(p.address.Text.Trim()) || string.IsNullOrEmpty(p.role.Text.Trim()) || string.IsNullOrEmpty(p.username.Text.Trim()))
+                if (p == null || string.IsNullOrEmpty(p.ten.Text.Trim()) || string.IsNullOrEmpty(p.phone.Text.Trim()) || string.IsNullOrEmpty(p.address.Text.Trim()) || string.IsNullOrEmpty(p.role.Text.Trim()) || string.IsNullOrEmpty(p.username.Text.Trim()) || !Regex.IsMatch(p.email.Text.Trim().ToString(), "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
                 {
                     return false;
                 }
@@ -174,10 +146,23 @@ namespace QuanLyDaiLyMVVM.ViewModel
             TextChangedPhoneCommand = new RelayCommand<TextBox>((p) => { if (p == null) return false; else return true; }, (p) => { 
                 p.Text = Regex.Replace(p.Text, "[^0-9]+", "");
             });
+            SearchTextChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    if (string.IsNullOrEmpty(TextSearch))
+                    {
+                        KhoiTaoList(null);
+                    }
+                    else
+                    {
+                        KhoiTaoList(TextSearch);
+                    }
+                }
+            });
 
             EditCommand = new RelayCommand<NhanVienVaTaiKhoanWindow>((p) =>
             {
-                if (p == null || string.IsNullOrEmpty(p.ten.Text.Trim()) || string.IsNullOrEmpty(p.phone.Text.Trim()) || string.IsNullOrEmpty(p.address.Text.Trim()) || string.IsNullOrEmpty(p.role.Text.Trim()) || string.IsNullOrEmpty(p.username.Text.Trim()) || SelectedItem == null)
+                if (p == null || string.IsNullOrEmpty(p.ten.Text.Trim()) || string.IsNullOrEmpty(p.phone.Text.Trim()) || string.IsNullOrEmpty(p.address.Text.Trim()) || string.IsNullOrEmpty(p.role.Text.Trim()) || string.IsNullOrEmpty(p.username.Text.Trim()) || SelectedItem == null || !Regex.IsMatch(p.email.Text.Trim().ToString(), "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
                 {
                     return false;
                 }
@@ -266,6 +251,88 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             });
 
+        }
+        private void KhoiTaoList(string name)
+        {
+            if(name == null)
+            {
+                List = new ObservableCollection<NhanVienVaTaiKhoan>();
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var nhanvien = db.NhanViens.Where(x => x.isRemove == false).ToList();
+                    var taikhoan = db.TaiKhoans.ToList();
+                    var list = (from nv in nhanvien
+                                join tk in taikhoan on nv.Id equals tk.Id
+                                select new
+                                {
+                                    Id = nv.Id,
+                                    Ten = nv.Ten,
+                                    DienThoai = nv.DienThoai,
+                                    DiaChi = nv.DiaChi,
+                                    Email = nv.Email,
+                                    VaiTro = nv.VaiTro,
+                                    TenDangNhap = tk.TenDangNhap,
+                                    MatKhau = tk.MatKhau
+                                });
+                    foreach (var nv in list)
+                    {
+                        List.Add(new NhanVienVaTaiKhoan()
+                        {
+                            Id = nv.Id,
+                            Ten = nv.Ten,
+                            DienThoai = nv.DienThoai,
+                            DiaChi = nv.DiaChi,
+                            Email = nv.Email,
+                            VaiTro = nv.VaiTro,
+                            TenDangNhap = nv.TenDangNhap,
+                            MatKhau = nv.MatKhau
+                        });
+                    }
+
+                }
+            }
+            else
+            {
+                List = new ObservableCollection<NhanVienVaTaiKhoan>();
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    string sql = $"select* from NhanVien where freetext(Ten, N'{name}')";
+                    var nhanvien = db.NhanViens.SqlQuery(sql).Where(x=>x.isRemove == false).ToList();
+                    var taikhoan = db.TaiKhoans.ToList();
+                    
+                    if(nhanvien.Count() > 0)
+                    {
+                        var list = (from nv in nhanvien
+                                    join tk in taikhoan on nv.Id equals tk.Id
+                                    select new
+                                    {
+                                        Id = nv.Id,
+                                        Ten = nv.Ten,
+                                        DienThoai = nv.DienThoai,
+                                        DiaChi = nv.DiaChi,
+                                        Email = nv.Email,
+                                        VaiTro = nv.VaiTro,
+                                        TenDangNhap = tk.TenDangNhap,
+                                        MatKhau = tk.MatKhau
+                                    });
+                        foreach (var nv in list)
+                        {
+                            List.Add(new NhanVienVaTaiKhoan()
+                            {
+                                Id = nv.Id,
+                                Ten = nv.Ten,
+                                DienThoai = nv.DienThoai,
+                                DiaChi = nv.DiaChi,
+                                Email = nv.Email,
+                                VaiTro = nv.VaiTro,
+                                TenDangNhap = nv.TenDangNhap,
+                                MatKhau = nv.MatKhau
+                            });
+                        }
+                    }
+
+                }
+            }
         }
     }
 }
