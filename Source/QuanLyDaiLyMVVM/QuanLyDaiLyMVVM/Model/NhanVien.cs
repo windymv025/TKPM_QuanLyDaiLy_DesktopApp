@@ -9,20 +9,29 @@
 
 namespace QuanLyDaiLyMVVM.Model
 {
+    using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class NhanVien
+    public partial class NhanVien: BaseViewModel
     {
-        public int Id { get; set; }
-        public string Ten { get; set; }
-        public string DienThoai { get; set; }
-        public string DiaChi { get; set; }
-        public string Email { get; set; }
-        public string HinhAnh { get; set; }
-        public int VaiTro { get; set; }
-        public Nullable<bool> isRemove { get; set; }
-    
-        public virtual TaiKhoan TaiKhoan { get; set; }
+        private int _Id;
+        public int Id { get=>_Id; set { _Id = value; OnPropertyChanged(); } }
+        private string _Ten;
+        public string Ten { get => _Ten; set { _Ten = value; OnPropertyChanged(); } }
+        private string _DienThoai;
+        public string DienThoai { get => _DienThoai; set { _DienThoai = value; OnPropertyChanged(); } }
+        private string _DiaChi;
+        public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
+        private string _Email;
+        public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
+        private string _HinhAnh;
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
+        private int _VaiTro;
+        public int VaiTro { get => _VaiTro; set { _VaiTro = value; OnPropertyChanged(); } }
+        private Nullable<bool> _isRemove;
+        public Nullable<bool> isRemove { get => _isRemove; set { _isRemove = value; OnPropertyChanged(); } }
+        private TaiKhoan _TaiKhoan;
+        public virtual TaiKhoan TaiKhoan { get=>_TaiKhoan; set { _TaiKhoan = value; OnPropertyChanged(); } }
     }
 }
