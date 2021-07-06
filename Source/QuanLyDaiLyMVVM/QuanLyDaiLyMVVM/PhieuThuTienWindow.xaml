@@ -22,6 +22,12 @@
         
 		DataContext="{StaticResource PhieuThuTienVM}"
 		x:Name="phieuThuTienWindow">
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<i:InvokeCommandAction Command="{Binding WindowLoadedCommand}"
+								   CommandParameter="{Binding ElementName=phieuThuTienWindow}"/>
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="70"/>
@@ -66,8 +72,15 @@
 				<Border x:Name="datePickerSearch" Grid.Column="3" Margin="10,5" CornerRadius="4" Visibility="Collapsed"
 								Background="White">
 					<DatePicker Width="300" Height="60" Name="datePicker_Search"
-								 materialDesign:HintAssist.Hint="Pick Date"
-								 Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+								 materialDesign:HintAssist.Hint="Pick Date" 
+								 Style="{StaticResource MaterialDesignOutlinedDatePicker}" >
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectedDateChanged">
+								<i:InvokeCommandAction Command="{Binding DateSearchCommand}" 
+													   CommandParameter="{Binding ElementName=datePicker_Search}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</DatePicker>
 				</Border>
 
 				<!--Tìm kiếm key search-->
@@ -85,7 +98,13 @@
                                          materialDesign:TextFieldAssist.HasOutlinedTextField="True"
                                          materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                          materialDesign:TextFieldAssist.TextFieldCornerRadius="8"
-                                         />
+                                         >
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="TextChanged">
+								<i:InvokeCommandAction Command="{Binding KeySearchCommand}" CommandParameter="{Binding ElementName=textbox_search}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</TextBox>
 					<materialDesign:PackIcon Grid.Column="2"
                                                          Kind="Magnify"
                                                          Width="40"
@@ -105,7 +124,7 @@
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
 								<i:InvokeCommandAction Command="{Binding ThayDoiLoaiTimKiemCommand}"
-														   CommandParameter="{Binding ElementName=phieuXuatHangWindow}"/>
+														   CommandParameter="{Binding ElementName=phieuThuTienWindow}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
 						<ComboBoxItem IsSelected="True">
@@ -235,8 +254,8 @@
 							</ItemsPanelTemplate>
 						</ComboBox.ItemsPanel>
 						<ComboBoxItem>Tên đại lý</ComboBoxItem>
-						<ComboBoxItem>Ngày lập phiếu</ComboBoxItem>
-						<ComboBoxItem>Tổng tiền</ComboBoxItem>
+						<ComboBoxItem>Ngày thu tiền</ComboBoxItem>
+						<ComboBoxItem>Số tiền thu</ComboBoxItem>
 					</ComboBox>
 
 					<ComboBox  Margin="10,0" Name="cbb_KieuSapXep"

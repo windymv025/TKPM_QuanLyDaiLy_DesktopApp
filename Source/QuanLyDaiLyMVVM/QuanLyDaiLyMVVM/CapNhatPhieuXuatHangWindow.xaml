@@ -43,11 +43,11 @@
 					<ColumnDefinition Width="150" />
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0"
-						   Text="{Binding PhieuDaiLy.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
+						   Text="{Binding PhieuXuatHang.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
 						   HorizontalAlignment="Center"
 						   VerticalAlignment="Center"
 						   FontSize="35"
-						   ToolTip="{Binding PhieuDaiLy.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
+						   ToolTip="{Binding PhieuXuatHang.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"
 						   TextWrapping="WrapWithOverflow"
 						   TextTrimming="CharacterEllipsis"
 						   FontWeight="ExtraBold"
@@ -103,10 +103,10 @@
 				<WrapPanel Margin="15,10" >
 					<!--Đại lý-->
 					<ComboBox  materialDesign:HintAssist.Hint="Đại lý" MinWidth="200" 
-									   ItemsSource="{Binding NguonNhaps}"  SelectedItem="{Binding NguonNhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+									   ItemsSource="{Binding DaiLys}"  SelectedItem="{Binding DaiLy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
-								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
+								<i:InvokeCommandAction Command="{Binding SelectionDaiLyCommand}"
 														   CommandParameter="{Binding ElementName=btnLuu}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
@@ -117,18 +117,18 @@
 						</ComboBox.ItemsPanel>
 						<ComboBox.ItemTemplate>
 							<DataTemplate>
-								<Grid Height="120" Width="540">
+								<Grid Height="120">
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition/>
+										<ColumnDefinition Width="120"/>
 										<ColumnDefinition Width="2*"/>
 									</Grid.ColumnDefinitions>
-									<Image Source="{Binding DaiLy.HinhAnh}" Stretch="Uniform" 
+									<Image Source="{Binding HinhAnh}" Stretch="Uniform" 
 														   RenderOptions.BitmapScalingMode="HighQuality"/>
 									<StackPanel Grid.Column="1" VerticalAlignment="Center" >
-										<TextBlock Text="{Binding DaiLy.Ten}" TextWrapping="WrapWithOverflow" FontWeight="Bold" Margin="5,0,0,0"/>
-										<TextBlock Text="{Binding DaiLy.DienThoai}" TextWrapping="WrapWithOverflow"	Margin="5,5,0,0"/>
-										<TextBlock Text="{Binding DaiLy.Email}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
-										<TextBlock Text="{Binding DaiLy.DiaChi}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding Ten}" TextWrapping="WrapWithOverflow" FontWeight="Bold" Margin="5,0,0,0"/>
+										<TextBlock Text="{Binding DienThoai}" TextWrapping="WrapWithOverflow"	Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding Email}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
 									</StackPanel>
 								</Grid>
 							</DataTemplate>
@@ -142,7 +142,7 @@
 									   ItemsSource="{Binding SanPhams}"  SelectedItem="{Binding SanPham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="15,5" >
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
-								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
+								<i:InvokeCommandAction Command="{Binding SelectionSanPhamCommand}"
 														   CommandParameter="{Binding ElementName=btnLuu}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
@@ -242,7 +242,7 @@
 							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 							Text="{Binding GiaBan}" FontSize="20" Foreground="Red"
 						    FontWeight="Bold"	  Padding="5"
-							VerticalAlignment="Center"
+							VerticalAlignment="Bottom"
 							materialDesign:TextFieldAssist.PrefixText=" đ "
 							materialDesign:TextFieldAssist.SuffixText="VNĐ">
 						<i:Interaction.Triggers>
@@ -255,7 +255,7 @@
 
 					<TextBox x:Name="soLuongTxt" Margin="15,5" MinWidth="200" materialDesign:HintAssist.Hint="Số lượng"
 									  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-									  VerticalAlignment="Center" FontWeight="Bold"
+									  VerticalAlignment="Bottom" FontWeight="Bold"
 							 materialDesign:TextFieldAssist.SuffixText="{Binding SanPham.DonViTinh.Ten}"
 									 Text="{Binding  SoLuong}" FontSize="20">
 						<i:Interaction.Triggers>
@@ -308,7 +308,7 @@
 					</i:Interaction.Triggers>
 					<ListView.View>
 						<GridView>
-							<GridViewColumn Header="STT" />
+							<GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"/>
 
 							<GridViewColumn Header="Tên sản phẩm" Width="auto"
                                                 DisplayMemberBinding="{Binding SanPham.Ten}"></GridViewColumn>

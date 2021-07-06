@@ -52,7 +52,14 @@
 								Background="White">
 						<DatePicker Width="300" Height="60" Name="datePicker_Search"
 								 materialDesign:HintAssist.Hint="Pick Date"
-								 Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+								 Style="{StaticResource MaterialDesignOutlinedDatePicker}" >
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="SelectedDateChanged">
+									<i:InvokeCommandAction Command="{Binding DateSearchCommand}" 
+													   CommandParameter="{Binding ElementName=datePicker_Search}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+						</DatePicker>
 					</Border>
 					
 					<Grid x:Name="txtSearch" Grid.Column="2"  Margin="10,0"  Visibility="Visible">
@@ -69,7 +76,13 @@
                                          materialDesign:TextFieldAssist.HasOutlinedTextField="True"
                                          materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                          materialDesign:TextFieldAssist.TextFieldCornerRadius="8"
-                                         />
+                                         >
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="TextChanged">
+									<i:InvokeCommandAction Command="{Binding KeySearchCommand}" CommandParameter="{Binding ElementName=textbox_search}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+						</TextBox>
 						<materialDesign:PackIcon Grid.Column="2"
                                                          Kind="Magnify"
                                                          Width="40"

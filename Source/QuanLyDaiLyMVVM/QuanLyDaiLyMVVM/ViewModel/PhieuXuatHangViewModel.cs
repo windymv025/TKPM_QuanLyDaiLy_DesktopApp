@@ -23,6 +23,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         private ObservableCollection<PhieuXuatHangHienThi> _PhieuXuatHangs;
         public ObservableCollection<PhieuXuatHangHienThi> PhieuXuatHangs { get => _PhieuXuatHangs; set { _PhieuXuatHangs = value; OnPropertyChanged(); } }
+        
+        private ObservableCollection<PhieuXuatHangHienThi> _PhieuXuatHangBackups;
+        public ObservableCollection<PhieuXuatHangHienThi> PhieuXuatHangBackups { get => _PhieuXuatHangBackups; set { _PhieuXuatHangBackups = value; OnPropertyChanged(); } }
 
         private PagingInfo _PagingInfo;
         public PagingInfo PagingInfo { get => _PagingInfo; set { _PagingInfo = value; OnPropertyChanged(); } }
@@ -38,7 +41,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand ThayDoiLoaiSapXepCommand { get; set; }
         public ICommand ThayDoiSapXepCommand { get; set; }
         public ICommand SelectionChangedCommand { get; set; }
-
+        public ICommand KeySearchCommand { get; set; }
+        public ICommand DateSearchCommand { get; set; }
 
         public PhieuXuatHangViewModel()
         {
@@ -53,7 +57,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 p.textbox_search.Text = "";
                 p.datePicker_Search.SelectedDate = null;
                 p.cbb_KieuSapXep.SelectedIndex = 0;
-
+                p.lv_phieuXuatHang.SelectedIndex = -1;
                 loadData();
             });
 
@@ -131,10 +135,48 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 return true;
             }, (p) =>
             {
-                var wd = new CapNhatPhieuXuatHangWindow();
-                var vm = new CapNhatPhieuXuatHangViewModel(SelectPhieuXuatHang);
-                wd.DataContext = vm;
-                wd.ShowDialog();
+                if (p.SelectedIndex > -1)
+                {
+                    var wd = new CapNhatPhieuXuatHangWindow();
+                    var vm = new CapNhatPhieuXuatHangViewModel(SelectPhieuXuatHang);
+                    wd.DataContext = vm;
+                    wd.ShowDialog();
+                }
+            });
+
+
+            KeySearchCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            {
+                string keySearch = p.Text.Trim();
+
+                using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+                {
+                    if (keySearch != "")
+                    {
+                        string sql = $"select* from DaiLy where freetext((Ten,DienThoai, DiaChi, Email, Quan), N'%{keySearch}%')";
+                        var listDaiLy = db.DaiLies.SqlQuery(sql);
+
+                        PhieuXuatHangs = new ObservableCollection<PhieuXuatHangHienThi>(
+                            PhieuXuatHangBackups.Where(i => listDaiLy.Where(dl => dl.Id == i.DaiLy.Id).Count() > 0)
+                            );
+                        PagingInfo = new PagingInfo(5, PhieuXuatHangs.Count);
+
+                        ListHienThiTheotrang = loadPageHienThi(1);
+                    }
+                }
+            });
+
+            DateSearchCommand = new RelayCommand<DatePicker>((p) => { return true; }, (p) =>
+            {
+                using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+                {
+                    PhieuXuatHangs = new ObservableCollection<PhieuXuatHangHienThi>(
+                        _PhieuXuatHangBackups.Where(i => i.PhieuXuatHang.NgayLapPhieu.Date == p.SelectedDate)
+                        );
+                    PagingInfo = new PagingInfo(5, PhieuXuatHangs.Count);
+
+                    ListHienThiTheotrang = loadPageHienThi(1);
+                }
             });
 
         }
@@ -222,6 +264,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     i.TongTien = ConvertNumber.convertNumberDecimalToString(i.PhieuXuatHang.TongTien);
                 }
             }
+            PhieuXuatHangBackups = new ObservableCollection<PhieuXuatHangHienThi>(PhieuXuatHangs);
             PagingInfo = new PagingInfo(5, PhieuXuatHangs.Count);
             ListHienThiTheotrang = loadPageHienThi(1);
         }

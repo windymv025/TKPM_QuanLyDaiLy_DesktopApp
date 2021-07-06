@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="Model\SanPhamHienThi.cs" />
     <Compile Include="Model\SanPhamTop.cs" />
+    <Compile Include="Model\SanPhamXuat.cs" />
     <Compile Include="Model\TaiKhoan.cs">
       <DependentUpon>DBQuanLyCacDaiLy.tt</DependentUpon>
     </Compile>
