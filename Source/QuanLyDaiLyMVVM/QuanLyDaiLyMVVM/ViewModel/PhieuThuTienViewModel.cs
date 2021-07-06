@@ -44,6 +44,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand ThayDoiDuLieuSoCommand { get; set; }
         public ICommand ThayDoiDuLieuCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand EditCommand { get; set; }
 
         public PhieuThuTienViewModel()
         {
@@ -239,6 +241,84 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     p.SoTienThuTxt.Text = "0";
 
                     NgayThuTien = DateTime.Now;
+                }
+            });
+
+            DeleteCommand = new RelayCommand<PhieuThuTienWindow>((p) => { return true; }, (p) =>
+            {
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    db.PhieuThuTiens.Remove(db.PhieuThuTiens.Where(i => i.PhieuDaiLy.Id == SelectedPhieuThuTien.PhieuDaiLy.Id).FirstOrDefault());
+                    db.PhieuDaiLies.Remove(db.PhieuDaiLies.Where(i => i.Id == SelectedPhieuThuTien.PhieuDaiLy.Id).FirstOrDefault());
+                    db.SaveChanges();
+
+                    PhieuThuTiens.Remove(SelectedPhieuThuTien);
+                }
+
+                p.btnThem.IsEnabled = false;
+                p.btnSua.IsEnabled = false;
+                p.btnXoa.IsEnabled = false;
+
+                p.cbb_LoaiTimKiem.SelectedIndex = 0;
+                p.cbb_SapXepTheo.SelectedIndex = -1;
+                p.textbox_search.Text = "";
+                p.datePicker_Search.SelectedDate = null;
+                p.cbb_KieuSapXep.SelectedIndex = 0;
+
+                p.cbb_dsDaiLy.SelectedIndex = -1;
+                p.lv_DanhSachPhieuThuTien.SelectedIndex = -1;
+                p.SoTienThuTxt.Text = "0";
+
+                NgayThuTien = DateTime.Now;
+            });
+
+            EditCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                if (SelectedPhieuThuTien == null)
+                    return;
+                MessageBoxResult result = MessageBox.Show("Bạn có muốn lưu?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (SoTienThu == "0")
+                    {
+                        MessageBox.Show("Số tiền thu phải lớn hơn 0.", "Error Systerm", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        decimal tongSoTienNo = 0;
+
+                        foreach (var i in db.PhieuXuatHangs.Where(px => px.PhieuDaiLy.IdDaiLy == DaiLy.Id))
+                        {
+                            tongSoTienNo += i.TongTien;
+                        }
+
+                        foreach (var i in db.PhieuThuTiens.Where(px => px.PhieuDaiLy.IdDaiLy == DaiLy.Id))
+                        {
+                            tongSoTienNo -= i.SoTienThu;
+                        }
+
+                        if (tongSoTienNo < PhieuThuTien.SoTienThu)
+                        {
+                            MessageBox.Show($"Số tiền thu không vượt quá số tiền nợ của đại lý ({ConvertNumber.convertNumberDecimalToString(tongSoTienNo)} VNĐ).", 
+                                "Error Systerm", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+
+                        var phieuThuTien = db.PhieuThuTiens.Where(i => i.PhieuDaiLy.Id == SelectedPhieuThuTien.PhieuDaiLy.Id).FirstOrDefault();
+
+                        phieuThuTien.PhieuDaiLy.IdDaiLy = DaiLy.Id;
+                        phieuThuTien.NgayThuTien = NgayThuTien;
+                        phieuThuTien.SoTienThu = PhieuThuTien.SoTienThu;
+                        
+                        db.SaveChanges();
+                    }
+                    SelectedPhieuThuTien.PhieuDaiLy.IdDaiLy = DaiLy.Id;
+                    SelectedPhieuThuTien.DaiLy = DaiLy;
+                    SelectedPhieuThuTien.PhieuThuTien.NgayThuTien = NgayThuTien;
+                    SelectedPhieuThuTien.PhieuThuTien.SoTienThu = PhieuThuTien.SoTienThu;
+                    SelectedPhieuThuTien.SoTienThu = SoTienThu;
                 }
             });
         }

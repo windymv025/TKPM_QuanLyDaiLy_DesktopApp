@@ -204,7 +204,7 @@
                             Margin="5"
                             Width="100"></Button>
 					<Button x:Name="btnSua" Command="{Binding EditCommand}"
-							CommandParameter="{Binding ElementName=lv_DanhSachNguonNhap}"
+							CommandParameter="{Binding ElementName=lv_DanhSachPhieuThuTien}"
                             Content="Sửa"
 							Background="Blue"
 							IsEnabled="False"
@@ -212,6 +212,7 @@
                             Width="100"></Button>
 					<Button x:Name="btnXoa" 
 							Command="{Binding DeleteCommand}"
+							CommandParameter="{Binding ElementName=phieuThuTienWindow}"
                             Content="Xóa"
 							Background="Red"
 							IsEnabled="False"
