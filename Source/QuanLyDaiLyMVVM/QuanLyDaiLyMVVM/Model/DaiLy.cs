@@ -41,9 +41,11 @@ namespace QuanLyDaiLyMVVM.Model
         public bool IsRemove { get => _IsRemove; set { _IsRemove = value; OnPropertyChanged(); } }
         private string _HinhAnh;
         public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
-    
-        public virtual LoaiDaiLy LoaiDaiLy { get; set; }
+
+        private LoaiDaiLy _LoaiDaiLy;
+        public virtual LoaiDaiLy LoaiDaiLy { get=>_LoaiDaiLy; set { _LoaiDaiLy = value; OnPropertyChanged(); } }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhieuDaiLy> PhieuDaiLies { get; set; }
+        private ICollection<PhieuDaiLy> _PhieuDaiLies;
+        public virtual ICollection<PhieuDaiLy> PhieuDaiLies { get=>_PhieuDaiLies; set { _PhieuDaiLies = value; OnPropertyChanged(); } }
     }
 }

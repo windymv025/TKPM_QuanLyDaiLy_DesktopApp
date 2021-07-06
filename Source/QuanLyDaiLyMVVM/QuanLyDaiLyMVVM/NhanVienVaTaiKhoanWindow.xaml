@@ -102,6 +102,40 @@
                             Margin="5"
                             Width="100"
                             CommandParameter="{Binding ElementName=nhanvienwindow}"></Button>
+                    <materialDesign:Card Margin="5">
+                        <Grid>
+                            <TextBox x:Name="DaiLy_textbox_search"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Center"
+                                     Background="White"
+                                     FontSize="15"
+                                     Width="300"
+                                     Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged}"
+                                     BorderThickness="0"
+                                     materialDesign:HintAssist.Hint="Nhập tên nhân viên..."
+                                     materialDesign:HintAssist.IsFloating="False"
+                                     materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                     materialDesign:TextFieldAssist.TextFieldCornerRadius="4">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding SearchTextChangedCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+
+                            <materialDesign:PackIcon Grid.Column="2"
+                                                     Kind="Magnify"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Margin="0,0,10,0"
+                                                     Panel.ZIndex="5"
+                                                     HorizontalAlignment="Right"
+                                                     VerticalAlignment="Center">
+
+                            </materialDesign:PackIcon>
+                        </Grid>
+                    </materialDesign:Card>
                 </WrapPanel>
             </materialDesign:Card>
 

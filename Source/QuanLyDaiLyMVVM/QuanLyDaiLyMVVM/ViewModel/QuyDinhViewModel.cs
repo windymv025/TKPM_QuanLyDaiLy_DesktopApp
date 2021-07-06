@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyDaiLyMVVM.ViewModel
@@ -40,6 +42,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand TextChangedValueCommand { get; set; }
 
         public QuyDinhViewModel()
         {
@@ -109,6 +112,19 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                     List = new ObservableCollection<QuyDinh>(db.QuyDinhs.Where(x => x.TrangThai == true).ToList());
                 }
+            });
+
+            TextChangedValueCommand = new RelayCommand<TextBox>((p) => {
+                if (p == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) => {
+                p.Text = Regex.Replace(p.Text, "[^0-9]+", "");
             });
         }
     }

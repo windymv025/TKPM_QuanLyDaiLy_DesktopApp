@@ -37,9 +37,17 @@
                              materialDesign:HintAssist.Hint="Tên quy định"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding GiaTri, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5" x:Name="Value"
+                             Margin="5 5 15 5"
+                             x:Name="Value"
                              materialDesign:HintAssist.Hint="Giá trị"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding TextChangedValueCommand}"
+                                                       CommandParameter="{Binding ElementName=Value}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                     <TextBox Text="{Binding KieuDuLieu, UpdateSourceTrigger=PropertyChanged}"
                              Margin="5 5 15 5"
                              materialDesign:HintAssist.Hint="Kiểu dữ liệu"
