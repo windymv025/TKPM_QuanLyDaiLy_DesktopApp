@@ -12,17 +12,14 @@ namespace QuanLyDaiLyMVVM.Model
     using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class PhieuThuTien:BaseViewModel
+
+    public partial class PhieuThuTien : BaseViewModel
     {
         private int _IdPhieuDaiLy;
         public int IdPhieuDaiLy { get => _IdPhieuDaiLy; set { _IdPhieuDaiLy = value; OnPropertyChanged(); } }
 
         private decimal _SoTienThu;
         public decimal SoTienThu { get => _SoTienThu; set { _SoTienThu = value; OnPropertyChanged(); } }
-
-        private System.DateTime _NgayThuTien;
-        public System.DateTime NgayThuTien { get => _NgayThuTien; set { _NgayThuTien = value; OnPropertyChanged(); } }
 
         private PhieuDaiLy _PhieuDaiLy;
         public virtual PhieuDaiLy PhieuDaiLy { get => _PhieuDaiLy; set { _PhieuDaiLy = value; OnPropertyChanged(); } }

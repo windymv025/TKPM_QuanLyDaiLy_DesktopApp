@@ -164,14 +164,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 PhieuXuatHangs = new ObservableCollection<PhieuXuatHangHienThi>(
                     from p in PhieuXuatHangs
-                    orderby p.PhieuDaiLy.NgayLapPhieu ascending
+                    orderby p.PhieuXuatHang.NgayLapPhieu ascending
                     select p);
             }
             else
             {
                 PhieuXuatHangs = new ObservableCollection<PhieuXuatHangHienThi>(
                     from p in PhieuXuatHangs
-                    orderby p.PhieuDaiLy.NgayLapPhieu descending
+                    orderby p.PhieuXuatHang.NgayLapPhieu descending
                     select p);
             }
             ListHienThiTheotrang = loadPageHienThi(1);

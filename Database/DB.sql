@@ -36,19 +36,20 @@ CREATE TABLE [QuyDinh] (
 GO
 CREATE TABLE [PhieuDaiLy] (
 	Id int identity(1,1) NOT NULL,
-	NgayLapPhieu Datetime NOT NULL,
 	IdDaiLy int NOT NULL,
 	primary key(Id)
 )
 GO
 CREATE TABLE [PhieuThuTien] (
 	IdPhieuDaiLy int NOT NULL,
+	NgayThuTien Datetime NOT NULL,
 	SoTienThu decimal NOT NULL,
 	primary key(IdPhieuDaiLy)
 )
 GO
 CREATE TABLE [PhieuXuatHang] (
 	IdPhieuDaiLy int NOT NULL,
+	NgayLapPhieu Datetime NOT NULL,
 	TongTien decimal NOT NULL,
 	primary key(IdPhieuDaiLy)
 )
@@ -209,60 +210,60 @@ GO
 INSERT [dbo].[DaiLy] ([Ten], [DienThoai], [DiaChi], [NgayTiepNhan], [Quan], [Email], [IdLoaiDaiLy], [IsRemove], [HinhAnh]) VALUES (N'Chu Bá Thông', N'0888888888', N'161 Xa lộ Hà Nội, Thảo Điền, Quận 2, Thành phố Hồ Chí Minh', CAST(N'2021-02-27' AS Datetime), N'2', N'chubathong@gmail.com', 2, 0, N'Images/DaiLy/14.png')
 GO
 
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-01' AS Datetime), 1)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (1)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-01' AS Datetime), 1)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (1)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2020-12-31' AS Datetime), 2)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (2)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-04-10' AS Datetime), 3)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (3)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-05-14' AS Datetime), 4)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (4)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-13' AS Datetime), 5)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (5)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-13' AS Datetime), 6)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (6)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 7)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (7)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 8)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (8)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-15' AS Datetime), 9)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (9)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-16' AS Datetime), 10)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (10)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-17' AS Datetime), 11)
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (11)
 GO
-INSERT [dbo].[PhieuDaiLy] ([NgayLapPhieu], [IDDaiLy]) VALUES (CAST(N'2021-06-17' AS Datetime), 12)
-GO
-
-
-INSERT [dbo].[PhieuThuTien] ([IdPhieuDaiLy], [SoTienThu]) VALUES (2, CAST(29000000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuDaiLy] ([IDDaiLy]) VALUES (12)
 GO
 
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (1, CAST(29000000 AS Decimal(18, 0)))
+
+INSERT [dbo].[PhieuThuTien] ([IdPhieuDaiLy], [NgayThuTien], [SoTienThu]) VALUES (2, CAST(N'2020-12-01' AS Datetime), CAST(29000000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (3, CAST(230940000 AS Decimal(18, 0)))
+
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (1, CAST(N'2020-12-01' AS Datetime), CAST(29000000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (4, CAST(15990000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (3, CAST(N'2020-12-31' AS Datetime), CAST(230940000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (5, CAST(154900000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (4, CAST(N'2021-04-10' AS Datetime), CAST(15990000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (6, CAST(115918000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (5, CAST(N'2021-05-14' AS Datetime), CAST(154900000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (7, CAST(22900000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (6, CAST(N'2021-06-13' AS Datetime), CAST(115918000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (8, CAST(11400000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (7, CAST(N'2021-06-13' AS Datetime), CAST(22900000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (9, CAST(22490000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (8, CAST(N'2021-06-15' AS Datetime), CAST(11400000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (10, CAST(25590000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (9, CAST(N'2021-06-15' AS Datetime), CAST(22490000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (11, CAST(65490000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (10, CAST(N'2021-06-15' AS Datetime), CAST(25590000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (12, CAST(43690000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (11, CAST(N'2021-06-16' AS Datetime), CAST(65490000 AS Decimal(18, 0)))
 GO
-INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [TongTien]) VALUES (13, CAST(20590000 AS Decimal(18, 0)))
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (12, CAST(N'2021-06-17' AS Datetime), CAST(43690000 AS Decimal(18, 0)))
+GO
+INSERT [dbo].[PhieuXuatHang] ([IdPhieuDaiLy], [NgayLapPhieu], [TongTien]) VALUES (13, CAST(N'2021-06-17' AS Datetime), CAST(20590000 AS Decimal(18, 0)))
 GO
 
 INSERT [dbo].[LoaiSanPham] ([Ten], [HinhAnh]) VALUES (N'Dell', N'Images/Category/dell.png')

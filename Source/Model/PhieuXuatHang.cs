@@ -12,8 +12,8 @@ namespace QuanLyDaiLyMVVM.Model
     using QuanLyDaiLyMVVM.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class PhieuXuatHang: BaseViewModel
+
+    public partial class PhieuXuatHang : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhieuXuatHang()
@@ -26,9 +26,6 @@ namespace QuanLyDaiLyMVVM.Model
 
         private decimal _TongTien;
         public decimal TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
-
-        private System.DateTime _NgayLapPhieu;
-        public System.DateTime NgayLapPhieu { get => _NgayLapPhieu; set { _NgayLapPhieu = value; OnPropertyChanged(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

@@ -16,7 +16,11 @@ namespace QuanLyDaiLyMVVM.Model
     public partial class PhieuDaiLy : BaseViewModel
     {
         private int _Id;
-        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } } 
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+
+
+        private System.DateTime _NgayLapPhieu;
+        public System.DateTime NgayLapPhieu { get => _NgayLapPhieu; set { _NgayLapPhieu = value; OnPropertyChanged(); } }
 
         private int _IdDaiLy;
         public int IdDaiLy { get => _IdDaiLy; set { _IdDaiLy = value; OnPropertyChanged(); } }

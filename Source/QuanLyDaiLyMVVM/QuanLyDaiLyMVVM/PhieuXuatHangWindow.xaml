@@ -175,7 +175,7 @@
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
 										<Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-											<TextBlock FontWeight="Bold" Text="{Binding PhieuDaiLy.NgayLapPhieu, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+											<TextBlock FontWeight="Bold" Text="{Binding PhieuXuatHang.NgayLapPhieu, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 										</Grid>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>

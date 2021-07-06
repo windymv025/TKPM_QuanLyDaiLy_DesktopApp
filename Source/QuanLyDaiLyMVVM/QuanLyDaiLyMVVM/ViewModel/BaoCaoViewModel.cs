@@ -349,24 +349,23 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 //Kết bảng đại lý và phiếu đại lý
                 var query_daily_phieudaily = from dl in daily
                                              join pdl in phieudaily on dl.Id equals pdl.IdDaiLy
-                                             where pdl.NgayLapPhieu.Year == Year
                                              select new
                                              {
                                                  iddl = dl.Id,
                                                  tendl = dl.Ten,
-                                                 time = pdl.NgayLapPhieu,
                                                  idpdl = pdl.Id
                                              };
                                 
                 //Kết bảng đại lý, phiếu đại lý và phiếu xuất hàng
                 var daily_phieudaily_phieuxuathang = from p in query_daily_phieudaily
                             join pxh in phieuxuathang on p.idpdl equals pxh.IdPhieuDaiLy
+                            where pxh.NgayLapPhieu.Year == Year
                             select new
                             {
                                 IDDAILY = p.iddl,
                                 TENDAILY = p.tendl,
                                 TIEN = pxh.TongTien,
-                                TIME = p.time
+                                TIME = pxh.NgayLapPhieu
                             };
 
                 //Group by => số tiền mà các đại lý mua
@@ -404,7 +403,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                                                          IDDAILY = dl.Id,
                                                          TENDAILY = dl.Ten,
                                                          TIEN = ptt.SoTienThu,
-                                                         TIME = pdl.NgayLapPhieu
+                                                         TIME = ptt.NgayThuTien
                                                      };
                 var daily_phieudaily_phieuxuathang_noYear = from dl in daily
                                                             join pdl in phieudaily on dl.Id equals pdl.IdDaiLy
@@ -414,7 +413,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                                                                 IDDAILY = dl.Id,
                                                                 TENDAILY = dl.Ten,
                                                                 TIEN = pxh.TongTien,
-                                                                TIME = pdl.NgayLapPhieu
+                                                                TIME = pxh.NgayLapPhieu
                                                             };
                 
                 

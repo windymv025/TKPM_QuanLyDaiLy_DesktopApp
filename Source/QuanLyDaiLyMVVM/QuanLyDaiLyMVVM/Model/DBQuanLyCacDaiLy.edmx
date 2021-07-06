@@ -89,7 +89,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NgayLapPhieu" Type="datetime" Nullable="false" />
           <Property Name="IdDaiLy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PhieuThuTien">
@@ -97,6 +96,7 @@
             <PropertyRef Name="IdPhieuDaiLy" />
           </Key>
           <Property Name="IdPhieuDaiLy" Type="int" Nullable="false" />
+          <Property Name="NgayThuTien" Type="datetime" Nullable="false" />
           <Property Name="SoTienThu" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PhieuXuatHang">
@@ -104,6 +104,7 @@
             <PropertyRef Name="IdPhieuDaiLy" />
           </Key>
           <Property Name="IdPhieuDaiLy" Type="int" Nullable="false" />
+          <Property Name="NgayLapPhieu" Type="datetime" Nullable="false" />
           <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="QuyDinh">
@@ -430,7 +431,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NgayLapPhieu" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdDaiLy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DaiLy" Relationship="Self.PhieuDaiLy_fk0" FromRole="PhieuDaiLy" ToRole="DaiLy" />
           <NavigationProperty Name="PhieuThuTien" Relationship="Self.PhieuThuTien_fk0" FromRole="PhieuDaiLy" ToRole="PhieuThuTien" />
@@ -443,6 +443,7 @@
           <Property Name="IdPhieuDaiLy" Type="Int32" Nullable="false" />
           <Property Name="SoTienThu" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="PhieuDaiLy" Relationship="Self.PhieuThuTien_fk0" FromRole="PhieuThuTien" ToRole="PhieuDaiLy" />
+          <Property Name="NgayThuTien" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="PhieuXuatHang">
           <Key>
@@ -452,6 +453,7 @@
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="ChiTietPhieuXuatHangs" Relationship="Self.ChiTietPhieuXuatHang_fk1" FromRole="PhieuXuatHang" ToRole="ChiTietPhieuXuatHang" />
           <NavigationProperty Name="PhieuDaiLy" Relationship="Self.PhieuXuatHang_fk0" FromRole="PhieuXuatHang" ToRole="PhieuDaiLy" />
+          <Property Name="NgayLapPhieu" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="QuyDinh">
           <Key>
@@ -781,7 +783,6 @@
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.PhieuDaiLy">
               <MappingFragment StoreEntitySet="PhieuDaiLy">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NgayLapPhieu" ColumnName="NgayLapPhieu" />
                 <ScalarProperty Name="IdDaiLy" ColumnName="IdDaiLy" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -789,6 +790,7 @@
           <EntitySetMapping Name="PhieuThuTiens">
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.PhieuThuTien">
               <MappingFragment StoreEntitySet="PhieuThuTien">
+                <ScalarProperty Name="NgayThuTien" ColumnName="NgayThuTien" />
                 <ScalarProperty Name="IdPhieuDaiLy" ColumnName="IdPhieuDaiLy" />
                 <ScalarProperty Name="SoTienThu" ColumnName="SoTienThu" />
               </MappingFragment>
@@ -797,6 +799,7 @@
           <EntitySetMapping Name="PhieuXuatHangs">
             <EntityTypeMapping TypeName="DBQuanLyCacDaiLyModel.PhieuXuatHang">
               <MappingFragment StoreEntitySet="PhieuXuatHang">
+                <ScalarProperty Name="NgayLapPhieu" ColumnName="NgayLapPhieu" />
                 <ScalarProperty Name="IdPhieuDaiLy" ColumnName="IdPhieuDaiLy" />
                 <ScalarProperty Name="TongTien" ColumnName="TongTien" />
               </MappingFragment>

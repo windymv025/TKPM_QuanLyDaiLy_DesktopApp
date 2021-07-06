@@ -20,7 +20,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         
-		DataContext="{StaticResource PhieuThuTienVM}">
+		DataContext="{StaticResource PhieuThuTienVM}"
+		x:Name="phieuThuTienWindow">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="70"/>
@@ -124,11 +125,13 @@
 
 				<WrapPanel Margin="15,10" >
 					<!--Đại lý-->
-					<ComboBox  materialDesign:HintAssist.Hint="Đại lý" MinWidth="200" VerticalAlignment="Bottom" Margin="15,5"
-									   ItemsSource="{Binding DaiLys}"  SelectedItem="{Binding DaiLy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+					<ComboBox  Name="cbb_dsDaiLy" materialDesign:HintAssist.Hint="Đại lý" 
+							   MinWidth="200" VerticalAlignment="Bottom" Margin="15,5"
+							   ItemsSource="{Binding DaiLys}"  SelectedItem="{Binding DaiLy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
-								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"/>
+								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}" 
+													   CommandParameter="{Binding ElementName=phieuThuTienWindow}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
 						<ComboBox.ItemsPanel>
@@ -138,18 +141,18 @@
 						</ComboBox.ItemsPanel>
 						<ComboBox.ItemTemplate>
 							<DataTemplate>
-								<Grid Height="120" Width="540">
+								<Grid Height="100" >
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition/>
+										<ColumnDefinition Width="100"/>
 										<ColumnDefinition Width="2*"/>
 									</Grid.ColumnDefinitions>
-									<Image Source="{Binding DaiLy.HinhAnh}" Stretch="Uniform" 
+									<Image Source="{Binding HinhAnh}" Stretch="Uniform" 
 														   RenderOptions.BitmapScalingMode="HighQuality"/>
 									<StackPanel Grid.Column="1" VerticalAlignment="Center" >
-										<TextBlock Text="{Binding DaiLy.Ten}" TextWrapping="WrapWithOverflow" FontWeight="Bold" Margin="5,0,0,0"/>
-										<TextBlock Text="{Binding DaiLy.DienThoai}" TextWrapping="WrapWithOverflow"	Margin="5,5,0,0"/>
-										<TextBlock Text="{Binding DaiLy.Email}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
-										<TextBlock Text="{Binding DaiLy.DiaChi}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding Ten}" TextWrapping="WrapWithOverflow" FontWeight="Bold" Margin="5,0,0,0"/>
+										<TextBlock Text="{Binding DienThoai}" TextWrapping="WrapWithOverflow"	Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding Email}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
+										<TextBlock Text="{Binding DiaChi}" TextWrapping="WrapWithOverflow" Margin="5,5,0,0"/>
 									</StackPanel>
 								</Grid>
 							</DataTemplate>
@@ -161,20 +164,20 @@
 							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 							Text="{Binding SoTienThu}" Foreground="Red"
 						    FontWeight="Bold"	  Padding="5"
-							VerticalAlignment="Center"
+							VerticalAlignment="Bottom"
 							materialDesign:TextFieldAssist.PrefixText=" đ "
 							materialDesign:TextFieldAssist.SuffixText="VNĐ">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="TextChanged">
 								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuSoCommand}"
-														   CommandParameter="{Binding ElementName=SoTienThuTxt}"/>
+														   CommandParameter="{Binding ElementName=phieuThuTienWindow}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
 					</TextBox>
 
 					<DatePicker Margin="15,5"  Name="ngayThuTien_dp" MinWidth="200"  VerticalAlignment="Bottom"
 								materialDesign:HintAssist.Hint="Ngày thu tiền"  
-								SelectedDate="{Binding NgayLapPhieu, Mode=TwoWay}"
+								SelectedDate="{Binding NgayThuTien, Mode=TwoWay}"
 								Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
 						
 					</DatePicker>
@@ -186,28 +189,73 @@
 		<!--Button Add Remove-->
 		<materialDesign:Card Grid.Row="2" Padding="0,5"
                                  Margin="5,15,5,0">
-			<WrapPanel>
-				<Button Command="{Binding RefreshCommand}"
+			<Grid>
+				<WrapPanel HorizontalAlignment="Left">
+					<Button Command="{Binding RefreshCommand}"
                             Content="Refresh"
+							CommandParameter="{Binding ElementName=phieuThuTienWindow}"
                             Margin="5"
                             Width="100"></Button>
-				<Button Command="{Binding AddCommand}"
+					<Button x:Name="btnThem" Command="{Binding AddCommand}"
+							CommandParameter="{Binding ElementName=phieuThuTienWindow}"
                             Content="Thêm"
 							Background="Blue"
+							IsEnabled="False"
                             Margin="5"
                             Width="100"></Button>
-				<Button Command="{Binding EditCommand}"
+					<Button x:Name="btnSua" Command="{Binding EditCommand}"
 							CommandParameter="{Binding ElementName=lv_DanhSachNguonNhap}"
                             Content="Sửa"
 							Background="Blue"
+							IsEnabled="False"
                             Margin="5"
                             Width="100"></Button>
-				<Button Command="{Binding DeleteCommand}"
+					<Button x:Name="btnXoa" 
+							Command="{Binding DeleteCommand}"
                             Content="Xóa"
 							Background="Red"
+							IsEnabled="False"
                             Margin="5"
                             Width="100"></Button>
-			</WrapPanel>
+				</WrapPanel>
+				<WrapPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+					<ComboBox  materialDesign:HintAssist.Hint="Sắp xếp theo"
+						   Margin="5,0" Name="cbb_SapXepTheo"
+						   Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding ThayDoiLoaiSapXepCommand}"
+												   CommandParameter="{Binding ElementName=cbb_SapXepTheo}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+						<ComboBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<VirtualizingStackPanel />
+							</ItemsPanelTemplate>
+						</ComboBox.ItemsPanel>
+						<ComboBoxItem>Tên đại lý</ComboBoxItem>
+						<ComboBoxItem>Ngày lập phiếu</ComboBoxItem>
+						<ComboBoxItem>Tổng tiền</ComboBoxItem>
+					</ComboBox>
+
+					<ComboBox  Margin="10,0" Name="cbb_KieuSapXep"
+						   Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding ThayDoiSapXepCommand}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+
+						<ComboBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<VirtualizingStackPanel />
+							</ItemsPanelTemplate>
+						</ComboBox.ItemsPanel>
+						<ComboBoxItem IsSelected="True">Tăng dần</ComboBoxItem>
+						<ComboBoxItem>Giảm dần</ComboBoxItem>
+					</ComboBox>
+				</WrapPanel>
+			</Grid>
 		</materialDesign:Card>
 		<!--Product-->
 		<materialDesign:Card Grid.Row="3"
@@ -215,11 +263,11 @@
                                  VerticalAlignment="Stretch">
 			<ScrollViewer VerticalScrollBarVisibility="Auto">
 				<ListView x:Name="lv_DanhSachPhieuThuTien" Height="auto" ItemsSource="{Binding PhieuThuTiens}" 
-                              SelectedItem="{Binding PhieuThuTien, Mode=TwoWay}">
+                              SelectedItem="{Binding SelectedPhieuThuTien, Mode=TwoWay}">
 					<i:Interaction.Triggers>
 						<i:EventTrigger EventName="SelectionChanged">
 							<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
-													   CommandParameter="{Binding ElementName=lv_DanhSachPhieuThuTien}"/>
+													   CommandParameter="{Binding ElementName=phieuThuTienWindow}"/>
 						</i:EventTrigger>
 					</i:Interaction.Triggers>
 					<ListView.View>
@@ -234,7 +282,7 @@
 							<GridViewColumn Header="Địa chỉ" Width="auto"
                                                 DisplayMemberBinding="{Binding DaiLy.DiaChi}"></GridViewColumn>
 							<GridViewColumn Header="Ngày thu tiền" Width="auto"
-                                                DisplayMemberBinding="{Binding PhieuDaiLy.NgayLapPhieu, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding PhieuThuTien.NgayThuTien, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
 							<GridViewColumn Header="Số tiền thu" Width="auto"
                                                 DisplayMemberBinding="{Binding SoTienThu}"></GridViewColumn>
 

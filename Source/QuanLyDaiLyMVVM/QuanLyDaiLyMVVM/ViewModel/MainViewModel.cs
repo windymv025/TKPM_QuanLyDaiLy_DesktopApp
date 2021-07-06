@@ -703,7 +703,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 if (db.PhieuDaiLies.Count() > 0)
                 {
-                    NgayBatDau = (from i in db.PhieuDaiLies
+                    NgayBatDau = (from i in db.PhieuXuatHangs
                                   orderby i.NgayLapPhieu ascending
                                   select i).FirstOrDefault().NgayLapPhieu;
                 }
@@ -736,17 +736,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     sanPhamTonKho += i.SoLuong;
                 }
 
-                foreach (var i in db.PhieuXuatHangs.Where(p => p.PhieuDaiLy.NgayLapPhieu >= NgayBatDau && p.PhieuDaiLy.NgayLapPhieu <= NgayKetThuc))
+                foreach (var i in db.PhieuXuatHangs.Where(p => p.NgayLapPhieu >= NgayBatDau && p.NgayLapPhieu <= NgayKetThuc))
                 {
                     doanhThu += i.TongTien;
                 }
 
-                foreach (var i in db.PhieuThuTiens.Where(p => p.PhieuDaiLy.NgayLapPhieu >= NgayBatDau && p.PhieuDaiLy.NgayLapPhieu <= NgayKetThuc))
+                foreach (var i in db.PhieuThuTiens.Where(p => p.NgayThuTien >= NgayBatDau && p.NgayThuTien <= NgayKetThuc))
                 {
                     tongTienThu += i.SoTienThu;
                 }
 
-                foreach (var i in db.ChiTietPhieuXuatHangs.Where(p => p.PhieuXuatHang.PhieuDaiLy.NgayLapPhieu >= NgayBatDau && p.PhieuXuatHang.PhieuDaiLy.NgayLapPhieu <= NgayKetThuc))
+                foreach (var i in db.ChiTietPhieuXuatHangs.Where(p => p.PhieuXuatHang.NgayLapPhieu >= NgayBatDau && p.PhieuXuatHang.NgayLapPhieu <= NgayKetThuc))
                 {
                     loiNhuan += i.SoLuong * (i.GiaBan - i.SanPham.GiaNhap);
                 }
