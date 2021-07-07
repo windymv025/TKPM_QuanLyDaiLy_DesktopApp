@@ -28,7 +28,7 @@
 			<RowDefinition Height="auto" MinHeight="50"/>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="70"/>
+			<RowDefinition Height="45"/>
 		</Grid.RowDefinitions>
 
 		<!--Header-->
@@ -144,6 +144,8 @@
 							<i:EventTrigger EventName="SelectionChanged">
 								<i:InvokeCommandAction Command="{Binding ThayDoiDuLieuCommand}"
 														   CommandParameter="{Binding ElementName=btnLuu}"/>
+								<i:InvokeCommandAction Command="{Binding ThayDoiSanPhamCommand}"
+														   CommandParameter="{Binding ElementName=cbb_DSSanPham}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
 						<ComboBox.ItemsPanel>
@@ -220,7 +222,7 @@
 										</WrapPanel>
 
 										<WrapPanel Margin="10,0">
-											<TextBlock Text="Số lượng:"
+											<TextBlock Text="Số lượng còn lại:"
                                                FontWeight="Bold"
                                                Margin="0,0,20,0"
                                                materialDesign:ShadowAssist.Darken="True" />
@@ -288,16 +290,18 @@
                             Content="Thêm"
 							Background="Blue"
                             Margin="5"
+						CommandParameter="{Binding ElementName=capNhatPhieuXuatWindow}"
 						IsEnabled="{Binding IsAdd}"
                             Width="100"></Button>
 				<Button Command="{Binding EditCommand}"
-							CommandParameter="{Binding ElementName=lv_DanhSachNguonNhap}"
+							CommandParameter="{Binding ElementName=capNhatPhieuXuatWindow}"
                             Content="Sửa"
 							Background="Blue"
 						IsEnabled="{Binding IsChange}"
                             Margin="5"
                             Width="100"></Button>
 				<Button Command="{Binding DeleteCommand}"
+						CommandParameter="{Binding ElementName=capNhatPhieuXuatWindow}"
                             Content="Xóa"
 						IsEnabled="{Binding IsRemove}"
 							Background="Red"

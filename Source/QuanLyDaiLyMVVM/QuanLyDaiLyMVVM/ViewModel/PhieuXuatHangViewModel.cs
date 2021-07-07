@@ -127,20 +127,32 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }, (p) =>
             {
                 var wd = new ThemPhieuXuatHangWindow();
+                var vm = new ThemPhieuXuatHangViewModel();
+
+                wd.DataContext = vm;
                 wd.ShowDialog();
+                loadData();
             });
 
-            SelectionChangedCommand = new RelayCommand<ListView>((p) =>
+            SelectionChangedCommand = new RelayCommand<PhieuXuatHangWindow>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                if (p.SelectedIndex > -1)
+                if (p.lv_phieuXuatHang.SelectedIndex > -1)
                 {
                     var wd = new CapNhatPhieuXuatHangWindow();
                     var vm = new CapNhatPhieuXuatHangViewModel(SelectPhieuXuatHang);
                     wd.DataContext = vm;
                     wd.ShowDialog();
+
+                    p.cbb_LoaiTimKiem.SelectedIndex = 0;
+                    p.cbb_SapXepTheo.SelectedIndex = -1;
+                    p.textbox_search.Text = "";
+                    p.datePicker_Search.SelectedDate = null;
+                    p.cbb_KieuSapXep.SelectedIndex = 0;
+                    p.lv_phieuXuatHang.SelectedIndex = -1;
+                    loadData();
                 }
             });
 

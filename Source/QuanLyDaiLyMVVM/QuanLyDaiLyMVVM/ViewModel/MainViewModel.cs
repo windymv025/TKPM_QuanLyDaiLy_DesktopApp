@@ -351,6 +351,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         private void DaiLyTop1_MouseDown(Window p)
         {
+            if (DaiLyTop1 == null)
+                return;
+
             var wd = new CapNhatDaiLyWindow();
             DaiLyViewModel vm = new DaiLyViewModel();
             using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
@@ -386,6 +389,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         private void DaiLyTop2_MouseDown(Window p)
         {
+            if (DaiLyTop2 == null)
+                return;
+
             var wd = new CapNhatDaiLyWindow();
             DaiLyViewModel vm = new DaiLyViewModel();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
@@ -421,6 +427,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         private void DaiLyTop3_MouseDown(Window p)
         {
+            if (DaiLyTop3 == null)
+                return;
+
             var wd = new CapNhatDaiLyWindow();
             DaiLyViewModel vm = new DaiLyViewModel();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
@@ -455,13 +464,22 @@ namespace QuanLyDaiLyMVVM.ViewModel
         }
 
         private void SanPhamTop1_MouseDown(Window p)
-        {
+        { 
+            if (SanPhamTop1 == null)
+                return;
+
             CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
             SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
             using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
+                if (db.SanPhams.Where(sp => sp.Id == SanPhamTop1.ID && sp.TrangThai == true).Count() < 1)
+                    return;
+
                 var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop1.ID && sp.TrangThai == true).FirstOrDefault();
-                SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+                if (SanPham.HinhAnh != null)
+                    SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+                else
+                    SanPham.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
 
                 sanPhamHienThi.SanPham = SanPham;
 
@@ -480,12 +498,22 @@ namespace QuanLyDaiLyMVVM.ViewModel
         }
         private void SanPhamTop2_MouseDown(Window p)
         {
+            if (SanPhamTop2 == null)
+                return;
+
             CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
             SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
+                if (db.SanPhams.Where(sp => sp.Id == SanPhamTop2.ID && sp.TrangThai == true).Count() < 1)
+                    return;
+
                 var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop2.ID && sp.TrangThai == true).FirstOrDefault();
-                SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+
+                if (SanPham.HinhAnh != null)
+                    SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+                else
+                    SanPham.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
 
                 sanPhamHienThi.SanPham = SanPham;
 
@@ -504,12 +532,20 @@ namespace QuanLyDaiLyMVVM.ViewModel
         }
         private void SanPhamTop3_MouseDown(Window p)
         {
+            if (SanPhamTop3 == null)
+                return;
             CapNhatSanPhamWindow wd = new CapNhatSanPhamWindow();
             SanPhamHienThi sanPhamHienThi = new SanPhamHienThi();
             using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
+                if (db.SanPhams.Where(sp => sp.Id == SanPhamTop3.ID && sp.TrangThai == true).Count() < 1)
+                    return;
+
                 var SanPham = db.SanPhams.Where(sp => sp.Id == SanPhamTop3.ID && sp.TrangThai == true).FirstOrDefault();
-                SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+                if (SanPham.HinhAnh != null)
+                    SanPham.HinhAnh = Path.GetFullPath(SanPham.HinhAnh);
+                else
+                    SanPham.HinhAnh = Path.GetFullPath("/Assets/image_not_available.png");
 
                 sanPhamHienThi.SanPham = SanPham;
 
@@ -594,16 +630,16 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     }
                 }
             }
-            if (listSanPhamTop.Count >= 0)
+            if (listSanPhamTop.Count > 0)
             {
                 SanPhamTop1 = listSanPhamTop[0];
             }
-            if (listSanPhamTop.Count >= 1)
+            if (listSanPhamTop.Count > 1)
             {
                 SanPhamTop2 = listSanPhamTop[1];
             }
 
-            if (listSanPhamTop.Count >= 2)
+            if (listSanPhamTop.Count > 2)
             {
                 SanPhamTop3 = listSanPhamTop[2];
             }
@@ -670,16 +706,16 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
 
 
-                if (listDaiLyTop.Count >= 0)
+                if (listDaiLyTop.Count > 0)
                 {
                     DaiLyTop1 = listDaiLyTop[0];
                 }
-                if (listDaiLyTop.Count >= 1)
+                if (listDaiLyTop.Count > 1)
                 {
                     DaiLyTop2 = listDaiLyTop[1];
                 }
 
-                if (listDaiLyTop.Count >= 2)
+                if (listDaiLyTop.Count > 2)
                 {
                     DaiLyTop3 = listDaiLyTop[2];
                 }

@@ -179,7 +179,7 @@
 				<ListView ItemsSource="{Binding ListHienThiTheotrang}" Name="lv_phieuXuatHang" SelectedItem="{Binding SelectPhieuXuatHang, Mode=TwoWay}">
 					<i:Interaction.Triggers>
 						<i:EventTrigger EventName="SelectionChanged">
-							<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=lv_phieuXuatHang}" />
+							<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=phieuXuatHangWindow}" />
 						</i:EventTrigger>
 					</i:Interaction.Triggers>
 					<ListView.View>

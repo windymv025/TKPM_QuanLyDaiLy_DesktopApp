@@ -122,6 +122,18 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }    
                 decimal number = decimal.Parse(newNumStr);
                 p.Text = ConvertNumber.convertNumberDecimalToString(number);
+                if (p.Text.Length == numberString.Length + 1)
+                {
+                    caretIndex++;
+                }
+                if (p.Text.Length == numberString.Length - 1)
+                {
+                    caretIndex--;
+                }
+                if (caretIndex < 0)
+                {
+                    caretIndex = 0;
+                }
                 p.CaretIndex = caretIndex;
             });
 
