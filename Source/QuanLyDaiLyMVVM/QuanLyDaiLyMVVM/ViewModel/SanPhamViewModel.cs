@@ -18,11 +18,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
         private int loaiSapXep = -1;
         private bool IsSXTang = true;
 
+        private string _SearchKeyword;
+        public string SearchKeyword { get => _SearchKeyword; set { _SearchKeyword = value; OnPropertyChanged(); } }
+
         private ObservableCollection<SanPhamHienThi> _ListSanPhamHienThiTheotrang;
         public ObservableCollection<SanPhamHienThi> ListSanPhamHienThiTheotrang { get => _ListSanPhamHienThiTheotrang; set { _ListSanPhamHienThiTheotrang = value; OnPropertyChanged(); } }
 
         private ObservableCollection<SanPhamHienThi> _ListSanPham;
         public ObservableCollection<SanPhamHienThi> ListSanPham { get => _ListSanPham; set { _ListSanPham = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<SanPhamHienThi> _ListSanPhamBackup;
+        public ObservableCollection<SanPhamHienThi> ListSanPhamBackup { get => _ListSanPham; set { _ListSanPham = value; OnPropertyChanged(); } }
 
         private ObservableCollection<SanPham> _SanPhams;
         public ObservableCollection<SanPham> SanPhams { get => _SanPhams; set { _SanPhams = value; OnPropertyChanged(); } }
@@ -43,6 +49,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand RefreshCommand { get; set; }
         public ICommand ThayDoiLoaiSapXepCommand { get; set; }
         public ICommand ThayDoiSapXepCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+
         private PagingInfo _PagingInfo;
         public PagingInfo PagingInfo { get => _PagingInfo; set { _PagingInfo = value; OnPropertyChanged(); } }
 
@@ -129,6 +137,50 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                     default:
                         break;
+                }
+            });
+
+            SearchCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+                {
+                    string sql = $"select* from SanPham where freetext((Ten, MoTa), N'%{SearchKeyword}%') AND TrangThai = 1";
+                    SanPhams = new ObservableCollection<SanPham>(db.SanPhams.SqlQuery(sql));
+
+                    foreach (var sp in SanPhams)
+                    {
+                        if (sp.HinhAnh == null)
+                        {
+                            sp.HinhAnh = Path.GetFullPath("Assets/image_not_available.png");
+                        }
+                        else
+                        {
+                            sp.HinhAnh = Path.GetFullPath(sp.HinhAnh);
+                        }
+
+                    }
+
+                    ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                        from sp in SanPhams
+                        join lsp in LoaiSanPhams
+                        on sp.IdLoaiSanPham equals lsp.Id
+                        join nn in NguonNhaps
+                        on sp.IdNguonNhap equals nn.Id
+                        join dv in DonViTinhs
+                        on sp.IdDonViTinh equals dv.Id
+                        select new SanPhamHienThi
+                        {
+                            SanPham = sp,
+                            LoaiSanPham = lsp,
+                            NguonNhap = nn,
+                            GiaBan = ConvertNumber.convertNumberDecimalToString(sp.GiaBan),
+                            GiaNhap = ConvertNumber.convertNumberDecimalToString(sp.GiaNhap),
+                            SoLuong = ConvertNumber.convertNumberToString(sp.SoLuong),
+                            DonViTinh = dv
+                        });
+
+                    PagingInfo = new PagingInfo(5, ListSanPham.Count);
+                    ListSanPhamHienThiTheotrang = loadPageHienThi(1);
                 }
             });
         }
@@ -270,7 +322,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         private void loadData()
         {
-            using(DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            SearchKeyword = "";
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
             {
                 SanPhams = new ObservableCollection<SanPham>(db.SanPhams.Where(sp=> sp.TrangThai == true));
                 LoaiSanPhams = new ObservableCollection<LoaiSanPham>(db.LoaiSanPhams);
@@ -318,6 +371,25 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }
 
             ListSanPham = new ObservableCollection<SanPhamHienThi>(
+                from sp in SanPhams
+                join lsp in LoaiSanPhams
+                on sp.IdLoaiSanPham equals lsp.Id
+                join nn in NguonNhaps
+                on sp.IdNguonNhap equals nn.Id
+                join dv in DonViTinhs
+                on sp.IdDonViTinh equals dv.Id
+                select new SanPhamHienThi
+                {
+                    SanPham = sp,
+                    LoaiSanPham = lsp,
+                    NguonNhap = nn,
+                    GiaBan = ConvertNumber.convertNumberDecimalToString(sp.GiaBan),
+                    GiaNhap = ConvertNumber.convertNumberDecimalToString(sp.GiaNhap),
+                    SoLuong = ConvertNumber.convertNumberToString(sp.SoLuong),
+                    DonViTinh = dv
+                });
+
+            ListSanPhamBackup = new ObservableCollection<SanPhamHienThi>(
                 from sp in SanPhams
                 join lsp in LoaiSanPhams
                 on sp.IdLoaiSanPham equals lsp.Id

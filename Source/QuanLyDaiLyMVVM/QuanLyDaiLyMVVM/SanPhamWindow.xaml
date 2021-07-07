@@ -63,7 +63,7 @@
 
                     <Grid Grid.Column="2"
                           Margin="10,0">
-                        <TextBox x:Name="SanPham_textbox_search"
+						<TextBox x:Name="SanPham_textbox_search"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
                                  Margin="40,0,0,0"
@@ -76,7 +76,14 @@
                                  materialDesign:HintAssist.IsFloating="True"
                                  materialDesign:TextFieldAssist.HasOutlinedTextField="True"
                                  materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4">
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="TextChanged">
+									<i:InvokeCommandAction Command="{Binding SearchCommand}" 
+														   CommandParameter="{Binding ElementName=sanPhamWindow}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+						</TextBox>
                         <materialDesign:PackIcon Grid.Column="2"
                                                  Kind="Magnify"
                                                  Width="40"
@@ -87,7 +94,8 @@
                                                  VerticalAlignment="Center">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" />
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" 
+														   CommandParameter="{Binding ElementName=sanPhamWindow}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </materialDesign:PackIcon>
