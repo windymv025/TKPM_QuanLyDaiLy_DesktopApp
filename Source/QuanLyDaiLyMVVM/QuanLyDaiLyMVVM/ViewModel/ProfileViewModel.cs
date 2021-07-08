@@ -15,6 +15,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
 {
     public class ProfileViewModel : BaseViewModel
     {
+        private Visibility _Visibility;
+        public Visibility Visibility { get => _Visibility; set { _Visibility = value; OnPropertyChanged(); } }
+
         private NhanVien _NhanVien;
         public NhanVien NhanVien { get => _NhanVien; set { _NhanVien = value; OnPropertyChanged(); } }
 
@@ -38,6 +41,15 @@ namespace QuanLyDaiLyMVVM.ViewModel
             using (var db = new DBQuanLyCacDaiLyEntities())
             {
                 NhanVien = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault();
+                var role = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault().VaiTro;
+                if (role != 1)
+                {
+                    Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    Visibility = Visibility.Visible;
+                }
             }
             
             if(NhanVien.HinhAnh != null)
@@ -53,18 +65,20 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
                 else
                 {
-                    using (var db = new DBQuanLyCacDaiLyEntities())
-                    {
-                        var role = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault().VaiTro;
-                        if (role != 1)
-                        {
-                            return false;
-                        }
-                        else
-                        {
-                            return true;
-                        }
-                    }
+                    return true;
+                    //using (var db = new DBQuanLyCacDaiLyEntities())
+                    //{
+                    //    var role = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault().VaiTro;
+                    //    if (role != 1)
+                    //    {
+                    //        p.nv.Visibility = Visibility.Collapsed;
+                    //        return false;
+                    //    }
+                    //    else
+                    //    {
+                    //        return true;
+                    //    }
+                    //}
                 }
             }, (p) => {
                 var wd = new NhanVienVaTaiKhoanWindow();

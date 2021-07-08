@@ -149,13 +149,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
             SearchTextChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
-                    if (string.IsNullOrEmpty(TextSearch))
+                    if (string.IsNullOrEmpty(TextSearch.Trim()))
                     {
                         KhoiTaoList(null);
                     }
                     else
                     {
-                        KhoiTaoList(TextSearch);
+                        KhoiTaoList(TextSearch.Trim());
                     }
                 }
             });
@@ -254,7 +254,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         }
         private void KhoiTaoList(string name)
         {
-            if(name == null)
+            if(string.IsNullOrEmpty(name))
             {
                 List = new ObservableCollection<NhanVienVaTaiKhoan>();
                 using (var db = new DBQuanLyCacDaiLyEntities())
@@ -296,7 +296,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 List = new ObservableCollection<NhanVienVaTaiKhoan>();
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
-                    string sql = $"select* from NhanVien where freetext(Ten, N'{name}')";
+                    string sql = $"select* from NhanVien where freetext(Ten, N'%{name}%')";
                     var nhanvien = db.NhanViens.SqlQuery(sql).Where(x=>x.isRemove == false).ToList();
                     var taikhoan = db.TaiKhoans.ToList();
                     
