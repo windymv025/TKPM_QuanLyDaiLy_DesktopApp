@@ -296,26 +296,40 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 {
                     if (sp.SanPham.Id == SanPham.SanPham.Id)
                     {
+                        decimal tongTienCu = tongtien;
+                        decimal giaBanMoi = ConvertNumber.convertStringtoDecimal(GiaBan);
+                        int soLuongMoi = sp.ChiTietPhieuXuatHang.SoLuong + ConvertNumber.convertStringtoInt(SoLuong);
+                        decimal thanhTien = giaBanMoi * soLuongMoi;
+
+                        tongtien -= sp.ThanhTienNum;
+                        tongtien += thanhTien;
+
+                        if(!kiemTraMucNo())
+                        {
+                            MessageBox.Show($"Mức nợ đại lý này không được vượt quá mức nợ tối đa.\nĐề nghị bạn giảm bớt giá trị đơn hàng.", "System Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                            tongtien = tongTienCu;
+                            return;
+                        }    
                         // Set lại số lượng sản phẩm
                         SanPham.SanPham.SoLuong -= soLuongXuat;
                         SanPham.SoLuong = ConvertNumber.convertNumberToString(SanPham.SanPham.SoLuong);
                         //Set lại tổng tiền
-                        tongtien -= sp.ThanhTienNum;
                         IsSave = true;
 
                         //Set lại số lượng mới và giá bán mới
-                        sp.ChiTietPhieuXuatHang.GiaBan = ConvertNumber.convertStringtoDecimal(GiaBan);
-                        sp.ChiTietPhieuXuatHang.SoLuong += ConvertNumber.convertStringtoInt(SoLuong);
-                        sp.SoLuong = ConvertNumber.convertNumberToString(sp.ChiTietPhieuXuatHang.SoLuong);
+                        sp.ChiTietPhieuXuatHang.GiaBan = giaBanMoi;
+                        sp.ChiTietPhieuXuatHang.SoLuong = soLuongMoi;
+                        sp.SoLuong = ConvertNumber.convertNumberToString(soLuongMoi);
                         sp.GiaBan = GiaBan;
 
                         //tính toán lại thành tiền
-                        sp.ThanhTienNum = sp.ChiTietPhieuXuatHang.GiaBan * sp.ChiTietPhieuXuatHang.SoLuong;
+                        sp.ThanhTienNum = thanhTien;
                         sp.ThanhTien = ConvertNumber.convertNumberDecimalToString(sp.ThanhTienNum);
 
-                        //Tính lại tổng tiền.
-                        tongtien += sp.ThanhTienNum;
+                        //Set lại tổng tiền string.
                         TongTien = ConvertNumber.convertNumberDecimalToString(tongtien);
+
 
                         isAdded = true;
                         break;
@@ -324,6 +338,21 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                 if (!isAdded)
                 {
+                    decimal tongTienCu = tongtien;
+                    decimal giaBanMoi = ConvertNumber.convertStringtoDecimal(GiaBan);
+                    int soLuong = ConvertNumber.convertStringtoInt(SoLuong);
+                    decimal thanhTien = giaBanMoi * soLuong;
+
+                    tongtien += thanhTien;
+
+                    if (!kiemTraMucNo())
+                    {
+                        MessageBox.Show($"Mức nợ đại lý này không được vượt quá mức nợ tối đa.\nĐề nghị bạn giảm bớt giá trị đơn hàng.", "System Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                        tongtien = tongTienCu;
+                        return;
+                    }
+
                     ChiTietPhieuXuatHang chiTietPhieuXuatHang = new ChiTietPhieuXuatHang
                     {
                         IdPhieuXuatHang = PhieuXuatHangHienThi.PhieuDaiLy.Id,
@@ -346,7 +375,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     SanPham.SanPham.SoLuong -= soLuongXuat;
                     SanPham.SoLuong = ConvertNumber.convertNumberToString(SanPham.SanPham.SoLuong);
 
-                    tongtien += sanPhamXuat.ThanhTienNum;
                     TongTien = ConvertNumber.convertNumberDecimalToString(tongtien);
 
                     SanPhamXuats.Add(sanPhamXuat);
@@ -396,26 +424,39 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                 if (p.lv_DanhSachSanPhamXuat.SelectedIndex > -1)
                 {
+                    decimal tongTienCu = tongtien;
+                    decimal giaBanMoi = ConvertNumber.convertStringtoDecimal(GiaBan);
+                    int soLuongMoi = ConvertNumber.convertStringtoInt(SoLuong);
+                    decimal thanhTien = giaBanMoi * soLuongMoi;
+
+                    tongtien -= SanPhamXuat.ThanhTienNum;
+                    tongtien += thanhTien;
+
+                    if (!kiemTraMucNo())
+                    {
+                        MessageBox.Show($"Mức nợ đại lý này không được vượt quá mức nợ tối đa.\nĐề nghị bạn giảm bớt giá trị đơn hàng.", "System Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                        tongtien = tongTienCu;
+                        return;
+                    }
+
                     SanPham.SanPham.SoLuong = SanPham.SanPham.SoLuong - soLuongXuat + SanPhamXuat.ChiTietPhieuXuatHang.SoLuong;
                     SanPham.SoLuong = ConvertNumber.convertNumberToString(SanPham.SanPham.SoLuong);
 
                     IsSave = true;
                     
-                    tongtien -= SanPhamXuat.ThanhTienNum;
-
                     SanPhamXuat.SoLuong = SoLuong;
                     SanPhamXuat.GiaBan = GiaBan;
-                    SanPhamXuat.ChiTietPhieuXuatHang.GiaBan = ConvertNumber.convertStringtoDecimal(GiaBan);
-                    SanPhamXuat.ChiTietPhieuXuatHang.SoLuong = ConvertNumber.convertStringtoInt(SoLuong);
+                    SanPhamXuat.ChiTietPhieuXuatHang.GiaBan = giaBanMoi;
+                    SanPhamXuat.ChiTietPhieuXuatHang.SoLuong = soLuongMoi;
 
                     SanPhamXuat.SanPham = SanPham.SanPham;
                     SanPhamXuat.ChiTietPhieuXuatHang.IdSanPham = SanPham.SanPham.Id;
 
                     SanPhamXuat.DonViTinh = SanPham.DonViTinh;
-                    SanPhamXuat.ThanhTienNum = SanPhamXuat.ChiTietPhieuXuatHang.GiaBan * SanPhamXuat.ChiTietPhieuXuatHang.SoLuong;
+                    SanPhamXuat.ThanhTienNum = thanhTien;
                     SanPhamXuat.ThanhTien = ConvertNumber.convertNumberDecimalToString(SanPhamXuat.ThanhTienNum);
 
-                    tongtien += SanPhamXuat.ThanhTienNum;
                     TongTien = ConvertNumber.convertNumberDecimalToString(tongtien);
                 }
                 IsChange = false;
@@ -579,6 +620,47 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 MessageBox.Show("Có lỗi khi lưu file!" + "\n" + ex.Message);
             }
+        }
+
+        private bool kiemTraMucNo()
+        {
+            bool result = true;
+            decimal tongNoHienTai = 0;
+            decimal tienNoMax = 0;
+
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                decimal doanhThu = 0;
+                decimal tongTienThu = 0;
+
+                foreach (var i in db.PhieuXuatHangs.Where(pxh => pxh.PhieuDaiLy.IdDaiLy == DaiLy.Id))
+                {
+                    doanhThu += i.TongTien;
+                }
+
+                foreach (var i in db.PhieuThuTiens.Where(p => p.PhieuDaiLy.IdDaiLy == DaiLy.Id))
+                {
+                    tongTienThu += i.SoTienThu;
+                }
+
+                tongNoHienTai = doanhThu - tongTienThu;
+
+                tienNoMax = db.LoaiDaiLies.Where(l => l.Id == DaiLy.IdLoaiDaiLy).FirstOrDefault().SoTienNoToiDa;
+            }
+
+            // Kiểm tra tiền nợ
+            tongNoHienTai = tongNoHienTai - PhieuXuatHangHienThi.PhieuXuatHang.TongTien + tongtien;
+
+            if(tongNoHienTai > tienNoMax)
+            {
+                result = false;
+            }   
+            else
+            {
+                result = true;
+            }    
+
+            return result;
         }
 
         private void loadData(PhieuXuatHangHienThi phieuXuatHangHienThi)

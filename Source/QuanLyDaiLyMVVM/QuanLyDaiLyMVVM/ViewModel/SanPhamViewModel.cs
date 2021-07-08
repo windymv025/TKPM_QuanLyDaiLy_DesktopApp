@@ -27,9 +27,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
         private ObservableCollection<SanPhamHienThi> _ListSanPham;
         public ObservableCollection<SanPhamHienThi> ListSanPham { get => _ListSanPham; set { _ListSanPham = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<SanPhamHienThi> _ListSanPhamBackup;
-        public ObservableCollection<SanPhamHienThi> ListSanPhamBackup { get => _ListSanPham; set { _ListSanPham = value; OnPropertyChanged(); } }
-
         private ObservableCollection<SanPham> _SanPhams;
         public ObservableCollection<SanPham> SanPhams { get => _SanPhams; set { _SanPhams = value; OnPropertyChanged(); } }
 
@@ -67,7 +64,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
             ThemCommand = new RelayCommand<Window>((p) => { return true; }, 
                 (p) => {
                     var wd = new ThemSanPhamWindow();
-                    var vm = wd.DataContext as ThemSanPhamViewModel;
+                    var vm = new ThemSanPhamViewModel();
+                    wd.DataContext = vm;
                     wd.ShowDialog();
                     if (vm.IsSave)
                     {
@@ -371,25 +369,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }
 
             ListSanPham = new ObservableCollection<SanPhamHienThi>(
-                from sp in SanPhams
-                join lsp in LoaiSanPhams
-                on sp.IdLoaiSanPham equals lsp.Id
-                join nn in NguonNhaps
-                on sp.IdNguonNhap equals nn.Id
-                join dv in DonViTinhs
-                on sp.IdDonViTinh equals dv.Id
-                select new SanPhamHienThi
-                {
-                    SanPham = sp,
-                    LoaiSanPham = lsp,
-                    NguonNhap = nn,
-                    GiaBan = ConvertNumber.convertNumberDecimalToString(sp.GiaBan),
-                    GiaNhap = ConvertNumber.convertNumberDecimalToString(sp.GiaNhap),
-                    SoLuong = ConvertNumber.convertNumberToString(sp.SoLuong),
-                    DonViTinh = dv
-                });
-
-            ListSanPhamBackup = new ObservableCollection<SanPhamHienThi>(
                 from sp in SanPhams
                 join lsp in LoaiSanPhams
                 on sp.IdLoaiSanPham equals lsp.Id

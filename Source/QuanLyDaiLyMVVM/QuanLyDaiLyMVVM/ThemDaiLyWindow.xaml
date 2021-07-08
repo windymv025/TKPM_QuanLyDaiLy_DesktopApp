@@ -144,6 +144,7 @@
             <DatePicker Grid.Row="3"
                         Grid.Column="1" Focusable="False"
                         x:Name="DaiLy_Date"
+						SelectedDate="{Binding NgayTiepNhan_Them}"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Width="200" FontSize="20"

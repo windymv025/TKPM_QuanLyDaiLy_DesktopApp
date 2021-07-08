@@ -40,7 +40,6 @@ namespace QuanLyDaiLyMVVM
             //Set tooltip
             if (Tg_btn.IsChecked == true)
             {
-                tt_home.Visibility = Visibility.Collapsed;
                 tt_daily.Visibility = Visibility.Collapsed;
                 tt_sanpham.Visibility = Visibility.Collapsed;
                 tt_phieuthutien.Visibility = Visibility.Collapsed;
@@ -50,7 +49,6 @@ namespace QuanLyDaiLyMVVM
             }
             else
             {
-                tt_home.Visibility = Visibility.Visible;
                 tt_daily.Visibility = Visibility.Visible;
                 tt_sanpham.Visibility = Visibility.Visible;
                 tt_phieuthutien.Visibility = Visibility.Visible;
@@ -61,11 +59,6 @@ namespace QuanLyDaiLyMVVM
         }
 
        
-
-        private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void Tg_btn_Unchecked(object sender, RoutedEventArgs e)
         {

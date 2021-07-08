@@ -55,7 +55,7 @@
                                    FontSize="30"
                                    FontWeight="ExtraBold"
                                    Margin="10" />
-                        <TextBlock Text="{Binding TongDoanhSo, StringFormat='0,0 VNĐ', UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
+                        <TextBlock Text="{Binding TongDoanhSo, StringFormat='#,0 VNĐ', UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="30"
@@ -173,7 +173,7 @@
                                    FontSize="30"
                                    FontWeight="ExtraBold"
                                    Margin="10" />
-                        <TextBlock Text="{Binding TongCongNo, StringFormat='0,0 VNĐ', UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding TongCongNo, StringFormat='#,0 VNĐ', UpdateSourceTrigger=PropertyChanged}"
                                    Grid.Row="1"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"

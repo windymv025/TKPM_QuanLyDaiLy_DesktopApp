@@ -52,6 +52,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }
         }
 
+        private DateTime _NgayTiepNhan_Them;
+        public DateTime NgayTiepNhan_Them { get => _NgayTiepNhan_Them; set { _NgayTiepNhan_Them = value; OnPropertyChanged(); } }
+
         private string _TenLoaiDaiLy;
         public string TenLoaiDaiLy { get => _TenLoaiDaiLy; set { _TenLoaiDaiLy = value; OnPropertyChanged(); } }
         private decimal _SoTienNoToiDa;
@@ -110,6 +113,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
                 LoaiDaiLy = new ObservableCollection<LoaiDaiLy>(db.LoaiDaiLies);
             }
+            NgayTiepNhan_Them = DateTime.Now;
 
             /*========================================================================================================*/
             #region THÊM ĐẠI LÝ
@@ -243,7 +247,39 @@ namespace QuanLyDaiLyMVVM.ViewModel
             //text nhập toàn số
             TextChangedMaxMoneyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
-                p.LoaiDaiLy_textbox_SoTienNoToiDa.Text = Regex.Replace(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text, "[^0-9]+", "");
+                //p.LoaiDaiLy_textbox_SoTienNoToiDa.Text = Regex.Replace(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text, "[^0-9]+", "");
+
+                int caretIndex = p.LoaiDaiLy_textbox_SoTienNoToiDa.CaretIndex;
+                p.LoaiDaiLy_textbox_SoTienNoToiDa.Text = Regex.Replace(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text, "[^0-9.]+", "");
+                string numberString = p.LoaiDaiLy_textbox_SoTienNoToiDa.Text;
+                string newNumStr = "";
+                for (int i = 0; i < numberString.Length; i++)
+                {
+                    if (numberString[i] != '.')
+                    {
+                        newNumStr += numberString[i];
+                    }
+                }
+                if (newNumStr == "")
+                {
+                    newNumStr = "0";
+                }
+                decimal number = decimal.Parse(newNumStr);
+                p.LoaiDaiLy_textbox_SoTienNoToiDa.Text = ConvertNumber.convertNumberDecimalToString(number);
+
+                if (p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Length == numberString.Length + 1)
+                {
+                    caretIndex++;
+                }
+                if (p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Length == numberString.Length - 1)
+                {
+                    caretIndex--;
+                }
+                if (caretIndex < 0)
+                {
+                    caretIndex = 0;
+                }
+                p.LoaiDaiLy_textbox_SoTienNoToiDa.CaretIndex = caretIndex;
             });
 
             //thêm

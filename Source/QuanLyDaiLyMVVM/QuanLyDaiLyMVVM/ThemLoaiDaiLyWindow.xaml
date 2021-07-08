@@ -36,18 +36,21 @@
                              Margin="5 5 15 5" x:Name="tenldl"
                              materialDesign:HintAssist.Hint="Tên loại đại lý"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <TextBox Text="{Binding SoTienNoToiDa, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="5 5 15 5"
-                             x:Name="LoaiDaiLy_textbox_SoTienNoToiDa"
-                             materialDesign:HintAssist.Hint="Số tiền nợ tối đa"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding TextChangedMaxMoneyCommand}"
-                                                       CommandParameter="{Binding ElementName=loaidailywindow}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
+					<TextBox Margin="15,5"  Name="LoaiDaiLy_textbox_SoTienNoToiDa" MinWidth="200"
+								  materialDesign:HintAssist.Hint="Số tiền nợ tối đa"
+							Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+							Text="{Binding SoTienNoToiDa}"
+						    FontWeight="Bold"	  Padding="5"
+							VerticalAlignment="Bottom"
+							materialDesign:TextFieldAssist.PrefixText=" đ "
+							materialDesign:TextFieldAssist.SuffixText="VNĐ">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="TextChanged">
+								<i:InvokeCommandAction Command="{Binding TextChangedMaxMoneyCommand}"
+														   CommandParameter="{Binding ElementName=loaidailywindow}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</TextBox>
                 </WrapPanel>
             </materialDesign:Card>
 
@@ -83,7 +86,7 @@
                                 <GridViewColumn Header="Tên loại đại lý"
                                                 DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Số tiền nợ tối đa"
-                                                DisplayMemberBinding="{Binding SoTienNoToiDa}"></GridViewColumn>
+                                                DisplayMemberBinding="{Binding SoTienNoToiDa, StringFormat='#,0 VNĐ'}"></GridViewColumn>
 
                             </GridView>
                         </ListView.View>
