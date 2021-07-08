@@ -58,21 +58,21 @@
             <materialDesign:Card Grid.Row="1"
                                  Margin="5">
                 <WrapPanel>
-                    <Button Command="{Binding AddCommand}"
+                    <!--<Button Command="{Binding AddCommand}"
                             Content="Thêm"
                             Margin="5"
                             Width="100"
-                            CommandParameter="{Binding ElementName=quydinhwindow}"></Button>
+                            CommandParameter="{Binding ElementName=quydinhwindow}"></Button>-->
                     <Button Command="{Binding EditCommand}"
                             Content="Sửa"
                             Margin="5"
                             Width="100"
                             CommandParameter="{Binding ElementName=quydinhwindow}"></Button>
-                    <Button Command="{Binding DeleteCommand}"
+                    <!--<Button Command="{Binding DeleteCommand}"
                             Content="Xóa"
                             Margin="5"
                             Width="100"
-                            CommandParameter="{Binding ElementName=quydinhwindow}"></Button>
+                            CommandParameter="{Binding ElementName=quydinhwindow}"></Button>-->
                 </WrapPanel>
             </materialDesign:Card>
 
