@@ -67,6 +67,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
         public bool Isloaded = false;
         public ICommand LoadedWindowCommand { get; set; }
+        public ICommand LogoutCommand { get; set; }
         public ICommand DaiLyShowCommand { get; set; }
         public ICommand SanPhamShowCommand { get; set; }
         public ICommand PhieuThuTienShowCommand { get; set; }
@@ -117,6 +118,11 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
             loadAllData();
 
+            LogoutCommand = new RelayCommand<MainWindow>((p) => { if (p == null) return false; else return true; }, (p) => {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                p.Close();
+            });
 
             DaiLyShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
