@@ -219,11 +219,16 @@
 								<ColumnDefinition Width="150" />
 								<ColumnDefinition Width="320" />
 							</Grid.ColumnDefinitions>
-							<Label Grid.Column="0"
+                            <Button Command="{Binding LogoutCommand}"
+                                    Content="Đăng xuất"
+                                    Margin="5"
+                                    Width="100" HorizontalAlignment="Left"
+                                    CommandParameter="{Binding ElementName=mainWindow}"></Button>
+                            <Label Grid.Column="0"
                                    Content="QUẢN LÝ ĐẠI LÝ"
-                                   HorizontalAlignment="Center"
+                                   HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
-                                   FontSize="35"
+                                   FontSize="35" Margin="0,0,30,0"
                                    FontWeight="ExtraBold"
                                    Foreground="#FFFFBD0B"
                                    Background="{x:Null}" />
