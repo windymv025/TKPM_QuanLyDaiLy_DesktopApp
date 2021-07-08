@@ -118,8 +118,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
             loadAllData();
 
-            LogoutCommand = new RelayCommand<MainWindow>((p) => { if (p == null) return false; else return true; }, (p) => {
+            LogoutCommand = new RelayCommand<MainWindow>((p) => { if (p == null) return false; else { return true; } }, (p) => {
                 MainWindow mainWindow = new MainWindow();
+                p.Hide();
                 mainWindow.Show();
                 p.Close();
             });

@@ -15,7 +15,7 @@ CREATE TABLE [DaiLy] (
 	IdLoaiDaiLy int NOT NULL,
 	IsRemove bit NOT NULL,
 	HinhAnh nvarchar(max),
-	PRIMARY KEY (Id)
+	CONSTRAINT PK_DaiLy PRIMARY KEY (Id)
 )
 GO
 CREATE TABLE [LoaiDaiLy] (
@@ -73,7 +73,7 @@ CREATE TABLE [SanPham] (
 	HinhAnh nvarchar(max),
 	MoTa nvarchar(max),
 	TrangThai bit NOT NULL, --0 là đã xóa, --1 là chưa xóa
-	primary key(Id)
+	CONSTRAINT PK_SanPham primary key(Id)
 )
 GO
 CREATE TABLE [NguonNhap] (
@@ -82,7 +82,7 @@ CREATE TABLE [NguonNhap] (
 	DiaChi nvarchar(max) NOT NULL,
 	SoDienThoai varchar(20) NOT NULL,
 	HinhAnh nvarchar(max),
-	primary key(Id)
+	CONSTRAINT PK_NguonNhap primary key(Id)
 )
 GO
 CREATE TABLE [ChiTietPhieuXuatHang] (
@@ -115,7 +115,7 @@ CREATE TABLE [NhanVien] (
 	HinhAnh nvarchar(max),
 	VaiTro int not null,			/*1 - admin, 2 - staff*/
 	isRemove bit default 0,
-	primary key(Id)
+	CONSTRAINT PK_NhanVien primary key(Id)
 )
 GO
 CREATE TABLE [TaiKhoan] (
@@ -535,11 +535,49 @@ INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUE
 INSERT [dbo].[QuyDinh] ([TenQuyDinh], [GiaTri], [KieuDuLieu], [TrangThai]) VALUES (N'SO_LUONG_DAI_LY_TOI_DA_TRONG_MOT_QUAN', 4, N'integer', 1)
 GO
 
+/****** Object:  FullTextCatalog [daily_ctlg]    Script Date: 2021-07-08 22:28:44 ******/
+CREATE FULLTEXT CATALOG [daily_ctlg] WITH ACCENT_SENSITIVITY = OFF
+GO
+/****** Object:  FullTextCatalog [nguonnhap_ctlg]    Script Date: 2021-07-08 22:28:44 ******/
+CREATE FULLTEXT CATALOG [nguonnhap_ctlg] WITH ACCENT_SENSITIVITY = OFF
+GO
+/****** Object:  FullTextCatalog [nhanvien_ctlg]    Script Date: 2021-07-08 22:28:44 ******/
+CREATE FULLTEXT CATALOG [nhanvien_ctlg] WITH ACCENT_SENSITIVITY = OFF
+GO
+/****** Object:  FullTextCatalog [sanpham_ctlg]    Script Date: 2021-07-08 22:28:44 ******/
+CREATE FULLTEXT CATALOG [sanpham_ctlg] WITH ACCENT_SENSITIVITY = OFF
+GO
 
-/* Báo cáo doanh số
+/****** Object:  FullTextIndex     Script Date: 2021-07-08 22:28:45 ******/
+CREATE FULLTEXT INDEX ON [dbo].[DaiLy](
+[DiaChi] LANGUAGE 'Vietnamese', 
+[DienThoai] LANGUAGE 'Vietnamese', 
+[Email] LANGUAGE 'Vietnamese', 
+[Quan] LANGUAGE 'Vietnamese', 
+[Ten] LANGUAGE 'Vietnamese')
+KEY INDEX [PK_DaiLy]ON ([daily_ctlg], FILEGROUP [PRIMARY])
+WITH (CHANGE_TRACKING = AUTO, STOPLIST = SYSTEM)
 
-select DaiLy.Id, DaiLy.Ten, Sum(PhieuXuatHang.TongTien) as 'Sum'
-from DaiLy, PhieuDaiLy, PhieuXuatHang
-where DaiLy.Id = PhieuDaiLy.IdDaiLy and PhieuDaiLy.Id = PhieuXuatHang.IdPhieuDaiLy
-group by DaiLy.Id, DaiLy.Ten
-*/
+GO
+/****** Object:  FullTextIndex     Script Date: 2021-07-08 22:28:45 ******/
+CREATE FULLTEXT INDEX ON [dbo].[NguonNhap](
+[DiaChi] LANGUAGE 'Vietnamese', 
+[SoDienThoai] LANGUAGE 'Vietnamese', 
+[Ten] LANGUAGE 'Vietnamese')
+KEY INDEX [PK_NguonNhap]ON ([nguonnhap_ctlg], FILEGROUP [PRIMARY])
+WITH (CHANGE_TRACKING = AUTO, STOPLIST = SYSTEM)
+
+GO
+/****** Object:  FullTextIndex     Script Date: 2021-07-08 22:28:45 ******/
+CREATE FULLTEXT INDEX ON [dbo].[NhanVien](
+[Ten] LANGUAGE 'Vietnamese')
+KEY INDEX [PK_NhanVien]ON ([nhanvien_ctlg], FILEGROUP [PRIMARY])
+WITH (CHANGE_TRACKING = AUTO, STOPLIST = SYSTEM)
+
+GO
+/****** Object:  FullTextIndex     Script Date: 2021-07-08 22:28:45 ******/
+CREATE FULLTEXT INDEX ON [dbo].[SanPham](
+[MoTa] LANGUAGE 'Vietnamese', 
+[Ten] LANGUAGE 'Vietnamese')
+KEY INDEX [PK_SanPham]ON ([sanpham_ctlg], FILEGROUP [PRIMARY])
+WITH (CHANGE_TRACKING = AUTO, STOPLIST = SYSTEM)
