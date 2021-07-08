@@ -78,9 +78,14 @@
                               materialDesign:HintAssist.IsFloating="True"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Center"
-                              Margin="0,0,100,0"
+                              Margin="5 5 15 5"
                               SelectedItem="{Binding VaiTro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     </ComboBox>
+                    <Button Command="{Binding RefreshCommand}"
+                            Content="Làm mới"
+                            Margin="5"
+                            Width="100"
+                            CommandParameter="{Binding ElementName=nhanvienwindow}"></Button>
                 </WrapPanel>
             </materialDesign:Card>
 

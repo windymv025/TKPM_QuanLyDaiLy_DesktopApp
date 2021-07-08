@@ -59,6 +59,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand ResetPassCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
         public ICommand TextChangedPhoneCommand { get; set; }
         public ICommand SearchTextChangedCommand { get; set; }
 
@@ -155,6 +156,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
             TextChangedPhoneCommand = new RelayCommand<TextBox>((p) => { if (p == null) return false; else return true; }, (p) => { 
                 p.Text = Regex.Replace(p.Text, "[^0-9]+", "");
+            });
+            RefreshCommand = new RelayCommand<NhanVienVaTaiKhoanWindow>((p) => { if (p == null) return false; else return true; }, (p) => {
+                p.ten.Text = "";
+                p.phone.Text = "";
+                p.address.Text = "";
+                p.email.Text = "";
+                p.username.Text = "";
+                p.role.Text = "1";
             });
             SearchTextChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 using (var db = new DBQuanLyCacDaiLyEntities())
