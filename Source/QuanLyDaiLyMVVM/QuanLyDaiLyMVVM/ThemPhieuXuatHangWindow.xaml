@@ -273,7 +273,7 @@
                                  Margin="5">
 			<WrapPanel>
 				<Button Command="{Binding RefreshCommand}"
-                            Content="Refresh"
+                            Content="Làm mới"
 							CommandParameter="{Binding ElementName=themPhieuXuatHangWindow}"
                             Margin="5"
                             Width="100"></Button>
