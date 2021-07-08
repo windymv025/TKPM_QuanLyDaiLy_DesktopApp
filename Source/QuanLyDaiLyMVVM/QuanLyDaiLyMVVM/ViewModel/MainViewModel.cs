@@ -170,6 +170,20 @@ namespace QuanLyDaiLyMVVM.ViewModel
             AccountShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 NhanVienWindow wd = new NhanVienWindow();
+                ProfileViewModel vm = new ProfileViewModel();
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var role = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault().VaiTro;
+                    if (role != 1)
+                    {
+                        vm.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        vm.Visibility = Visibility.Visible;
+                    }
+                }
+                wd.DataContext = vm;
                 wd.ShowDialog();
             });
 

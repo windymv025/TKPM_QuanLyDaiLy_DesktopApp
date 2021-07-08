@@ -41,15 +41,6 @@ namespace QuanLyDaiLyMVVM.ViewModel
             using (var db = new DBQuanLyCacDaiLyEntities())
             {
                 NhanVien = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault();
-                var role = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault().VaiTro;
-                if (role != 1)
-                {
-                    Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    Visibility = Visibility.Visible;
-                }
             }
             
             if(NhanVien.HinhAnh != null)
@@ -58,28 +49,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }
 
             ShowDoiMatKhauCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { DoiMatKhauWindow wd = new DoiMatKhauWindow(); wd.ShowDialog(); });
-            ShowDSNhanVienCommand = new RelayCommand<NhanVienWindow>((p) => {
-                if (p == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                    //using (var db = new DBQuanLyCacDaiLyEntities())
-                    //{
-                    //    var role = db.NhanViens.Where(x => x.Id == LoginViewModel.IdUser).FirstOrDefault().VaiTro;
-                    //    if (role != 1)
-                    //    {
-                    //        p.nv.Visibility = Visibility.Collapsed;
-                    //        return false;
-                    //    }
-                    //    else
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-                }
+            ShowDSNhanVienCommand = new RelayCommand<object>((p) => {
+                return true;
             }, (p) => {
                 var wd = new NhanVienVaTaiKhoanWindow();
                 wd.ShowDialog();
