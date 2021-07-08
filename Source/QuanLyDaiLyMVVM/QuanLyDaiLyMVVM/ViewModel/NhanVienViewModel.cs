@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -57,7 +58,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand PasswordChangedCommand { get; set; }
+        public ICommand ResetPassCommand { get; set; }
         public ICommand TextChangedPhoneCommand { get; set; }
         public ICommand SearchTextChangedCommand { get; set; }
 
@@ -95,6 +96,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     }
                 }
             }, (p) => {
+                MatKhau = "password";
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
                     var nv = new NhanVien()
@@ -140,9 +142,17 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 VaiTro = 2;
                 TenDangNhap = null;
                 MatKhau = null;
-                p.FloatingPasswordBox.Password = null;
+                //p.FloatingPasswordBox.Password = null;
             });
-            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { if (p == null) return false; else return true; }, (p) => { MatKhau = p.Password; });
+            ResetPassCommand = new RelayCommand<object>((p) => { if (SelectedItem == null) return false; else return true; }, (p) => { 
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    var item = db.TaiKhoans.Where(x => x.Id == SelectedItem.Id).FirstOrDefault();
+                    item.MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode("password"));
+                    db.SaveChanges();
+                    MessageBox.Show("Mật khẩu đã được đặt lại mặc định.");
+                }
+            });
             TextChangedPhoneCommand = new RelayCommand<TextBox>((p) => { if (p == null) return false; else return true; }, (p) => { 
                 p.Text = Regex.Replace(p.Text, "[^0-9]+", "");
             });
@@ -199,7 +209,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                     var tk = db.TaiKhoans.Where(x => x.Id == SelectedItem.Id).FirstOrDefault();
                     tk.TenDangNhap = TenDangNhap;
-                    tk.MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau));
+                    //if (!string.IsNullOrEmpty(p.FloatingPasswordBox.Password))
+                    //{
+                    //    tk.MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau));
+                    //}
                     db.SaveChanges();
 
                     SelectedItem.Ten = Ten;
@@ -208,7 +221,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     SelectedItem.Email = Email;
                     SelectedItem.VaiTro = VaiTro;
                     SelectedItem.TenDangNhap = TenDangNhap;
-                    SelectedItem.MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau));
+                    //if (!string.IsNullOrEmpty(p.FloatingPasswordBox.Password))
+                    //{
+                    //    SelectedItem.MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau));
+                    //}
                 }
             });
 
@@ -247,7 +263,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     VaiTro = 2;
                     TenDangNhap = null;
                     MatKhau = null;
-                    p.FloatingPasswordBox.Password = null;
+                    //p.FloatingPasswordBox.Password = null;
                 }
             });
 
@@ -296,7 +312,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 List = new ObservableCollection<NhanVienVaTaiKhoan>();
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
-                    string sql = $"select* from NhanVien where freetext(Ten, N'%{name}%')";
+                    string sql = $"select* from NhanVien where freetext(Ten, N'{name}')";
                     var nhanvien = db.NhanViens.SqlQuery(sql).Where(x=>x.isRemove == false).ToList();
                     var taikhoan = db.TaiKhoans.ToList();
                     

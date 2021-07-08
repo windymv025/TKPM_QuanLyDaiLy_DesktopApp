@@ -53,6 +53,14 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 return true;
             }, (p) => {
                 var wd = new NhanVienVaTaiKhoanWindow();
+                var vm = wd.DataContext as NhanVienViewModel;
+                vm.Ten = null;
+                vm.DienThoai = null;
+                vm.DiaChi = null;
+                vm.Email = null;
+                vm.TenDangNhap = null;
+                vm.MatKhau = null;
+                vm.VaiTro = 1;
                 wd.ShowDialog();
             });
             DoiMatKhauCommand = new RelayCommand<Window>((p) => {

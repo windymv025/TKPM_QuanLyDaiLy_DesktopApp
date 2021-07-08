@@ -60,7 +60,7 @@
                              Margin="5 5 15 5" x:Name="username"
                              materialDesign:HintAssist.Hint="Tên đăng nhập"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <PasswordBox x:Name="FloatingPasswordBox"
+                    <!--<PasswordBox x:Name="FloatingPasswordBox"
                                  Margin="5 5 15 5"
                                  materialDesign:HintAssist.Hint="Mật khẩu"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
@@ -71,7 +71,7 @@
                                                        CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                    </PasswordBox>
+                    </PasswordBox>-->
                     <ComboBox materialDesign:HintAssist.Hint="Vai trò"
                               ItemsSource="{Binding ListVaiTro}"
                               Width="auto" x:Name="role"
@@ -102,6 +102,10 @@
                             Margin="5"
                             Width="100"
                             CommandParameter="{Binding ElementName=nhanvienwindow}"></Button>
+                    <Button Command="{Binding ResetPassCommand}"
+                            Content="Reset mật khẩu"
+                            Margin="5"
+                            Width="130"></Button>
                     <materialDesign:Card Margin="5">
                         <Grid>
                             <TextBox x:Name="DaiLy_textbox_search"
@@ -157,8 +161,8 @@
                                                 DisplayMemberBinding="{Binding Email}"></GridViewColumn>
                                 <GridViewColumn Header="Tên đăng nhập"
                                                 DisplayMemberBinding="{Binding TenDangNhap}"></GridViewColumn>
-                                <GridViewColumn Header="Mật khẩu"
-                                                DisplayMemberBinding="{Binding MatKhau}"></GridViewColumn>
+                                <!--<GridViewColumn Header="Mật khẩu"
+                                                DisplayMemberBinding="{Binding MatKhau}"></GridViewColumn>-->
                                 <GridViewColumn Header="Vai trò"
                                                 DisplayMemberBinding="{Binding VaiTro}"></GridViewColumn>
 
