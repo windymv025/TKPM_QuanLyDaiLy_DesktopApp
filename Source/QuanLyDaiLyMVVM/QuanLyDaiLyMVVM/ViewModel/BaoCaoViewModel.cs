@@ -169,7 +169,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                             //gán giá trị cho từng cell                      
                             ws.Cells[rowIndex, colIndex++].Value = item.TenDaiLy;
                             ws.Cells[rowIndex, colIndex++].Value = item.TongTien;
-                            ws.Cells[rowIndex, colIndex++].Value = $"{Math.Round(item.Tyle, 2)}%";
+                            ws.Cells[rowIndex, colIndex++].Value = $"{100 * Math.Round(item.Tyle, 2)}%";
 
                             // lưu ý phải .ToShortDateString để dữ liệu khi in ra Excel là ngày như ta vẫn thấy.Nếu không sẽ ra tổng số :v
                             //ws.Cells[rowIndex, colIndex++].Value = item.Birthday.ToShortDateString();
