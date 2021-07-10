@@ -311,6 +311,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }, (p) =>
             {
+                SoTienNoToiDa = decimal.Parse(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Replace(".",""));
                 var category = new LoaiDaiLy() { Ten = TenLoaiDaiLy, SoTienNoToiDa = SoTienNoToiDa };
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
@@ -361,6 +362,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }, (p) =>
             {
+                SoTienNoToiDa = decimal.Parse(p.LoaiDaiLy_textbox_SoTienNoToiDa.Text.Replace(".", ""));
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
                     var item = db.LoaiDaiLies.Where(x => x.Id == SelectedItemLoaiDaiLy.Id).FirstOrDefault();
@@ -368,7 +370,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     item.SoTienNoToiDa = SoTienNoToiDa;
                     db.SaveChanges();
                 }
-                SelectedItemLoaiDaiLy.Ten = Ten;
+                SelectedItemLoaiDaiLy.Ten = TenLoaiDaiLy;
                 SelectedItemLoaiDaiLy.SoTienNoToiDa = SoTienNoToiDa;
             });
             DeleteLoaiDaiLyCommand = new RelayCommand<ThemLoaiDaiLyWindow>((p) => {
@@ -511,8 +513,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 wd.ShowDialog();
             });
 
+            #region Filter
             CategoryFilterCommand = new RelayCommand<DaiLyWindow>((p) => {
-                if(p == null || p.CategoryFilter.SelectedItem == null)
+                if (p == null || p.CategoryFilter.SelectedItem == null)
                 {
                     return false;
                 }
@@ -525,7 +528,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 var category = p.CategoryFilter.SelectedItem as Model.LoaiDaiLy;
                 var quan = p.DistrictFilter.SelectedItem as string;
 
-                if (quan == null) {
+                if (quan == null)
+                {
                     int idCategory;
                     ObservableCollection<DaiLy> ListTemp;
                     using (var db = new DBQuanLyCacDaiLyEntities())
@@ -546,7 +550,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     }
                     List = new ObservableCollection<DaiLy>(ListTemp.Where(x => x.IdLoaiDaiLy == idCategory && x.Quan == quan));
                 }
-                
+
             });
 
             DistrictFilterCommand = new RelayCommand<DaiLyWindow>((p) => {
@@ -562,12 +566,13 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 var quan = p.DistrictFilter.SelectedItem as string;
                 var category = p.CategoryFilter.SelectedItem as Model.LoaiDaiLy;
-                if(category == null)
+                if (category == null)
                 {
                     ObservableCollection<DaiLy> ListTemp;
                     using (var db = new DBQuanLyCacDaiLyEntities())
                     {
                         ListTemp = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                        LoaiDaiLy = new ObservableCollection<LoaiDaiLy>(db.LoaiDaiLies);
                     }
                     List = new ObservableCollection<DaiLy>(ListTemp.Where(x => x.Quan == quan));
                 }
@@ -600,8 +605,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 using (var db = new DBQuanLyCacDaiLyEntities())
                 {
                     List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                    LoaiDaiLy = new ObservableCollection<LoaiDaiLy>(db.LoaiDaiLies);
                 }
             });
+            #endregion
 
             DeleteCommand = new RelayCommand<Window>((p) => {
                 if (SelectedItem == null || p == null)

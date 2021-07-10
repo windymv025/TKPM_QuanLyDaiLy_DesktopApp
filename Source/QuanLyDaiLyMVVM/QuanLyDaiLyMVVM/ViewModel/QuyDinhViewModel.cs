@@ -52,7 +52,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             }
 
             AddCommand = new RelayCommand<QuyDinhWindow>((p) => { 
-                if(p != null && !string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && !string.IsNullOrEmpty(p.Value.Text.Trim()))
+                if(p != null && !string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && p.Value.Text.Trim() != "0")
                 {
                     return true;
                 }
@@ -70,7 +70,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             });
             EditCommand = new RelayCommand<QuyDinhWindow>((p) => {
-                if (p != null && !string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && !string.IsNullOrEmpty(p.Value.Text.Trim()) && SelectedItem != null)
+                if (p != null && !string.IsNullOrEmpty(TenQuyDinh) && !string.IsNullOrEmpty(KieuDuLieu) && p.Value.Text.Trim() != "0" && SelectedItem != null)
                 {
                     return true;
                 }
@@ -125,6 +125,11 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             }, (p) => {
                 p.Text = Regex.Replace(p.Text, "[^0-9]+", "");
+                if (string.IsNullOrEmpty(p.Text.Trim()))
+                {
+                    p.Text = "0";
+                    GiaTri = 0.0;
+                }
             });
         }
     }

@@ -42,7 +42,6 @@
 							Text="{Binding SoTienNoToiDa}"
 						    FontWeight="Bold"	  Padding="5"
 							VerticalAlignment="Bottom"
-							materialDesign:TextFieldAssist.PrefixText=" đ "
 							materialDesign:TextFieldAssist.SuffixText="VNĐ">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="TextChanged">
