@@ -25,6 +25,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!--Row 1-->
@@ -103,11 +104,53 @@
         </Border>
 
         <!--Row 2-->
+        <materialDesign:Card Grid.Row="1"
+                             Margin="20 10 20 0">
+            <WrapPanel Margin="0 0 0 10">
+                <ComboBox Name="CategoryFilter"
+                          Margin="40,0,0,0"
+                          Padding="10,0,0,0"
+                          FontSize="18"
+                          DisplayMemberPath="Ten"
+                          ItemsSource="{Binding LoaiDaiLy}"
+                          materialDesign:HintAssist.Hint="Loại đại lý"
+                          VerticalAlignment="Center"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding CategoryFilterCommand}" CommandParameter="{Binding ElementName=dailywindow}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <ComboBox Name="DistrictFilter"
+                          Margin="40,0,0,0"
+                          Padding="10,0,0,0"
+                          FontSize="18"
+                          ItemsSource="{Binding ListQuan}"
+                          materialDesign:HintAssist.Hint="Quận"
+                          VerticalAlignment="Center"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding DistrictFilterCommand}"
+                                                   CommandParameter="{Binding ElementName=dailywindow}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <Button Command="{Binding RefreshCommand}"
+                        Content="Làm mới bộ lọc"
+                        Margin="40,0,0,0"
+                        Width="140" VerticalAlignment="Center"
+                        CommandParameter="{Binding ElementName=dailywindow}"></Button>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <!--Row 3-->
         <Border Margin="25, 20, 25,20"
-                Grid.Row="1"
+                Grid.Row="2"
                 CornerRadius="5"
                 BorderThickness="1"
-				MaxHeight="630"
+				MaxHeight="600"
                 BorderBrush="#FF484848">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel>

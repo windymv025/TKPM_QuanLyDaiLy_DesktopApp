@@ -81,6 +81,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public Model.LoaiDaiLy SelectedLoaiDaiLy { get => _SelectedLoaiDaiLy; set { _SelectedLoaiDaiLy = value; OnPropertyChanged(); } }
         private string _TextSearch;
         public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+        private ObservableCollection<string> _ListQuan;
+        public ObservableCollection<string> ListQuan { get => _ListQuan; set { _ListQuan = value; OnPropertyChanged(); } }
 
 
         public ICommand ShowAddCommand { get; set; }
@@ -104,6 +106,10 @@ namespace QuanLyDaiLyMVVM.ViewModel
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
+        public ICommand CategoryFilterCommand { get; set; }
+        public ICommand DistrictFilterCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
+
 
         public DaiLyViewModel()
         {
@@ -112,6 +118,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             {
                 List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
                 LoaiDaiLy = new ObservableCollection<LoaiDaiLy>(db.LoaiDaiLies);
+                ListQuan = new ObservableCollection<string>(db.DaiLies.Select(x => x.Quan).Distinct());
             }
             NgayTiepNhan_Them = DateTime.Now;
 
@@ -216,6 +223,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                             db.DaiLies.Add(daiLy);
                             db.SaveChanges();
                             List.Add(daiLy);
+                            ListQuan = new ObservableCollection<string>(db.DaiLies.Where(x => x.IsRemove == false).Select(x => x.Quan).Distinct());
                         }
                         else
                         {
@@ -466,6 +474,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                             //SelectedItem.HinhAnh = HinhAnh;
                             SelectedItem.IdLoaiDaiLy = SelectedLoaiDaiLy.Id;
                             SelectedItem.LoaiDaiLy = SelectedLoaiDaiLy;
+
+                            ListQuan = new ObservableCollection<string>(db.DaiLies.Where(x => x.IsRemove == false).Select(x => x.Quan).Distinct());
                         }
                         else
                         {
@@ -501,6 +511,98 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 wd.ShowDialog();
             });
 
+            CategoryFilterCommand = new RelayCommand<DaiLyWindow>((p) => {
+                if(p == null || p.CategoryFilter.SelectedItem == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
+            {
+                var category = p.CategoryFilter.SelectedItem as Model.LoaiDaiLy;
+                var quan = p.DistrictFilter.SelectedItem as string;
+
+                if (quan == null) {
+                    int idCategory;
+                    ObservableCollection<DaiLy> ListTemp;
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        ListTemp = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                        idCategory = db.LoaiDaiLies.Where(x => x.Ten == category.Ten).FirstOrDefault().Id;
+                    }
+                    List = new ObservableCollection<DaiLy>(ListTemp.Where(x => x.IdLoaiDaiLy == idCategory));
+                }
+                else
+                {
+                    int idCategory;
+                    ObservableCollection<DaiLy> ListTemp;
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        ListTemp = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                        idCategory = db.LoaiDaiLies.Where(x => x.Ten == category.Ten).FirstOrDefault().Id;
+                    }
+                    List = new ObservableCollection<DaiLy>(ListTemp.Where(x => x.IdLoaiDaiLy == idCategory && x.Quan == quan));
+                }
+                
+            });
+
+            DistrictFilterCommand = new RelayCommand<DaiLyWindow>((p) => {
+                if (p == null || p.DistrictFilter.SelectedItem == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
+            {
+                var quan = p.DistrictFilter.SelectedItem as string;
+                var category = p.CategoryFilter.SelectedItem as Model.LoaiDaiLy;
+                if(category == null)
+                {
+                    ObservableCollection<DaiLy> ListTemp;
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        ListTemp = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                    }
+                    List = new ObservableCollection<DaiLy>(ListTemp.Where(x => x.Quan == quan));
+                }
+                else
+                {
+                    int idCategory;
+                    ObservableCollection<DaiLy> ListTemp;
+                    using (var db = new DBQuanLyCacDaiLyEntities())
+                    {
+                        ListTemp = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                        idCategory = db.LoaiDaiLies.Where(x => x.Ten == category.Ten).FirstOrDefault().Id;
+                    }
+                    List = new ObservableCollection<DaiLy>(ListTemp.Where(x => x.Quan == quan && x.IdLoaiDaiLy == idCategory));
+                }
+            });
+
+            RefreshCommand = new RelayCommand<DaiLyWindow>((p) => {
+                if (p == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
+            {
+                p.CategoryFilter.SelectedItem = null;
+                p.DistrictFilter.SelectedIndex = -1;
+                using (var db = new DBQuanLyCacDaiLyEntities())
+                {
+                    List = new ObservableCollection<DaiLy>(db.DaiLies.Where(x => x.IsRemove == false));
+                }
+            });
+
             DeleteCommand = new RelayCommand<Window>((p) => {
                 if (SelectedItem == null || p == null)
                 {
@@ -521,6 +623,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         item.IsRemove = true;
                         db.SaveChanges();
                         List.Remove(SelectedItem);
+                        ListQuan = new ObservableCollection<string>(db.DaiLies.Where(x => x.IsRemove == false).Select(x => x.Quan).Distinct());
                         p.Close();
                     }
                 }
