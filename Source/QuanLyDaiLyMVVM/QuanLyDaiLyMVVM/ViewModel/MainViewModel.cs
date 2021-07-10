@@ -15,6 +15,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        public bool IsShow = false;
         private int loaiTimKiem = 0;
 
         private string _DoanhThu;
@@ -119,6 +120,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             loadAllData();
 
             LogoutCommand = new RelayCommand<MainWindow>((p) => { if (p == null) return false; else return true; }, (p) => {
+                p.Hide();
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 p.Close();
