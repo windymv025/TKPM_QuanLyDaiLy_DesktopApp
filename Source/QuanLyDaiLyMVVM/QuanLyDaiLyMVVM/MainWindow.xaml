@@ -222,6 +222,7 @@
                             <Button Command="{Binding LogoutCommand}"
                                     Content="Đăng xuất"
                                     Margin="5"
+									Height="45"
                                     Width="100" HorizontalAlignment="Left"
                                     CommandParameter="{Binding ElementName=mainWindow}"></Button>
                             <Label Grid.Column="0"

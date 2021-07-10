@@ -211,7 +211,7 @@
 			<Grid>
 				<WrapPanel HorizontalAlignment="Left">
 					<Button Command="{Binding RefreshCommand}"
-                            Content="Refresh"
+                            Content="Làm mới"
 							CommandParameter="{Binding ElementName=phieuThuTienWindow}"
                             Margin="5"
                             Width="100"></Button>
