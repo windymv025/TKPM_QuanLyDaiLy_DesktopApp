@@ -336,6 +336,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
             DoanhSoHienThi = new ObservableCollection<DoanhSo>();
             CongNoHienThi = new ObservableCollection<CongNo>();
             SeriesCollection_DoanhSo = new SeriesCollection();
+
             SeriesCollection_DoanhSoCot = new SeriesCollection();
             SeriesCollection_CongNoCot = new SeriesCollection();
 
@@ -485,7 +486,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         TienNo = item.TIENNO,
                     });
                 }
+
                 TongCongNo = CongNoHienThi.Sum(x => x.TienNo);
+
                 foreach(var item in CongNoHienThi)
                 {
                     ColumnSeries columnSeries = new ColumnSeries()

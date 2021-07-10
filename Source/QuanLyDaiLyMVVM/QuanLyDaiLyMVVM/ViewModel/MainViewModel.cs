@@ -171,6 +171,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
             RevenueShowCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => {
                 p.IsChecked = false;
                 BaoCaoWindow wd = new BaoCaoWindow();
+                BaoCaoViewModel vm = new BaoCaoViewModel();
+                wd.DataContext = vm;
                 wd.ShowDialog();
                 loadAllData();
             });
