@@ -121,17 +121,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 {
                     using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
                     {
-                        decimal tongSoTienNo = 0;
-
-                        foreach (var i in db.PhieuXuatHangs.Where(px => px.PhieuDaiLy.IdDaiLy == DaiLy.Id))
-                        {
-                            tongSoTienNo += i.TongTien;
-                        }
-
-                        foreach (var i in db.PhieuThuTiens.Where(px => px.PhieuDaiLy.IdDaiLy == DaiLy.Id))
-                        {
-                            tongSoTienNo -= i.SoTienThu;
-                        }
+                        decimal tongSoTienNo = tinhTongSoTienNoDaiLy(DaiLy);
 
                         SoTienThu = ConvertNumber.convertNumberDecimalToString(tongSoTienNo);
                         PhieuThuTien.SoTienThu = tongSoTienNo;
@@ -532,6 +522,26 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 }
             });
 
+        }
+
+        private decimal tinhTongSoTienNoDaiLy(DaiLy daiLy)
+        {
+            using (DBQuanLyCacDaiLyEntities db = new DBQuanLyCacDaiLyEntities())
+            {
+                decimal tongSoTienNo = 0;
+
+                foreach (var i in db.PhieuXuatHangs.Where(px => px.PhieuDaiLy.IdDaiLy == daiLy.Id))
+                {
+                    tongSoTienNo += i.TongTien;
+                }
+
+                foreach (var i in db.PhieuThuTiens.Where(px => px.PhieuDaiLy.IdDaiLy == daiLy.Id))
+                {
+                    tongSoTienNo -= i.SoTienThu;
+                }
+
+                return tongSoTienNo;
+            }
         }
 
         private void sapXepTheoTenDaiLy()
