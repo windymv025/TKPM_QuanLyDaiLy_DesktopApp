@@ -648,7 +648,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                     else
                     {
                         string sql = $"select* from DaiLy where freetext(Ten, N'{TextSearch}')";
-                        List = new ObservableCollection<DaiLy>(db.DaiLies.SqlQuery(sql).ToList());
+                        List = new ObservableCollection<DaiLy>(db.DaiLies.SqlQuery(sql).ToList().Where(x=>x.IsRemove == false));
                     }
                 }
             });
