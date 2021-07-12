@@ -1213,14 +1213,14 @@
                                                          Width="35"
                                                          Height="35"
                                                          Margin="15,0,0,0" />
-								<TextBlock Text="Doanh thu"
+								<TextBlock Text="Báo cáo"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}" />
 							</StackPanel>
 
 							<ListViewItem.ToolTip>
 								<ToolTip x:Name="tt_revenue"
-                                         Content="REVENUE"
+                                         Content="REPORT"
                                          Style="{StaticResource tt_style}" />
 							</ListViewItem.ToolTip>
 						</ListViewItem>

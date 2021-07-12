@@ -79,13 +79,21 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 {
                     using(var db = new DBQuanLyCacDaiLyEntities())
                     {
-                        if(db.TaiKhoans.Where(x=>x.TenDangNhap == TenDangNhap).Count() > 0)
+                        var activeAccount = from nv in db.NhanViens.Where(x => x.isRemove == false).ToList()
+                                            join tk in db.TaiKhoans.ToList() on nv.Id equals tk.Id
+                                            select new
+                                            {
+                                                Ten = nv.Ten,
+                                                DienThoai = nv.DienThoai,
+                                                TenDangNhap = tk.TenDangNhap
+                                            };
+                        if(activeAccount.Where(x=>x.TenDangNhap == TenDangNhap).Count() > 0)
                         {
                             return false;
                         }
                         else
                         {
-                            if(db.NhanViens.Where(x=>x.Ten == Ten && x.DienThoai == DienThoai).Count() > 0)
+                            if(activeAccount.Where(x=>x.Ten == Ten && x.DienThoai == DienThoai).Count() > 0)
                             {
                                 return false;
                             }
@@ -134,6 +142,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
                         TenDangNhap = TenDangNhap,
                         MatKhau = LoginViewModel.MD5Hash(LoginViewModel.Base64Encode(MatKhau))
                     });
+
+                    KhoiTaoList(null);
                 }
 
                 Ten = null;
@@ -164,6 +174,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 p.email.Text = "";
                 p.username.Text = "";
                 p.role.Text = "1";
+                SelectedItem = null;
             });
             SearchTextChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 using (var db = new DBQuanLyCacDaiLyEntities())
@@ -189,17 +200,37 @@ namespace QuanLyDaiLyMVVM.ViewModel
                 {
                     using (var db = new DBQuanLyCacDaiLyEntities())
                     {
-                        if (db.TaiKhoans.Where(x => x.TenDangNhap == TenDangNhap).Count() > 0)
+                        var activeAccount = from nv in db.NhanViens.Where(x => x.isRemove == false).ToList()
+                                            join tk in db.TaiKhoans.ToList() on nv.Id equals tk.Id
+                                            select new
+                                            {
+                                                Id = nv.Id,
+                                                Ten = nv.Ten,
+                                                DienThoai = nv.DienThoai,
+                                                TenDangNhap = tk.TenDangNhap
+                                            };
+                        if (activeAccount.Where(x => x.TenDangNhap == TenDangNhap).Count() > 0)
                         {
-                            if (db.TaiKhoans.Where(x => x.TenDangNhap == TenDangNhap).FirstOrDefault().Id == SelectedItem.Id)
+                            if (activeAccount.Where(x => x.TenDangNhap == TenDangNhap).FirstOrDefault().Id == SelectedItem.Id)
                             {
-                                return true;
+                                if (activeAccount.Where(x => x.DienThoai == DienThoai && x.Ten == Ten).Count() > 0)
+                                {
+                                    if (activeAccount.Where(x => x.DienThoai == DienThoai && x.Ten == Ten).FirstOrDefault()?.Id == SelectedItem.Id)
+                                    {
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                }
                             }
                             else
                             {
                                 return false;
                             }
                         }
+                        
                         return true;
                     }
                 }

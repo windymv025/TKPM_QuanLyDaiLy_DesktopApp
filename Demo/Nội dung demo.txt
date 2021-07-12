@@ -1,0 +1,40 @@
+- Đăng nhập => vào trang cá nhân
+- Đăng xuất => đăng nhập lại và vào trang cá nhân
+- Thao tác lọc trên trang chủ
+- Đổi ảnh đại diện
+- Đổi mật khẩu và đăng nhập lại => Vào trang cá nhân
+- Lọc đại lý
+- Tra cứu đại lý
+- Tiếp nhận đại lý => chọn loại đại lý có sẵn => Chọn quận 1
+- Tiếp nhận đại lý => (khoan hãy nhập thông tin) Thêm loại đại lý mới => Lỗi => Qua quy định chỉnh sửa sô lượng loại đại lý => Chọn quận 1
+- Tiếp nhận đại lý => (quận 1) => Lỗi => Qua quy định chỉnh sửa sô lượng đại lý trong quận
+- Sửa thông tin đại lý 
+- Xóa đại lý 
+- Xóa loại đại lý 
+- Sửa loại đại lý
+- Tạo phiếu xuất hàng
+- Xóa phiếu xuất hàng 
+- Tìm phiếu xuất hàng 
+- Sửa phiếu xuất hàng 
+- Tạo phiếu thu tiền 
+- Xóa phiếu thu tiền 
+- Sửa phiếu thu tiền 
+- Tìm phiếu thu tiền
+- Thêm nguồn nhập 
+- Xóa nguồn nhập 
+- Sửa nguồn nhập
+- Thêm sản phẩm 
+- Xóa sản phẩm 
+- Sửa sản phẩm 
+- Tra cứu sản phẩm 
+- Sắp xếp sản phẩm
+- Quản lý đơn vị tính
+- Thêm loại sản phẩm 
+- Xóa loại sản phẩm 
+- Sửa loại sản phẩm
+- Lập báo cáo => xuất hai file excel
+- Thêm nhân viên 
+- Xóa nhân viên 
+- Sửa nhân viên 
+- Tìm kiếm nhân viên 
+- Đặt lại mật khẩu cho nhân viên
