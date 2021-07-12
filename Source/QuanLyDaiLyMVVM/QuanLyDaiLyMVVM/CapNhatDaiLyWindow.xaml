@@ -239,7 +239,7 @@
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
                 </Grid>
                 <Button x:Name="btn_ThemLoaiDaiLy"
-                        Content="Thêm loại"
+                        Content="Quản lý loại đại lý"
                         Margin="20,0,0,0"
                         Command="{Binding ShowAddLoaiDaiLyCommand}" />
             </StackPanel>
