@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Data.Entity;
+using System.Windows.Controls;
 
 namespace QuanLyDaiLyMVVM.ViewModel
 {
@@ -160,9 +161,9 @@ namespace QuanLyDaiLyMVVM.ViewModel
             });
 
             //text nhập toàn số
-            TextChangedSDTCommand = new RelayCommand<ThemDaiLyWindow>((p) => { if (p == null) return false; else return true; }, (p) =>
+            TextChangedSDTCommand = new RelayCommand<TextBox>((p) => { if (p == null) return false; else return true; }, (p) =>
             {
-                p.DaiLy_textbox_phone.Text = Regex.Replace(p.DaiLy_textbox_phone.Text, "[^0-9]+", "");
+                p.Text = Regex.Replace(p.Text, "[^0-9]+", "");
             });
 
             //Thêm đại lý
@@ -218,7 +219,7 @@ namespace QuanLyDaiLyMVVM.ViewModel
                             count = 4;
                         }
 
-                        if(count > db.DaiLies.Where(x=>x.Quan == p.DaiLy_textbox_district.Text.Trim()).Count())
+                        if(count > db.DaiLies.Where(x=>x.Quan == p.DaiLy_textbox_district.Text.Trim() && x.IsRemove == false).Count())
                         {
                             db.DaiLies.Add(daiLy);
                             db.SaveChanges();
@@ -434,7 +435,12 @@ namespace QuanLyDaiLyMVVM.ViewModel
                             count = 4;
                         }
 
-                        if (count > db.DaiLies.Where(x => x.Quan == p.DaiLy_textbox_district.Text.Trim()).Count())
+                        if(SelectedItem.Quan == p.DaiLy_textbox_district.Text.Trim())
+                        {
+                            count++; // Sửa đại lý quận mà nằm ngay giới hạn
+                        }
+
+                        if (count > db.DaiLies.Where(x => x.Quan == p.DaiLy_textbox_district.Text.Trim() && x.IsRemove == false).Count())
                         {
                             var dl = db.DaiLies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
                             dl.Ten = Ten;
