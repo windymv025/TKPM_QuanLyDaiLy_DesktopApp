@@ -100,7 +100,14 @@
                      materialDesign:TextFieldAssist.HasClearButton="True"
                      materialDesign:TextFieldAssist.HasOutlinedTextField="True"
                      materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                     materialDesign:TextFieldAssist.TextFieldCornerRadius="4" />
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="4">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding TextChangedSDTCommand}"
+                                               CommandParameter="{Binding ElementName=DaiLy_textbox_phone}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
 
             <!--Địa chỉ-->
             <Label Grid.Row="2"
