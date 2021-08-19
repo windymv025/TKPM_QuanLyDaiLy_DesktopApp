@@ -272,7 +272,8 @@ namespace QuanLyDaiLyMVVM.ViewModel
 
                         foreach (var i in db.PhieuThuTiens.Where(px => px.PhieuDaiLy.IdDaiLy == DaiLy.Id))
                         {
-                            tongSoTienNo -= i.SoTienThu;
+                            if (i.PhieuDaiLy.Id != SelectedPhieuThuTien.PhieuDaiLy.Id)
+                                tongSoTienNo -= i.SoTienThu;
                         }
 
                         if (tongSoTienNo < PhieuThuTien.SoTienThu)
